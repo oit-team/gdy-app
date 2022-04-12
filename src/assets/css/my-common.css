@@ -1,0 +1,18 @@
+[v-cloak]{
+  display: none;
+}
+/*设置IOS页面长按不可复制粘贴，但是IOS上出现input、textarea不能输入，因此将使用-webkit-user-select:auto;*/
+/* *{
+  -webkit-touch-callout:none;
+  -webkit-user-select:none; 
+  -khtml-user-select:none; 
+  -moz-user-select:none;
+  -ms-user-select:none; 
+  user-select:none;
+}
+input,textarea {
+  -webkit-user-select:auto; 
+  margin: 0px;
+  padding: 0px;
+  outline: none;
+} */

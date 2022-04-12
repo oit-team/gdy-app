@@ -1,0 +1,278 @@
+#searchSingle {
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+  font-size: 14px;
+  color: #333333;
+  display: flex;
+  flex-direction: column;
+}
+#searchSingle .hd_select {
+  display: flex;
+  /* margin: 5px 0; */
+  height: 1.4rem;
+  align-items: center;
+  padding: 0px 12px;
+}
+#searchSingle .hd_select img {
+  height: 0.4rem;
+}
+#searchSingle .hd_select .hd_input_wrap {
+  border-radius: 16px;
+  height: 32px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex: 1;
+  margin: 0 10px;
+  padding: 0 10px;
+  /* border:0.5px solid #ccc; */
+  background-color: #fff;
+}
+#searchSingle .hd_select .hd_input_wrap .icon {
+  width: 15px;
+  height: 15px;
+}
+#searchSingle .hd_select .hd_input_wrap input {
+  background: transparent;
+  border: 0;
+  width: 100%;
+  height: 20px;
+  font-size: 12px;
+  outline: none;
+}
+#searchSingle .hd_select .select {
+  margin-right: 5px;
+  background: url("../../../static/images/collocation/select@2x.png") center / contain no-repeat;
+}
+#searchSingle >>> .van-popup {
+  height: auto;
+}
+#searchSingle >>> .van-popup .ulList {
+  padding: 6px 10px;
+  font-size: 14px;
+}
+#searchSingle >>> .van-popup .ulList li {
+  margin-bottom: 3px;
+  padding: 5px 0px;
+  border-bottom: 0.5px solid #ddd;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+#searchSingle >>> .van-popup .ulList li img {
+  width: 60px;
+  height: 60px;
+  display: block;
+  object-fit: contain;
+}
+#searchSingle >>> .van-popup .ulList li .baseInfo {
+  flex: 1;
+}
+#searchSingle >>> .van-popup .ulList li .baseInfo .styleName {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+}
+#searchSingle >>> .van-popup .ulList li .delBtn {
+  width: 40px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  margin-left: 6px;
+  border-radius: 5px;
+  background-color: #ec4753;
+  color: #fff;
+}
+#searchSingle >>> .van-popup .ulList li:last-child {
+  border-bottom: none;
+}
+.searchResBody {
+  flex: 1;
+  overflow: hidden;
+}
+.searchResBody .noData {
+  padding-top: 5px;
+}
+.searchResBody .recommended {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding-left: 2%;
+}
+.searchResBody .recommended .keyStyle-item {
+  float: none;
+  display: inline-block;
+  vertical-align: top;
+  width: 31.2%;
+  padding: 0.5px;
+  box-sizing: border-box;
+  margin-bottom: 6px;
+  margin-right: 2%;
+  background-color: #fff;
+}
+.searchResBody .recommended .keyStyle-item .goods-img-box {
+  width: 100%;
+  position: relative;
+}
+.searchResBody .recommended .keyStyle-item .goods-img-box .goods-img {
+  width: 100%;
+}
+.searchResBody .recommended .keyStyle-item .goods-img-box .addIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  font-size: 26px;
+  line-height: 30px;
+  text-align: center;
+}
+.searchResBody .recommended .keyStyle-item .goods-img-box .addIcon img {
+  width: 25px;
+  height: 25px;
+  margin-top: 2.5px;
+}
+.searchResBody .recommended .keyStyle-item .goods-img-box .tipBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.searchResBody .recommended .keyStyle-item .goods-img-box .tipBox img {
+  width: 14px;
+}
+.searchResBody .recommended .keyStyle-item .goods-num {
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #666;
+}
+.searchResBody .recommended .keyStyle-item .goods-price {
+  font-size: 15px;
+  color: #AF0005;
+  line-height: 20px;
+}
+.searchResBody .recommended .keyStyle-item .goods-price .money-symbel {
+  font-size: 10px;
+  margin: 0px 2px;
+}
+.searchResBody .recommended .keyStyle-item .goods-stylePrice {
+  box-sizing: border-box;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+}
+.searchResBody .recommended .keyStyle-item .goods-stylePrice .money-symbel {
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  color: #AF0005;
+}
+.searchResBody .recommended .keyStyle-item .goods-stylePrice .learnIcon {
+  margin-left: 4px;
+}
+.searchResBody .recommended .keyStyle-item .goods-stylePrice .lastIcon {
+  margin-left: 4px;
+  margin-top: 1px;
+}
+.searchResBody .recommended .keyStyle-item:nth-child(3n+2) {
+  margin-bottom: 6px;
+}
+.searchResBody .recommended .rec_item {
+  width: 28%;
+  background: #fff;
+  align-items: center;
+  border-radius: 6px;
+  margin: 5px 10px;
+  box-sizing: border-box;
+}
+.searchResBody .recommended .rec_item .proImg {
+  width: 100%;
+  height: 80px;
+  object-fit: contain;
+}
+.searchResBody .recommended .rec_item .baseBox {
+  flex: 1;
+}
+.searchResBody .recommended .rec_item .baseBox .name {
+  margin: 14.5px 11.5px 9.5px;
+  font-size: 14px;
+  font-family: ArialMT;
+  font-weight: 400;
+  color: #333333;
+  line-height: 16px;
+  text-overflow: ellipsis;
+}
+.searchResBody .recommended .rec_item .baseBox .rec_bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 11.5px 16.5px;
+}
+.searchResBody .recommended .rec_item .baseBox .rec_bottom .price {
+  font-size: 18px;
+  font-family: KaiTi;
+  font-weight: 400;
+  color: #b80502;
+  line-height: 16px;
+}
+.searchResBody .recommended .rec_item .baseBox .rec_bottom i {
+  font-size: 14px;
+  font-style: normal;
+}
+.searchResBody .recommended .rec_item .addBox {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #f3f3f3;
+  color: #666;
+  font-size: 26px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: 5px;
+}
+.searchResBody .recommended .rec_item .people_buy {
+  font-size: 12px;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: #999999;
+  line-height: 16px;
+}
+.choosedBox {
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0px 12px;
+}
+.choosedBox .chooseNums {
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: 30px;
+}
+.choosedBox .conBtn {
+  width: 60px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 6px;
+  background-color: #1978FE;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+}
+.choosedBox .viewBtn {
+  margin-left: auto;
+  margin-right: 10px;
+}

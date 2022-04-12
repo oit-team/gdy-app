@@ -1,0 +1,177 @@
+#taskTestTopic {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#taskTestTopic .header {
+  width: 100%;
+  height: 1.2rem;
+  padding: 0 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #333;
+  box-sizing: border-box;
+  background-color: #F6F6F6;
+  /* background-color: red; */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+#taskTestTopic .header img {
+  width: 8px;
+  height: 13px;
+  margin-right: 5px;
+  padding: 5px 25px 5px 0px;
+  /* background-color: pink; */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+#taskTestTopic .header .tit {
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+#taskTestTopic .header .placeLabel {
+  width: 33px;
+  height: 13px;
+}
+#taskTestTopic .goodsTestTopicCon {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0 12.5px;
+  overflow: hidden;
+}
+#taskTestTopic .goodsTestTopicCon .bodys {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listsTop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listsTop img {
+  width: 60%;
+  height: 60%;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listsBomTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listsBomTop .listsBomTopTop {
+  color: #999999;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listsBomTop .listsBomTopTop .listsBomTopTopSpan {
+  font-size: 20px;
+  color: #1978FE;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listsBomTop .listsBomTopBom .listsBomTopTopImg {
+  width: 13px;
+  height: 13px;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listsBomIn {
+  margin: 10px 0;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listsBomIn /deep/ img {
+  display: block;
+  width: 50%;
+  height: 100%;
+  margin: 0 auto;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listBomBom {
+  display: flex;
+  flex-direction: column;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listBomBom .listBomBomList {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px 0;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listBomBom .listBomBomList .listIcon {
+  text-align: center;
+  line-height: 30px;
+  width: 30px;
+  height: 30px;
+  color: #1978FE;
+  margin-right: 20px;
+  border: 0.5px solid #1978FE;
+  border-radius: 50%;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listBomBom .listBomBomList .listContent {
+  flex: 1;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listBomBom .listBomBomList .active {
+  color: #fff;
+  background: #1978FE;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listBomBom .listBomBomList .red {
+  color: #fff;
+  background: #F8736E;
+  border: 0.5px solid #F8736E;
+}
+#taskTestTopic .goodsTestTopicCon .bodys .listsBom .listBomBom .listBomBomList .green {
+  color: #fff;
+  background: #7DCD98;
+  border: 0.5px solid #7DCD98;
+}
+#taskTestTopic .footer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 40px;
+  padding: 0 12.5px;
+  margin-bottom: 30px;
+  box-sizing: border-box;
+}
+#taskTestTopic .footer .startBtn {
+  flex: 1;
+  font-size: 15px;
+  height: 40px;
+}
+#taskTestTopic .footer .up {
+  border-radius: 20px 0 0 20px;
+}
+#taskTestTopic .footer .in {
+  border: none;
+}
+#taskTestTopic .footer .down {
+  border-radius: 0 20px 20px 0;
+}
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 9px;
+  opacity: 0.75;
+  line-height: 150px;
+  margin: 0;
+}
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+.el-carousel__item:nth-child(2n+1) {
+  background-color: #d3dce6;
+}

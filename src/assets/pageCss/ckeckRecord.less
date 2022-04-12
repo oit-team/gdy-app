@@ -1,0 +1,124 @@
+#checkRecord{
+  width:100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  .recordScrollCon{
+    flex:1;
+    overflow: hidden;
+    // 测一测任务
+    .checkTaskContent{
+      width:100%;
+      box-sizing:border-box;
+      overflow: hidden;
+      .lists{
+        width:100%;
+        box-sizing:border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 10px;
+        border-bottom: 0.5px solid #e3e3e3;
+        font-size: 14px;
+        .checkedSelect{
+          display: flex;
+          align-items: center;
+          img{
+            width:20px;
+            height:20px;
+          }
+        }
+        .listsLeft{
+          display: flex;
+          flex-direction: column;
+          box-sizing: border-box;
+          padding: 5px;
+          margin-right: auto;
+          margin-left:7px;
+            .con_t{
+              padding:3px 0;
+            }
+            .con_b{
+              color:#999;
+              padding:3px 0;
+            }
+        }
+        .listsRight{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          .right_box{
+            width:2rem;
+            display: flex;
+            flex-direction: column;
+            margin-right:5px;
+            .ospan{
+              text-align: right;
+            }
+            .rspan{
+              color:#999;
+              text-align: right;
+            }
+            .yspan{
+              color:#999;
+              text-align: right;
+            }
+            // .nspan{
+            //   color:#F8736E;
+            // }
+          }
+          img{
+            height:10.5px;
+            width:5.5px;
+            margin-left:0.1rem;
+          }
+        }
+      }
+      .list{
+        color:#FF8C7C;
+      }
+    }
+  }
+  .delBox{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:0 12.5px;
+    box-sizing: border-box;
+    color:#999;
+    // margin-bottom: 20px;
+    .selectCircle{
+      height: 50px;
+      display: flex;
+      align-items: center;
+      img{
+        width:20px;
+        height:20px;
+      }
+    }
+    .countBox{
+      margin-right:auto;
+      margin-left:10px;
+    }
+    .delBtn{
+      width:100px;
+      height:40px;
+      border-radius: 20px 0 0 20px;
+      background:#FF8C7C;
+      border:0.5px solid #FF8C7C;
+      font-size: 0.373333rem;
+      margin-right:10px;
+    }
+    .startBtn{
+      width:100px;
+      height:40px;
+      border-radius:0 20px 20px 0;
+      font-size: 0.373333rem;
+      background: #5EA1FE;
+      border:0.5px solid #5EA1FE;
+    }
+  }
+}

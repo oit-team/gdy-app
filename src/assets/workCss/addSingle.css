@@ -1,0 +1,368 @@
+#addSingle {
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+  font-size: 14px;
+  color: #333333;
+  display: flex;
+  flex-direction: column;
+}
+#addSingle .hd_select {
+  display: flex;
+  /* margin: 5px 0; */
+  height: 1.4rem;
+  align-items: center;
+  padding: 0px 12px;
+}
+#addSingle .hd_select img {
+  height: 0.4rem;
+}
+#addSingle .hd_select .hd_input_wrap {
+  border-radius: 16px;
+  height: 32px;
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex: 1;
+  margin: 0 10px;
+  padding: 0 10px;
+  /* border:0.5px solid #ccc; */
+  background-color: #fff;
+}
+#addSingle .hd_select .hd_input_wrap .icon {
+  width: 15px;
+  height: 15px;
+}
+#addSingle .hd_select .hd_input_wrap input {
+  background: transparent;
+  border: 0;
+  width: 100%;
+  height: 20px;
+  font-size: 12px;
+  outline: none;
+}
+#addSingle .hd_select .select {
+  margin-right: 5px;
+  background: url("../../../static/images/collocation/select@2x.png") center / contain no-repeat;
+}
+#addSingle .kindTitBox {
+  width: 100%;
+  height: 1.1rem;
+  line-height: 1.1rem;
+  display: flex;
+  background-color: #fff;
+}
+#addSingle .kindTitBox .kindTitUl {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  height: 1.1rem;
+}
+#addSingle .kindTitBox .kindTitUl .kindTitItem {
+  padding: 0px 15px;
+  white-space: nowrap;
+  height: 1.1rem;
+  color: #999;
+  box-sizing: border-box;
+}
+#addSingle .kindTitBox .kindTitUl .kindTitItem .styleName {
+  display: inline-block;
+  height: 0.94rem;
+  font-size: 14px;
+  border-bottom: 2px solid transparent;
+  box-sizing: border-box;
+}
+#addSingle .kindTitBox .kindTitUl .kindTitItem:last-child {
+  margin-right: 0px;
+}
+#addSingle .kindTitBox .kindTitUl .active .styleName {
+  color: #1978FE;
+  font-size: 16px;
+  border-bottom: 2px solid #1978FE;
+}
+#addSingle .kindTopBox {
+  width: 100%;
+  height: 1.2rem;
+  line-height: 1.2rem;
+  display: flex;
+  margin: 6px 0px;
+  background-color: #fff;
+}
+#addSingle .kindTopBox .scrollUl {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  height: 1.2rem;
+}
+#addSingle .kindTopBox .scrollUl .kindItem {
+  padding: 0px 15px;
+  white-space: nowrap;
+  height: 1.2rem;
+  color: #999;
+  box-sizing: border-box;
+}
+#addSingle .kindTopBox .scrollUl .kindItem .styleName {
+  padding: 4px 10px;
+  background-color: #f5f5f5;
+  font-size: 14px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 0.5px solid #fff;
+}
+#addSingle .kindTopBox .scrollUl .kindItem:last-child {
+  margin-right: 0px;
+}
+#addSingle .kindTopBox .scrollUl .active .styleName {
+  background-color: #E8F1FE;
+  color: #1978FE;
+  border: 0.5px solid #1978FE;
+}
+#addSingle .keyStyleCon {
+  flex: 1;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-left: 2%;
+}
+#addSingle .keyStyleCon .keyStyle-item {
+  float: none;
+  display: inline-block;
+  vertical-align: top;
+  width: 31.2%;
+  padding: 0.5px;
+  box-sizing: border-box;
+  margin-bottom: 6px;
+  margin-right: 2%;
+  background-color: #fff;
+}
+#addSingle .keyStyleCon .keyStyle-item .goods-img-box {
+  position: relative;
+}
+#addSingle .keyStyleCon .keyStyle-item .goods-img-box .goods-img {
+  width: 100%;
+}
+#addSingle .keyStyleCon .keyStyle-item .goods-img-box .addIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  font-size: 26px;
+  line-height: 30px;
+  text-align: center;
+}
+#addSingle .keyStyleCon .keyStyle-item .goods-img-box .addIcon img {
+  width: 25px;
+  height: 25px;
+  margin-top: 2.5px;
+}
+#addSingle .keyStyleCon .keyStyle-item .goods-img-box .tipBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+#addSingle .keyStyleCon .keyStyle-item .goods-img-box .tipBox img {
+  width: 14px;
+}
+#addSingle .keyStyleCon .keyStyle-item .goods-num {
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #666;
+}
+#addSingle .keyStyleCon .keyStyle-item .goods-price {
+  font-size: 15px;
+  color: #AF0005;
+  line-height: 20px;
+}
+#addSingle .keyStyleCon .keyStyle-item .goods-price .money-symbel {
+  font-size: 10px;
+  margin: 0px 2px;
+}
+#addSingle .keyStyleCon .keyStyle-item .goods-stylePrice {
+  box-sizing: border-box;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+}
+#addSingle .keyStyleCon .keyStyle-item .goods-stylePrice .money-symbel {
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  color: #AF0005;
+}
+#addSingle .keyStyleCon .keyStyle-item .goods-stylePrice .learnIcon {
+  margin-left: 4px;
+}
+#addSingle .keyStyleCon .keyStyle-item .goods-stylePrice .lastIcon {
+  margin-left: 4px;
+  margin-top: 1px;
+}
+#addSingle .keyStyleCon .keyStyle-item:nth-child(3n+2) {
+  margin-bottom: 6px;
+}
+#addSingle >>> .van-popup {
+  height: auto;
+}
+#addSingle >>> .van-popup .ulList {
+  padding: 6px 10px;
+  font-size: 14px;
+}
+#addSingle >>> .van-popup .ulList li {
+  margin-bottom: 3px;
+  padding: 5px 0px;
+  border-bottom: 0.5px solid #ddd;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+#addSingle >>> .van-popup .ulList li img {
+  width: 60px;
+  height: 60px;
+  display: block;
+  object-fit: contain;
+}
+#addSingle >>> .van-popup .ulList li .baseInfo {
+  flex: 1;
+}
+#addSingle >>> .van-popup .ulList li .baseInfo .styleName {
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+}
+#addSingle >>> .van-popup .ulList li .delBtn {
+  width: 40px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  margin-left: 6px;
+  border-radius: 5px;
+  background-color: #ec4753;
+  color: #fff;
+}
+#addSingle >>> .van-popup .ulList li:last-child {
+  border-bottom: none;
+}
+.searchResBody {
+  flex: 1;
+  overflow: hidden;
+}
+.searchResBody .noData {
+  padding-top: 5px;
+}
+.searchResBody .recommended {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+.searchResBody .recommended .rec_item {
+  width: 100%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  border-radius: 6px;
+  padding: 5px 5px 5px 0px;
+  margin: 5px 10px;
+  box-sizing: border-box;
+}
+.searchResBody .recommended .rec_item .chooseImgBox {
+  width: 26px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.searchResBody .recommended .rec_item .chooseImgBox .chooseImg {
+  width: 18px;
+  height: 18px;
+  object-fit: cover;
+}
+.searchResBody .recommended .rec_item .proImg {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
+.searchResBody .recommended .rec_item .baseBox {
+  flex: 1;
+}
+.searchResBody .recommended .rec_item .baseBox .name {
+  margin: 14.5px 11.5px 9.5px;
+  font-size: 14px;
+  font-family: ArialMT;
+  font-weight: 400;
+  color: #333333;
+  line-height: 16px;
+  text-overflow: ellipsis;
+}
+.searchResBody .recommended .rec_item .baseBox .rec_bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 11.5px 16.5px;
+}
+.searchResBody .recommended .rec_item .baseBox .rec_bottom .price {
+  font-size: 18px;
+  font-family: KaiTi;
+  font-weight: 400;
+  color: #b80502;
+  line-height: 16px;
+}
+.searchResBody .recommended .rec_item .baseBox .rec_bottom i {
+  font-size: 14px;
+  font-style: normal;
+}
+.searchResBody .recommended .rec_item .addBox {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #f3f3f3;
+  color: #666;
+  font-size: 26px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: 5px;
+}
+.searchResBody .recommended .rec_item .people_buy {
+  font-size: 12px;
+  font-family: PingFang-SC-Medium;
+  font-weight: 500;
+  color: #999999;
+  line-height: 16px;
+}
+.choosedBox {
+  width: 100%;
+  height: 50px;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0px 12px;
+}
+.choosedBox .chooseNums {
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: 30px;
+}
+.choosedBox .conBtn {
+  width: 60px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 6px;
+  background-color: #1978FE;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+}
+.choosedBox .viewBtn {
+  margin-left: auto;
+  margin-right: 10px;
+}

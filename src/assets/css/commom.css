@@ -1,0 +1,45 @@
+.fl{
+  float: left;
+}
+.fr{
+  float:right;
+}
+.clear:after{
+  content:'';
+  overflow:hidden;
+  height:0;
+  clear: both;
+  display: block;
+}
+.clear{
+  zoom: 1;
+}
+
+/* 头部共用样式 */
+.header{
+  font-size: 16px;
+  z-index: 1999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height:1.2rem;
+}
+.header div{
+  padding-left:0.4rem;
+  padding-right: 0.4rem;
+  height: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+.header .right{
+  font-size: 8px;
+  margin-right: 4px;
+  background-color: #1978FE;
+  color: #fff;
+  padding:2px 4px;
+  border-radius: 4px;
+
+}
+.header img{
+  height: 0.4rem;
+}

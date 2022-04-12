@@ -1,0 +1,194 @@
+#taskGoodsTask{
+  width: 100%;
+  height:100%;
+  display: flex;
+  flex-direction: column;
+  .header{
+    width:100%;
+    height:1.2rem;
+    padding:0 0.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color:#333;
+    box-sizing: border-box;
+    background-color: #F6F6F6;
+    user-select: none; -webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;
+    .img{
+      width:40px;
+      padding:0 25px 0 0;
+    }
+    .tit{
+      font-size:16px;
+      user-select: none; -webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;
+    }
+    .placeLabel{
+      width:50px;
+      padding-right:15px;
+      color:#1978FE;
+      font-size: 16px;
+    }
+  }
+  .goods-box {
+    width:100%;
+    height: 1.1rem;
+    line-height: 1.1rem;
+    display: flex;
+    background-color: #fff;
+    .goods-ul{
+      flex:1;
+      overflow: hidden;
+      display: flex;
+      height: 1.1rem;
+      .goods-item{
+        white-space: nowrap;
+        font-size: 14px;
+        color:#999;
+        border-bottom:2px solid transparent;
+        margin-right:22px;
+        height: 0.94rem;
+        box-sizing: border-box;
+      }
+      .goods-item:first-child{
+        margin-left:15px;
+      }
+      .goods-item:last-child{
+        margin-right:0px;
+      }
+      .active{
+        border-bottom:2px solid #1978FE;
+        color:#1978FE;
+        font-size: 16px;
+      }
+    }
+  }
+  .goodsBody{
+    flex:1;
+    width:100%;
+    background-color: #f5f5f5;
+    .scrollCon{
+      flex:1;
+      display: flex;
+      flex-direction: column;
+      width:100%;
+      box-sizing: border-box;
+      .scrollTestItem{
+        flex:1;
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+        border: 0.5px solid #fff;
+        background:#fff;
+        margin:10px 10px;
+        height:130px;
+        box-sizing: border-box;
+        font-size: 14px;
+        .goodsListTop{
+          color: #999;
+          height:40px;
+          align-items: center;
+          border-bottom: 0.5px solid #f3f3f3;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          .odiv{
+            margin:0 10px;
+            width:3px;
+            background:#1978FE;
+            height:14px;
+          }
+          .seriesName{
+            flex:1;
+          }
+        }
+        .goodsListBom{
+          flex:1;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          margin:10px 10px;
+          .liTop{
+            flex:2;
+            height:100%;
+            display: flex;
+            flex-direction: column;
+            .tesk{
+              flex:1;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: center;
+              .teskNums{
+                font-size: 12px;
+                color:#999;
+              }
+              .Num{
+                color:#4FD5AC;
+                margin-right:10px;
+              }
+            }
+            .best{
+              flex:1;
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between;
+              align-items: center;
+              .bestGrade{
+                font-size: 12px;
+                color:#999;
+              }
+              .grade{
+                color:#F8736E;
+                margin-right:10px;
+              }
+            }
+          }
+          .odiv{
+            flex:1;
+          }
+          .liBom{
+            flex:2;
+            height:100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            .taskLiLeft{
+              flex:1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              img{
+                flex:1;
+                width:0.96rem;
+              }
+              span{
+                margin-top:5px;
+                font-size: 12px;
+                color:#4FD5AC;
+              }
+            }
+            .taskLiRight{
+              flex:1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              img{
+                flex:1;
+                // width:50%;
+                width:0.96rem;
+              }
+              span{
+                margin-top:5px;
+                font-size: 12px;
+                color:#5eA1fe;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

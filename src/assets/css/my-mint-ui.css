@@ -1,0 +1,36 @@
+.mint-indicator-wrapper{
+    background-color:transparent;
+}
+
+.bottom .mint-tabbar{
+    position: static;
+    background-color: #fff!important;
+}
+.mint-tab-container{
+    height:100%;
+    width: 100%;
+    position: absolute;
+}
+.middle .mint-tab-container-wrap{
+    height: 100%;
+}
+.middle .mint-tab-container-item{
+    height: 100%;
+}
+
+.mint-spinner-fading-circle{
+    width: 64px !important;
+    height:64px !important;
+
+}
+.circle-color-8 > div::before{
+    background-color: #00A8C5 !important;
+}
+.mint-tabbar > .mint-tab-item.is-selected {
+    background-color: #fff!important;
+    border-top:0.5px solid #ddd;
+    box-sizing: border-box;
+}
+.mint-tabbar > .mint-tab-item.is-selected .mint-tab-item-label{
+    color:#1978FE;
+}

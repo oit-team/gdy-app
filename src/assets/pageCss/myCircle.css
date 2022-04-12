@@ -1,0 +1,215 @@
+#myCircle {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#myCircle .headBox {
+  height: 1.2rem;
+}
+#myCircle .module-box {
+  width: 100%;
+  height: 1.1rem;
+  line-height: 1.1rem;
+  display: flex;
+}
+#myCircle .module-box .module-ul {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  height: 1.1rem;
+  box-sizing: border-box;
+}
+#myCircle .module-box .module-ul .module-item {
+  white-space: nowrap;
+  font-size: 14px;
+  color: #999;
+  box-sizing: border-box;
+  margin: 0px 15px;
+  height: 0.96rem;
+}
+#myCircle .module-box .module-ul .active {
+  border-bottom: 2px solid #1978FE;
+  color: #1978FE;
+  font-size: 16px;
+}
+#myCircle .select-list {
+  padding: 0px 10px 0px 14px;
+  box-sizing: border-box;
+  border-bottom: 0.5px solid #e3e3e3;
+  height: 40px;
+  line-height: 40px;
+}
+#myCircle .select-list .item {
+  color: #7F7F7F;
+  font-size: 14px;
+  margin-left: 25px;
+}
+#myCircle .select-list .item:nth-child(1) {
+  margin-left: 0px;
+}
+#myCircle .select-list .active {
+  color: #1978FE;
+}
+#myCircle .select-list .select-condit {
+  display: flex;
+}
+#myCircle .select-list .select-condit .img-box {
+  margin-left: 5px;
+  height: 15px;
+  margin-top: 12px;
+}
+#myCircle .select-list .select-condit .img-box .img-inner-box {
+  width: 8px;
+  position: relative;
+}
+#myCircle .select-list .select-condit .img-box .img-inner-box img {
+  position: relative;
+  display: block;
+  width: 8px;
+}
+#myCircle .circleCon {
+  flex: 1;
+  overflow: hidden;
+  padding: 0px 14px;
+  box-sizing: border-box;
+}
+#myCircle .circleCon .item {
+  font-size: 14px;
+  display: flex;
+  padding: 10px 0px ;
+  box-sizing: border-box;
+  border-bottom: 0.5px solid #e3e3e3;
+}
+#myCircle .circleCon .item .icon-box {
+  width: 13px;
+  height: 25px;
+  margin-top: 7px;
+}
+#myCircle .circleCon .item .icon-box img {
+  width: 100%;
+  margin-top: 2.5px;
+}
+#myCircle .circleCon .item .new-brief {
+  width: 92%;
+  margin-left: 2%;
+}
+#myCircle .circleCon .item .new-brief .title {
+  width: 100%;
+  color: #444;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  line-height: 35px;
+}
+#myCircle .circleCon .item .new-brief .other {
+  line-height: 26px;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#myCircle .circleCon .item .new-brief .other .time,
+#myCircle .circleCon .item .new-brief .other .module,
+#myCircle .circleCon .item .new-brief .other .scan-count,
+#myCircle .circleCon .item .new-brief .other .giveUp {
+  color: #999;
+}
+#myCircle .circleCon .item .new-brief .other .module {
+  margin-right: 5px;
+}
+#myCircle .circleCon .item .new-brief .other .time {
+  margin-right: auto;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#myCircle .circleCon .item .new-brief .other .publisher {
+  width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#myCircle .circleCon .item .new-brief .other .scan-count {
+  width: 75px;
+}
+#myCircle .circleCon .item .new-brief .other .giveUp,
+#myCircle .circleCon .item .new-brief .other .collect {
+  display: flex;
+  align-items: center;
+}
+#myCircle .circleCon .item .new-brief .other .giveUp {
+  margin-left: 10px;
+  width: 55px;
+}
+#myCircle .circleCon .item .new-brief .other .giveUp img {
+  width: 16px;
+  height: 16px;
+  display: block;
+  margin-right: 5px;
+}
+#myCircle .circleCon .item .new-brief .other .giveUp span {
+  font-size: 12px;
+}
+#myCircle .circleCon .item .new-brief .other .giveUp .collect {
+  background-color: #BFBFBF;
+  color: #555;
+  border-radius: 10px;
+  padding: 2px 6px;
+  margin-left: auto;
+}
+#myCircle .circleCon .item .new-brief .other .collect img {
+  width: 15px;
+  height: 15px;
+  display: block;
+}
+#myCircle .circleCon .item .new-brief .other .collect-active {
+  background-color: #00A2EA;
+  color: #fff;
+}
+#myCircle .circleCon .loadStatu {
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+}
+#myCircle .circleCon .no-news-list {
+  color: #999;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 80px;
+}
+#myCircle .circleCon .news-tip {
+  margin-top: 10px;
+}
+#myCircle .noData {
+  padding-top: 0.5px;
+}
+#myCircle .van-loading,
+#myCircle .van-loading__spinner {
+  position: relative;
+  left: 25px;
+  top: 80px;
+  vertical-align: middle;
+}
+#myCircle .van-loading__spinner {
+  width: 7.4rem;
+  height: 1rem;
+}
+.collocation {
+  width: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  padding: 10px 0px;
+  line-height: 15px;
+  background-color: #00A2EA;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  position: fixed;
+  right: 15px;
+  bottom: 100px;
+}

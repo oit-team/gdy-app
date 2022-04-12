@@ -1,0 +1,111 @@
+.van-button {
+  /*font-size:16px;*/
+}
+.van-button--large{
+  height:40px;
+  line-height: 40px;
+}
+
+.van-picker__toolbar {
+  height: 40px;
+  line-height: 40px;
+}
+.picker__confirm {
+  font-size: 16px;
+}
+.van-picker__cancel, .van-picker__confirm {
+  font-size: 16px;
+}
+.van-picker-column {
+  font-size: 16px;
+}
+
+.van-popup__close-icon {
+  font-size: 24px;
+}
+
+.van-loading{
+
+}
+/* .van-loading, .van-loading__spinner {
+  position: relative;
+  top:100px;
+  vertical-align: middle;
+}*/
+.van-loading__spinner {
+  width: 10rem;
+  height: 1.4rem;
+  top:100px;
+}
+
+.van-toast{
+  width:70px;
+  height: 70px;
+}
+.van-toast .van-toast__text{
+  margin-top: 10px;
+  font-size:12px;
+}
+
+.van-image-preview__index{
+  top: 94%;
+  left: 88%;
+  font-size:14px;
+}
+
+.van-share-sheet__icon{
+  width:40px;
+  height:40px;
+}
+.van-share-sheet__name{
+  font-size:12px;
+}
+
+.van-share-sheet__cancel{
+  font-size:12px;
+  height:40px;
+  line-height: 40px;
+}
+
+.van-step--vertical .van-step__circle-container {
+  top: 18px;
+  font-size: 16px;
+}
+
+.van-step--vertical .van-step__line {
+  top: 0.213333rem;
+  left: -0.2rem;
+  width: 1.5px;
+}
+
+.van-dialog {
+  font-size: 14px;
+  width: 250px;
+}
+.van-dialog__message {
+  font-size: 14px;
+  line-height: 25px;
+}
+
+.van-image-preview__image {
+  top: 55px;
+  bottom: 55px;
+}
+.van-share-sheet__icon {
+  margin: 0 12px;
+}
+
+.van-dialog__header {
+  line-height: 25px;
+}
+
+/* .van-cell {
+  font-size: 16px;
+  line-height: 40px;
+  padding-left: 12px ;
+  padding-right: 12px ;
+  box-sizing: border-box;
+}
+.van-collapse-item__content {
+  font-size: 16px;
+} */

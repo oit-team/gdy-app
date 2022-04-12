@@ -1,0 +1,163 @@
+#taskCheckTask {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+#taskCheckTask .check-box {
+  width: 100%;
+  height: 1.2rem;
+  line-height: 1.1rem;
+  display: flex;
+  background-color: #fff;
+}
+#taskCheckTask .check-box .check-ul {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  height: 1.1rem;
+}
+#taskCheckTask .check-box .check-ul .check-item {
+  white-space: nowrap;
+  font-size: 14px;
+  color: #999;
+  border-bottom: 2px solid transparent;
+  margin-right: 22px;
+  height: 0.94rem;
+  box-sizing: border-box;
+}
+#taskCheckTask .check-box .check-ul .check-item:first-child {
+  margin-left: 15px;
+}
+#taskCheckTask .check-box .check-ul .check-item:last-child {
+  margin-right: 0px;
+}
+#taskCheckTask .check-box .check-ul .active {
+  border-bottom: 2px solid #1978FE;
+  color: #1978FE;
+  font-size: 16px;
+}
+#taskCheckTask .checkTaskCon {
+  flex: 1;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  color: #999;
+}
+#taskCheckTask .checkTaskCon .checkTask_box {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: #f5f5f5;
+  border-bottom: 0.5px solid #e3e3e3;
+  font-size: 14px;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 0.5px solid #fff;
+  background: #fff;
+  margin: 10px 10px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkTop {
+  color: #999;
+  height: 40px;
+  border-bottom: 0.5px solid #f3f3f3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkTop .checkTop_box {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkTop .checkTop_box .sekuai {
+  margin: 0 10px;
+  width: 3px;
+  background: #1978FE;
+  height: 14px;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkTop .checkRspan {
+  color: #FF8C7C;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkTop .Rspan {
+  margin: 0 10px;
+  color: #FF8C7C;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkBom {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 5px;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkBom .box_top {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkBom .box_top .check_top {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkBom .box_top .check_top .box_b {
+  font-size: 12px;
+  margin: 5px 0;
+  margin-left: 5px;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkBom .box_top .check_top .box_t {
+  margin: 5px 0;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkBom .box_top .check_top .box_t .Pspan {
+  font-size: 12px;
+  margin-right: 15px;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkBom .box_top .check_top .box_t .Rspan {
+  color: #FF8C7C;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkBom .box_top .check_in {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkBom .box_top .check_in .box_b {
+  font-size: 12px;
+  margin: 5px 0;
+  margin-left: 5px;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkBom .box_top .check_in .box_t {
+  margin: 5px 0;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkBom .box_top .check_in .box_t .Pspan {
+  font-size: 12px;
+  margin-right: 15px;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkBom .box_top .check_in .box_t .Gspan {
+  color: #4FD5AC;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkBom .check_bom {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+#taskCheckTask .checkTaskCon .checkTask_box .listcheck .checkBom .check_bom img {
+  flex: 1;
+  width: 0.96rem;
+  margin-right: 6px;
+}

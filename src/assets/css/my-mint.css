@@ -1,0 +1,82 @@
+/* 在css中排除需要排除的标签即可 */
+/* ,:not(textarea)   怎么再多排除一个多行文本框呢   */
+/* *,:not(textarea){
+  -moz-user-select: -moz-none;
+  -moz-user-select: none;
+  -o-user-select:none;
+  -khtml-user-select:none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+} */
+*{
+  -moz-user-select: -moz-none;
+  -moz-user-select: none;
+  -o-user-select:none;
+  -khtml-user-select:none;
+  -webkit-user-select:none;
+  -ms-user-select:none;
+  user-select:none;
+}
+input {
+  -webkit-user-select:auto; /*webkit浏览器*/
+}
+/* 如果存在textarea也输入不进文本的情况下，加上这个 */
+textarea {                                                               
+  -webkit-user-select:auto; /*webkit浏览器*/
+}
+/* tabbar */
+.mint-tabbar > .mint-tab-item{
+  padding:5px 0px;
+}
+.mint-tabbar > .mint-tab-item > .mint-tab-item-icon{
+  /* width:22.5px;
+  height:22.5px; */
+  width:24px;
+  height:24px;
+  box-sizing:border-box;
+  user-select: none;
+  -webkit-user-select:none;
+  -moz-user-select:none;
+  -ms-user-select:none;
+}
+.mint-tabbar > .homeTab > .mint-tab-item-icon{
+  width: 35px !important;
+  height: 35px !important;
+}
+.mint-tabbar > .mint-tab-item > .mint-tab-item-label{
+  font-size:12px;
+  margin-top:2px;
+  color: #808080;
+}
+/* 我的取消/确认登录弹框 */
+.mint-msgbox-title {
+  height:30px;
+  line-height: 30px;
+  font-size: 14px;
+}
+.mint-msgbox-message {
+  color: #999;
+  font-size:14px;
+  height:30px;
+  line-height: 30px;
+}
+.mint-msgbox-btns {
+  height:40px;
+  line-height: 40px;
+}
+.mint-msgbox-btn {
+  height:40px;
+  line-height: 40px;
+  font-size:14px;
+}
+
+/* 提示框 */
+.mint-toast-text {
+  font-size: 16px;
+
+}
+
+.popup_btn div{
+  background-color: #00a2ea;
+}

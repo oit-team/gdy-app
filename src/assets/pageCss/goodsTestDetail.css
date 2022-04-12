@@ -1,0 +1,61 @@
+#goodsTestDetail {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#goodsTestDetail .goodsTestDetailCon {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+#goodsTestDetail .goodsTestDetailCon .bodys {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30%;
+}
+#goodsTestDetail .goodsTestDetailCon .bodys .bodysTop {
+  flex: 1;
+}
+#goodsTestDetail .goodsTestDetailCon .bodys .bodysTop .lists {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 14px;
+  text-align: left;
+  margin: 15px 0;
+}
+#goodsTestDetail .goodsTestDetailCon .bodys .bodysTop .lists .listsTop {
+  margin-right: 10px;
+}
+#goodsTestDetail .goodsTestDetailCon .bodys .bodysTop .lists .listsTop img {
+  width: 80%;
+  height: 80%;
+}
+#goodsTestDetail .goodsTestDetailCon .bodys .bodysTop .lists .listsBom .tspan {
+  padding: 5px 0;
+  display: block;
+  color: #999999;
+}
+#goodsTestDetail .goodsTestDetailCon .bodys .bodysTop .lists .listsBom .bspan {
+  padding: 5px 0;
+  display: block;
+  font-weight: 700;
+  color: #333333;
+}
+#goodsTestDetail .footer {
+  width: 100%;
+  padding: 0 12.5px;
+  box-sizing: border-box;
+  height: 40px;
+  margin-bottom: 30px;
+}
+#goodsTestDetail .footer .startBtn {
+  width: 100%;
+  font-size: 15px;
+  height: 40px;
+}

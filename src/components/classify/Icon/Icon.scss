@@ -1,0 +1,17 @@
+.vc-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	flex-shrink: 0;
+	width: 1em;
+	height: 1em;
+	font-size: 1em;
+	box-sizing: initial;
+}
+
+.vc-icon__svg {
+	width: 100%;
+	height: 100%;
+	fill: currentColor;
+}

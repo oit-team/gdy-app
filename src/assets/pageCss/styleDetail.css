@@ -1,0 +1,236 @@
+#styleMain {
+  background-color: #f5f5f5;
+}
+#styleMain .styleDetailCon {
+  flex: 1;
+  overflow: hidden;
+}
+#styleMain .base {
+  background-color: #fff;
+  padding: 10px 14px;
+}
+#styleMain .base .suitBox {
+  flex: 1;
+  padding: 7px 0px;
+}
+#styleMain .base .suitBox .item {
+  display: inline-block;
+  background-color: #1978FE;
+  color: #fff;
+  border-radius: 8px;
+  padding: 2px 12px;
+  font-size: 12px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+#styleMain .base .baseInnerBox {
+  display: flex;
+}
+#styleMain .base .baseInnerBox .suitBox {
+  flex: 1;
+  padding: 7px 0px;
+}
+#styleMain .base .baseInnerBox .suitBox .item {
+  display: inline-block;
+  background-color: #1978FE;
+  color: #fff;
+  border-radius: 8px;
+  padding: 2px 12px;
+  font-size: 12px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+#styleMain .base .baseInnerBox .praiseBox {
+  width: 40px;
+  height: 40px;
+  background-color: #EA7F59;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+}
+#styleMain .base .baseInnerBox .praiseBox .nums {
+  margin-top: 4px;
+}
+#styleMain .base .baseInnerBox .praiseBox .praiseIcon {
+  width: 15px;
+  margin: 0 auto;
+  display: block;
+}
+#styleMain .base .styleName {
+  font-size: 16px;
+  line-height: 26px;
+}
+#styleMain .base .recReason {
+  color: #333;
+}
+#styleMain .base .recReason .recTit {
+  margin: 5px 0px;
+  display: flex;
+  align-items: center;
+}
+#styleMain .base .recReason .recTit .tit {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 20px;
+  margin: 10px 0px;
+}
+#styleMain .base .recReason .recTit img {
+  margin-right: 6px;
+  margin-left: auto;
+  width: 14px;
+  height: 16px;
+}
+#styleMain .base .recReason .recTit .copyBtn {
+  color: #999;
+  font-size: 12px;
+}
+#styleMain .base .recReason .recDesc {
+  width: 100%;
+  font-size: 14px;
+  color: #666;
+  line-height: 26px;
+  text-align: left;
+  text-align: justify;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+#styleMain .base .recReason .fold {
+  -webkit-line-clamp: 3;
+}
+#styleMain .base .recReason .unfold {
+  -webkit-line-clamp: 100;
+}
+#styleMain .base .recReason .expande {
+  height: auto;
+}
+#styleMain .base .recReason .close {
+  height: 78px;
+}
+#styleMain .base .recReason .show {
+  color: #1978FE;
+  font-size: 12px;
+}
+#styleMain .recList {
+  margin-top: 10px;
+  padding-left: 3%;
+  display: flex;
+  flex-wrap: wrap;
+}
+#styleMain .recList .item {
+  width: 31%;
+  margin-right: 2%;
+  text-align: center;
+  background-color: #fff;
+  margin-bottom: 7px;
+  box-sizing: border-box;
+  padding: 10px 0px;
+  font-size: 14px;
+}
+#styleMain .recList .item .imgBox {
+  width: 100%;
+  position: relative;
+}
+#styleMain .recList .item .imgBox img {
+  width: 100%;
+}
+#styleMain .recList .item .imgBox .tipBox {
+  position: absolute;
+  top: -10px;
+  left: 0;
+}
+#styleMain .recList .item .imgBox .tipBox img {
+  width: 14px;
+}
+#styleMain .recList .num {
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 26px;
+  padding: 0px 4px;
+}
+#styleMain .recList .price {
+  color: #AF0005;
+}
+#styleMain .collCommentbox {
+  padding: 10px 14px;
+  background-color: #fff;
+}
+#styleMain .collCommentbox .commentTit {
+  line-height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#styleMain .collCommentbox .commentTit .tit {
+  font-size: 20px;
+  font-weight: bold;
+}
+#styleMain .collCommentbox .commentTit img {
+  width: 16px;
+  height: 16px;
+}
+#styleMain .collCommentbox .comCon {
+  padding: 6px 0px;
+  border-bottom: 0.5px solid #eee;
+}
+#styleMain .collCommentbox .comCon .inner {
+  font-size: 14px;
+  line-height: 22px;
+  padding: 6px 0px;
+  color: #666;
+  text-align: justify;
+}
+#styleMain .collCommentbox .comCon .avatarBox {
+  display: flex;
+  align-items: center;
+}
+#styleMain .collCommentbox .comCon .avatarBox img {
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+  border-radius: 50%;
+  overflow: hidden;
+}
+#styleMain .collCommentbox .comCon .avatarBox .userName {
+  margin-left: 6px;
+  font-size: 14px;
+  color: #666;
+}
+#styleMain .collCommentbox .comCon .avatarBox .praise {
+  margin-left: auto;
+  font-size: 14px;
+  color: #666;
+}
+#styleMain .collCommentbox .comCon:last-child {
+  border-bottom: none;
+}
+#styleMain .collCommentbox .noData {
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  margin: 10px auto;
+}
+#styleMain .refusedBox {
+  padding: 10px 12px;
+  background-color: #fff;
+}
+#styleMain .refusedBox .van-step--vertical {
+  line-height: 22px;
+}
+#styleMain .refusedBox .refuseTit {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 20px;
+  margin: 10px 0px;
+}
+#styleMain .refusedBox .tit {
+  color: #666;
+  font-size: 14px;
+}
+#styleMain .refusedBox .time {
+  color: #999;
+  font-size: 12px;
+}

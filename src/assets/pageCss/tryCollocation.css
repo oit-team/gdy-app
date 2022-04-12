@@ -1,0 +1,262 @@
+#tryCollocation {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+#tryCollocation .try-collocation {
+  box-sizing: border-box;
+  width: 100%;
+  height: 93vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+#tryCollocation .try-collocation .this-clothes {
+  padding: 10px 14.5px;
+  z-index: 1999;
+  background-color: #fff;
+  border-radius: 0px 0px 12px 12px;
+}
+#tryCollocation .try-collocation .this-clothes .this-style {
+  display: flex;
+  align-items: center;
+}
+#tryCollocation .try-collocation .this-clothes .this-style img {
+  width: 35%;
+  padding: 0.5px;
+}
+#tryCollocation .try-collocation .this-clothes .this-style .this-info {
+  align-self: flex-start;
+  padding-left: 7%;
+  width: 72%;
+  box-sizing: border-box;
+}
+#tryCollocation .try-collocation .this-clothes .this-style .this-info .this-title {
+  margin-top: 11px;
+  width: 100%;
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+  line-height: 30px;
+}
+#tryCollocation .try-collocation .this-clothes .this-style .this-info .style-num {
+  font-size: 12px;
+  color: #999;
+  line-height: 12px;
+}
+#tryCollocation .try-collocation .this-clothes .this-style .this-info .this-desc {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #999;
+  line-height: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+#tryCollocation .try-collocation .this-clothes .this-style .this-info .price {
+  margin-top: 14px;
+  color: #AF0005;
+  font-size: 18px;
+}
+#tryCollocation .try-collocation .this-clothes .this-style .this-info .price .symble {
+  font-size: 18px;
+}
+#tryCollocation .try-collocation .coll-tab {
+  z-index: 1999;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+  background-color: #fff;
+  height: 1.1rem;
+  line-height: 1.1rem;
+}
+#tryCollocation .try-collocation .coll-tab div {
+  margin-right: 10px;
+  height: 1.1rem;
+}
+#tryCollocation .try-collocation .coll-tab div span {
+  display: inline-block;
+  height: 0.9rem;
+  border-bottom: 2px solid #fff;
+}
+#tryCollocation .try-collocation .coll-tab .brandRec {
+  margin-left: 15px;
+}
+#tryCollocation .try-collocation .coll-tab .addIcon {
+  margin-left: auto;
+  width: 16px;
+  height: 16px;
+  border: 0.5px solid #000;
+  line-height: 16px;
+  text-align: center;
+}
+#tryCollocation .try-collocation .coll-tab .active span {
+  color: #1978FE;
+  border-bottom: 2px solid #1978FE;
+  font-size: 16px;
+}
+#tryCollocation .try-collocation .collBody {
+  flex: 1;
+  overflow: hidden;
+}
+#tryCollocation .try-collocation .collBody .brandRecList {
+  padding-left: 3%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+#tryCollocation .try-collocation .collBody .brandRecList .brandItem {
+  width: 47%;
+  margin-right: 3%;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background-color: #fff;
+  padding-bottom: 7px;
+}
+#tryCollocation .try-collocation .collBody .brandRecList .brandItem img {
+  width: 100%;
+  height: 170px;
+  object-fit: contain;
+  display: block;
+}
+#tryCollocation .try-collocation .collBody .brandRecList .brandItem .collLabel {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 5px 7px;
+  color: #666;
+  font-size: 12px;
+  line-height: 26px;
+  box-sizing: border-box;
+  text-align: center;
+}
+#tryCollocation .try-collocation .collBody .brandRecList .brandItem .coll-item {
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+}
+#tryCollocation .try-collocation .collBody .brandRecList .brandItem .coll-item .inner-list {
+  display: inline-flex;
+  justify-content: space-between;
+  padding: 0px;
+  position: relative;
+}
+#tryCollocation .try-collocation .collBody .brandRecList .brandItem .coll-item .inner-list .inner-item {
+  box-sizing: border-box;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  margin-right: 7px;
+}
+#tryCollocation .try-collocation .collBody .brandRecList .brandItem .coll-item .inner-list .inner-item img {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+#tryCollocation .try-collocation .collBody .brandRecList .brandItem .coll-item .inner-list .inner-item:last-child {
+  margin-right: 0px;
+}
+#tryCollocation .try-collocation .collBody .brandRecList .brandItem .coll-item:last-child {
+  margin-bottom: 0px;
+}
+#tryCollocation .try-collocation .collBody .brandRecList .brandItem .collItemScroll {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  display: flex;
+  margin-bottom: 10px;
+}
+#tryCollocation .try-collocation .collBody .brandRecList .brandItem .collItemScroll .imgList {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  height: 50px;
+}
+#tryCollocation .try-collocation .collBody .brandRecList .brandItem .collItemScroll .imgList .imgBox {
+  font-size: 14px;
+  margin-right: 10px;
+  width: 50px;
+  height: 50px;
+}
+#tryCollocation .try-collocation .collBody .brandRecList .brandItem .collItemScroll .imgList .imgBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+#tryCollocation .try-collocation .collBody .brandRecList .brandItem .collItemScroll .imgList .imgBox:last-child {
+  margin-right: 0px;
+}
+#tryCollocation .try-collocation .beautyList {
+  flex: 1;
+  overflow: hidden;
+}
+#tryCollocation .try-collocation .beautyList .beautyListBox {
+  padding-left: 3%;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+}
+#tryCollocation .try-collocation .beautyList .beautyListBox .beautyItem {
+  width: 47%;
+  margin-right: 3%;
+  margin-bottom: 10px;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  padding-bottom: 5px;
+}
+#tryCollocation .try-collocation .beautyList .beautyListBox .beautyItem img {
+  width: 100%;
+  height: 187.5px;
+  display: block;
+  object-fit: contain;
+}
+#tryCollocation .try-collocation .beautyList .beautyListBox .beautyItem .comment {
+  font-size: 14px;
+  padding: 3px 5px;
+  line-height: 22px;
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+#tryCollocation .try-collocation .beautyList .beautyListBox .beautyItem .reviewerBox {
+  padding: 3px 5px;
+  display: flex;
+  align-items: center;
+  color: #999;
+}
+#tryCollocation .try-collocation .beautyList .beautyListBox .beautyItem .reviewerBox .avatar {
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+  border-radius: 50%;
+  overflow: hidden;
+}
+#tryCollocation .try-collocation .beautyList .beautyListBox .beautyItem .reviewerBox .name {
+  font-size: 12px;
+  margin-left: 3px;
+  margin-right: auto;
+}
+#tryCollocation .try-collocation .beautyList .beautyListBox .beautyItem .reviewerBox .praiseIcon {
+  width: 14px;
+  height: 14px;
+  margin-right: 3px;
+}
+#tryCollocation .try-collocation .beautyList .beautyListBox .beautyItem .reviewerBox .num {
+  font-size: 12px;
+}

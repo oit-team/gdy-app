@@ -1,0 +1,198 @@
+#taskGoodsTask {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#taskGoodsTask .header {
+  width: 100%;
+  height: 1.2rem;
+  padding: 0 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #333;
+  box-sizing: border-box;
+  background-color: #F6F6F6;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+#taskGoodsTask .header .img {
+  width: 40px;
+  padding: 0 25px 0 0;
+}
+#taskGoodsTask .header .tit {
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+#taskGoodsTask .header .placeLabel {
+  width: 50px;
+  padding-right: 15px;
+  color: #1978FE;
+  font-size: 16px;
+}
+#taskGoodsTask .goods-box {
+  width: 100%;
+  height: 1.1rem;
+  line-height: 1.1rem;
+  display: flex;
+  background-color: #fff;
+}
+#taskGoodsTask .goods-box .goods-ul {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  height: 1.1rem;
+}
+#taskGoodsTask .goods-box .goods-ul .goods-item {
+  white-space: nowrap;
+  font-size: 14px;
+  color: #999;
+  border-bottom: 2px solid transparent;
+  margin-right: 22px;
+  height: 0.94rem;
+  box-sizing: border-box;
+}
+#taskGoodsTask .goods-box .goods-ul .goods-item:first-child {
+  margin-left: 15px;
+}
+#taskGoodsTask .goods-box .goods-ul .goods-item:last-child {
+  margin-right: 0px;
+}
+#taskGoodsTask .goods-box .goods-ul .active {
+  border-bottom: 2px solid #1978FE;
+  color: #1978FE;
+  font-size: 16px;
+}
+#taskGoodsTask .goodsBody {
+  flex: 1;
+  width: 100%;
+  background-color: #f5f5f5;
+}
+#taskGoodsTask .goodsBody .scrollCon {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  border: 0.5px solid #fff;
+  background: #fff;
+  margin: 10px 10px;
+  height: 130px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListTop {
+  color: #999;
+  height: 40px;
+  border-bottom: 0.5px solid #f3f3f3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListTop .odiv {
+  margin: 0 10px;
+  width: 3px;
+  background: #1978FE;
+  height: 14px;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListTop .seriesName {
+  flex: 1;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 10px;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .liTop {
+  flex: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .liTop .tesk {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .liTop .tesk .teskNums {
+  font-size: 12px;
+  color: #999;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .liTop .tesk .Num {
+  color: #4FD5AC;
+  margin-right: 10px;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .liTop .best {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .liTop .best .bestGrade {
+  font-size: 12px;
+  color: #999;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .liTop .best .grade {
+  color: #F8736E;
+  margin-right: 10px;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .odiv {
+  flex: 1;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .liBom {
+  flex: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .liBom .taskLiLeft {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .liBom .taskLiLeft img {
+  flex: 1;
+  width: 0.96rem;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .liBom .taskLiLeft span {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #4FD5AC;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .liBom .taskLiRight {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .liBom .taskLiRight img {
+  flex: 1;
+  width: 0.96rem;
+}
+#taskGoodsTask .goodsBody .scrollCon .scrollTestItem .goodsListBom .liBom .taskLiRight span {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #5eA1fe;
+}

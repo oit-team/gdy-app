@@ -1,0 +1,157 @@
+#keyStylePage {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+#keyStylePage .header {
+  background-color: #fff;
+}
+#keyStylePage .kindTopBox {
+  width: 100%;
+  height: 1.2rem;
+  line-height: 1.2rem;
+  display: flex;
+  margin: 6px 0px;
+  background-color: #fff;
+}
+#keyStylePage .kindTopBox .scrollUl {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  height: 1.2rem;
+}
+#keyStylePage .kindTopBox .scrollUl .kindItem {
+  padding: 0px 15px;
+  white-space: nowrap;
+  height: 1.2rem;
+  color: #999;
+  box-sizing: border-box;
+}
+#keyStylePage .kindTopBox .scrollUl .kindItem .styleName {
+  padding: 4px 10px;
+  background-color: #f5f5f5;
+  font-size: 14px;
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 0.5px solid #fff;
+}
+#keyStylePage .kindTopBox .scrollUl .kindItem:last-child {
+  margin-right: 0px;
+}
+#keyStylePage .kindTopBox .scrollUl .active .styleName {
+  background-color: #E8F1FE;
+  color: #1978FE;
+  border: 0.5px solid #1978FE;
+}
+#keyStylePage .kindTitBox {
+  width: 100%;
+  height: 1.1rem;
+  line-height: 1.1rem;
+  display: flex;
+  background-color: #fff;
+}
+#keyStylePage .kindTitBox .kindTitUl {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  height: 1.1rem;
+}
+#keyStylePage .kindTitBox .kindTitUl .kindTitItem {
+  padding: 0px 15px;
+  white-space: nowrap;
+  height: 1.1rem;
+  color: #999;
+  box-sizing: border-box;
+}
+#keyStylePage .kindTitBox .kindTitUl .kindTitItem .styleName {
+  display: inline-block;
+  height: 0.94rem;
+  font-size: 14px;
+  border-bottom: 2px solid transparent;
+  box-sizing: border-box;
+}
+#keyStylePage .kindTitBox .kindTitUl .kindTitItem:last-child {
+  margin-right: 0px;
+}
+#keyStylePage .kindTitBox .kindTitUl .active .styleName {
+  color: #1978FE;
+  font-size: 16px;
+  border-bottom: 2px solid #1978FE;
+}
+#keyStylePage .keyStyleCon {
+  flex: 1;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding-left: 2%;
+}
+#keyStylePage .keyStyleCon .keyStyle-item {
+  float: none;
+  display: inline-block;
+  vertical-align: top;
+  width: 31.2%;
+  padding: 0.5px;
+  box-sizing: border-box;
+  margin-bottom: 6px;
+  margin-right: 2%;
+  background-color: #fff;
+}
+#keyStylePage .keyStyleCon .keyStyle-item .goods-img-box {
+  position: relative;
+}
+#keyStylePage .keyStyleCon .keyStyle-item .goods-img-box .goods-img {
+  width: 100%;
+}
+#keyStylePage .keyStyleCon .keyStyle-item .goods-img-box .tipBox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+#keyStylePage .keyStyleCon .keyStyle-item .goods-img-box .tipBox img {
+  width: 14px;
+}
+#keyStylePage .keyStyleCon .keyStyle-item .goods-num {
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #666;
+}
+#keyStylePage .keyStyleCon .keyStyle-item .goods-price {
+  font-size: 15px;
+  color: #AF0005;
+  line-height: 20px;
+}
+#keyStylePage .keyStyleCon .keyStyle-item .goods-price .money-symbel {
+  font-size: 10px;
+  margin: 0px 2px;
+}
+#keyStylePage .keyStyleCon .keyStyle-item .goods-stylePrice {
+  box-sizing: border-box;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+}
+#keyStylePage .keyStyleCon .keyStyle-item .goods-stylePrice .money-symbel {
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  color: #AF0005;
+}
+#keyStylePage .keyStyleCon .keyStyle-item .goods-stylePrice .learnIcon {
+  margin-left: 4px;
+}
+#keyStylePage .keyStyleCon .keyStyle-item .goods-stylePrice .lastIcon {
+  margin-left: 4px;
+  margin-top: 1px;
+}
+#keyStylePage .keyStyleCon .keyStyle-item:nth-child(3n+2) {
+  margin-bottom: 6px;
+}

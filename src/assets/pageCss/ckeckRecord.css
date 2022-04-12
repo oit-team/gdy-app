@@ -1,0 +1,119 @@
+#checkRecord {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#checkRecord .recordScrollCon {
+  flex: 1;
+  overflow: hidden;
+}
+#checkRecord .recordScrollCon .checkTaskContent {
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+#checkRecord .recordScrollCon .checkTaskContent .lists {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px;
+  border-bottom: 0.5px solid #e3e3e3;
+  font-size: 14px;
+}
+#checkRecord .recordScrollCon .checkTaskContent .lists .checkedSelect {
+  display:  flex;
+  align-items:  center;
+}
+#checkRecord .recordScrollCon .checkTaskContent .lists .checkedSelect img {
+  width: 20px;
+  height: 20px;
+}
+#checkRecord .recordScrollCon .checkTaskContent .lists .listsLeft {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 5px;
+  margin-right: auto;
+  margin-left: 7px;
+}
+#checkRecord .recordScrollCon .checkTaskContent .lists .listsLeft .con_t {
+  padding: 3px 0;
+}
+#checkRecord .recordScrollCon .checkTaskContent .lists .listsLeft .con_b {
+  color: #999;
+  padding: 3px 0;
+}
+#checkRecord .recordScrollCon .checkTaskContent .lists .listsRight {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#checkRecord .recordScrollCon .checkTaskContent .lists .listsRight .right_box {
+  width: 2rem;
+  display: flex;
+  flex-direction: column;
+  margin-right: 5px;
+}
+#checkRecord .recordScrollCon .checkTaskContent .lists .listsRight .right_box .ospan {
+  text-align: right;
+}
+#checkRecord .recordScrollCon .checkTaskContent .lists .listsRight .right_box .rspan {
+  color: #999;
+  text-align: right;
+}
+#checkRecord .recordScrollCon .checkTaskContent .lists .listsRight .right_box .yspan {
+  color: #999;
+  text-align: right;
+}
+#checkRecord .recordScrollCon .checkTaskContent .lists .listsRight img {
+  height: 10.5px;
+  width: 5.5px;
+  margin-left: 0.1rem;
+}
+#checkRecord .recordScrollCon .checkTaskContent .list {
+  color: #FF8C7C;
+}
+#checkRecord .delBox {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 12.5px;
+  box-sizing: border-box;
+  color: #999;
+}
+#checkRecord .delBox .selectCircle {
+  height:  50px;
+  display:  flex;
+  align-items:  center;
+}
+#checkRecord .delBox .selectCircle img {
+  width: 20px;
+  height: 20px;
+}
+#checkRecord .delBox .countBox {
+  margin-right: auto;
+  margin-left: 10px;
+}
+#checkRecord .delBox .delBtn {
+  width: 100px;
+  height: 40px;
+  border-radius: 20px 0 0 20px;
+  background: #FF8C7C;
+  border: 0.5px solid #FF8C7C;
+  font-size: 0.373333rem;
+  margin-right: 10px;
+}
+#checkRecord .delBox .startBtn {
+  width: 100px;
+  height: 40px;
+  border-radius: 0 20px 20px 0;
+  font-size: 0.373333rem;
+  background: #5EA1FE;
+  border: 0.5px solid #5EA1FE;
+}

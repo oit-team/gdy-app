@@ -1,0 +1,44 @@
+#staffHave {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#staffHave .staffHaveCon {
+  flex: 1;
+  overflow: hidden;
+  width: 100%;
+  padding: 0 12.5px;
+  box-sizing: border-box;
+}
+#staffHave .staffHaveCon .lists {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 0.5px solid #e3e3e3;
+  font-size: 14px;
+}
+#staffHave .staffHaveCon .lists .listsLeft {
+  display: flex;
+  align-items: center;
+}
+#staffHave .staffHaveCon .lists .listsLeft .listsLeftLeft {
+  margin-right: 15px;
+}
+#staffHave .staffHaveCon .lists .ospan {
+  color: #1978FE;
+}
+#staffHave .staffHaveCon .lists .yspan {
+  color: #7DCD98;
+}
+#staffHave .staffHaveCon .lists .nspan {
+  color: #F8736E;
+}
+#staffHave .staffHaveCon .lists img {
+  height: 10.5px;
+  width: 5.5px;
+  margin-left: 0.1rem;
+}

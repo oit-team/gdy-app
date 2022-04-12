@@ -1,0 +1,70 @@
+#newsDetail {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+#newsDetail .newsHead {
+  padding: 5px 15px;
+  box-sizing: border-box;
+}
+#newsDetail .newsHead h1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+#newsDetail .newsHead .publish-box {
+  font-size: 12px;
+  color: #999;
+  line-height: 30px;
+}
+#newsDetail .newsHead .publish-box .publisher {
+  margin-left: 15px;
+}
+#newsDetail .detail-content {
+  width: 100%;
+  overflow-y: scroll;
+  flex: 1;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+#newsDetail .detail-content .content-box {
+  padding: 0px 15px 20px 15px;
+}
+#newsDetail .fixBottom {
+  height: 1rem;
+  width: 100%;
+  height: 1.2rem;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: space-around;
+  color: #000;
+  font-size: 16px;
+  border-top: 0.5px solid #e3e3e3;
+  background-color: pink;
+}
+#newsDetail .fixBottom div {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#newsDetail .fixBottom div img {
+  width: 24px;
+}
+#newsDetail .fixBottom div .active {
+  color: #1978FE;
+}
+#newsDetail .fixBottom .giveup {
+  position: relative;
+}
+#newsDetail .fixBottom .giveup .likeNum {
+  position: absolute;
+  top: -2px;
+  left: 24px;
+  font-size: 10px;
+}

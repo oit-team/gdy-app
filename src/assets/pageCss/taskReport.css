@@ -1,0 +1,221 @@
+#taskReport {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#taskReport .header {
+  width: 100%;
+  height: 1.2rem;
+  padding: 0 0.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #333;
+  box-sizing: border-box;
+  background-color: #F6F6F6;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+#taskReport .header .img {
+  width: 40px;
+  padding: 0 25px 0 0;
+}
+#taskReport .header .tit {
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+#taskReport .header .placeLabel {
+  width: 50px;
+  padding-right: 15px;
+  color: #1978FE;
+  font-size: 16px;
+}
+#taskReport .testReportCon {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+#taskReport .testReportCon .bodys {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 12.5px;
+  font-size: 14px;
+}
+#taskReport .testReportCon .bodys .radial {
+  width: 100%;
+  margin: auto;
+  padding: 10px 0;
+}
+#taskReport .testReportCon .bodys .bodysTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+#taskReport .testReportCon .bodys .bodysTop .lists {
+  flex: 2;
+  display: flex;
+  flex-direction: row;
+  padding: 0 10px;
+}
+#taskReport .testReportCon .bodys .bodysTop .lists .listsTop {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+}
+#taskReport .testReportCon .bodys .bodysTop .lists .listsTop img {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+}
+#taskReport .testReportCon .bodys .bodysTop .lists .listsBom {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+#taskReport .testReportCon .bodys .bodysTop .lists .listsBom .bspan {
+  font-weight: 700;
+  width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#taskReport .testReportCon .bodys .bodysTop .listss {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+#taskReport .testReportCon .bodys .bodysTop .listss .listsTop {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+}
+#taskReport .testReportCon .bodys .bodysTop .listss .listsTop img {
+  width: 40px;
+  height: 40px;
+  margin-right: 5px;
+}
+#taskReport .testReportCon .bodys .bodysTop .listss .listsBom {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+#taskReport .testReportCon .bodys .bodysTop .listss .listsBom .bspan {
+  font-weight: 700;
+  width: 100%;
+}
+#taskReport .testReportCon .bodys .bodysBom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+#taskReport .testReportCon .bodys .bodysBom .bodysBomIn {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 30px;
+  height: 30px;
+  margin: 10px 35px 10px 0;
+  box-sizing: border-box;
+}
+#taskReport .testReportCon .bodys .bodysBom .bodysBomIn .bodysBomInIn {
+  box-sizing: border-box;
+  text-align: center;
+  line-height: 30px;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  border: 0.5px solid #ff8c7c;
+  border-radius: 50%;
+  background: #ff8c7c;
+}
+#taskReport .testReportCon .bodys .bodysBom .bodysBomIn .active {
+  background: #4FD5AC;
+  border: 0.5px solid #4FD5AC;
+}
+#taskReport .testReportCon .bodys .bodysBom .bodysBomIn .warning {
+  background: #b7b7b7;
+  border: 0.5px solid #b7b7b7;
+}
+#taskReport .testReportCon .bodys .bodysBom .bodysBomIn:nth-child(5n+5) {
+  margin: 10px 0;
+}
+#taskReport .footer {
+  width: 100%;
+  padding: 0 12.5px;
+  box-sizing: border-box;
+  height: 50px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+#taskReport .footer .startBtn {
+  background: #5EA1FE;
+  border-color: #5EA1FE;
+  width: 100%;
+  font-size: 15px;
+  margin: 5px 0;
+  height: 40px;
+  flex: 1;
+}
+#taskReport .footer .testBtn {
+  flex: 1;
+  width: 100%;
+  font-size: 15px;
+  margin: 5px 0;
+  height: 40px;
+}
+#taskReport .footer .signOutBtn {
+  width: 100%;
+  font-size: 15px;
+  margin: 5px 0;
+  height: 40px;
+  border: none;
+  color: #999999;
+}
+#taskReport .footer1 {
+  width: 100%;
+  padding: 0 12.5px;
+  box-sizing: border-box;
+  height: 50px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+#taskReport .footer1 .startBtn {
+  background: #5EA1FE;
+  border-color: #5EA1FE;
+  width: 100%;
+  font-size: 15px;
+  margin: 5px 0;
+  height: 40px;
+  flex: 1;
+}
+#taskReport .footer1 .testBtn {
+  flex: 1;
+  width: 100%;
+  font-size: 15px;
+  margin: 5px 0;
+  height: 40px;
+}
+#taskReport .footer1 .signOutBtn {
+  width: 100%;
+  font-size: 15px;
+  margin: 5px 0;
+  height: 40px;
+  border: none;
+  color: #999999;
+}

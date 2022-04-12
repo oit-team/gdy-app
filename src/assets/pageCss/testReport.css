@@ -1,0 +1,100 @@
+#testReport {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#testReport .header {
+  font-weight: 700;
+}
+#testReport .testReportCon {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+#testReport .testReportCon .bodys {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 12.5px;
+  font-size: 14px;
+}
+#testReport .testReportCon .bodys .radial {
+  width: 100%;
+  margin: auto;
+  padding: 10px 0;
+}
+#testReport .testReportCon .bodys .bodysTop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+#testReport .testReportCon .bodys .bodysTop .lists {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+#testReport .testReportCon .bodys .bodysTop .lists .listsTop {
+  margin-right: 5px;
+}
+#testReport .testReportCon .bodys .bodysTop .lists .listsTop img {
+  width: 40px;
+  height: 40px;
+}
+#testReport .testReportCon .bodys .bodysTop .lists .listsBom {
+  display: flex;
+  flex-direction: column;
+}
+#testReport .testReportCon .bodys .bodysTop .lists .listsBom .bspan {
+  font-weight: 700;
+}
+#testReport .testReportCon .bodys .bodysBom {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+}
+#testReport .testReportCon .bodys .bodysBom .bodysBomIn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+#testReport .testReportCon .bodys .bodysBom .bodysBomIn .bodysBomInIn {
+  text-align: center;
+  line-height: 30px;
+  width: 30px;
+  height: 30px;
+  color: #1978FE;
+  border: 0.5px solid #1978FE;
+  border-radius: 50%;
+}
+#testReport .footer {
+  width: 100%;
+  padding: 0 12.5px;
+  box-sizing: border-box;
+  height: 170px;
+  margin-bottom: 30px;
+}
+#testReport .footer .startBtn {
+  width: 100%;
+  font-size: 15px;
+  margin: 10px 0;
+  height: 40px;
+}
+#testReport .footer .testBtn {
+  width: 100%;
+  font-size: 15px;
+  margin: 10px 0;
+  height: 40px;
+}
+#testReport .footer .signOutBtn {
+  width: 100%;
+  font-size: 15px;
+  margin: 10px 0;
+  height: 40px;
+  border: none;
+  color: #999999;
+}

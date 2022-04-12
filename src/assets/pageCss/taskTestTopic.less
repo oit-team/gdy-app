@@ -1,0 +1,181 @@
+#taskTestTopic{
+  width: 100%;
+  height:100%;
+  display: flex;
+  flex-direction: column;
+
+  .header{
+    width:100%;
+    height:1.2rem;
+    padding:0 0.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color:#333;
+    box-sizing: border-box;
+    background-color: #F6F6F6;
+    /* background-color: red; */
+    user-select: none; -webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;
+  }
+  .header img{
+    width:8px;
+    height: 13px;
+    margin-right: 5px;
+    padding:5px 25px 5px 0px;
+    /* background-color: pink; */
+    user-select: none; -webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;
+  }
+  .header .tit{
+    font-size:16px;
+    user-select: none; -webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;
+  }
+  .header .placeLabel{
+    width:33px;
+    height: 13px;
+  }
+
+  .goodsTestTopicCon{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    box-sizing:border-box;
+    padding: 0 12.5px;
+    overflow: hidden;
+    .bodys{
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+      .listsBom{
+        width:100%;
+        // flex:1;
+        display: flex;
+        flex-direction: column;
+        .listsTop{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          img{
+            width:60%;
+            height:60%;
+          }
+        }
+        .listsBomTop{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          margin:10px 0;
+          .listsBomTopTop{
+            color: #999999;
+            .listsBomTopTopSpan{
+              font-size: 20px;
+              color: #1978FE;
+            }
+          }
+          .listsBomTopBom{
+            .listsBomTopTopImg{
+              width:13px;
+              height:13px;
+            }
+          }
+        }
+        .listsBomIn{
+          margin:10px 0;
+          // font-weight: 700;
+          width:100%;
+          height:100%;
+          // height:150px;
+          // text-align:center;
+          margin:0 auto;
+          // overflow: hidden;
+          // padding-bottom:50px;
+          /deep/img{
+            display: block;
+            width:50%;
+            height:100%;
+            // width:100%;
+            margin:0 auto;
+          }
+        }
+        .listBomBom{
+          display: flex;
+          flex-direction: column;
+          .listBomBomList{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin:10px 0;
+            .listIcon{
+              text-align: center;
+              line-height: 30px;
+              width:30px;
+              height:30px;
+              color: #1978FE;
+              margin-right:20px;
+              border:0.5px solid #1978FE;
+              border-radius: 50%;
+            }
+            .listContent{
+              flex:1;
+            }
+            .active{
+              color:#fff;
+              background:#1978FE;
+            }
+            .red{
+              color:#fff;
+              background:#F8736E;
+              border:0.5px solid #F8736E;
+            }
+            .green{
+              color:#fff;
+              background:#7DCD98;
+              border:0.5px solid #7DCD98;
+            }
+          }
+        }
+      }
+    }
+  }
+  .footer{
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    height:40px;
+    padding: 0 12.5px;
+    margin-bottom: 30px;
+    box-sizing:border-box;
+    .startBtn{
+      flex: 1;
+      font-size: 15px;
+      height:40px;
+    }
+    .up{
+      border-radius: 20px 0 0 20px;
+    }
+    .in{
+      border:none;
+    }
+    .down{
+      border-radius: 0 20px 20px 0;
+    }
+  }
+}
+.el-carousel__item h3 {
+  color: #475669;
+  font-size: 9px;
+  opacity: 0.75;
+  line-height: 150px;
+  margin: 0;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n+1) {
+  background-color: #d3dce6;
+}

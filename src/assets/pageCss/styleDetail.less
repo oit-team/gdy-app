@@ -1,0 +1,287 @@
+#styleMain{
+  background-color: #f5f5f5;
+
+  .styleDetailCon{
+    // display: flex;
+    // flex-direction: column;
+    // width:100%;
+    // height: 100%;
+    flex:1;
+    overflow: hidden;
+
+  }
+  .base{
+    background-color: #fff;
+    padding:10px 14px;
+    .suitBox{
+      flex:1;
+      padding:7px 0px;
+      // background-color: pink;
+
+      .item{
+        display: inline-block;
+        background-color: #1978FE;
+        color:#fff;
+        border-radius: 8px;
+        padding:2px 12px;
+        font-size: 12px;
+        margin-right:10px;
+        margin-bottom: 5px;
+      }
+    }
+    .baseInnerBox{
+      display: flex;
+      .suitBox{
+        flex:1;
+        padding:7px 0px;
+        // background-color: pink;
+  
+        .item{
+          display: inline-block;
+          background-color: #1978FE;
+          color:#fff;
+          border-radius: 8px;
+          padding:2px 12px;
+          font-size: 12px;
+          margin-right:10px;
+          margin-bottom: 5px;
+        }
+      }
+      .praiseBox{
+        width:40px;
+        height: 40px;
+        background-color: #EA7F59;
+        border-radius:50%;
+        text-align: center;
+        color:#fff;
+        .nums{
+          margin-top:4px;
+        }
+        .praiseIcon{
+          width:15px;
+          margin:0 auto;
+          // margin-top:2px;
+          display: block;
+
+        }
+      }
+
+    }
+    
+    .styleName{
+      font-size: 16px;
+      line-height: 26px;
+    }
+    .recReason{
+      color:#333;
+      .recTit{
+        // font-size: 16px;
+        // line-height: 26px;
+        margin:5px 0px;
+        // font-weight: 600;
+        display: flex;
+        align-items: center;
+        // align-items:baseline;
+        // align-items: flex-end;
+        .tit{
+          font-size: 20px;
+          font-weight: bold;
+
+          // line-height: 26px;
+          // font-weight: 600;
+          line-height: 20px;
+          margin: 10px 0px;
+        }
+        img{
+          margin-right:6px;
+          margin-left:auto;
+          width:14px;
+          height: 16px;
+          // border:0.5px solid red;
+          // margin:0px 5px 0px 5px;
+          // vertical-align: baseline;
+        }
+        .copyBtn{
+          color:#999;
+          font-size: 12px;
+        }
+      }
+      .recDesc{
+        width:100%;
+        font-size: 14px;
+        color:#666;
+        line-height: 26px;
+        text-align: left;
+        text-align: justify;
+        // margin-bottom:6px;
+        // height:52px;
+        // background-color: pink;
+        overflow: hidden;
+        // word-break:break-all;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      } 
+      .fold{
+        -webkit-line-clamp:3;
+      }
+      .unfold{
+        -webkit-line-clamp:100;
+      }
+      .expande{
+        // -webkit-line-clamp:3;
+        height:auto;
+      }
+      .close{
+        // -webkit-line-clamp:100;
+        height: 78px;
+      }
+      .show{
+        color:#1978FE;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .recList{
+    margin-top:10px;
+    padding-left:3%;
+    display: flex;
+    flex-wrap: wrap;
+    .item{
+      width:31%;
+      margin-right:2%;
+      text-align: center;
+      background-color: #fff;
+      margin-bottom:7px;
+      box-sizing: border-box;
+      padding:10px 0px;
+      font-size: 14px;
+      .imgBox{
+        width:100%;
+        position: relative;
+        img{
+          width:100%;
+        }
+        .tipBox{
+          position: absolute;
+          top:-10px;
+          left:0;
+          img{
+            width:14px;
+          }
+        }
+      }
+    }
+    .num{
+      color:#333;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 26px;
+      padding:0px 4px;
+    }
+    .price{
+      color:#AF0005;
+    }
+
+  }
+
+  // 搭配评论,单属于店铺搭配模块的样式
+  .collCommentbox{
+    padding:10px 14px;
+    background-color: #fff;
+    .commentTit{
+      line-height: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .tit{
+        font-size: 20px;
+        font-weight: bold;
+      }
+      img{
+        width:16px;
+        height:16px;
+      }
+    }
+
+    .comCon{
+      // background-color: pink;
+      padding:6px 0px;
+      border-bottom: 0.5px solid #eee;
+      .inner{
+        font-size: 14px;
+        line-height: 22px;
+        padding:6px 0px;
+        color:#666;
+        text-align: justify;
+        // background-color: green;
+      }
+      .avatarBox{
+        display: flex;
+        align-items: center;
+        img{
+          width:25px;
+          height: 25px;
+          object-fit: cover;
+          border-radius: 50%;
+          overflow: hidden;
+        }
+        .userName{
+          margin-left:6px;
+          font-size: 14px;
+          color:#666;
+        }
+        .praise{
+          margin-left:auto;
+          font-size: 14px;
+          color:#666;
+        }
+      }
+    }
+    .comCon:last-child{
+      border-bottom:none;
+    }
+    .noData{
+      text-align: center;
+      color:#666;
+      font-size:14px;
+      margin:10px auto;
+    }
+
+  }
+
+  // 被拒绝列表
+  .refusedBox{
+    padding:10px 12px;
+    background-color: #fff;
+    .van-step--vertical {
+      line-height: 22px;
+      // .van-step__circle-container {
+      //   top: 15.5px;
+      // } 
+    }
+    .refuseTit{
+      font-size: 20px;
+      font-weight: bold;
+      line-height: 20px;
+      margin: 10px 0px;
+    }
+    .tit{
+      color:#666;
+      font-size:14px;
+    }
+    .time{
+      color:#999;
+      font-size:12px;
+    }
+
+  }
+
+
+}
+
+
+
