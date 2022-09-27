@@ -80,7 +80,7 @@ export default {
     exit(){
       MessageBox.confirm('确定退出当前账号?').then(action => {
         // 删除保存的用户
-        const savedUsers = JSON.parse(localStorage.getItem('savedUsers') || {})
+        const savedUsers = JSON.parse(localStorage.getItem('savedUsers') || '{}')
         delete savedUsers[localStorage.getItem('userId')]
         localStorage.setItem('savedUsers', JSON.stringify(savedUsers))
 

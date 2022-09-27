@@ -5,7 +5,7 @@
           <search  type="0"></search>
         </div>
 
-        <div class="middle" ref="middle">
+        <div ref="middle" class="middle">
           <mt-tab-container v-model="selected">
             <mt-tab-container-item id="主页">
             <searchIndex ref="searchIndex"></searchIndex>
@@ -26,7 +26,7 @@
       </div>
       <div class="bottom">
         <mt-tabbar v-model="selected">
-          <mt-tab-item class="homeTab" id="主页">
+          <mt-tab-item id="主页" class="homeTab">
             <img slot="icon" class="search_index_icon" :src="selected=='主页'?'static/images/tabbarIcon/home-active.png':'static/images/tabbarIcon/home-grey.png'">
             <!-- <span>主页</span> -->
           </mt-tab-item>
@@ -37,7 +37,7 @@
           <mt-tab-item id="工作">
             <img slot="icon" :src="selected=='工作'?'static/images/tabbarIcon/operation-active.png':'static/images/tabbarIcon/operation-grey.png'">
             <span>工作</span>
-            <span class="news_tip" v-if="newsTipFlag"></span>
+            <span v-if="newsTipFlag" class="news_tip"></span>
           </mt-tab-item>
           <mt-tab-item id="我的">
             <img slot="icon" :src="selected=='我的'?'static/images/tabbarIcon/mine-active1.png':'static/images/tabbarIcon/mine-grey.png'">
@@ -88,7 +88,7 @@ export default {
     let _this = this;
     if(!localStorage.indexSelected){
     }else{
-      _this.selected = localStorage.indexSelected;
+      // _this.selected = localStorage.indexSelected;
     }
     window.callCodeJsFunction = this.getCode;
 

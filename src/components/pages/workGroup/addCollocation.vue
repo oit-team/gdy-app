@@ -2,18 +2,18 @@
   <div id="addCollocation" @touchmove.prevent>
     <div class="headBox">
       <backHeader title="添加搭配">
-        <span class="head-class f-l" slot="left" @click="back">
+        <span slot="left" class="head-class f-l" @click="back">
           <slot>
             <img class="back-icon" src="static/images/dev/back@2x.png" alt="">
           </slot>
         </span>
-        <span class="head-class place-label" slot="right"></span>
+        <span slot="right" class="head-class place-label"></span>
       </backHeader>
     </div>
 
     <Scroll
-      class="addCollScrollBox"
       ref="addCollScroll"
+      class="addCollScrollBox"
       :probeType = '3'
       :bounce='false'
       :listenScroll='true'
@@ -40,16 +40,22 @@
 
         <div class="addCollImgBox">
           <div class="tit">搭配照</div>
-          <van-uploader v-model="collImgList" multiple
-            accept="image/*"
+          <Uploader
+            v-model="uploadImages"
+            multiple
             :max-count="5"
             :max-size="15000 * 1024"
+            :action="baseUrl + '/system/file/upVideoOrAudio'"
+            :transform-data="transformData"
+            :headers="headers"
+            :chunk-size="5000"
+            :handle-response="handleResponse"
             @oversize="onOversize"
-            :after-read="collAfterRead"
-            :before-delete="deleteUploadImg" />
-              <!-- :deletable="false" -->
+            @success="onSuccess"
+            @error="onError"
+          />
         </div>
-        <div class="tip">{{imgUrlList.length}}/5</div>
+        <div class="tip">{{uploadImages.length}}/5</div>
       </div>
 
       <!-- 搭配单品 -->
@@ -57,10 +63,10 @@
         <div class="addCollSingle">
           <div class="tit">搭配单品</div>
           <div class="singleBox">
-            <div class="singleImgCon" v-if="choosedList.length>0">
-              <div class="singleImgBox" v-for="(item,index) in choosedList" :key="index">
+            <div v-if="choosedList.length>0" class="singleImgCon">
+              <div v-for="(item,index) in choosedList" :key="index" class="singleImgBox">
                 <img class="singleImg"  :src="item.imgUrl" alt="">
-                <img class="delIcon" @click="delSingle(index)" src="static/images/icon/close1.png" alt="">
+                <img class="delIcon" src="static/images/icon/close1.png" alt="" @click="delSingle(index)">
               </div>
               <div v-if="choosedList.length<5" class="addSingleBtn" @click="addSingle">+</div>
 
@@ -74,20 +80,20 @@
       <div class="suitOccationBox">
         <div class="tit">适用场景</div>
         <div class="suitBox">
-          <span v-for="(item,index) in suitOccaList" :class="[item.choosed?'active':'']" @click="changeState(item)"  :key="index">{{item.fitOccasionName}}</span>
+          <span v-for="(item,index) in suitOccaList" :key="index" :class="[item.choosed?'active':'']"  @click="changeState(item)">{{item.fitOccasionName}}</span>
           <div class="suitLimit">{{activeSuit.length}}/3</div>
         </div>
       </div>
 
     </Scroll>
 
-    <div class="btnBox" v-show="hideshow">
+    <div v-show="hideshow" class="btnBox">
       <div v-if="showSaveBtnFlag" class="confirmBtn saveBtn" @click="saveCollFun">保存</div>
       <div class="confirmBtn" @click="submitCollFun">提交</div>
     </div>
 
     <div v-if="upFlag" class="bgImg"></div>
-    <div class="loadingBox" v-if="upFlag"><van-loading v-if="upFlag" color="#fff"  size="14px">图片上传中...</van-loading></div>
+    <div v-if="upFlag" class="loadingBox"><van-loading v-if="upFlag" color="#fff"  size="14px">图片上传中...</van-loading></div>
 
 
   </div>
@@ -98,12 +104,21 @@ import { Dialog } from 'vant';
 import Header from '../../comps/header/header';
 import backHeader from '../../comps/common/commonBackHeader';
 import EXIF from 'exif-js';
+import { Uploader, uploaderOptions } from '@oit/vant-extend'
+
+const continuingly = new WeakMap()
 
 export default {
   name: "addCollocation",
-  components:{ Header , backHeader },
+  components:{ Header , backHeader, Uploader },
   data() {
     return {
+      baseUrl: process.env.NODE_ENV === 'production' ? './mta-api' : '/api',
+      uploadImages: [],
+      headers: {
+        token: localStorage.accessToken,
+        userId: localStorage.userId,
+      },
       recommentReason:'',
       collImgList: [],    // 搭配照回显数组
 
@@ -137,12 +152,12 @@ export default {
   },
   created(){
     // console.log("-------created-------",this.$route.query)
-    if(this.$route.query.collId && this.$route.query.editFlag){
-      this.collId = this.$route.query.collId;
+    if(this.$route.params.collId && this.$route.params.editFlag){
+      this.collId = this.$route.params.collId;
       localStorage.shopCollId = this.collId
       this.getStyleInfo(this.collId)
     }
-    if(this.$route.query.collStatus && this.$route.query.collStatus==2){
+    if(this.$route.params.collStatus && this.$route.params.collStatus==2){
       this.showSaveBtnFlag = false;
 
     }
@@ -199,6 +214,23 @@ export default {
   },
 
   methods:{
+    transformData(data, option) {
+      const _data = uploaderOptions.transformData(data, option)
+      _data.fname = continuingly.get(option.file) || _data.fname
+      return _data
+    },
+    handleResponse(response, option) {
+      if (response.status === 101)
+        continuingly.set(option.file, response.fname)
+
+      return uploaderOptions.handleResponse(response)
+    },
+    onSuccess({ item, response }) {
+      this.$set(item, 'response', response)
+    },
+    onError(e) {
+      console.log(e)
+    },
     back(){
       if(this.recommentReason || this.choosedIdList.length > 0 || this.activeSuit.length > 0 || this.imgUrlList.length > 0 ){
         Dialog.confirm({
@@ -208,6 +240,7 @@ export default {
           this.$router.push({
             path:"/myCollocation"
           })
+          this.$destroy()
         }).catch(() => {
           // console.log("取消")
         });
@@ -215,6 +248,7 @@ export default {
         this.$router.push({
           path:"/myCollocation"
         })
+        this.$destroy()
       }
       // this.$router.push({
       //   path:"/myCollocation"
@@ -439,15 +473,19 @@ export default {
     confirmCollFun(){
       // console.log("点击提交按钮",this.collImgList);
       let _this = this;
-      let imgList = [];
-      for(let i=0;i<_this.collImgList.length;i++){
-        let num = i + 1;
-        let url = _this.collImgList[i].url+"_"+num; // http://xxxxx.jpg_1
-        // fileUrls[i].fileUrl = url+"_"+num;
-        imgList.push(url)
-      }
+      // let imgList = [];
+      // for(let i=0;i<_this.collImgList.length;i++){
+      //   let num = i + 1;
+      //   let url = _this.collImgList[i].url+"_"+num; // http://xxxxx.jpg_1
+      //   // fileUrls[i].fileUrl = url+"_"+num;
+      //   imgList.push(url)
+      // }
       // console.log("==========",imgList,fileUrls)
-      _this.imgUrlList = imgList;  // 点击保存或提交时所要传递的参数值
+      // 点击保存或提交时所要传递的参数值
+      _this.imgUrlList = this.uploadImages.map((item, index) => {
+        return `${item.response.fileUrl}_${index}`
+      });
+      console.log(_this.imgUrlList)
       if(this.imgUrlList.length == 0){
         this.$toast("请选择搭配照")
         return
@@ -473,7 +511,7 @@ export default {
       // console.log("--点击保存、提交传递的参数----",data)
       // debugger
 
-      _this.$axios.post("/api/coll/addColl",data).then(function (res){
+      _this.$axios.post("/api/coll/addColl",data).then((res) => {
         // console.log("适用场景列表为:",res.data)
         if(res.data.code == 200){
           localStorage.removeItem("activeSuitList");
@@ -481,6 +519,9 @@ export default {
           localStorage.removeItem("recommentReasonVal");
           localStorage.removeItem("collImgListArr");
           localStorage.removeItem("shopCollId");
+          Object.entries(this.$options.data()).forEach(([key, value]) => {
+            this[key] = value
+          })
 
           // debugger
           _this.$toast("成功");
@@ -576,15 +617,15 @@ export default {
 
         // 转为异步操作，获取到值之后再进行下一步
         Orientation = await this.getImageTag(file.file, 'Orientation');
-        if (file.file.size > 800 * 1024) {
-          // 大于800k，压缩图片
-          this.pressImgUrl.push(await this.imageCompress(file.content,Orientation));
-          // console.log("this.pressImgUrl=====",this.pressImgUrl);
-          // console.log("大于800k，压缩图片")
-        }else{
-          this.pressImgUrl.push(file.content);
+        // if (file.file.size > 800 * 1024) {
+        //   // 大于800k，压缩图片
+        //   this.pressImgUrl.push(await this.imageCompress(file.content,Orientation));
+        //   // console.log("this.pressImgUrl=====",this.pressImgUrl);
+        //   // console.log("大于800k，压缩图片")
+        // }else{
+        this.pressImgUrl.push(file.content);
           // console.log("文件小于800kb，正常上传")
-        }
+        // }
         // console.log(" this.pressImgUrl", this.pressImgUrl)
       }
       // console.log("0000000",this.pressImgUrl.length, this.imgLength)

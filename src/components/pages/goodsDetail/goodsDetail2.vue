@@ -23,7 +23,7 @@
           <mslider v-show="!isVideo"  ref="slider" :loop="isLoop" :auto-play="false">
             <div v-for="(item,index) in (styleInfo.styleImgList)" :key="index" class="img_wrapper" >
               <!-- <img :src="item" alt="" @click="getImg(index)" @touchstart="touchStart" @touchend="touchEnd"> -->
-              <img :src="item" alt="" @click="getImg(index)">
+              <vc-img raw :src="item" alt="" @click="getImg(index)" />
             </div>
           </mslider>
 
@@ -170,10 +170,11 @@
       :imgList="previewList"
       :curIndex.sync="curImgIndex"
       :isShowPreview=showPreview
+      raw
       @func="changePreview"
     >
-      <template v-if="styleInfo.imgDetailsUrls.length > 0" slot="action">
-        <div class="preview-switch">
+      <template slot="action">
+        <div v-if="styleInfo.imgDetailsUrls.length > 0" class="preview-switch">
           <span :class="{'active': active === 0}" @click.stop="previewSwitch(0)">商品图</span>
           <span :class="{'active': active === 1}" @click.stop="previewSwitch(1)">细节图</span>
         </div>
@@ -1284,7 +1285,5 @@ function callWebViewScript(){
   color: #fff;
 
 }
-
-
 </style>
 

@@ -51,8 +51,8 @@
     <!-- ref多写了个冒号导致报错：themeScroll变量未定义，警惕 -->
     <Scroll
       v-show="selectedTabs == 0"
-      class="themeScroll"
       ref="themeScroll"
+      class="themeScroll"
       :probeType='3'
       :scrollX='false'
       :scrollY='true'
@@ -60,9 +60,9 @@
       :pullUp="false">
       <div>
         <div class="head_img" >
-          <mslider :loop="isLoop" :show-dot="true" ref="slider" :auto-play="false">
-            <div class="img_wrapper" v-for="(item,index) in showImgs" :key="index">
-              <img :src="item" alt="" @click="getImg(index)" loaded @load="imgLoad">
+          <mslider ref="slider" :loop="isLoop" :show-dot="true" :auto-play="false">
+            <div v-for="(item,index) in showImgs" :key="index" class="img_wrapper">
+              <img :src="item" alt="" loaded @click="getImg(index)" @load="imgLoad">
             </div>
           </mslider>
         </div>
@@ -70,9 +70,9 @@
         <div class="themeRead">
           <div class="themeName">{{series.seriesName}}</div>
           <div class="labelBox">
-            <div class="themeLabel" v-for="(item,i) in labelList" :key="i">{{item}}</div>
+            <div v-for="(item,i) in labelList" :key="i" class="themeLabel">{{item}}</div>
           </div>
-          <div class="themeHtml" v-html="series.seriesInterpretation"></div>
+          <div v-html="series.seriesInterpretation" class="themeHtml"></div>
         </div>
       </div>
     </Scroll>
@@ -83,10 +83,10 @@
     </div>
     <Scroll
       v-show="selectedTabs == 1 && stylesFlag == true"
+      ref="styleListScroll"
+      class="styleListScroll"
       :update-data="[stylesList]"
       :refresh-data="[]"
-      class="styleListScroll"
-      ref="styleListScroll"
       :probeType = '3'
       :listenScroll='true'
       :scrollX='false'
@@ -97,18 +97,18 @@
       <!-- pullUpConfig={threshold: 100,txt: { more:'上拉加载', noMore: '— jjjjjjj —'}} -->
 
       <!-- 滚动的内容 -->
-      <ul class="con-inner-list clear" v-if="stylesList.length>0">
-        <li class="inner-item fl" v-for="(item,index) in stylesList" :key="index" @click="goGoods(item.id)">
+      <ul v-if="stylesList.length>0" class="con-inner-list clear">
+        <li v-for="(item,index) in stylesList" :key="index" class="inner-item fl" @click="goGoods(item.id)">
           <div class="goods-img-box">
-            <img class="goods-img" v-lazy="item.imgUrl" loaded @load="imgLoad">
+            <img class="goods-img" :src="item.imgUrl" loaded lazy-load @load="imgLoad" />
             <div class="tipBox">
               <!-- styleFlag 1:重点款，0:非重点款 -->
               <!-- leaFlag 1:没有学习，0:有学习 -->
               <!-- videoFlag 1:没有视频，0:有视频 -->
               <!-- 内网admin2账号请求会的数据styleFlag为null -->
-              <img class="key-tip-img" v-if="item.styleFlag == 1" src="../../../../static/images/icon/tip.png" alt="">
-              <img class="learnIcon" v-if="item.leaFlag == 1"  src="../../../../static/images/icon/new.png" alt="">
-              <img class="videoIcon" v-if="item.videoFlag == 0"  src="../../../../static/images/icon/video.png" alt="">
+              <img v-if="item.styleFlag == 1" class="key-tip-img" src="../../../../static/images/icon/tip.png" alt="">
+              <img v-if="item.leaFlag == 1" class="learnIcon"  src="../../../../static/images/icon/new.png" alt="">
+              <img v-if="item.videoFlag == 0" class="videoIcon"  src="../../../../static/images/icon/video.png" alt="">
             </div>
 
           </div>
@@ -119,7 +119,7 @@
           </div>
         </li>
       </ul>
-      <div style="padding-top:0.5px;" v-else>
+      <div v-else style="padding-top:0.5px;">
         <!-- <noGood msg="暂无列表数据"></noGood> -->
         <noGood></noGood>
       </div>
@@ -129,8 +129,8 @@
     <!-- 横线滚动系列列表 -->
     <Scroll
       v-show="selectedTabs == 2 || selectedTabs == 3"
-      class="serieScroll"
       ref="serieScrollScroll"
+      class="serieScroll"
       :probeType='3'
       :scrollX='true'
       :scrollY='false'
@@ -155,10 +155,10 @@
     </div>
     <Scroll
       v-show="selectedTabs == 2 && collLoadFlag == true"
+      ref="collBodyScroll"
+      class="collBody"
       :update-data="[collocationList]"
       :refresh-data="[]"
-      class="collBody"
-      ref="collBodyScroll"
       :probeType = '3'
       :listenScroll='true'
       :scrollX='false'
@@ -166,14 +166,14 @@
       :autoUpdate="false"
       @pullingDown="collRefresh"
       @pullingUp="collLoadMore">
-      <div class="brandRecList" v-if="collocationList.length>0">
-        <div class="brandItem" v-for="(item,index) in collocationList" :key="index" >
-          <img :src="item.imgUrl" alt="" @click="toStyleDetail(item.id)" loaded @load="imgLoad">
+      <div v-if="collocationList.length>0" class="brandRecList">
+        <div v-for="(item,index) in collocationList" :key="index" class="brandItem" >
+          <vc-img raw height="4.53rem" fit="contain" width="100%" :src="item.imgUrl" alt="" loaded @click="toStyleDetail(item.id)" @load="imgLoad" />
           <div class="collName">{{item.collName}}</div>
 
-          <div class="coll-item" :ref="'collItemScroll'+(index+1)">
+          <div :ref="'collItemScroll'+(index+1)" class="coll-item">
             <div class="inner-list clear">
-              <div class="inner-item fl" v-for="(item,index) in item.styleList" :key="index" @click="toGoodsDetail(item.id)">
+              <div v-for="(item,index) in item.styleList" :key="index" class="inner-item fl" @click="toGoodsDetail(item.id)">
                 <img :src="item.imgUrl" alt="">
               </div>
             </div>
@@ -181,7 +181,7 @@
 
         </div>
       </div>
-      <div  style="padding-top:0.5px;" v-else>
+      <div  v-else style="padding-top:0.5px;">
         <noGood></noGood>
       </div>
     </Scroll>
@@ -193,8 +193,8 @@
     </div>
     <Scroll
       v-show="selectedTabs == 3 && collLoadFlag == true"
-      class="beautyScrollBox"
       ref="beautyScroll"
+      class="beautyScrollBox"
       :update-data="[collocationList]"
       :refresh-data="[]"
       :probeType = '3'
@@ -205,9 +205,9 @@
       @pullingDown="shopCollRefresh"
       @pullingUp="shopCollLoadMore">
       <!-- 滚动的内容 -->
-      <div class="beautyListBox" v-if="collocationList.length>0">
-        <div class="beautyItem" v-for="(item,index) in collocationList" :key="index" @click="toShopCollDetail(item.id)">
-          <img :src="item.imgUrl" alt="" loaded @load="imgLoad">
+      <div v-if="collocationList.length>0" class="beautyListBox">
+        <div v-for="(item,index) in collocationList" :key="index" class="beautyItem" @click="toShopCollDetail(item.id)">
+          <vc-img raw height="4.53rem" fit="contain" width="100%" :src="item.imgUrl" alt="" loaded @load="imgLoad" />
           <!-- <div class="comment">颜色正尺码标准,面料柔软超级舒服,上身很合适,推荐购买哦，导购小姐姐很热心,推荐的都是适合的一整套,不用再为搭配衣服烦恼了</div> -->
           <div class="comment">{{item.collInterpretation}}</div>
           <div class="reviewerBox">
@@ -220,7 +220,7 @@
         </div>
       </div>
       <!-- 请求回的店铺搭配列表为空时 -->
-      <div  style="padding-top:0.5px;" v-else>
+      <div  v-else style="padding-top:0.5px;">
         <noGood></noGood>
       </div>
 
@@ -254,8 +254,8 @@
     <imgPreview v-if="showPreview"
         :imgList = showImgs
         :curIndex="curImgIndex"
-        @func="changePreview"
-        :isShowPreview = showPreview></imgPreview>
+        :isShowPreview = showPreview
+        @func="changePreview"></imgPreview>
 
   </div>
 </template>

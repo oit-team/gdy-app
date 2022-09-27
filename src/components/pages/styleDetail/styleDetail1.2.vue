@@ -4,27 +4,27 @@
       <div class="header_one" @click="back">
         <div><img src="static/images/dev/back_white@2x.png" ></div>
       </div>
-      <div class="header_two" ref="header" @click="back">
+      <div ref="header" class="header_two" @click="back">
         <img src="static/images/dev/back@2x.png" >
       </div>
     </div>
-    <div class="page"  ref="page">
+    <div ref="page"  class="page">
       <div class="page_scroll_content">
 
         <div class="head_img">
-          <mslider :loop="isLoop" ref="slider" :auto-play="false">
-            <div class="img_wrapper" v-for="(item,index) in collInfo.imgUrls" :key="index">
-              <img :src="item" alt="" @click="getImg(index)">
+          <mslider ref="slider" :loop="isLoop" :auto-play="false">
+            <div v-for="(item,index) in collInfo.imgUrls" :key="index" class="img_wrapper">
+              <vc-img raw fit="contain" height="100%" :src="item" alt="" @click="getImg(index)" />
             </div>
           </mslider>
         </div>
         <div class="base">
-          <div class="suitBox" v-if="situationsList">
-            <span class="item" v-for="(item,i) in situationsList" :key="i">{{item}}</span>
+          <div v-if="situationsList" class="suitBox">
+            <span v-for="(item,i) in situationsList" :key="i" class="item">{{item}}</span>
           </div>
           <!-- <div class="styleName">{{collInfo.collName}}</div> -->
           <div class="recReason">
-            <div class="recTit" v-if="reasonDesc !==''">
+            <div v-if="reasonDesc !==''" class="recTit">
               <span class="tit">推荐理由</span>
               <img src="static/images/icon/copy.png" alt="">
               <span class="copyBtn"  @click="copy(reasonDesc)">复制</span>
@@ -32,23 +32,23 @@
 
             <!-- <div class="recDesc" v-if="reasonDesc !==''">{{reasonDesc}}</div> -->
 
-            <div class="recDesc" :class="fold ? 'fold' : 'unfold'"  v-if="reasonDesc !==''" ref="desc">{{reasonDesc}}</div>
+            <div v-if="reasonDesc !==''" ref="desc"  class="recDesc" :class="fold ? 'fold' : 'unfold'">{{reasonDesc}}</div>
             <div v-if="showExchangeButton">
-              <div class="show" @click="handleFold" v-show="fold">展开</div>
-              <div class="show" @click="handleFold" v-show="!fold">收起</div>
+              <div v-show="fold" class="show" @click="handleFold">展开</div>
+              <div v-show="!fold" class="show" @click="handleFold">收起</div>
             </div>
 
           </div>
         </div>
 
         <div class="recList">
-          <div class="item" @click="toGoods(item.id)" v-for="(item,i) in goodsSingle" :key="i">
+          <div v-for="(item,i) in goodsSingle" :key="i" class="item" @click="toGoods(item.id)">
             <div class="imgBox">
               <img :src="item.imgUrl" alt="" @load="imgLoad">
               <div class="tipBox">
-                <img class="key-tip-img" v-if="item.styleFlag == 1" src="../../../../static/images/icon/tip.png" alt="">
-                <img class="learnIcon" v-if="item.leaFlag == 1" src="../../../../static/images/icon/new.png" alt="">
-                <img class="videoIcon" v-if="item.videoFlag == 0" src="../../../../static/images/icon/video.png" alt="">
+                <img v-if="item.styleFlag == 1" class="key-tip-img" src="../../../../static/images/icon/tip.png" alt="">
+                <img v-if="item.leaFlag == 1" class="learnIcon" src="../../../../static/images/icon/new.png" alt="">
+                <img v-if="item.videoFlag == 0" class="videoIcon" src="../../../../static/images/icon/video.png" alt="">
               </div>
             </div>
             <div class="num">{{item.styleNo}}</div>
@@ -66,9 +66,10 @@
         :imgList = collInfo.imgUrls
         fromPage="brandCollDetail"
         :curIndex="curImgIndex"
-        @func="changePreview"
         :isShowPreview = showPreview
         :goodsId='goodsId'
+        raw
+                @func="changePreview"
         ></imgPreview>
 
   </div>

@@ -4,26 +4,26 @@
       <div class="header_one" @click="back">
         <div><img src="static/images/dev/back_white@2x.png" ></div>
       </div>
-      <div class="header_two" ref="header" @click="back">
+      <div ref="header" class="header_two" @click="back">
         <img src="static/images/dev/back@2x.png" >
       </div>
     </div>
-    <div class="page"  ref="page">
+    <div ref="page"  class="page">
       <div class="page_scroll_content">
 
         <div class="head_img">
-          <mslider :loop="isLoop" ref="slider" :auto-play="false">
-            <div class="img_wrapper" v-for="(item,index) in collInfo.imgUrls" :key="index">
+          <mslider ref="slider" :loop="isLoop" :auto-play="false">
+            <div v-for="(item,index) in collInfo.imgUrls" :key="index" class="img_wrapper">
               <img :src="item" alt="" @click="getImg(index)">
             </div>
           </mslider>
         </div>
         <div class="base">
           <div class="baseInnerBox">
-            <div class="suitBox" v-if="situationsList">
-              <span class="item" v-for="(item,i) in situationsList" :key="i">{{item}}</span>
+            <div v-if="situationsList" class="suitBox">
+              <span v-for="(item,i) in situationsList" :key="i" class="item">{{item}}</span>
             </div>
-            <div class="praiseBox" @click="collPraise" v-if="collStatus == 3">
+            <div v-if="collStatus == 3" class="praiseBox" @click="collPraise">
               <!-- <div>点赞</div> -->
               <div class="nums">{{aeNumber}}</div>
               <img class="praiseIcon" src="static/images/icon/praise1.png" alt="">
@@ -32,7 +32,7 @@
 
           <!-- <div class="styleName">{{collInfo.collName}}</div> -->
           <div class="recReason">
-            <div class="recTit" v-if="reasonDesc !==''">
+            <div v-if="reasonDesc !==''" class="recTit">
               <span class="tit">推荐理由</span>
               <img src="static/images/icon/copy.png" alt="">
               <span class="copyBtn"  @click="copy(reasonDesc)">复制</span>
@@ -40,23 +40,23 @@
 
             <!-- <div class="recDesc" v-if="reasonDesc !==''">{{reasonDesc}}</div> -->
 
-            <div class="recDesc" :class="fold ? 'fold' : 'unfold'"  v-if="reasonDesc !==''" ref="desc">{{reasonDesc}}</div>
+            <div v-if="reasonDesc !==''" ref="desc"  class="recDesc" :class="fold ? 'fold' : 'unfold'">{{reasonDesc}}</div>
             <div v-if="showExchangeButton">
-              <div class="show" @click="handleFold" v-show="fold">展开</div>
-              <div class="show" @click="handleFold" v-show="!fold">收起</div>
+              <div v-show="fold" class="show" @click="handleFold">展开</div>
+              <div v-show="!fold" class="show" @click="handleFold">收起</div>
             </div>
 
           </div>
         </div>
 
         <div class="recList">
-          <div class="item" @click="toGoods(item.id)" v-for="(item,i) in goodsSingle" :key="i">
+          <div v-for="(item,i) in goodsSingle" :key="i" class="item" @click="toGoods(item.id)">
             <div class="imgBox">
               <img :src="item.imgUrl" alt="" @load="imgLoad">
               <div class="tipBox">
-                <img class="key-tip-img" v-if="item.styleFlag == 1" src="../../../../static/images/icon/tip.png" alt="">
-                <img class="learnIcon" v-if="item.leaFlag == 1" src="../../../../static/images/icon/new.png" alt="">
-                <img class="videoIcon" v-if="item.videoFlag == 0" src="../../../../static/images/icon/video.png" alt="">
+                <img v-if="item.styleFlag == 1" class="key-tip-img" src="../../../../static/images/icon/tip.png" alt="">
+                <img v-if="item.leaFlag == 1" class="learnIcon" src="../../../../static/images/icon/new.png" alt="">
+                <img v-if="item.videoFlag == 0" class="videoIcon" src="../../../../static/images/icon/video.png" alt="">
               </div>
             </div>
             <div class="num">{{item.styleNo}}</div>
@@ -64,13 +64,13 @@
           </div>
         </div>
 
-        <div class="collCommentbox" v-if="collStatus == 3">
+        <div v-if="collStatus == 3" class="collCommentbox">
           <div class='commentTit' @click="toShopCollComment">
             <span class="tit">搭配评论</span>
             <img  src="static/images/icon/rightArrowGrey.png" alt="">
           </div>
           <div v-if="commentList && commentList.length>0">
-            <div class="comCon" v-for="(item,index) in commentList" :key="index">
+            <div v-for="(item,index) in commentList" :key="index" class="comCon">
               <div v-if="item.content" class="inner">{{item.content}}</div>
               <div v-else class="inner">颜色正尺码标准,面料柔软超级舒服,上身很合适,推荐购买哦，导购小姐姐很热心,推荐的都是适合的一整套,不用再为搭配衣服烦恼了</div>
 
@@ -89,7 +89,7 @@
         </div>
 
         <!-- 被拒绝理由 -->
-        <div class="refusedBox" v-if=" approvalList && approvalList.length>0">
+        <div v-if=" approvalList && approvalList.length>0" class="refusedBox">
           <div class="refuseTit">审批记录</div>
           <van-steps direction="vertical" active-icon="underway" inactive-icon="underway"  active-color="#969799" inactive-color="#969799">
             <van-step v-for="(item,index) in approvalList" :key="index">
@@ -108,9 +108,10 @@
         :imgList="collInfo.imgUrls"
         fromPage="shopCollDetail"
         :curIndex="curImgIndex"
-        @func="changePreview"
         :isShowPreview = showPreview
-        :goodsId='goodsId'>
+        raw
+        :goodsId='goodsId'
+        @func="changePreview">
       <!-- <span slot="pageTip" class="pageTip">返回</span> -->
     </imgPreview>
 

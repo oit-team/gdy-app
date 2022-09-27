@@ -1,13 +1,13 @@
 <template>
   <div id="myCollocation">
     <div class="headBox">
-      <backHeader title="我要搭配" style="background-color: #f5f5f5;">
-        <span class="head-class f-l" slot="left" @click="back">
+      <backHeader style="background-color: #f5f5f5;" title="我要搭配">
+        <span slot="left" class="head-class f-l" @click="back">
           <slot>
             <img class="back-icon" src="static/images/dev/back@2x.png" alt="">
           </slot>
         </span>
-        <span class="head-class place-label" slot="right" @click="toAddColl">
+        <span slot="right" class="head-class place-label" @click="toAddColl">
           <slot>
             <img class="add-icon" src="static/images/icon/addColl.png" alt="">
           </slot>
@@ -15,11 +15,11 @@
       </backHeader>
     </div>
     <div class="tabBox">
-      <div class="tabItem"
-        v-for="(item,index) in tabList"
+      <div v-for="(item,index) in tabList"
         :key="index"
-        @click="clickTab(item.status)"
-        :class="collStatus == item.status?'active':''">
+        class="tabItem"
+        :class="collStatus == item.status?'active':''"
+        @click="clickTab(item.status)">
         <span>{{item.statusName}}</span>
         <span>({{item.count}})</span>
         </div>
@@ -32,10 +32,10 @@
     </div>
     <Scroll
       v-else
+      ref="collBodyScroll"
+      class="collBody"
       :update-data="[collList]"
       :refresh-data="[]"
-      class="collBody"
-      ref="collBodyScroll"
       :probeType = '3'
       :listenScroll='true'
       :autoUpdate="false"
@@ -45,8 +45,8 @@
       @pullingUp="collLoadMore"
       >
 
-      <div class="collListBox" v-if="collList.length > 0">
-        <div class="itemBox" v-for="(item,index) in collList" :key="index" @click="toCollDetail(item.id,item)">
+      <div v-if="collList.length > 0" class="collListBox">
+        <div v-for="(item,index) in collList" :key="index" class="itemBox" @click="toCollDetail(item.id,item)">
           <van-swipe-cell>
             <div class="collItem">
               <img class="collImg" :src="item.imgUrl" alt="">
@@ -57,12 +57,12 @@
                 </div>
                 <div class="otherBox">
                   <span class="time">{{item.createDate}}</span>
-                  <span class="praiseBox" v-if="item.aeNumber"><img class="praiseIcon" src="static/images/icon/praise-grey.png" alt="">&nbsp;<span class="praiseNum">{{item.aeNumber}}</span></span>
+                  <span v-if="item.aeNumber" class="praiseBox"><img class="praiseIcon" src="static/images/icon/praise-grey.png" alt="">&nbsp;<span class="praiseNum">{{item.aeNumber}}</span></span>
                 </div>
               </div>
             </div>
 
-            <template slot="right" v-if="collStatus != 1">
+            <template v-if="collStatus != 1" slot="right">
               <van-button v-if="collStatus != 3" square type="primary" text="编辑" @click="editColl(item.id)"/>
               <van-button square type="danger" text="删除" @click="deleteColl(item.id,index)"/>
             </template>
@@ -70,7 +70,7 @@
         </div>
       </div>
 
-      <div style="padding-top:0.5px;" v-else>
+      <div v-else style="padding-top:0.5px;">
         <noGood></noGood>
       </div>
     </Scroll>
@@ -223,7 +223,7 @@ export default {
       });
     },
     toAddColl(){
-      this.$router.push({path:'/addCollocation',query:{stamp:new Date().getTime()}})
+      this.$router.push({path:'/addCollocation'})
     },
     clickTab(id){
       this.collStatus = id;

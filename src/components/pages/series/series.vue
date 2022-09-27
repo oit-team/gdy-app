@@ -1,21 +1,21 @@
 <template>
   <div style="background-color: #fff;">
     <mt-header :title="title">
-      <span @click="back" slot="left">
+      <span slot="left" @click="back">
         <mt-button icon="back">返回</mt-button>
       </span>
       <!-- <mt-button icon="more" slot="right"></mt-button> -->
     </mt-header>
     <div class="head_tab">
-        <div class="head_scroll_wrapper" ref="head_scroll_wrapper">
-          <mt-navbar v-model="selected" class="head_tab_bar" ref="head_tab_bar">
-            <mt-tab-item :id="item.id" v-for="(item, index) in headTabs" :key="index"
+        <div ref="head_scroll_wrapper" class="head_scroll_wrapper">
+          <mt-navbar v-model="selected" ref="head_tab_bar" class="head_tab_bar">
+            <mt-tab-item v-for="(item, index) in headTabs" :key="index" :id="item.id"
             >{{item.seriesName}}
             </mt-tab-item>
           </mt-navbar>
         </div>
     </div>
-    <div class="head_tab_container container_scroll_wrapper" ref="container_scroll_wrapper">
+    <div ref="container_scroll_wrapper" class="head_tab_container container_scroll_wrapper">
       <div>
         <div class="series_info">
           <div class="series_info_row">
@@ -41,7 +41,7 @@
         <div class="series_info_goods">
           <div class="series_info_goods_title">本系列单款详解</div>
           <div class="series_info_goods_list">
-            <div class="series_info_goods_box" v-for="(item,index) in goodsList" :key="index"
+            <div v-for="(item,index) in goodsList" :key="index" class="series_info_goods_box"
               @click="goGoods(item.id)">
               <img :src="item.imgUrl" width="1rem" height="1rem"/>
               <span>货号：{{item.styleNo}}</span>
@@ -172,19 +172,19 @@ export default {
   width: 100vw;
 }
 .head_tab_container {
-  width: 100vw;
-  background-color: #fff;
-  height: 15.7rem;
   overflow: hidden;
+  width: 100vw;
+  height: 15.7rem;
+  background-color: #fff;
 }
 .head_tab_bar {
   /* width: 20rem; */
 }
 .series_info {
-  text-align: left;
+  font-size: 0.4rem;
   padding-top: 0.2rem;
   padding-left: 0.2rem;
-  font-size: 0.4rem;
+  text-align: left;
 }
 .series_info_row {
   line-height: 1rem;
@@ -196,16 +196,16 @@ export default {
 }
 .series_info_row div {
   white-space: normal;
-  word-break: break-all;
   word-wrap: break-word;
+  word-break: break-all;
 }
 .scroll_view {
   height: 15.7rem;
 }
 .series_info_imgs {
   width: 95vw;
-  margin-left: 2.5vw;
   height: 4rem;
+  margin-left: 2.5vw;
 }
 
 .series_info_imgs img {
@@ -217,15 +217,15 @@ export default {
   margin-top: 0.2rem;
 }
 .series_info_goods_title {
-  text-align: center;
   font-size: 0.35rem;
   padding-bottom: 0.3rem;
+  text-align: center;
   border-bottom: 0.5px solid #8eacac;
 }
 .series_info_goods_box {
   float: left;
-  margin-left: 0.3rem;
   margin-top: 0.3rem;
+  margin-left: 0.3rem;
 }
 .series_info_goods_box img {
   width: 2.9rem;

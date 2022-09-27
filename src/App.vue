@@ -35,10 +35,7 @@ export default {
         this.transitionName = 'slide-right';
       }
     }
-  },
-  destroyed() {
-    console.log(1)
-  },
+  }
 }
 </script>
 

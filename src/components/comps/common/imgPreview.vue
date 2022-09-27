@@ -6,16 +6,17 @@
     <div v-if="flag" @touchstart="touchStart" @touchend="touchEnd">
     <!-- <div v-if="flag"> -->
       <!-- :start-position="curIndex"  指定起始位置 :showIndex="false"  是否显示页码 -->
-      <van-image-preview v-model="flag" :images="imgList" :start-position="curIndex" @change="onChange">
+      <van-image-preview v-model="flag" :images="innerImgList" :start-position="curIndex" @change="onChange">
         <!-- <template v-slot:index>第{{ index }}页</template> -->
         <template slot="index">
           <slot :index="index"></slot>
         </template>
-        <template slot="cover">
-          123
-        </template>
+        <template slot="cover"></template>
       </van-image-preview>
+    </div>
 
+    <div v-if="!isRaw && raw" class="preview-origin">
+      <van-button size="small" @click.stop="previewRaw()">查看原图</van-button>
     </div>
     <div class="image-preview__action">
       <slot name="action"></slot>
@@ -25,8 +26,8 @@
     <van-share-sheet
       v-model="showShare"
       :options="options"
-      @select="onSelect"
       :duration="0.1"
+      @select="onSelect"
     />
 
   </div>
@@ -36,11 +37,20 @@ import { Toast } from 'vant';
 import { ImagePreview } from 'vant';
 
 let timer = null
+const cache = []
 
 export default {
   name:'',
   //
-  props:['imgList','isShowPreview',"fromPage","curIndex",'ImagePreview','goodsId'],
+  props:{
+    imgList: null,
+    isShowPreview: null,
+    fromPage: null,
+    curIndex: null,
+    ImagePreview: null,
+    goodsId: null,
+    raw: Boolean,
+  },
   data(){
     return {
       flag:this.isShowPreview,
@@ -64,15 +74,24 @@ export default {
       osType:null,
       // curIndex:1,
       index: 0,
-
+      innerImgList: [],
     }
   },
+  computed: {
+    isRaw() {
+      return /^((?!_x).)*\.[A-z]+$/.test(this.innerImgList[this.index])
+    },
+  },
   created(){
+    this.innerImgList = this.imgList.map(img => {
+      if (cache.includes(img)) return img
+      return img.replace(/(.*)(\.[A-z]+)$/, '$1_x$2')
+    })
     // console.log("goodsId====",this.goodsId)
     this.index = this.curIndex;
     // this.curIndex = 2
     // console.log("this.index======",this.index)
-    this.curImgSrc = this.imgList[this.curIndex];  // 获取当前图片src并进行赋值
+    this.curImgSrc = this.innerImgList[this.curIndex];  // 获取当前图片src并进行赋值
     // console.log("this.curImgSrc>>>>>",this.curImgSrc);
 
     // let u = navigator.userAgent;
@@ -118,7 +137,7 @@ export default {
       }, 300)
       // 要根据当前的index值获取到对应图片的src,长按保存图片时将该src当作参数传过去
       // console.log("当前选中的图片的src",this.imgList[index])   // src
-      this.curImgSrc = this.imgList[index];
+      this.curImgSrc = this.innerImgList[index];
       // console.log("this.imgList[index]>>>>>>",this.imgList[index])
     },
 
@@ -249,7 +268,11 @@ export default {
         // console.log('插入分享记录失败',error);
       });
     },
-
+    previewRaw() {
+      this.$set(this.innerImgList, this.index, this.innerImgList[this.index].replace('_x', ''))
+      const current = this.innerImgList[this.index]
+      if (!cache.includes(current)) cache.push(current)
+    }
   }
 
 }
@@ -268,4 +291,9 @@ export default {
     z-index: 9999;
   }
 
+  .preview-origin {
+    padding: 16px;
+    position: relative;
+    z-index: 9999;
+  }
 </style>

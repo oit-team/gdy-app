@@ -15,8 +15,8 @@
     </div>
 
     <Scroll
-      class="kindTitBox"
       ref="kindTitScroll"
+      class="kindTitBox"
       :probeType='3'
       :scrollX='true'
       :scrollY='false'
@@ -25,10 +25,10 @@
       :pullUp="false">
       <ul class="kindTitUl">
         <li
-          class="kindTitItem"
-          :class="[kindItem.id == activeSeasonId ?'active':'']"
           v-for="(kindItem,index) in seasonList"
           :key="index"
+          class="kindTitItem"
+          :class="[kindItem.id == activeSeasonId ?'active':'']"
           @click="clickKindItem(kindItem)">
           <span class="styleName">{{kindItem.fitOccasionName}}</span>
         </li>
@@ -36,8 +36,8 @@
     </Scroll>
 
     <Scroll
-      class="kindTopBox"
       ref="kindTopScroll"
+      class="kindTopBox"
       :listenScroll='true'
       :probeType='3'
       :scrollX='true'
@@ -48,10 +48,10 @@
       <!-- 滚动的内容 -->
       <ul class="scrollUl" >
         <li
-          class="kindItem"
-          :class="[item.id == activeSeriesId ?'active':'']"
           v-for="(item,index) in seriesList"
           :key="index"
+          class="kindItem"
+          :class="[item.id == activeSeriesId ?'active':'']"
           @click="clickItem(item.id,item.seriesName)">
           <span class="styleName">{{item.seriesName}}</span>
         </li>
@@ -85,13 +85,13 @@
       </div>
     </Scroll> -->
 
-    <div style="flex:1;overflow:hidden;" v-if="styleListFlag"><van-loading color="#00a2ea"  /></div>
+    <div v-if="styleListFlag" style="flex:1;overflow:hidden;"><van-loading color="#00a2ea"  /></div>
     <Scroll
       v-else
+      ref="keyStyleScroll"
+      class="keyStyleCon"
       :update-data="[styleList]"
       :refresh-data="[]"
-      class="keyStyleCon"
-      ref="keyStyleScroll"
       :probeType = '3'
       :listenScroll='true'
       :autoUpdate="false"
@@ -102,21 +102,21 @@
       <div>
         <div v-if="styleList.length > 0" class="keyStyleDataBox ">
           <div class="clear">
-            <div class="keyStyle-item fl"
-              v-for="(item,index) in styleList"
+            <div v-for="(item,index) in styleList"
               :key="index"
+              class="keyStyle-item fl"
               >
               <!-- @click="goGoodDetail(item.id)" -->
               <div class="goods-img-box">
-                <img class="goods-img" v-lazy="item.imgUrl" alt="" >
+                <img v-lazy="item.imgUrl" class="goods-img" alt="" >
                 <div class="tipBox">
-                  <img class="key-tip-img" v-if="item.styleFlag == 1" src="../../../../static/images/icon/tip.png" alt="">
-                  <img class="learnIcon" v-if="item.leaFlag == 1"  src="../../../../static/images/icon/new.png" alt="">
-                  <img class="videoIcon" v-if="item.videoFlag == 0"  src="../../../../static/images/icon/video.png" alt="">
+                  <img v-if="item.styleFlag == 1" class="key-tip-img" src="../../../../static/images/icon/tip.png" alt="">
+                  <img v-if="item.leaFlag == 1" class="learnIcon"  src="../../../../static/images/icon/new.png" alt="">
+                  <img v-if="item.videoFlag == 0" class="videoIcon"  src="../../../../static/images/icon/video.png" alt="">
                 </div>
                 <div class="addIcon">
-                  <img v-if="item.choosed" @click.stop="delSingle(item)" src="static/images/icon/a-reduce.png" alt="">
-                  <img v-else @click.stop="addSingle(item)" src="static/images/icon/add1.png" alt="">
+                  <img v-if="item.choosed" src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item)">
+                  <img v-else src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item)">
                 </div>
               </div>
               <div class="goods-num">{{item.styleNo}}</div>
@@ -129,7 +129,7 @@
           </div>
           <div style="height:0.5px;background:transprant;"></div>
         </div>
-        <div style="padding-top:0.5px;" v-else>
+        <div v-else style="padding-top:0.5px;">
           <noGood></noGood>
         </div>
 
@@ -477,7 +477,7 @@ export default {
         this.$router.push({
         // this.$router.replace({
           path:'/addCollocation',
-          query:{
+          params:{
             choosedList:this.choosedList,
             recommentReason:this.$route.query.recommentReason,
             activeSuit:this.$route.query.activeSuit,

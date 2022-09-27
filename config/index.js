@@ -9,16 +9,29 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/app/',
+    assetsPublicPath: '/',
     proxyTable: {
-      '/system': {
-        target: 'http://192.168.9.71:8089',
+      '/api/api': {
+        target: 'http://192.168.9.12:8132/mta-api/api',
         changeOrigin: true,
+        pathRewrite: {
+          '^/api/api': ''
+        }
+      },
+      '/api/mta': {
+        target: 'http://192.168.9.12:8132/mta',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api/mta': ''
+        }
       },
       '/api': {
-        target: 'http://192.168.9.12:8132/mta-api',
+        target: 'http://192.168.9.65:8089',
         changeOrigin: true,
-      }
+        pathRewrite: {
+          '^/api': ''
+        }
+      },
     },
 
     // Various Dev Server settings
