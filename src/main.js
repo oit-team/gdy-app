@@ -6,7 +6,7 @@ import router from './router'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import 'vuescroll/dist/vuescroll.css'
-import 'lib-flexible/flexible.js'
+// import 'lib-flexible/flexible.js'
 import axios from 'axios'
 import { Indicator } from 'mint-ui';
 import BScroll from 'better-scroll'
@@ -23,6 +23,7 @@ import 'video.js/dist/video-js.css'
 // Vue.prototype.requestParams = requestParams;
 import '@/components'
 import '@/assets/icons'
+import 'windicss/windi.css'
 
 // import Viewer from 'v-viewer'
 // import 'viewerjs/dist/viewer.css'
@@ -220,15 +221,6 @@ axios.interceptors.response.use(function(response) {
   return error;
 
 })
-
-window.onresize = setHtmlFontSize;
-function setHtmlFontSize(){
-    // console.log(document.documentElement.clientWidth+"-------------"+document.body.clientWidth);
-    const htmlWidth = document.documentElement.clientWidth || document.body.clientWidth;
-    const htmlDom = document.getElementsByTagName('html')[0];
-    htmlDom.style.fontSize = htmlWidth / 10 + 'px';
-};
-setHtmlFontSize();
 
 // 重写clear方法，不删除用户数据
 localStorage.clear = (function(clear) {

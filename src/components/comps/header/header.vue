@@ -1,7 +1,7 @@
 <template>
   <div class='header'>
     <img src="static/images/dev/back@2x.png" @click="back" >
-    <span class="tit" @click="back">{{title}}</span>
+    <span class="tit">{{title}}</span>
     <span class="placeLabel">
       <slot name="after"></slot>
     </span>
@@ -39,7 +39,7 @@ export default {
 <style scoped>
 .header{
   width:100%;
-  height:1.2rem;
+  height:1.4rem;
   padding:0 0.4rem;
   display: flex;
   justify-content: space-between;

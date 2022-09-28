@@ -121,7 +121,7 @@ export default {
   display: flex;
   flex-direction: column;
   .headBox {
-    height: 1.2rem;
+    height: 1.4rem;
 
   }
  .taxt{

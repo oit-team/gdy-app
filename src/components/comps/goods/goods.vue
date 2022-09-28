@@ -321,7 +321,7 @@ export default {
   display: block;
   text-align: center;
   cursor: pointer;
-  line-height: 1.2rem;
+  line-height: 1.4rem;
   border-bottom: transparent;
   font-size: 0.38rem;
 }
@@ -386,7 +386,7 @@ export default {
 .white_box{
   float: left;
   width:100%;
-  height: 1.2rem;
+  height: 1.4rem;
 }
 .goods_menu_scroll_wrapper{
   height: 100%;

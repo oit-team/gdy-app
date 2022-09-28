@@ -1,7 +1,7 @@
 <template>
   <div id="taskGoodsTask">
     <!-- 头部 -->
-    <div class="headBox" style="height:1.2rem;">
+    <div class="headBox" style="height: 1.4rem;">
       <backHeader title="商品自测">
         <span class="head-class f-l" slot="left" @click="back">
           <slot>

@@ -1,6 +1,6 @@
 <template>
   <div id="checkRecord">
-    <div style="height:1.2rem;">
+    <div style="height: 1.4rem;">
       <backHeader :title="dateName">
         <span class="head-class f-l" slot="left" @click="back">
           <slot>
@@ -10,7 +10,7 @@
         <span class="head-class place-label" slot="right"></span>
       </backHeader>
     </div>
-    <!-- <div style="height:1.2rem;">
+    <!-- <div style="height: 1.4rem;">
       <Header :title="'考核记录'"></Header>
     </div> -->
 

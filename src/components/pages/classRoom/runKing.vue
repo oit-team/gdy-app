@@ -129,7 +129,7 @@ export default {
   flex-direction: column;
   background-color: #fff;
   .headBox {
-    height: 1.2rem;
+    height: 1.4rem;
   }
   .rankScrollBox{
     width: 100%;

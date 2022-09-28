@@ -1,6 +1,6 @@
 <template>
   <div id="taskReport">
-    <div class="headBox" style="height:1.2rem;">
+    <div class="headBox" style="height: 1.4rem;">
       <backHeader title="报告">
         <span class="head-class f-l" slot="left" @click="back">
           <slot>

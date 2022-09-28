@@ -1,6 +1,6 @@
 <template>
   <div id="tryCollocation">
-    <div class="headClass" style="height:1.2rem;">
+    <div class="headClass" style="height: 1.4rem;">
       <Header :title="'试试这样搭'"></Header>
     </div>
 

@@ -1,6 +1,6 @@
 <template>
   <div id="taskBatch">
-    <div style="height:1.2rem;">
+    <div style="height: 1.4rem;">
       <backHeader :title="dateName">
         <span class="head-class f-l" slot="left" @click="back">
           <slot>

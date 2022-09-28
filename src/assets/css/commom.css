@@ -22,12 +22,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height:1.2rem;
+  height: 1.4rem;
 }
 .header div{
   padding-left:0.4rem;
   padding-right: 0.4rem;
-  height: 1.2rem;
+  height: 1.4rem;
   display: flex;
   align-items: center;
 }

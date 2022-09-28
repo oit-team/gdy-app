@@ -342,7 +342,7 @@ export default {
   flex-direction: column;
   .box {
     width: 100%;
-    height: 1.2rem;
+    height: 1.4rem;
     line-height: 1.1rem;
     display: flex;
     background-color: #fff;

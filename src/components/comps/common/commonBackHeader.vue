@@ -30,7 +30,7 @@ export default {
 <style lang="less">
 .back-head{
   width:100%;
-  height:1.2rem;
+  height:1.4rem;
   // background-color: #13a7e3 ;
   background-color: #f6f6f6 ;
   display: flex;
@@ -38,6 +38,7 @@ export default {
   justify-content: space-between;
   box-sizing: border-box;
   .head-tit{
+    display: flex;
     color:#333;
     .head-title{
       // font-weight: bold;
@@ -50,8 +51,8 @@ export default {
   font-size:18px;
   color:#333;
   width:33px;
-  height:1.2rem;
-  line-height:1.2rem;
+  height: 1.4rem;
+  line-height: 1.4rem;
   // background-color: pink;
   text-align: center;
 }

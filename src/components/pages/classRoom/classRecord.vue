@@ -1,7 +1,7 @@
 <template>
   <div id="classRecord">
     <!-- <h1>微课堂历史考核记录</h1> -->
-    <div style="height:1.2rem;">
+    <div style="height: 1.4rem;">
       <backHeader :title="title+'--历史记录'">
         <span class="head-class f-l" slot="left" @click="back">
           <slot>

@@ -84,7 +84,7 @@ export default {
   font-size: 15px;
 }
 .header{
-  height:1.2rem;
+  height: 1.4rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -64,26 +64,6 @@ export default {
         {
           title: '门店日常',
           items: [
-            // {
-            //   icon: '1dbe9e6707f7cf8f008c1677ad595052',
-            //   title: '新品学习',
-            // },
-            // {
-            //   icon: 'https://picsum.photos/36',
-            //   title: '陈列指引',
-            // },
-            // {
-            //   icon: 'https://picsum.photos/36',
-            //   title: '货品主推',
-            // },
-            // {
-            //   icon: 'https://picsum.photos/36',
-            //   title: '货品周报',
-            // },
-            // {
-            //   icon: 'https://picsum.photos/36',
-            //   title: '商品搭配',
-            // },
             {
               icon: '007b55f6d8c0af10e678d3251dee462d',
               title: '工作圈',
@@ -126,6 +106,16 @@ export default {
               title: '话术训练',
               click: this.toVoicePage,
               auth: localStorage.brandId === '1' && isIos,
+            },
+          ],
+        },
+        {
+          title: '大屏',
+          items: [
+            {
+              icon: '646fa467770dc1a85f4cbfad59844d2e',
+              title: '大屏',
+              click: this.toMyCollocation,
             },
           ],
         },

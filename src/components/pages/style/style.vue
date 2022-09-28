@@ -206,7 +206,7 @@ export default {
 <style scoped>
 .first_navbar {
   overflow: hidden;
-  height: 1.2rem;
+  height: 1.4rem;
   background-color: #fff;
   font-size: 0.4rem;
   line-height: 1rem;

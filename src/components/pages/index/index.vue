@@ -265,7 +265,7 @@ export default {
   /* border: 0.5px #000 solid; */
 }
 .bottom{
-  height:1.3rem;
+  height:1.6rem;
   border-top: 0.5px solid #ddd;
 }
 .dev-box{

@@ -1,6 +1,6 @@
 <template>
   <div id="taskCheckTask">
-    <div style="height:1.2rem;">
+    <div style="height: 1.4rem;">
       <backHeader title="考核任务">
         <span class="head-class f-l" slot="left" @click="back">
           <slot>

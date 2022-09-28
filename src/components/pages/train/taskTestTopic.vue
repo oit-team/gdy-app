@@ -396,7 +396,7 @@ export default {
 @import "../../../assets/pageCss/taskTestTopic";
 @deep:~">>>";
 .headBox{
-height:1.2rem;
+height: 1.4rem;
 }
 @{deep} video{
   width:300px;
