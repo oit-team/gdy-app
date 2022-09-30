@@ -23,7 +23,7 @@ import 'video.js/dist/video-js.css'
 // Vue.prototype.requestParams = requestParams;
 import '@/components'
 import '@/assets/icons'
-import 'windicss/windi.css'
+import './uno.css'
 
 // import Viewer from 'v-viewer'
 // import 'viewerjs/dist/viewer.css'
@@ -35,8 +35,8 @@ import Scroll from 'vue-slim-better-scroll'
 Vue.use(Scroll)
 
 // 按需引入
-import { Button, Loading, ShareSheet,Toast, Dialog,Icon,Popup ,DatetimePicker,Field,Uploader ,SwipeCell ,Cell,Step, Steps,Collapse,CollapseItem,Radio,RadioGroup } from 'vant';
-Vue.use(Button).use(Loading).use(ShareSheet).use(Toast).use(Dialog).use(Icon).use(Popup).use(DatetimePicker ).use(Field).use(Uploader ).use(SwipeCell ).use(Cell).use(Steps).use(Step).use(Collapse).use(CollapseItem).use(Radio).use(RadioGroup);
+import { Button, Loading, ShareSheet,Toast, Dialog,Icon,Popup ,DatetimePicker,Field,Uploader ,Swipe, SwipeItem, SwipeCell ,Cell,Step, Steps,Collapse,CollapseItem,Radio,RadioGroup, Image } from 'vant';
+Vue.use(Button).use(Loading).use(ShareSheet).use(Toast).use(Dialog).use(Icon).use(Popup).use(DatetimePicker ).use(Field).use(Uploader ).use(SwipeCell ).use(Cell).use(Steps).use(Step).use(Collapse).use(CollapseItem).use(Radio).use(RadioGroup).use(Swipe).use(SwipeItem).use(Image);
 import { ImagePreview } from 'vant';
 Vue.use(ImagePreview);
 import 'vant/lib/index.css';

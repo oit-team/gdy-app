@@ -9,8 +9,8 @@
     "dev": "env-cmd webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js",
-    "dev:css": "yarn css --dev",
-    "css": "windicss ./src/**/*.{vue,html,js} --config windi.config.js -o node_modules/windicss/windi.css"
+    "dev:css": "yarn css --watch",
+    "css": "unocss \"src/**/*.vue\" --out-file src/uno.css"
   },
   "dependencies": {
     "@oit/vant-extend": "^0.1.0-beta.10",
@@ -43,6 +43,8 @@
     "weixin-js-sdk": "^1.4.0-test"
   },
   "devDependencies": {
+    "@unocss/preset-rem-to-px": "^0.45.25",
+    "@unocss/webpack": "^0.45.26",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
@@ -80,6 +82,7 @@
     "stylus-loader": "^3.0.2",
     "svg-sprite-loader": "^6.0.11",
     "uglifyjs-webpack-plugin": "^1.1.1",
+    "unocss": "^0.45.26",
     "url-loader": "^0.5.8",
     "vue-lazyload": "^1.3.3",
     "vue-loader": "^13.3.0",
@@ -88,8 +91,7 @@
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.11.5",
-    "webpack-merge": "^4.1.0",
-    "windicss": "^3.5.6"
+    "webpack-merge": "^4.1.0"
   },
   "engines": {
     "node": ">= 6.0.0",
