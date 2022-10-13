@@ -1,5 +1,7 @@
-import { defineConfig } from 'unocss'
-import presetMini from '@unocss/preset-mini'
+import {
+  defineConfig,
+  presetMini,
+} from 'unocss'
 import presetRemToPx from '@unocss/preset-rem-to-px'
 
 export default defineConfig({
