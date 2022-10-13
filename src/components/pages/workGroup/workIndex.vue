@@ -115,7 +115,7 @@ export default {
             {
               icon: '646fa467770dc1a85f4cbfad59844d2e',
               title: '大屏',
-              click: this.toMyCollocation,
+              click: () => this.$router.push('/large-screen/config'),
             },
           ],
         },
