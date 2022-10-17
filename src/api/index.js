@@ -52,6 +52,7 @@ export function post(url, params = {}, config = { tips: true }) {
       mod: 'app',
       de: '2019-10-16',
       sync: 1,
+      cmd: config.cmd,
       uuid: userData.orgId,
       chcode: 'ef19843298ae8f2134f',
     },

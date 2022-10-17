@@ -308,6 +308,30 @@ export default new Router({
             meta: { index: 101 },
             // component: resolve => require(['../views/Voice/index.vue'], resolve)
             component: () => import('@/views/Voice')
-        }
+        },
+        {
+          name: "LargeScreen",
+          path: '/large-screen',
+          meta: { index: 101 },
+          component: () => import('../views/LargeScreen/List.vue')
+        },
+        // {
+        //   name: "AddMould",
+        //   path: '/add-mould',
+        //   meta: { index: 101 },
+        //   component: () => import('../views/LargeScreen/AddMould.vue')
+        // },
+        {
+          name: "Config",
+          path: '/config',
+          meta: { index: 101 },
+          component: () => import('../views/LargeScreen/Config.vue')
+        },
+      {
+        name: "Collocation",
+        path: '/collocation',
+        meta: { index: 101 },
+        component: () => import('../views/LargeScreen/Collocation.vue')
+      },
     ]
 })
