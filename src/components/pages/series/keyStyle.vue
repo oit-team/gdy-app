@@ -1,5 +1,5 @@
 <template>
-  <div id="keyStylePage" @touchmove.prevent>
+  <VueActions id="keyStylePage" data="keyStyle" @touchmove.prevent>
     <div class='header'>
       <div class="head_back" @click="back"><img src="static/images/dev/back@2x.png"></div>
       <span class="head_span">{{seasonName}}</span>
@@ -23,6 +23,7 @@
           class="kindTitItem"
           :class="[kindItem.bandName == bandName ?'active':'']"
           v-for="(kindItem,index) in bigList"
+          v-actions:tag.click
           :key="index"
           @click="clickKindItem(kindItem.bandName)">
           <span class="styleName">{{kindItem.bandName}}</span>
@@ -47,6 +48,7 @@
           :class="[item.id == activeId ?'active':'']"
           v-for="(item,index) in cateList"
           :key="index"
+          v-actions:item.click
           @click="clickItem(item.id,item.seriesName)">
           <span class="styleName">{{item.seriesName}}</span>
         </li>
@@ -111,7 +113,7 @@
       </div>
     </Scroll>
 
-  </div>
+  </VueActions>
 </template>
 <script>
 import horizonScroll from "../../comps/common/horizonScroll";

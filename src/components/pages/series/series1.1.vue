@@ -1,5 +1,5 @@
 <template>
-  <div class="seriesMain" @touchmove.prevent >
+  <VueActions class="seriesMain" data="series" @touchmove.prevent >
     <div class='header'>
       <div class="head_back" @click="back"><img src="static/images/dev/back@2x.png" loaded @load="imgLoad"></div>
       <span class="head_span">{{seasonName}}-{{seasonLabel}}</span>
@@ -28,18 +28,21 @@
         <li
           class="hd_tab_item"
           :class="{active:selectedTabs  == 1}"
+          v-actions:single.click
           @click="changeTab(1)">
           <span class="tabName">单款详解</span>
         </li>
         <li
           class="hd_tab_item"
           :class="{active:selectedTabs  == 2}"
+          v-actions:brand.click
           @click="changeTab(2)">
           <span class="tabName">品牌搭配</span>
         </li>
         <li
           class="hd_tab_item"
           :class="{active:selectedTabs  == 3}"
+          v-actions:shop.click
           @click="changeTab(3)">
           <span class="tabName">店铺搭配</span>
         </li>
@@ -98,7 +101,7 @@
 
       <!-- 滚动的内容 -->
       <ul v-if="stylesList.length>0" class="con-inner-list clear">
-        <li v-for="(item,index) in stylesList" :key="index" class="inner-item fl" @click="goGoods(item.id)">
+        <li v-for="(item,index) in stylesList" :key="index" class="inner-item fl" @click="goGoods(item.id)" v-actions:item.click>
           <div class="goods-img-box">
             <img class="goods-img" :src="item.imgUrl" loaded lazy-load @load="imgLoad" />
             <div class="tipBox">
@@ -257,7 +260,7 @@
         :isShowPreview = showPreview
         @func="changePreview"></imgPreview>
 
-  </div>
+  </VueActions>
 </template>
 <script>
 import util from "@/assets/js/util.js"

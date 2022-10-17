@@ -1,5 +1,5 @@
 <template>
-  <div class="searchResultMain" @touchmove.prevent>
+  <VueActions class="searchResultMain" data="searchResult" @touchmove.prevent>
     <div class="hd_select">
       <img src = "static/images/dev/back@2x.png" @click="back">
       <div class="hd_input_wrap">
@@ -48,6 +48,7 @@
           :key="index"
           class="keyStyle-item fl"
           @click="toGoods(item.id)"
+          v-actions:searchItem.click
           >
           <!-- @click="toGoods(item.id)" -->
           <div class="goods-img-box">
@@ -64,7 +65,7 @@
       </div>
     </Scroll>
 
-  </div>
+  </VueActions>
 </template>
 
 <script>

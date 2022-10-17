@@ -1,5 +1,5 @@
 <template>
-  <div class="goodDetailMain" @touchmove.prevent>
+  <VueActions class="goodDetailMain" data="goodsDetail" @touchmove.prevent>
     <div class="header">
       <div class="header_one">
         <div class="head_one_back" @click="back"><img src="static/images/dev/back_white@2x.png" ></div>
@@ -174,7 +174,7 @@
       @func="changePreview"
     >
       <template slot="action">
-        <div v-if="styleInfo.imgDetailsUrls.length > 0" class="preview-switch">
+        <div v-if="styleInfo.imgDetailsUrls.length > 0" class="preview-switch text-base">
           <span :class="{'active': active === 0}" @click.stop="previewSwitch(0)">商品图</span>
           <span :class="{'active': active === 1}" @click.stop="previewSwitch(1)">细节图</span>
         </div>
@@ -192,7 +192,7 @@
 
       <div slot="popupBody">
         <slot>
-          <div v-if="baseInfoType==1" class="baseone">
+          <div v-if="baseInfoType==1" class="baseone" v-actions:basicInfo.duration>
             <div v-if="styleInfo.styleNo"><span class="tit">款号</span><span class="inner">{{styleInfo.styleNo}}</span></div>
             <div v-if="styleInfo.seriesName"><span class="tit">系列</span><span class="inner">{{styleInfo.seriesName}}</span></div>
             <div v-if="styleInfo.bandName"><span class="tit">波段</span><span class="inner">{{styleInfo.bandName}}</span></div>
@@ -261,26 +261,26 @@
       </div> -->
       <div slot="popupTop" class="basicTop" >
         <slot>
-          <span :class='sellPointType == 1?"active":""' @click="sellPointType=1;">面料卖点</span>
-          <span :class='sellPointType == 2?"active":""' @click="sellPointType=2;">设计卖点</span>
-          <span :class='sellPointType == 3?"active":""' @click="sellPointType=3;">穿着卖点</span>
+          <span :class='sellPointType == 1?"active":""' @click="sellPointType=1;" v-actions:sellingPointFabric.click>面料卖点</span>
+          <span :class='sellPointType == 2?"active":""' @click="sellPointType=2;" v-actions:designSellingPoint.click>设计卖点</span>
+          <span :class='sellPointType == 3?"active":""' @click="sellPointType=3;" v-actions:wearSellingPoint.click>穿着卖点</span>
         </slot>
       </div>
 
       <div slot="popupBody">
         <slot>
           <div class="sell-list" >
-            <div v-if="sellPointType==1" class="sell-item">
+            <div v-if="sellPointType==1" class="sell-item" v-actions:sellingPointFabric.duration key="sellingPointFabric">
               <div v-if="!styleInfo.sellingPointFabric || styleInfo.sellingPointFabric=='<br>'" class="sell-item-inner" >暂无</div>
               <div v-else v-html="styleInfo.sellingPointFabric" class="sell-item-inner"></div>
             </div>
-            <div v-if="sellPointType==2" class="sell-item">
+            <div v-if="sellPointType==2" class="sell-item" v-actions:designSellingPoint.duration key="designSellingPoint">
               <div v-if="!styleInfo.designSellingPoint || styleInfo.designSellingPoint=='<br>'" class="sell-item-inner" >暂无</div>
               <div v-else v-html="styleInfo.designSellingPoint" class="sell-item-inner"></div>
             </div>
-            <div v-if="sellPointType==3" class="sell-item">
+            <div v-if="sellPointType==3" class="sell-item" v-actions:wearSellingPoint.duration key="wearSellingPoint">
               <div v-if="!styleInfo.wearSellingPoint || styleInfo.wearSellingPoint=='<br>'" class="sell-item-inner" >暂无</div>
-              <div v-else v-html="styleInfo.wearSellingPoint" class="sell-item-inner">暂无</div>
+              <div v-else v-html="styleInfo.wearSellingPoint" class="sell-item-inner"></div>
             </div>
           </div>
         </slot>
@@ -321,7 +321,7 @@
 
     </van-popup>
 
-  </div>
+  </VueActions>
 </template>
 
 <script>
@@ -975,7 +975,7 @@ function callWebViewScript(){
 
 .head_img{
   position: relative;
-  width: 10rem;
+  width: 100%;
   height:10rem;
   overflow: hidden;
   // border:5px solid red;
@@ -1242,7 +1242,7 @@ function callWebViewScript(){
   display: none;
 }
 .good_video{
-  width: 10rem;
+  width: 100%;
   height: 10rem;
 }
 

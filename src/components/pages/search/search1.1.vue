@@ -1,5 +1,5 @@
 <template>
-  <div class="searchMain" @touchmove.prevent>
+  <VueActions class="searchMain" data="search" @touchmove.prevent>
     <!-- 头部搜索框 -->
     <div class="hd_select">
       <img src = "static/images/dev/back@2x.png" @click="back">
@@ -9,7 +9,7 @@
           <input v-model="value" ref="search" type="search" :placeholder="defaultValue" @keyup.13="search()" >
         </form>
       </div>
-      <div class="search" @click="search()">搜索</div>
+      <div class="search" @click="search()" v-actions:searchBtn.click>搜索</div>
     </div>
 
     <!-- 搜索发现的接口还没写，先保留之前的样式 -->
@@ -17,7 +17,7 @@
       热门搜索
     </div>
     <div class="search_list">
-      <span v-for="(item, index) in hotWords" :key="index" :style="'backgroundColor:'+item.color" @click="search(item.name)">{{item.name}}</span>
+      <span v-for="(item, index) in hotWords" :key="index" :style="'backgroundColor:'+item.color" @click="search(item.name)" v-actions:searchTag.click>{{item.name}}</span>
     </div>
 
     <!-- <div class="historyBox">
@@ -39,7 +39,7 @@
 
 
 
-  </div>
+  </VueActions>
 </template>
 
 <script>

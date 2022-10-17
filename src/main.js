@@ -25,6 +25,8 @@ import '@/components'
 import '@/assets/icons'
 import './uno.css'
 
+import '@/plugins/Actions'
+
 // import Viewer from 'v-viewer'
 // import 'viewerjs/dist/viewer.css'
 // Vue.use(Viewer)

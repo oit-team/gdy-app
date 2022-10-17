@@ -1,5 +1,5 @@
 <template>
-  <div class="goodsMain" @touchmove.prevent>
+  <VueActions class="goodsMain" data="goods" @touchmove.prevent>
     <!-- 头部导航 -->
 
     <Scroll
@@ -51,21 +51,23 @@
       >
         <div v-for="(series,index) in bigList" :key="index">
           <div class="oneName">{{ series.bandName }}</div>
-          <div v-if="listType == 1" class="seriesBox">
+          <div v-if="listType == 1" class="seriesBox" key="1">
             <div
                 class="secName"
                 v-for="(item,index) in series.result"
                 :key="index"
+                v-actions:item.click
                 @click="goGoods(series.bandName,item,series)"
             >
               <span class="name">{{ item.seriesName }}</span> <span class="count">({{ item.count }})</span>
             </div>
           </div>
-          <div v-if="listType == 2" class="kindBox">
+          <div v-if="listType == 2" class="kindBox" key="2">
             <div
                 class="secName"
                 v-for="(item,index) in series.result"
                 :key="index"
+                v-actions:categoryItem.click
                 @click="goKeyStyle(bigList,series,item)"
             >
               <span class="name">{{ item.seriesName }}</span> <span class="count">({{ item.count }})</span>
@@ -76,7 +78,7 @@
       </div>
     </Scroll>
 
-  </div>
+  </VueActions>
 </template>
 
 <script>
