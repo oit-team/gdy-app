@@ -87,10 +87,10 @@
   line-height: 25px;
 }
 
-.van-image-preview__image {
+/* .van-image-preview__image {
   top: 55px;
   bottom: 55px;
-}
+} */
 .van-share-sheet__icon {
   margin: 0 12px;
 }

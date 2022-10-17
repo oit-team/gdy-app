@@ -294,6 +294,6 @@ export default {
   .preview-origin {
     padding: 16px;
     position: relative;
-    z-index: 9999;
+    z-index: 10000;
   }
 </style>
