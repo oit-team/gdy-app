@@ -129,6 +129,11 @@
   resolved "http://192.168.9.16:4873/@oit%2fvant-extend/-/vant-extend-0.1.0-beta.10.tgz#52382dbf8a8885f3a082d5357018e494e1ee23ad"
   integrity sha512-mp/r+CZwtCQkMP4OKxum60Xx5bVrT3zKxk0Zorewq3j70/WN02kYtFX0bweX+LbpnFSa4JZhStsrYeQHKt8/HQ==
 
+"@oit/vue-actions@^0.0.0":
+  version "0.0.1"
+  resolved "http://192.168.9.16:4873/@oit%2fvue-actions/-/vue-actions-0.0.1.tgz#d5a8569f402f5f93b31e3439765c8f4b2aa8beae"
+  integrity sha512-NxojOm2oly1SjUOLycZgu+Y/aX0rrEvAl5ZqMw1VadwFWbNTNJKLWOmYSgkWnl86Dp0BwoWnDQxMDJ2MRIdQoQ==
+
 "@polka/url@^1.0.0-next.20":
   version "1.0.0-next.21"
   resolved "http://192.168.9.16:4873/@polka%2furl/-/url-1.0.0-next.21.tgz#5de5a2385a35309427f6011992b544514d559aa1"
