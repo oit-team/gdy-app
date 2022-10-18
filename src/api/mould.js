@@ -50,7 +50,7 @@ export function deleteAdvertsShop(params) {
  * @returns {Promise<*>}
  */
 export function dictitemInfoAllMethod(params, config) {
-  return post('/goods/dictitemInfo/dictitemInfoAllMethod', params, config)
+  return post('/liveBroadcast/adverts/getStyleType', params, config)
 }
 
 /**
@@ -58,6 +58,6 @@ export function dictitemInfoAllMethod(params, config) {
  * @param params
  * @returns {Promise<*>}
  */
-export function getCollocationList(params, config) {
-  return post('/liveBroadcast/adverts/getCollocationList', params, config)
+export function getCollocationList(params) {
+  return post('/liveBroadcast/adverts/getCollocationList', params)
 }

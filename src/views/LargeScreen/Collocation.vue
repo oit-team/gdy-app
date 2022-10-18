@@ -1,8 +1,8 @@
 <template>
   <div class="page">
-    <Header title="选择搭配"></Header>
-    <van-tabs v-model="selectClass" @click="onClick">
-      <van-tab v-for="(item, index) in classList" :key="item.dictitemCode" :title="item.dicttimeDisplayName">
+    <Header title="选择搭配" class="sticky top-0 z-4"></Header>
+    <van-tabs v-model="selectClass" @click="onClick" sticky>
+      <van-tab v-for="(item, index) in classList" :key="item.dictitemCode" :title="`${item.styleName}(${item.totalNum})`">
         <van-empty
           v-if="showEmpty"
           description="暂无数据"
@@ -23,9 +23,9 @@
               :immediate-check="false"
               @load="getData"
             >
-              <div class="content-box flex w-full flex-wrap text-sm p-2 box-border">
+              <div class="content-box flex w-full flex-wrap text-sm grid grid-cols-3 gap-3 p-2 box-border">
                 <div
-                  class="list-item"
+                  class="list-item rounded-md bgf relative"
                   v-for="(item, index) in indexData"
                   :key="item.id"
                 >
@@ -36,25 +36,19 @@
 <!--                  </div>-->
 <!--                  _chose 是否已经添加   false  未添加  true 已添加-->
                   <div class="addIcon">
-                    <img v-show="!item._chose" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)">
-                    <img v-show="item._chose" src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)">
-<!--                    <van-image-->
-<!--                      :src="item._chose ? 'static/images/icon/a-reduce.png' : 'static/images/icon/add1.png'"-->
-<!--                      @click="onSingle(item, index)"-->
-<!--                    ></van-image>-->
+                    <img v-if="!item._chose" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)">
+                    <img v-else src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)">
                   </div>
                   <van-image
                     height="110"
-                    fit="cover"
+                    fit="contain"
+                    class="item-img"
                     :src="item.collImgUrl"
                   />
                   <div class="list-info flex flex-col items-center">
-                    <p class="van-multi-ellipsis--l2 w-full h-10">
+                    <p class="van-multi-ellipsis--l2 w-full px-2 text-center h-10 box-border goodsFont">
                       {{item.collName}}
                     </p>
-                    <div>
-                      {{ item.collImg }}
-                    </div>
                   </div>
                 </div>
               </div>
@@ -63,18 +57,33 @@
         </div>
       </van-tab>
     </van-tabs>
+
 <!--    底部确认-->
-    <div class="page-btm bgf !absolute bottom-0 text-sm flex justify-end w-full items-center p-2 box-border" @click="show = true">
+    <div class="page-btm bgf !absolute bottom-0 text-sm flex justify-end w-full items-center p-2 box-border" @click.stop="onShow">
       <div class="mr-2">
         已选中：{{ selectImg.length }}/15
       </div>
-      <van-button class="py-2" size="mini" type="info" round>确认</van-button>
+      <van-button class="py-2" size="mini" type="info" round @click="onsubmit">确认</van-button>
     </div>
+
     <!--    弹出层-->
-    <van-popup v-model="show" position="buttom" :style="{ height: '30%' }">
-      <div class="pop-scroll">
-          123
-      </div>
+    <van-popup v-model="show" position="bottom" class="overflow-hidden pt-3 box-border max-h-7/10 flex">
+        <div class="overflow-y-auto flex flex-wrap items-center grid grid-cols-3 gap-3 px-3 pb-3">
+          <div
+            v-for="(item, index) in selectImg"
+            :key="item.resId"
+            class="box-border relative aspect-9/16 flex bg-gray-100 rounded"
+          >
+            <van-image
+              class="h-full w-full"
+              :src="item.resUrl"
+              fit="contain"
+            ></van-image>
+            <div class="pop-item__del" @click.stop="delImg(item, index)">
+              <van-icon name="cross" color="#fff" size="14"></van-icon>
+            </div>
+          </div>
+        </div>
     </van-popup>
   </div>
 </template>
@@ -105,6 +114,7 @@ export default {
       styleCategory: '',
     },
     selectImg: [],
+    selectImgs: [],
     show: false,
   }),
   activated() {
@@ -113,7 +123,7 @@ export default {
   methods: {
     // 获取商品列表数据
     getData() {
-      this.formData.styleCategory = this.classList[this.selectClass].dicttimeDisplayName
+      this.formData.styleCategory = this.classList[this.selectClass].styleName
       getCollocationList({
         ...this.formData,
       }).then((res) => {
@@ -136,8 +146,13 @@ export default {
               this.finished = true
             } else if (res.body.totalCount > this.indexData.length) this.formData.pageNum++
           }
-          this.indexData.forEach((run) => {
-            run._chose = false
+          // this.selectImg = JSON.parse(localStorage.getItem('collocation'))
+          this.indexData.forEach(e => {
+            e._chose = false
+            e.imgResInfo.forEach(n => {
+              const obj = this.selectImg.find(item => item.resId === n.resId)
+              e._chose = obj ? true : false
+            })
           })
         }
       }).catch(() => {
@@ -159,7 +174,7 @@ export default {
         cmd: 100009
       }).then((res) => {
         if (res.head.status === 0) {
-          this.classList = res.body.result
+          this.classList = res.body.resultList
           this.getData()
         }
       })
@@ -182,7 +197,13 @@ export default {
       } else {
         item._chose = true
         this.$set(this.indexData, index, item)
+        const obj = {}
+        obj[item.id] = [
+          ...item.imgResInfo,
+        ]
+        this.selectImgs.push(obj)
         this.selectImg.push(...item.imgResInfo)
+        // localStorage.setItem('collocation', JSON.stringify(this.selectImg))
       }
     },
     // 删除照片
@@ -196,6 +217,32 @@ export default {
           }
         })
       })
+      // localStorage.setItem('collocation', JSON.stringify(this.selectImg))
+    },
+    // 单独删除图片
+    delImg(item, index) {
+      this.selectImg.splice(index, 1)
+      this.indexData.forEach(e => {
+        e.imgResInfo.forEach(n => {
+          const obj = this.selectImg.find(item => item.resId === n.resId)
+          e._chose = obj
+        })
+      })
+      // localStorage.setItem('collocation', JSON.stringify(this.selectImg))
+      if (this.selectImg.length === 0) {
+        this.show = false
+      }
+    },
+    onShow() {
+      if (this.selectImg.length === 0) {
+        this.$toast('您还未选择搭配单品')
+      } else {
+        this.show = true
+      }
+    },
+    // 点击确认按钮
+    onsubmit() {
+      // this.$root.$emit()
     },
   },
 }
@@ -205,18 +252,14 @@ export default {
 .page{
   background-color: rgb(245, 245, 245);
 }
-.list-item{
-  position: relative;
-  width: 32%;
-  margin-right: 5px;
-  margin-bottom: 5px;
-  background-color: #fff;
-}
-.list-item > .van-image{
+.item-img{
   width: 100%;
 }
-.list-item::marker{
-  content: '';
+.item-img >>> .van-image__img{
+  border-radius: 5px 5px 0 0;
+}
+div::marker{
+  content: '' !important;
 }
 .list-item:nth-child(3n){
   flex: 1;
@@ -230,6 +273,9 @@ export default {
 }
 .tipBox > img{
   width:14px;
+}
+.goodsFont{
+  font-size: 12px;
 }
 .addIcon {
   position: absolute;
@@ -248,13 +294,36 @@ export default {
   height: 25px;
   margin-top:2.5px;
 }
-.van-button{
+.page-btm > .van-button{
   padding: 0 10px !important;
 }
 .bgf{
   background-color: #fff;
 }
 .pop-scroll{
+  overflow-x: hidden;
   overflow-y: auto;
+}
+.pop-item > .van-image{
+  width:50px;
+  height: 50px;
+  border-radius: 5px;
+}
+.pop-item__del{
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.van-popup{
+  bottom: 0;
+  max-height: 70%;
+  /*border-right: 10px 10px 0 0;*/
 }
 </style>
