@@ -37,8 +37,8 @@ import Scroll from 'vue-slim-better-scroll'
 Vue.use(Scroll)
 
 // 按需引入
-import { Button, Loading,PullRefresh, List, ShareSheet,Toast, Dialog,Icon,Popup ,DatetimePicker,Field,Uploader ,Swipe, SwipeItem, SwipeCell ,Cell, CellGroup ,Step, Steps,Collapse,CollapseItem,Radio,RadioGroup,Empty, Image, Tab, Tabs } from 'vant';
-Vue.use(Button).use(Loading).use(PullRefresh).use(List).use(ShareSheet).use(Toast).use(Dialog).use(Icon).use(Popup).use(DatetimePicker ).use(Field).use(Uploader ).use(Empty).use(SwipeCell ).use(Cell).use(Tabs).use(Tab).use(CellGroup).use(Steps).use(Step).use(Collapse).use(CollapseItem).use(Radio).use(RadioGroup).use(Swipe).use(SwipeItem).use(Image);
+import { Button, Loading,PullRefresh, List, ShareSheet,Sticky,Toast, Dialog,Icon,Popup ,DatetimePicker,Field,Uploader ,Swipe, SwipeItem, SwipeCell ,Cell, CellGroup ,Step, Steps,Collapse,CollapseItem,Radio,RadioGroup,Empty, Image, Tab, Tabs } from 'vant';
+Vue.use(Button).use(Loading).use(PullRefresh).use(List).use(Sticky).use(ShareSheet).use(Toast).use(Dialog).use(Icon).use(Popup).use(DatetimePicker ).use(Field).use(Uploader ).use(Empty).use(SwipeCell ).use(Cell).use(Tabs).use(Tab).use(CellGroup).use(Steps).use(Step).use(Collapse).use(CollapseItem).use(Radio).use(RadioGroup).use(Swipe).use(SwipeItem).use(Image);
 import { ImagePreview } from 'vant';
 Vue.use(ImagePreview);
 import 'vant/lib/index.css';

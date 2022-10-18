@@ -1,20 +1,22 @@
 <template>
-  <div class="page h-full">
+  <div class="page">
     <!--    头部-->
-    <div class="headBox">
-      <backHeader style="background-color: #f5f5f5;" title="大屏模板">
-        <span slot="left" class="head-class f-l" @click="$router.back()">
-          <slot>
-            <img class="back-icon" src="static/images/dev/back@2x.png" alt="">
-          </slot>
-        </span>
-        <span slot="right" class="head-class place-label" @click="toAddMould">
-          <slot>
-            <img class="add-icon" src="static/images/icon/addColl.png" alt="">
-          </slot>
-        </span>
-      </backHeader>
-    </div>
+    <van-sticky>
+      <div class="headBox">
+        <backHeader style="background-color: #f5f5f5;" title="大屏模板">
+          <span slot="left" class="head-class f-l" @click="$router.back()">
+            <slot>
+              <img class="back-icon" src="static/images/dev/back@2x.png" alt="">
+            </slot>
+          </span>
+          <span slot="right" class="head-class place-label" @click="toAddMould">
+            <slot>
+              <img class="add-icon" src="static/images/icon/addColl.png" alt="">
+            </slot>
+          </span>
+        </backHeader>
+      </div>
+    </van-sticky>
 
     <!--    模板列表-->
     <div class="content w-full py-2 box-border">
@@ -27,7 +29,7 @@
           v-model="isLoading"
           class="ub-refresh"
           success-text="加载成功"
-          @refresh="isLoading = true, formData.pageNum = 1, getData()"
+          @refresh="refresh"
         >
           <van-list
             v-model="loading"
@@ -41,7 +43,7 @@
             <van-swipe-cell
               v-for="item in indexData"
               :key="item.advId"
-              class="h-24 mt-2"
+              class="h-24 mb-2"
             >
               <div class="card-left w-full h-full flex items-center text-base" @click="toInfo(item.advId)">
                 <van-image
@@ -172,16 +174,25 @@ export default {
         })
       }).catch(() => {});
     },
+    refresh() {
+      this.isLoading = true
+      this.formData.pageNum = 1
+      this.getData()
+    },
   },
 }
 </script>
 
 <style lang='scss' scoped>
 .page{
-  background-color: rgb(245, 245, 245);
+  height: 100%;
+  background-color: #f5f5f5;
 }
 .headBox{
   height: 1.4rem;
+}
+.content{
+  background-color: #f5f5f5;
 }
 >>> .van-swipe-cell__wrapper{
   height: 100% !important;
