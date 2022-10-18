@@ -1,65 +1,68 @@
 <template>
   <div class="page">
-    <Header title="选择搭配" class="sticky top-0 z-4"></Header>
-    <van-tabs v-model="selectClass" @click="onClick" sticky>
-      <van-tab v-for="(item, index) in classList" :key="item.dictitemCode" :title="`${item.styleName}(${item.totalNum})`">
-        <van-empty
-          v-if="showEmpty"
-          description="暂无数据"
-        ></van-empty>
-        <div v-else class="w-full">
-          <van-pull-refresh
-            v-model="isLoading"
-            class="ub-refresh"
-            success-text="加载成功"
-            @refresh="isLoading = true, formData.pageNum = 1, getData()"
-          >
-            <van-list
-              v-model="loading"
-              :finished="finished"
-              :error.sync="error"
-              error-text="请求失败，点击重新加载"
-              finished-text="没有更多了"
-              :immediate-check="false"
-              @load="getData"
+    <van-sticky>
+      <Header title="选择搭配"></Header>
+      <van-tabs v-model="selectClass" @click="onClick">
+        <van-tab v-for="(item, index) in classList" :key="item.dictitemCode" :title="`${item.styleName}(${item.totalNum})`">
+        </van-tab>
+      </van-tabs>
+    </van-sticky>
+<!--    列表-->
+    <van-empty
+      v-if="showEmpty"
+      description="暂无数据"
+    ></van-empty>
+    <div v-else class="w-full pb-10">
+      <van-pull-refresh
+        v-model="isLoading"
+        class="ub-refresh"
+        success-text="加载成功"
+        @refresh="isLoading = true, formData.pageNum = 1, getData()"
+      >
+        <van-list
+          v-model="loading"
+          :finished="finished"
+          :error.sync="error"
+          error-text="请求失败，点击重新加载"
+          finished-text="没有更多了"
+          :immediate-check="false"
+          @load="getData"
+        >
+          <div class="content-box flex w-full h-full flex-wrap text-sm grid grid-cols-3 gap-3 p-2 box-border">
+            <div
+              class="list-item rounded-md bgf relative"
+              v-for="(item, index) in indexData"
+              :key="item.id"
             >
-              <div class="content-box flex w-full flex-wrap text-sm grid grid-cols-3 gap-3 p-2 box-border">
-                <div
-                  class="list-item rounded-md bgf relative"
-                  v-for="(item, index) in indexData"
-                  :key="item.id"
-                >
-<!--                  <div class="tipBox">-->
-<!--                    <img v-if="item.styleFlag == 1" class="key-tip-img" src="static/images/icon/tip.png" alt="">-->
-<!--                    <img v-if="item.leaFlag == 1" class="learnIcon"  src="static/images/icon/new.png" alt="">-->
-<!--                    <img v-if="item.videoFlag == 0" class="videoIcon"  src="static/images/icon/video.png" alt="">-->
-<!--                  </div>-->
-<!--                  _chose 是否已经添加   false  未添加  true 已添加-->
-                  <div class="addIcon">
-                    <img v-if="!item._chose" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)">
-                    <img v-else src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)">
-                  </div>
-                  <van-image
-                    height="110"
-                    fit="contain"
-                    class="item-img"
-                    :src="item.collImgUrl"
-                  />
-                  <div class="list-info flex flex-col items-center">
-                    <p class="van-multi-ellipsis--l2 w-full px-2 text-center h-10 box-border goodsFont">
-                      {{item.collName}}
-                    </p>
-                  </div>
-                </div>
+              <!--                  <div class="tipBox">-->
+              <!--                    <img v-if="item.styleFlag == 1" class="key-tip-img" src="static/images/icon/tip.png" alt="">-->
+              <!--                    <img v-if="item.leaFlag == 1" class="learnIcon"  src="static/images/icon/new.png" alt="">-->
+              <!--                    <img v-if="item.videoFlag == 0" class="videoIcon"  src="static/images/icon/video.png" alt="">-->
+              <!--                  </div>-->
+              <!--                  _chose 是否已经添加   false  未添加  true 已添加-->
+              <div class="addIcon">
+                <img v-if="!item._chose" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)">
+                <img v-else src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)">
               </div>
-            </van-list>
-          </van-pull-refresh>
-        </div>
-      </van-tab>
-    </van-tabs>
+              <van-image
+                height="110"
+                fit="contain"
+                class="item-img"
+                :src="item.collImgUrl"
+              />
+              <div class="list-info flex flex-col items-center">
+                <p class="van-multi-ellipsis--l2 w-full px-2 text-center h-10 box-border goodsFont">
+                  {{item.collName}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </van-list>
+      </van-pull-refresh>
+    </div>
 
-<!--    底部确认-->
-    <div class="page-btm bgf !absolute bottom-0 text-sm flex justify-end w-full items-center p-2 box-border" @click.stop="onShow">
+    <!--    底部确认-->
+    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border" @click.stop="onShow">
       <div class="mr-2">
         已选中：{{ selectImg.length }}/15
       </div>
@@ -304,11 +307,6 @@ div::marker{
   overflow-x: hidden;
   overflow-y: auto;
 }
-.pop-item > .van-image{
-  width:50px;
-  height: 50px;
-  border-radius: 5px;
-}
 .pop-item__del{
   position: absolute;
   top: 2px;
@@ -324,6 +322,5 @@ div::marker{
 .van-popup{
   bottom: 0;
   max-height: 70%;
-  /*border-right: 10px 10px 0 0;*/
 }
 </style>
