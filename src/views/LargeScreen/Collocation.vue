@@ -149,7 +149,6 @@ export default {
               this.finished = true
             } else if (res.body.totalCount > this.indexData.length) this.formData.pageNum++
           }
-          // this.selectImg = JSON.parse(localStorage.getItem('collocation'))
           this.indexData.forEach(e => {
             e._chose = false
             e.imgResInfo.forEach(n => {
@@ -206,7 +205,6 @@ export default {
         ]
         this.selectImgs.push(obj)
         this.selectImg.push(...item.imgResInfo)
-        // localStorage.setItem('collocation', JSON.stringify(this.selectImg))
       }
     },
     // 删除照片
@@ -220,7 +218,6 @@ export default {
           }
         })
       })
-      // localStorage.setItem('collocation', JSON.stringify(this.selectImg))
     },
     // 单独删除图片
     delImg(item, index) {
@@ -228,10 +225,9 @@ export default {
       this.indexData.forEach(e => {
         e.imgResInfo.forEach(n => {
           const obj = this.selectImg.find(item => item.resId === n.resId)
-          e._chose = obj
+          e._chose = !!obj
         })
       })
-      // localStorage.setItem('collocation', JSON.stringify(this.selectImg))
       if (this.selectImg.length === 0) {
         this.show = false
       }
