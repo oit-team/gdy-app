@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page bacF">
     <van-sticky>
       <Header title="选择搭配"></Header>
       <van-tabs v-model="selectClass" @click="onClick">
@@ -12,7 +12,7 @@
       v-if="showEmpty"
       description="暂无数据"
     ></van-empty>
-    <div v-else class="w-full pb-10">
+    <div v-else class="w-full pb-10 bacF">
       <van-pull-refresh
         v-model="isLoading"
         class="ub-refresh"
@@ -252,7 +252,7 @@ export default {
 </script>
 
 <style scoped>
-.page{
+.bacF{
   background-color: rgb(245, 245, 245);
 }
 .item-img{
