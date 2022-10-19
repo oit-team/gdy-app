@@ -1,6 +1,6 @@
 <template>
   <!-- 横向滚动通用组件 -->
-  <div id="horizonScroll">
+  <VueAction id="horizonScroll" data="horizonScroll">
     <div class="scrollBox" ref = "horizonScrollList">
       <ul class="scrollUl" >
         <li
@@ -9,12 +9,13 @@
           v-for="(item,index) in horizonScroll"
           :key="index"
           @click="clickItem(item[types],item[renderName])"
+          v-actions:ScrollItem.click
         >
           {{item[renderName]}}
         </li>
       </ul>
     </div>
-  </div>
+  </VueAction>
 </template>
 <script>
 export default {

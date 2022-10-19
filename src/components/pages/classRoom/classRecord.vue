@@ -28,7 +28,7 @@
         <div class='itemBox' v-for="(item,index) in classRecordList" :key='index'>
           <div class="checkedSelect" @click.stop="checkedSelect(item,index)">
             <img v-if='item.checked' src="static/images/icon/choosed.png" alt="">
-            <img v-else src="static/images/icon/no-choose.png" alt="">
+            <img v-else src="static/images/icon/no-choose.png" alt="" />
           </div>
           <div class='finishTime'>{{item.finshTime}}</div>
           <div class="score">{{item.maxFraction}}</div>
@@ -39,14 +39,14 @@
         <noGood></noGood>
       </div>
     </Scroll>
-    <div class="delBox">
-      <div class="selectCircle" @click="clickSelectAll()">
-        <img v-if='selectAll' src="static/images/icon/choosed.png" alt="">
-        <img v-else src="static/images/icon/no-choose.png" alt="">
+    <div class="delBox flex justify-center items-center">
+      <div class="selectCircle flex justify-center items-center text-sm" @click="clickSelectAll()">
+        <img v-if='selectAll' src="static/images/icon/choosed.png" alt="" />
+        <img v-else src="static/images/icon/no-choose.png" alt="" />
         <span style="margin-left:5px;">全选</span>
       </div>
-      <div class="countBox">共计{{selectedList.length}}/{{classRecordCount}}</div>
-      <van-button type="info" class="delBtn"  @click="delBtn()">删除</van-button>
+      <div class="countBox text-sm">共计{{selectedList.length}}/{{classRecordCount}}</div>
+      <van-button type="info" class="delBtn" @click="delBtn()">删除</van-button>
       <van-button type="info" class="startBtn" @click="toCheck()">测一测</van-button>
     </div>
 

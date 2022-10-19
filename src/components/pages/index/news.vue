@@ -1,5 +1,5 @@
 <template>
-  <div id="newsPage">
+  <VueActions id="newsPage" data="news">
     <div class="headBox">
       <backHeader title="消息">
         <span class="head-class f-l" slot="left" @click="back">
@@ -16,12 +16,13 @@
         v-for="(item,index) in newsType"
         :key="index"
         @click="clickTab(item.type)"
+        v-actions:newsTab.click
         :class="activeType == item.type?'active':''">
         <span>{{item.msgTypeRemark}}</span>
         <span>({{item.count}})</span>
       </div>
     </div>
-    <div v-if="newsLoading == true">
+    <div v-if="newsLoading == true" key="1">
       <van-loading color="#00a2ea"  />
     </div>
     <Scroll
@@ -33,11 +34,12 @@
       :autoUpdate="false"
       :scrollX='false'
       :scrollY='true'
+      key="2"
       @pullingDown="newsRefresh"
       @pullingUp="newsLoadMore">
 
       <div class='msgList' v-if="msgList.length>0">
-        <div  v-for="(item,index) in msgList" :key='index' @click="toNewsDetail(item)">
+        <div  v-for="(item,index) in msgList" :key='index' @click="toNewsDetail(item)" v-actions:msgItem.click>
 
           <van-swipe-cell>
             <div class="newsItem">
@@ -53,7 +55,7 @@
             </div>
             <!-- 0 审批消息   1 总部消息     2 系统消息 -->
             <template slot="right" v-if="activeType != 1 && activeType != 2">
-              <van-button square type="danger" text="删除" @click="deleteMsg(item.id,index)"/>
+              <van-button square type="danger" text="删除" @click="deleteMsg(item.id,index)" v-actions:delMsg.click/>
             </template>
           </van-swipe-cell>
 
@@ -64,7 +66,7 @@
       </div>
 
     </Scroll>
-  </div>
+  </VueActions>
 </template>
 
 <script>

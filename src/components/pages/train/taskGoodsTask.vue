@@ -1,5 +1,5 @@
 <template>
-  <div id="taskGoodsTask">
+  <VueActions id="taskGoodsTask" data="goodsTask">
     <!-- 头部 -->
     <div class="headBox" style="height: 1.4rem;">
       <backHeader title="商品自测">
@@ -28,7 +28,8 @@
           :key="index"
           :id="item.id"
           :class="{active: item.id == selected}"
-          @click="set_tab_index(item.id,index)">
+          @click="set_tab_index(item.id,index)"
+          v-actions:goodsItem.click>
           {{item.fitOccasionName}}
         </div>
       </div>
@@ -46,6 +47,7 @@
       :listenScroll = 'true'
       :pullDown="false"
       :pullUp="false"
+      key="2"
     >
       <div class="scrollCon" v-if='bigList&&bigList.length>0'>
         <div class="scrollTestItem"  v-for="(series,index) in bigList" :key="index">
@@ -64,13 +66,13 @@
             </div>
             <div class="odiv"> </div>
             <div class="liBom">
-              <div class="taskLiLeft" v-if="series.obj.testCount&&series.obj.testCount>0" @click="goodsTestShow(series)">
+              <div class="taskLiLeft" v-if="series.obj.testCount&&series.obj.testCount>0" @click="goodsTestShow(series)" v-actions:taskHistory.click>
                 <img src="static/images/icon/lishi.png" alt="">
                 <span>查历史</span>
               </div>
               <div class="taskLiLeft" v-else>
               </div>
-              <div class="taskLiRight" @click="taskBtn(series)">
+              <div class="taskLiRight" @click="taskBtn(series)" v-actions:taskTest.click >
                 <img src="static/images/icon/ceyice.png " alt="">
                 <span>测一测</span>
               </div>
@@ -82,7 +84,7 @@
         <noGood></noGood>
       </div>
     </Scroll>
-  </div>
+  </VueActions>
 </template>
 <script>
 import { Dialog } from 'vant';

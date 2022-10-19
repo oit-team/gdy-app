@@ -1,5 +1,5 @@
 <template>
-  <div id="taskTopicCatalog">
+  <VueActions id="taskTopicCatalog" data="taskTopic">
 
     <div class="headBox" style="height: 1.4rem;">
       <backHeader :title="dateName">
@@ -23,10 +23,10 @@
       :pullDown="false"
       :pullUp="false">
       <!-- 测试过程点击目录进入 -->
-      <div class="bodys" v-if="jiexi!=1">
+      <div class="bodys" v-if="jiexi!=1" key="isJieXi">
         <!-- <div class="bodysTop"></div> -->
         <div class="bodysBom">
-          <div class="bodysBomIn" v-for="(item,index) in query.vResult" @click="topicShow(item,index)" :key="index">
+          <div class="bodysBomIn" v-for="(item,index) in query.vResult" @click="topicShow(item,index)" :key="index" v-actions:bomIn.click.duration>
             <div class="bodysBomInIn" :class="item.age?'active':''">{{index+1}}</div>
           </div>
         </div>
@@ -37,10 +37,10 @@
         <!-- </div> -->
       </div>
       <!-- 解析进入 -->
-      <div class="bodys" v-else>
+      <div class="bodys" v-else key="goInAnalyse">
         <!-- 解析 -->
         <div class="bodysBom" >
-          <div class="bodysBomIn" v-for="(item,index) in tastReportList.list" @click="topicShow(item,index)" :key="index">
+          <div class="bodysBomIn" v-for="(item,index) in tastReportList.list" @click="topicShow(item,index)" :key="index" v-actions:topicShow.click.duration>
             <span class="bodysBomInIn" :class="item.correct ==1 ?'oactive':item.correct ==3? 'vactive':'xactive'">{{index+1}}</span>
           </div>
         </div>
@@ -49,7 +49,7 @@
     <!-- <div class="footer" >
       <van-button class="startBtn" round type="info" @click="seeResult">交卷并查看结果</van-button>
     </div> -->
-  </div>
+  </VueActions>
 </template>
 <script>
 import { Dialog } from 'vant';

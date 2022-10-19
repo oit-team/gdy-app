@@ -1,5 +1,5 @@
 <template>
-  <div id="addCollocation" @touchmove.prevent>
+  <VueActions id="addCollocation" data="addColl" @touchmove.prevent>
     <div class="headBox">
       <backHeader title="添加搭配">
         <span class="head-class f-l" slot="left" @click="back">
@@ -53,7 +53,7 @@
         <div class="tit">搭配单品</div>
         <!-- <van-uploader v-model="goodsImgList" multiple :after-read="goodAfterRead" /> -->
         <div class="addSingleBtn">
-          <span @click="addSingle">添加单品</span>
+          <span @click="addSingle" v-actions:addSingle.click>添加单品</span>
         </div>
       </div>
 
@@ -62,7 +62,7 @@
       <div class="suitOccationBox">
         <div class="tit">适用场景</div>
         <div class="suitBox">
-          <span v-for="(item,index) in suitOccaList" :class="[item.choosed?'active':'']" @click="changeState(item)"  :key="index">{{item.name}}</span>
+          <span v-for="(item,index) in suitOccaList" :class="[item.choosed?'active':'']" @click="changeState(item)" v-actions:suitPlace.click :key="index">{{item.name}}</span>
         </div>
       </div>
       <div class="btnBox">
@@ -70,7 +70,7 @@
       </div>
     </Scroll>
 
-  </div>
+  </VueActions>
 </template>
 
 <script>

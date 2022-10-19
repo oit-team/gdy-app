@@ -8,18 +8,26 @@
         <div ref="middle" class="middle">
           <mt-tab-container v-model="selected">
             <mt-tab-container-item id="主页">
-            <searchIndex ref="searchIndex"></searchIndex>
+              <keep-alive>
+                <searchIndex ref="searchIndex" v-if="selected === '主页'"></searchIndex>
+              </keep-alive>
             </mt-tab-container-item>
             <mt-tab-container-item id="商品">
-            <goods ref="goods"></goods>
+              <keep-alive>
+                <goods ref="goods" v-if="selected === '商品'"></goods>
+              </keep-alive>
             </mt-tab-container-item>
             <mt-tab-container-item id="工作">
-              <workIndex @changeTip="changeTipFlag"></workIndex>
+              <keep-alive>
+                <workIndex @changeTip="changeTipFlag" v-if="selected === '工作'"></workIndex>
+              </keep-alive>
               <!-- <collocation ref="collocation"></collocation> -->
             </mt-tab-container-item>
             <mt-tab-container-item id="我的">
             <!-- <Main ref="main" :noReadNum1="noReadNum" @indexSelect="changeSelected" @changeTip="changeTipFlag"></Main> -->
-            <Main ref="main" :noReadNum1="noReadNum" @indexSelect="changeSelected" ></Main>
+              <keep-alive>
+                <Main ref="main" :noReadNum1="noReadNum" @indexSelect="changeSelected"  v-if="selected === '我的'"></Main>
+              </keep-alive>
             </mt-tab-container-item>
           </mt-tab-container>
         </div>
@@ -295,13 +303,13 @@ export default {
 //   height: 37.5px!important;
 // }
 .news_tip{
-  width:11px;
-  height: 11px;
+  width:6px;
+  height: 6px;
   border-radius: 50%;
   background-color: red;
   position: absolute;
   top:3px;
-  right:34px;
+  right:30px;
 }
 
 

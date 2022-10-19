@@ -1,5 +1,5 @@
 <template>
-  <div class="main" @touchmove.prevent>
+  <VueActions class="main" @touchmove.prevent data="collMain">
     <div class="head-list-box">
       <div class="hd_container" ref = "head_tab_wrapper">
         <ul class="hd_tab_wrap" >
@@ -8,13 +8,14 @@
             class="hd_tab_item select-none"
             :class="{active: item.id == selected}"
             @click="set_tab_index(item.id,$event)"
+            v-actions:fitOccasion.click
           >
             {{item.fitOccasionName}}
           </li>
           <!-- <i class="cursor" ref="cursor"></i> -->
         </ul>
       </div>
-      <div class="funnel-icon-box select-none" @click="showSelectBox()">
+      <div class="funnel-icon-box select-none" @click="showSelectBox()" v-actions:showSelect.click>
         <img src="../../../../static/images/icon/funnel.png" alt="">
       </div>
     </div>
@@ -50,11 +51,11 @@
       <van-loading color="#00a2ea"  />
     </div>
     <div v-show="collLoading == false" class="right_content"  ref="contentScroll">
-      <div v-if="collocationList.length > 0" class="scroll_content" ref="collConBody">
+      <div v-if="collocationList.length > 0" class="scroll_content" ref="collConBody" key="collList">
         <ul class="goods_list select-none" >
           <li
             v-for="(item, index) in collocationList"
-            :key="index" @click="goCollocationDetail(item.id)">
+            :key="index" @click="goCollocationDetail(item.id)" v-actions:goCollDetail.click>
             <div class="img_wrap ">
               <!-- <img loaded :src="item.imgUrl" alt="" @load="imgLoad"> -->
               <img height="100%" loaded v-lazy="item.imgUrl" alt="" @load="imgLoad">
@@ -76,12 +77,12 @@
 
     <!-- 右侧弹出框 -->
     <transition name="fade">
-      <div class="mask-bg" v-show="showSelect" @click="hideMask"></div>
+      <div class="mask-bg" v-show="showSelect" @click="hideMask" v-actions:hideMask.click></div>
     </transition>
 
     <transition name="slideCon">
       <div  class="select-list-box" v-show="showSelect">
-        <div class="cancel-block" @click="hideMask">
+        <div class="cancel-block" @click="hideMask" v-actions:hideMsk.click>
           <img src="../../../../static/images/icon/back.png" alt="" class="back-icon">
           <span>搭配筛选</span>
         </div>
@@ -89,7 +90,7 @@
         <div class="list-box"  ref="selectScrollWrap">
           <div class="list-container">
             <!-- 系列 -->
-            <div class="select-item" v-if="seriesList.length>0">
+            <div class="select-item" v-if="seriesList.length>0" key="selectItem">
               <div class="tit-box">
                 <span class="item-dot"></span>
                 <span class="item-tit">系列</span>
@@ -100,7 +101,8 @@
                     v-for="(item, index) in seriesList"
                     :class="{active:item.id==seriesSelected}"
                     :key="index"
-                    @click="chooseSeries(item.id)">
+                    @click="chooseSeries(item.id)"
+                    v-actions:chooseSeries.click>
                     {{item.seriesName}}
                   </div>
                 </div>
@@ -119,14 +121,15 @@
                     v-for="(item, key) in tabs "
                     :key="key"
                     :class="{active:item.id==liselected}"
-                    @click="choose(item.id)">
+                    @click="choose(item.id)"
+                    v-actions:choose.click>
                     {{item.fitOccasionName}}
                   </div>
                 </div>
               </div>
             </div>
             <!-- 风格 -->
-            <div class="select-item" v-if="viewList.length != 0">
+            <div class="select-item" v-if="viewList.length != 0" key="selectStyle">
               <div class="tit-box">
                 <span class="item-dot"></span>
                 <span class="item-tit">风格</span>
@@ -136,14 +139,16 @@
                   <div class="series-item-name fl"
                     v-for="(item, index) in viewList"
                     :class="{active:item.id==viewListSelected}"
-                    :key="index" @click="goCollection(item.id)">
+                    :key="index" @click="goCollection(item.id)"
+                    v-actions:goCollect.click
+                    >
                     {{item.fitOccasionName}}
                   </div>
                 </div>
               </div>
             </div>
             <!-- 品类 -->
-            <div class="select-item" v-if="kindsList.length != 0">
+            <div class="select-item" v-if="kindsList.length != 0" key="selectCate">
               <div class="tit-box">
                 <span class="item-dot"></span>
                 <span class="item-tit">品类</span>
@@ -153,7 +158,8 @@
                   <div class="series-item-name kinds-item-name fl"
                     v-for="(item, index) in kindsList"
                     :class="{active:item.id==kindsListSelected}"
-                    :key="index" @click="selectKind(item.id)">
+                    :key="index" @click="selectKind(item.id)"
+                    v-actions:selectCate.click.duration>
                     {{item.fitOccasionName}}
                   </div>
                 </div>
@@ -163,13 +169,13 @@
         </div>
 
         <div class="button-box">
-          <div class="reset" @click="resetSelected">重置</div>
-          <div class="confirm active" @click="confirmSelected">确定</div>
+          <div class="reset" @click="resetSelected" v-actions:reset.click>重置</div>
+          <div class="confirm active" @click="confirmSelected" v-actions:confirm.click>确定</div>
         </div>
       </div>
     </transition>
 
-  </div>
+  </VueActions>
 </template>
 
 <script>

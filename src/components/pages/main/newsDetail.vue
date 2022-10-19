@@ -1,11 +1,12 @@
 <template>
-  <div
+  <VueActions
     class="newsDetail"
+    data  ="newsDetailData"
     @touchmove.prevent
   >
     <Header :title="'详情'"></Header>
 
-    <div class="newsHead">
+    <div class="newsHead" v-actions:newsDetail>
       <h2>{{newsTitle}}</h2>
       <div class="publish-box">
         <span class="publish-time">{{publishTime}}</span>
@@ -15,10 +16,12 @@
     <div
       class="detail-content"
       ref="contentBox"
+      v-actions:newsDetailCon.duration
     >
       <div
         class="page_scroll_content"
         @click="getImg($event)"
+        v-actions:getImg.click
       >
         <div
           class="content-box ql-editor"
@@ -39,6 +42,7 @@
       <div
         class="giveup"
         @click="clickPraiseBtn"
+        v-actions:praiseBtn.click
       >
         <img
           v-if="isPraise"
@@ -57,7 +61,7 @@
       </div>
     </div>
 
-  </div>
+  </VueActions>
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 <template>
-  <div id="minePage" @touchmove.prevent>
-    <div class="mineTopBox" @click="toUserinfo">
+  <VueActions id="minePage" @touchmove.prevent data="minePage">
+    <div class="mineTopBox" @click="toUserinfo" v-actions:mineBox.click>
       <img class="avatar" :src="headPortrait">
       <div>
         <!-- <div class="occupation">{{nickName}}</div> -->
@@ -13,7 +13,7 @@
     </div>
 
     <div class="mineList">
-      <div class="mineItem" @click="toSetup">
+      <div class="mineItem" @click="toSetup" v-actions:toSetUp.click>
         <img class="icon_font" src="static/images/icon/setUp1.png" alt="">
         <span class="tit">设置</span>
         <img class="right_icon" src="static/images/icon/rightArrowGrey.png">
@@ -36,7 +36,7 @@
     <!-- <div @click="toShare" style="font-size:15px;font-weight:bold;">点击跳转到分享测试页面--hellWord</div> -->
     <!-- ================ -->
 
-  </div>
+  </VueActions>
 </template>
 
 <script>

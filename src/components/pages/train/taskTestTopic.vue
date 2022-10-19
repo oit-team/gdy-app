@@ -1,5 +1,5 @@
 <template>
-  <div id="taskTestTopic">
+  <VueActions id="taskTestTopic" data="taskTestTopic">
     <div class="headBox">
       <backHeader :title="dateName">
         <span class="head-class f-l" slot="left" @click="back">
@@ -30,7 +30,7 @@
           </div>
           <div class="listsBomIn" v-html="goodslist.vResult[content_index].subTitle?goodslist.vResult[content_index].subTitle:goodslist.vResult[content_index].content"></div>
           <div class="listBomBom" v-for="(key,i) in (goodslist.vResult[content_index].option?goodslist.vResult[content_index].option:goodslist.vResult[content_index].answers)" :key="i">
-            <div v-if="jiexi!=1" class="listBomBomList" @click="listIconShow(key,i,content_index)">
+            <div v-if="jiexi!=1" class="listBomBomList" @click="listIconShow(key,i,content_index)" key="listIcon" v-actions:listIcon.click>
               <!-- 判断 id 判断 选项 -->
               <div class="listIcon" :class="goodslist.vResult[content_index].ageNUM == key.orderNum&&goodslist.vResult[content_index].egaID == key.instanceId||goodslist.vResult[content_index].ID == key.orderNum?'active':''" >{{key.orderNum}}</div><div class="listContent">{{key.title?key.title:key.orderContent}}</div>
             </div>
@@ -43,17 +43,17 @@
       </div>
     </Scroll>
     <div class="footer">
-      <van-button class="startBtn up" v-if="content_index" type="info" @click="startTesting()">上一题</van-button>
+      <van-button class="startBtn up" v-if="content_index" type="info" @click="startTesting()" key="pre" v-actions:pre.click>上一题</van-button>
       <van-button class="startBtn up" v-else disabled type="info">上一题</van-button>
-      <van-button class="startBtn in" v-if="queryArr.length!=0" @click="catalogShow()">目 录({{queryArr.length}}/{{goodslist.count?goodslist.count:goodslist.questionCount}})</van-button>
-      <van-button class="startBtn in" v-else @click="catalogShow()">目 录</van-button>
+      <van-button class="startBtn in" v-if="queryArr.length!=0" @click="catalogShow()" key="menuAll" v-actions:menuAll.click>目 录({{queryArr.length}}/{{goodslist.count?goodslist.count:goodslist.questionCount}})</van-button>
+      <van-button class="startBtn in" v-else @click="catalogShow()" key="menuEmpty" v-actions:menuEmpty.click>目 录</van-button>
 
-      <van-button class="startBtn down" v-if="(((queryArr.length>0?queryArr.length:0) == goodslist.vResult.length)&&jiexi!=1)" type="info" :disabled="isDisable" @click="submit()">提交</van-button>
-      <van-button class="startBtn down" v-else-if="content_index < goodslist.vResult.length-1"  type="info"  @click="endTesting(1)">下一题</van-button>
+      <van-button class="startBtn down" v-if="(((queryArr.length>0?queryArr.length:0) == goodslist.vResult.length)&&jiexi!=1)" type="info" :disabled="isDisable" @click="submit()" key="next" v-actions:next.click>提交</van-button>
+      <van-button class="startBtn down" v-else-if="content_index < goodslist.vResult.length-1"  type="info"  @click="endTesting(1)" key="lastTest" v-actions:last.click>下一题</van-button>
       <van-button class="startBtn down" v-else-if="(queryArr.length>0?queryArr.length:0) < goodslist.vResult.length" disabled type="info" >下一题</van-button>
 
     </div>
-  </div>
+  </VueActions>
 </template>
 <script>
 import { Dialog, ContactCard } from 'vant';

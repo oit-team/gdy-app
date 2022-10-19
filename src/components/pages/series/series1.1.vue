@@ -22,7 +22,9 @@
           v-if="showTheme"
           class="hd_tab_item"
           :class="{active:selectedTabs  == 0}"
-          @click="changeTab(0)">
+          @click="changeTab(0)"
+          v-actions:theme.click
+          >
           <span class="tabName">主题解读</span>
         </li>
         <li
@@ -101,7 +103,7 @@
 
       <!-- 滚动的内容 -->
       <ul v-if="stylesList.length>0" class="con-inner-list clear">
-        <li v-for="(item,index) in stylesList" :key="index" class="inner-item fl" @click="goGoods(item.id)" v-actions:item.click>
+        <li v-for="(item,index) in stylesList" :key="index" class="inner-item fl" @click="goGoods(item.id)" v-actions:singleItem.click>
           <div class="goods-img-box">
             <img class="goods-img" :src="item.imgUrl" loaded lazy-load @load="imgLoad" />
             <div class="tipBox">

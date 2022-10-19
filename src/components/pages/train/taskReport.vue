@@ -1,5 +1,5 @@
 <template>
-  <div id="taskReport">
+  <VueActions id="taskReport" data="taskReport">
     <div class="headBox" style="height: 1.4rem;">
       <backHeader title="报告">
         <span class="head-class f-l" slot="left" @click="back">
@@ -53,19 +53,19 @@
           </div>
         </div>
         <div class="bodysBom" >
-          <div class="bodysBomIn" v-for="(item,index) in tastReportList.list" @click="analysisList(index)" :key="index">
+          <div class="bodysBomIn" v-for="(item,index) in tastReportList.list" @click="analysisList(index)" :key="index" v-actions:analysisList.click>
             <span class="bodysBomInIn" :class="item.correct == 1?'active':item.correct == 3 ? 'warning' :''">{{index+1}}</span>
           </div>
         </div>
       </div>
     </Scroll>
-    <div class="footer" v-if="tastReportList.usedTimes && tastReportList.usedTimes>tastReportList.timesLimit || tastReportList.timesLimit&&tastReportList.usedTimes<tastReportList.timesLimit" >
-      <van-button class="startBtn" round type="info" @click="analysis">题目解析</van-button>
+    <div class="footer" key="1" v-if="tastReportList.usedTimes && tastReportList.usedTimes>tastReportList.timesLimit || tastReportList.timesLimit&&tastReportList.usedTimes<tastReportList.timesLimit" >
+      <van-button class="startBtn" round type="info" @click="analysis" v-actions:analysisOne.click>题目解析</van-button>
     </div>
-    <div class="footer1" v-else >
-      <van-button class="startBtn" round type="info" @click="analysis">题目解析</van-button>
+    <div class="footer1" key="2" v-else >
+      <van-button class="startBtn" round type="info" @click="analysis" v-actions:analysisTwo.click>题目解析</van-button>
     </div>
-  </div>
+  </VueActions>
 </template>
 <script>
 import { Dialog } from 'vant';

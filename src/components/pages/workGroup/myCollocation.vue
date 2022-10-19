@@ -1,5 +1,5 @@
 <template>
-  <div id="myCollocation">
+  <VueActions id="myCollocation" data="workColl">
     <div class="headBox">
       <backHeader style="background-color: #f5f5f5;" title="我要搭配">
         <span slot="left" class="head-class f-l" @click="back">
@@ -19,7 +19,8 @@
         :key="index"
         class="tabItem"
         :class="collStatus == item.status?'active':''"
-        @click="clickTab(item.status)">
+        @click="clickTab(item.status)"
+        v-actions:workCollTab.click>
         <span>{{item.statusName}}</span>
         <span>({{item.count}})</span>
         </div>
@@ -27,7 +28,7 @@
     <div style="height:3px;background-color: #f5f5f5;"></div>
 
 
-    <div v-if="collLoading == true">
+    <div v-if="collLoading == true" key="1">
       <van-loading color="#00a2ea"  />
     </div>
     <Scroll
@@ -43,10 +44,11 @@
       :scrollY='true'
       @pullingDown="collRefresh"
       @pullingUp="collLoadMore"
+      key="2"
       >
 
       <div v-if="collList.length > 0" class="collListBox">
-        <div v-for="(item,index) in collList" :key="index" class="itemBox" @click="toCollDetail(item.id,item)">
+        <div v-for="(item,index) in collList" :key="index" class="itemBox" @click="toCollDetail(item.id,item)" v-actions:workCollList.click>
           <van-swipe-cell>
             <div class="collItem">
               <img class="collImg" :src="item.imgUrl" alt="">
@@ -63,8 +65,8 @@
             </div>
 
             <template v-if="collStatus != 1" slot="right">
-              <van-button v-if="collStatus != 3" square type="primary" text="编辑" @click="editColl(item.id)"/>
-              <van-button square type="danger" text="删除" @click="deleteColl(item.id,index)"/>
+              <van-button v-if="collStatus != 3" square type="primary" text="编辑" @click="editColl(item.id)"  v-actions:editColl.click/>
+              <van-button square type="danger" text="删除" @click="deleteColl(item.id,index)"  v-actions:delColl.click/>
             </template>
           </van-swipe-cell>
         </div>
@@ -75,7 +77,7 @@
       </div>
     </Scroll>
 
-  </div>
+  </VueActions>
 </template>
 <script>
 import { Dialog } from 'vant';

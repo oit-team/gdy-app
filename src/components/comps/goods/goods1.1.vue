@@ -20,6 +20,7 @@
             class="navItem"
             :class="{active: item.id == selected}"
             @click="set_tab_index(item.id,$event)"
+            v-actions:headTabs.click
         >
           {{ item.fitOccasionName }}
         </div>
@@ -31,8 +32,8 @@
     </div>
 
     <div class="tabBox">
-      <div class="item" :class="{active: listType == 1}" @click="clickSeriesBtn(1)">系列列表</div>
-      <div class="item" :class="{active: listType == 2}" @click="clickSeriesBtn(2)">品类列表</div>
+      <div class="item" :class="{active: listType == 1}" @click="clickSeriesBtn(1)" v-actions:seriesList.click>系列列表</div>
+      <div class="item" :class="{active: listType == 2}" @click="clickSeriesBtn(2)" v-actions:cateList.click>品类列表</div>
     </div>
 
     <Scroll
@@ -56,7 +57,7 @@
                 class="secName"
                 v-for="(item,index) in series.result"
                 :key="index"
-                v-actions:item.click
+                v-actions:seriesItem.click
                 @click="goGoods(series.bandName,item,series)"
             >
               <span class="name">{{ item.seriesName }}</span> <span class="count">({{ item.count }})</span>
@@ -67,7 +68,7 @@
                 class="secName"
                 v-for="(item,index) in series.result"
                 :key="index"
-                v-actions:categoryItem.click
+                v-actions:cateItem.click
                 @click="goKeyStyle(bigList,series,item)"
             >
               <span class="name">{{ item.seriesName }}</span> <span class="count">({{ item.count }})</span>

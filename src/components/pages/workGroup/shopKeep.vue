@@ -1,5 +1,5 @@
 <template>
-<div id="shopKeep">
+<VueActions id="shopKeep" data="shop">
     <div class="headBox">
         <backHeader title="店务手册" style="background-color: #f5f5f5;">
             <span class="head-class f-l" slot="left" @click="back">
@@ -14,14 +14,14 @@
         <div class='testCon'>
             <Scroll class="left" :probeType='3' :bounce='false' :listenScroll='true' :pullDown="false" :pullUp="false">
                 <ul class="module-ul">
-                    <li v-for="(item,index) of list" :key="index" :class="{active: isActive === index}" @click="changeClass(item.dicttimeDisplayName,index)">{{item.dicttimeDisplayName}}
+                    <li v-for="(item,index) of list" :key="index" :class="{active: isActive === index}" @click="changeClass(item.dicttimeDisplayName,index)" v-actions:shopItemLeft.click>{{item.dicttimeDisplayName}}
                         <span class="borderActive"></span>
                     </li>
                 </ul>
             </Scroll>
             <Scroll class="right" :probeType='3' :bounce='false' :listenScroll='true' :pullDown="false" :pullUp="false">
                 <ul class="module-ul" v-if='goodList.length>0'>
-                    <li v-for="(item,index) in goodList" :key="index" @click="toNewsDetail(item.id,item.browse)">
+                    <li v-for="(item,index) in goodList" :key="index" @click="toNewsDetail(item.id,item.browse)" v-actions:shopItemRight.click>
                         <div class="tit" style="text-align:left">
                             <span class="title">{{item.nTitle}} </span>
                             <img v-if="item.browse==1" class="readNo" src="../../../../static/images/icon/read-no.png" alt="">
@@ -37,7 +37,7 @@
             </Scroll>
         </div>
     </div>
-</div>
+</VueActions>
 </template>
 
 <script>

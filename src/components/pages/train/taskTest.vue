@@ -1,5 +1,5 @@
 <template>
-  <div id="taskTest">
+  <VueActions id="taskTest" data="taskTest">
     <div class="headBox" style="height: 1.4rem;">
       <backHeader :title="dateName">
         <span class="head-class f-l" slot="left" @click="back">
@@ -54,9 +54,9 @@
       </div>
     </Scroll>
     <div class="footer" >
-      <van-button class="startBtn" round type="info" @click="startTesting">开始测试</van-button>
+      <van-button class="startBtn" round type="info" @click="startTesting" v-actions:startTest.click>开始测试</van-button>
     </div>
-  </div>
+  </VueActions>
 </template>
 <script>
 import { Dialog } from 'vant';

@@ -1,5 +1,5 @@
 <template>
-  <div id="taskCheckTask">
+  <VueActions id="taskCheckTask" data="check">
     <div style="height: 1.4rem;">
       <backHeader title="考核任务">
         <span class="head-class f-l" slot="left" @click="back">
@@ -27,7 +27,8 @@
           :key="index"
           :id="item.dictitemCode"
           :class="{active: item.dictitemCode == selecteds}"
-          @click="set_tab_index(item.dictitemCode,index)">
+          @click="set_tab_index(item.dictitemCode,index)"
+          v-actions:check.click>
           {{item.dictitemDisplayName}}
         </div>
       </div>
@@ -49,11 +50,12 @@
       :scrollY='true'
       @pullingDown="checkRefresh"
       @pullingUp="checkLoadMore"
+      key="2"
       >
       <div v-if="checkTaskList.length > 0" style="padding-top:0.5px;">
         <!-- 考核任务 -->
         <div class="checkTask_box">
-          <div class="listcheck" @click="toCheckTask(item)" v-for="(item,index) in checkTaskList" :key="index">
+          <div class="listcheck" @click="toCheckTask(item)" v-for="(item,index) in checkTaskList" :key="index" v-actives:toCheckTask.click>
             <div class="checkTop">
               <div class="checkTop_box">
                 <div class="sekuai"></div>
@@ -91,7 +93,7 @@
         <noGood></noGood>
       </div>
     </Scroll>
-  </div>
+  </VueActions>
 </template>
 <script>
 import { Dialog } from 'vant';

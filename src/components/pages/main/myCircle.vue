@@ -1,5 +1,5 @@
 <template>
-  <div id="myCircle">
+  <VueActions id="myCircle" data="myCircleData">
     <div class="headBox">
       <Header :title="'工作圈'"></Header>
     </div>
@@ -34,14 +34,16 @@
           :class="[item.dOrderby == activeId ?'active':'']"
           v-for="(item,Mindex) in circleClassify"
           :key="Mindex"
-          @click="clickTest(item.dOrderby,item.type)">
+          @click="clickTest(item.dOrderby,item.type)"
+          v-actions:myCircleItem.click
+          >
           {{item.displayName}}
         </div>
       </div>
     </Scroll>
 
     <div class="select-list clear">
-      <div class="item fl select-condit" @click="timeClickCondition" :class="[curCondition == 1 ? 'active':'']">
+      <div class="item fl select-condit" @click="timeClickCondition" :class="[curCondition == 1 ? 'active':'']" v-actions:filterTimer.click>
         <div>时间</div>
         <div class="img-box">
           <div class="img-inner-box">
@@ -54,7 +56,7 @@
           </div>
         </div>
       </div>
-      <div class="item fl select-condit" @click="scanClickCondition" :class="[curCondition == 2 ? 'active':'']">
+      <div class="item fl select-condit" @click="scanClickCondition" :class="[curCondition == 2 ? 'active':'']" v-actions:filterViewTimes.click>
         <div>浏览量</div>
         <div class="img-box">
           <div class="img-inner-box">
@@ -67,7 +69,7 @@
           </div>
         </div>
       </div>
-      <div class="item fl select-condit" @click="praiseClickCondition" :class="[curCondition == 3 ? 'active':'']">
+      <div class="item fl select-condit" @click="praiseClickCondition" :class="[curCondition == 3 ? 'active':'']" v-actions:filterPointTimes.click>
         <div>点赞量</div>
         <div class="img-box">
           <div class="img-inner-box">
@@ -82,7 +84,7 @@
       </div>
     </div>
 
-    <div class="coll-loading-box" v-if="newsLoading == true">
+    <div class="coll-loading-box" v-if="newsLoading == true" key="load">
       <van-loading color="#00a2ea"  />
     </div>
     <Scroll
@@ -97,9 +99,10 @@
       :scrollX='false'
       :scrollY='true'
       @pullingDown="circleRefresh"
-      @pullingUp="circleLoadMore">
+      @pullingUp="circleLoadMore"
+      key="scroll">
       <div v-if="newsList.length > 0">
-        <div class="item" v-for="item in newsList" :key="item.id" @click="toNewsDetail(item.id,item.collection,item.praise,item.browse,item.browseNum)">
+        <div class="item" v-for="item in newsList" :key="item.id" @click="toNewsDetail(item.id,item.collection,item.praise,item.browse,item.browseNum)" v-actions:newListItem.click>
           <div class="icon-box">
             <img v-if="item.browse" src="../../../../static/images/icon/read-no.png" alt="">
             <img v-else src="../../../../static/images/icon/readed.png" alt="">
@@ -123,7 +126,7 @@
       </div>
     </Scroll>
 
-  </div>
+  </VueActions>
 </template>
 
 <script>

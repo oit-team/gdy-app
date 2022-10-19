@@ -1,11 +1,11 @@
 <template>
-  <div class="main" @touchmove.prevent>
+  <VueActions class="main" data="setUp" @touchmove.prevent>
     <div class="page">
       <ul>
-        <li @click="toSecret">
+        <li @click="toSecret" v-actions:setSecret.click>
           <span>修改密码</span><span><img src="static/images/dev/go@2x.png"></span>
         </li>
-        <li @click="toAbout">
+        <li @click="toAbout" v-actions:setAbout.click>
           <span>关于我们</span><span><img src="static/images/dev/go@2x.png" ></span>
         </li>
         <li>
@@ -16,7 +16,7 @@
         </li>
       </ul>
     </div>
-  </div>
+  </VueActions>
 </template>
 
 <script>

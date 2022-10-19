@@ -1,6 +1,6 @@
 <template>
   <!-- 图片预览 -->
-  <div id="imgPreview" >
+  <VueAction id="imgPreview" data="imgPreView" >
 
     <!-- 图片预览模块 -->
     <div v-if="flag" @touchstart="touchStart" @touchend="touchEnd">
@@ -15,8 +15,8 @@
       </van-image-preview>
     </div>
 
-    <div v-if="!isRaw && raw" class="preview-origin">
-      <van-button size="small" @click.stop="previewRaw()">查看原图</van-button>
+    <div v-if="!isRaw && raw" class="preview-origin" key="preView">
+      <van-button size="small" @click.stop="previewRaw()" v-actions:preView.click.duration>查看原图</van-button>
     </div>
     <div class="image-preview__action">
       <slot name="action"></slot>
@@ -30,7 +30,7 @@
       @select="onSelect"
     />
 
-  </div>
+  </VueAction>
 </template>
 <script>
 import { Toast } from 'vant';

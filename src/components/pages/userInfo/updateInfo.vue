@@ -1,5 +1,5 @@
 <template>
-  <div id="updateUserInfo">
+  <VueActions id="updateUserInfo" data="userInfo">
     <!-- <Header :title="titleLabel"></Header> -->
     <div class='header'>
       <div @click="back"><img src="static/images/dev/back@2x.png" ></div>
@@ -7,7 +7,7 @@
       <span v-if="prepage == 'job'">修改岗位</span>
       <span v-if="prepage == 'sign'">修改签名</span>
       <span v-if="prepage == 'telePhone'">修改电话</span>
-      <span class="right" @click="updateInfo">确定</span>
+      <span class="right" @click="updateInfo" v-actions:userInfo.click>确定</span>
     </div>
 
     <div v-if="prepage == 'nickName'" class="update-con">
@@ -30,7 +30,7 @@
     </div>
 
 
-  </div>
+  </VueActions>
 </template>
 <script>
 import Header from '../../comps/header/header';

@@ -1,5 +1,5 @@
 <template>
-  <div id="workIndex">
+  <VueActions id="workIndex" data="work">
     <!-- <h1>工作组</h1> -->
     <div class="tabTitle">工作</div>
     <Scroll
@@ -21,11 +21,12 @@
               :key="item.title"
               class="otherMenuBox circleBox"
               @click="panelAction(item)"
+              v-actions:item.click
           >
             <div class="imgBox">
               <div style="position:relative;">
                 <vc-icon size="28">{{ item.icon }}</vc-icon>
-                <div class="numBox" v-if="item.badge > 0">
+                <div class="numBox flex items-center" v-if="item.badge > 0">
                   <span class="nums">{{ item.badge }}</span>
                 </div>
               </div>
@@ -35,7 +36,7 @@
         </div>
       </div>
     </Scroll>
-  </div>
+  </VueActions>
 </template>
 <script>
 import iframe from '@/iframe'

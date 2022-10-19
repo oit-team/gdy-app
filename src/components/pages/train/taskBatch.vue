@@ -1,5 +1,5 @@
 <template>
-  <div id="taskBatch">
+  <VueActions id="taskBatch" data="taskBatch">
     <div style="height: 1.4rem;">
       <backHeader :title="dateName">
         <span class="head-class f-l" slot="left" @click="back">
@@ -11,11 +11,12 @@
       </backHeader>
     </div>
 
-    <div v-if="staffLoading == true">
+    <div v-if="staffLoading == true" key="1">
       <van-loading color="#00a2ea"  />
     </div>
     <Scroll
       v-else
+      key="2"
       :update-data="[staffHaveList]"
       :refresh-data="[]"
       class="staffHaveCon"
@@ -30,7 +31,7 @@
       >
       <div class="content" v-if="staffHaveList.length > 0">
         <div class="content_list" v-for="(item,index) in staffHaveList" :key="index" >
-          <div class="lists" :class="item.fraction == numScore?'bth':''" @click="toStaffHaveShow(item)">
+          <div class="lists" :class="item.fraction == numScore?'bth':''" @click="toStaffHaveShow(item)" v-actios:showTask.click>
             <div class="listsLeft">
               <div class="second" :class="item.fraction == numScore?'secondBth':''">{{item.rowId}}</div>
               <div class="listsLeftLeft">{{item.createDate}}</div>
@@ -49,9 +50,9 @@
     </Scroll>
     <!-- <div class="delBox" v-if="usedTimes && usedTimes>timesLimit && new Date().getTime() < new Date(endTime).getTime(new Date(endTime)) && new Date().getTime() > new Date(startTime).getTime(new Date(startTime))|| timesLimit&&usedTimes<timesLimit && new Date().getTime() < new Date(endTime).getTime(new Date(endTime)) && new Date().getTime() > new Date(startTime).getTime(new Date(startTime))"> 加一个判断new Date().getTime() -->
     <div class="delBox" v-if="showTestFlag">
-      <van-button type="info" class="checkBtn" @click="toStaffHave()">测一测</van-button>
+      <van-button type="info" class="checkBtn" @click="toStaffHave()" v-actions:checkBtn.click>测一测</van-button>
     </div>
-  </div>
+  </VueActions>
 </template>
 <script>
 import { Dialog } from 'vant';

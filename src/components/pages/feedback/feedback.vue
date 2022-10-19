@@ -1,5 +1,5 @@
 <template>
-  <div class="feedback" @touchmove.prevent>
+  <VueActions class="feedback" data="feedBack" @touchmove.prevent>
     <Header title="意见反馈"></Header>
     <div class="feedback-content">
       <van-field
@@ -20,9 +20,9 @@
           <van-radio name="3" icon-size="7px">其他</van-radio>
         </van-radio-group>
       </div>
-      <van-button class="btn" color="#333" @click="btnShow()" plain>提交</van-button>
+      <van-button class="btn" color="#333" @click="btnShow()" v-actions:feedBackBtn.click plain>提交</van-button>
     </div>
-  </div>
+  </VueActions>
 </template>
 
 <script>

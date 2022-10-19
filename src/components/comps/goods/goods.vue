@@ -1,5 +1,5 @@
 <template>
-  <div style="position:relative;top:0px;">
+  <VueActions style="position:relative;top:0px;" data="goodsName">
       <div class="head_tab">
           <div class="goods_head_tab_wrapper" ref="goods_head_tab_wrapper">
               <mt-navbar v-model="selected" class="head_tab_bar" ref="head_tab_bar">
@@ -16,6 +16,7 @@
                   <li class="e_navbar_item"
                     v-for="(tab, index) in tabs"
                     :class="{'active':tab.id===liselected}"
+                    v-actions:listSelect.click
                     @click="choose(tab.id)" v-bind:key="index">{{tab.bandName}}dddd
                   </li>
                 </ul>
@@ -43,7 +44,7 @@
             </div>
             <div class="session_img_box goods_session_scroll_wrapper" ref="goods_session_scroll_wrapper">
               <div class="session_scroll_content">
-                <div class="series_box" v-for="(item,index) in seriesList" :key="index" @click="goGoods(liselected,item.id)">
+                <div class="series_box" v-for="(item,index) in seriesList" :key="index" @click="goGoods(liselected,item.id)" v-actions:goGoods.click>
                   <img :src="item.imgUrl"/>
                   <p>{{item.seriesName}}</p>
                 </div>
@@ -53,7 +54,7 @@
             </div>
         </div>
       </div>
-  </div>
+  </VueActions>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div id="msgDetail">
+  <VueActions id="msgDetail" data="msgPage">
     <div class="headBox">
       <backHeader title="系统消息">
         <span class="head-class f-l" slot="left" @click="back">
@@ -10,12 +10,12 @@
         <span class="head-class place-label" slot="right"></span>
       </backHeader>
     </div>
-    <div class="msgDetailCon">
+    <div class="msgDetailCon" v-actions:msgView.duration>
       <div class="msgTime">{{msgCon.createDate}}</div>
       <div class="msgContent" v-html="msgCon.content"></div>
     </div>
 
-  </div>
+  </VueActions>
 </template>
 <script>
 import backHeader from '../../comps/common/commonBackHeader';

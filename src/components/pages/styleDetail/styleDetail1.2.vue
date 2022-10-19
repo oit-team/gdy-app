@@ -1,5 +1,5 @@
 <template>
-  <div id="styleMain" @touchmove.prevent>
+  <VueActions id="styleMain" data="styleMainThree" @touchmove.prevent>
     <div class="header" >
       <div class="header_one" @click="back">
         <div><img src="static/images/dev/back_white@2x.png" ></div>
@@ -14,7 +14,7 @@
         <div class="head_img">
           <mslider ref="slider" :loop="isLoop" :auto-play="false">
             <div v-for="(item,index) in collInfo.imgUrls" :key="index" class="img_wrapper">
-              <vc-img raw fit="contain" height="100%" :src="item" alt="" @click="getImg(index)" />
+              <vc-img raw fit="contain" height="100%" :src="item" alt="" @click="getImg(index)" v-actions:getCollImg.click.duration />
             </div>
           </mslider>
         </div>
@@ -24,25 +24,25 @@
           </div>
           <!-- <div class="styleName">{{collInfo.collName}}</div> -->
           <div class="recReason">
-            <div v-if="reasonDesc !==''" class="recTit">
+            <div v-if="reasonDesc !==''" class="recTit" key="reasonDesc">
               <span class="tit">推荐理由</span>
               <img src="static/images/icon/copy.png" alt="">
-              <span class="copyBtn"  @click="copy(reasonDesc)">复制</span>
+              <span class="copyBtn"  @click="copy(reasonDesc)" v-actions:copyReason.click>复制</span>
             </div>
 
             <!-- <div class="recDesc" v-if="reasonDesc !==''">{{reasonDesc}}</div> -->
 
             <div v-if="reasonDesc !==''" ref="desc"  class="recDesc" :class="fold ? 'fold' : 'unfold'">{{reasonDesc}}</div>
-            <div v-if="showExchangeButton">
-              <div v-show="fold" class="show" @click="handleFold">展开</div>
-              <div v-show="!fold" class="show" @click="handleFold">收起</div>
+            <div v-if="showExchangeButton" key="isFold">
+              <div v-show="fold" class="show" @click="handleFold" v-actions:fold.click>展开</div>
+              <div v-show="!fold" class="show" @click="handleFold" v-actions:unFold.click>收起</div>
             </div>
 
           </div>
         </div>
 
         <div class="recList">
-          <div v-for="(item,i) in goodsSingle" :key="i" class="item" @click="toGoods(item.id)">
+          <div v-for="(item,i) in goodsSingle" :key="i" class="item" @click="toGoods(item.id)" v-actions:toGoods.click>
             <div class="imgBox">
               <img :src="item.imgUrl" alt="" @load="imgLoad">
               <div class="tipBox">
@@ -72,7 +72,7 @@
                 @func="changePreview"
         ></imgPreview>
 
-  </div>
+  </VueActions>
 </template>
 
 <script>

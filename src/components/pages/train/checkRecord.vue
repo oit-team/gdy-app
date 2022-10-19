@@ -1,5 +1,5 @@
 <template>
-  <div id="checkRecord">
+  <VueActions id="checkRecord" data="checkRecord">
     <div style="height: 1.4rem;">
       <backHeader :title="dateName">
         <span class="head-class f-l" slot="left" @click="back">
@@ -29,10 +29,10 @@
       >
       <div v-if="checkRecordList.length > 0" style="padding-top:0.5px;">
         <div class="checkTaskContent">
-          <div class="lists" :class="item.maxFraction == score?'list':''" @click="toCheckTask(item)" v-for="(item,index) in checkRecordList" :key="index">
-            <div class="checkedSelect" @click.stop="checkedSelect(item,index)">
-              <img v-if='item.checked' src="static/images/icon/choosed.png" alt="">
-              <img v-else src="static/images/icon/no-choose.png" alt="">
+          <div class="lists" :class="item.maxFraction == score?'list':''" @click="toCheckTask(item)" v-actions:toCheck.click v-for="(item,index) in checkRecordList" :key="index">
+            <div class="checkedSelect" @click.stop="checkedSelect(item,index)" v-actions:checkSelect.click>
+              <img v-if='item.checked' src="static/images/icon/choosed.png" alt="" />
+              <img v-else src="static/images/icon/no-choose.png" alt=""/>
             </div>
             <div class="listsLeft">
               <div class="con_t">{{item.finshTime}}</div>
@@ -52,18 +52,18 @@
         <noGood></noGood>
       </div>
     </Scroll>
-    <div class="delBox">
-      <div class="selectCircle" @click="clickSelectAll()">
-        <img v-if='selectAll' src="static/images/icon/choosed.png" alt="">
-        <img v-else src="static/images/icon/no-choose.png" alt="">
+    <div class="delBox flex justify-center items-center">
+      <div class="selectCircle flex justify-center items-center text-sm" @click="clickSelectAll()" v-actions:selectCircle.click>
+        <img v-if='selectAll' src="static/images/icon/choosed.png" alt="" />
+        <img v-else src="static/images/icon/no-choose.png" alt="" />
         <span style="margin-left:5px;">全选</span>
       </div>
-      <div class="countBox">共计{{selectedList.length}}/{{recordTotal}}</div>
-      <van-button type="info" class="delBtn"  @click="delBtn()">删除</van-button>
-      <van-button type="info" class="startBtn" @click="toCheck()">测一测</van-button>
+      <div class="countBox text-sm">共计{{selectedList.length}}/{{recordTotal}}</div>
+      <van-button type="info" class="delBtn"  @click="delBtn()" v-actions:delBtn.click>删除</van-button>
+      <van-button type="info" class="startBtn" @click="toCheck()" v-action:toCheck.click>测一测</van-button>
     </div>
 
-  </div>
+  </VueActions>
 </template>
 <script>
 

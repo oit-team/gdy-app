@@ -1,5 +1,5 @@
 <template>
-  <div class="aboutMain" @touchmove.prevent>
+  <VueActions data="aboutMe" class="aboutMain" @touchmove.prevent>
     <!-- <div class=header>
       <div class="back_wrapper" @click="back"><img src="static/images/dev/back@2x.png"></div>
       <span>关于我们</span>
@@ -7,7 +7,7 @@
     </div> -->
     <Header :title="'关于我们'"></Header>
 
-    <div class="aboutMain" ref="aboutScroll">
+    <div class="aboutMain" ref="aboutScroll" v-actions:aboutMe.duration>
       <div class="about-con">
 
         <img src="static/images/login/logo.png" class="logoImg">
@@ -40,7 +40,7 @@
 
       <div class="copy-right">Copyright @2020 高单易网络科技 版权所有</div>
     </div>
-  </div>
+  </VueActions>
 </template>
 
 <script>

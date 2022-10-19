@@ -1,5 +1,5 @@
 <template>
-  <div class="homeMain" @touchmove.prevent>
+  <VueActions class="homeMain" data="homeIndex" @touchmove.prevent>
     <div class="homeHead">
       <div class="top">
         <span class="logoImg">
@@ -57,7 +57,7 @@
             <!-- <img class="icon" src="static/images/icon/rightArrowGrey.png" alt=""> -->
           </div>
           <div class="list">
-            <div class="item"  v-for="(item,index) in curSeriesList" :key="index" @click="toSeries(item)">
+            <div class="item"  v-for="(item,index) in curSeriesList" :key="index" @click="toSeries(item)" v-actions:addItem.click>
               <!-- {{item.seriesName}}({{item.count}}) -->
               <span class="name">{{item.seriesName}}</span> <span class="count">({{item.count}})</span>
             </div>
@@ -71,7 +71,7 @@
             <img class="icon" src="static/images/icon/rightArrowGrey.png" alt="">
           </div>
           <div class="list" v-if="circleList.length>0">
-            <div class="item" v-for="(item,index) in circleList" :key="index" @click="toNewsDetail(item.id,item.collection,item.praise,item.browse,item.browseNum)">
+            <div class="item" v-for="(item,index) in circleList" :key="index" @click="toNewsDetail(item.id,item.collection,item.praise,item.browse,item.browseNum)" v-actions:toMyCircle.click>
               <!-- <div class="icon-box">
                 <img v-if="!item.browse" src="../../../../static/images/icon/read-no.png" alt="">
                 <img v-if="item.browse" src="../../../../static/images/icon/readed.png" alt="">
@@ -97,7 +97,7 @@
     </Scroll>
     <div style="width:100%;height:4px;background-color: #f5f5f5;"></div>
 
-  </div>
+  </VueActions>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="userinfo-wrap">
+  <VueActions class="userinfo-wrap" data="updateUser">
     <Header :title="'个人资料'"></Header>
 
     <div class="userInfoPage" ref="userInfoPage">
@@ -14,7 +14,7 @@
             </van-uploader>
           </div>
         </div>
-        <div class="box-li" @click="updateUserInfo">
+        <div class="box-li" @click="updateUserInfo" v-actions:updateName.click>
           <div class="box-left">
             <div class="dot"></div>昵称
           </div>
@@ -23,7 +23,7 @@
           </div>
           <img class="more-icon" src="static/images/icon/more-right.png" alt="">
         </div>
-        <div class="box-li" @click="updateSex">
+        <div class="box-li" @click="updateSex" v-actions:updateSex.click>
           <div class="box-left">
             <div class="dot"></div>性别
           </div>
@@ -38,12 +38,12 @@
           <div class="box-left">
             <div class="dot"></div>生日
           </div>
-          <div class="box-right" @click="showDatePicker('birthday')" ref="birthday">
+          <div class="box-right" @click="showDatePicker('birthday')" v-actions:updateBirth.click ref="birthday">
             {{birthday}}
           </div>
           <img class="more-icon" src="static/images/icon/more-right.png" alt="">
         </div>
-        <div class="box-li" @click="updateWork">
+        <div class="box-li" @click="updateWork" v-actions:updateWork.click>
           <div class="box-left">
             <div class="dot"></div>岗位
           </div>
@@ -56,12 +56,12 @@
           <div class="box-left">
             <div class="dot"></div>入职时间
           </div>
-          <div class="box-right" @click="showDatePicker('entry')" ref="entry">
+          <div class="box-right" @click="showDatePicker('entry')" ref="entry" v-actions:updateJoinWork.click>
           {{entryTime}}
           </div>
           <img class="more-icon" src="static/images/icon/more-right.png" alt="">
         </div>
-        <div class="box-li"  @click="updateSign">
+        <div class="box-li"  @click="updateSign" v-actions:sign.click>
           <div class="box-left">
             <div class="dot"></div>个性签名
           </div>
@@ -99,7 +99,7 @@
           :formatter="formatter"
         />
     </van-popup>
-  </div>
+  </VueActions>
 </template>
 
 <script>

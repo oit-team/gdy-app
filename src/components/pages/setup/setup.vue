@@ -1,10 +1,10 @@
 <template>
-  <div class="setupMainPage" @touchmove.prevent>
+  <VueActions class="setupMainPage" data="setUpMain" @touchmove.prevent>
     <Header :title="'设置'"></Header>
 
     <div class="page select-none">
       <ul>
-        <li @click="toSecret">
+        <li @click="toSecret" v-actions:setSecret.click>
           <span class="item-tit">修改密码</span>
           <span><img src="static/images/dev/go@2x.png"></span>
         </li>
@@ -16,11 +16,11 @@
           <span class="item-tit">新消息提醒</span>
           <span><img src="static/images/dev/go@2x.png" ></span>
         </li> -->
-        <li @click="toAbout">
+        <li @click="toAbout" v-actions:setAbout.click>
           <span class="item-tit">关于我们</span>
           <span><img src="static/images/dev/go@2x.png" ></span>
         </li>
-        <li @click="toFeedback">
+        <li @click="toFeedback" v-actions:setFeedBack.click>
           <span class="item-tit">意见反馈</span>
           <span><img src="static/images/dev/go@2x.png" ></span>
         </li>
@@ -33,15 +33,15 @@
           <span  class="item-tit">版&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本</span>
           <div>2.0.2</div>
         </li>
-        <li class="changeAmount" @click="changeAmount">
+        <li class="changeAmount" @click="changeAmount" v-actions:changeAccount.click>
           <span>切换账号</span>
         </li>
-        <li class="quit" @click="exit">
+        <li class="quit" @click="exit" v-actions:setQuit.click>
           <span>退出登录</span>
         </li>
       </ul>
     </div>
-  </div>
+  </VueActions>
 </template>
 
 <script>

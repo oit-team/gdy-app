@@ -1,5 +1,5 @@
 <template>
-  <div id="shopCollComment">
+  <VueActions id="shopCollComment" data="comment">
     <div class="headBox">
       <backHeader title="店铺搭配评论">
         <span class="head-class f-l" slot="left" @click="back">
@@ -54,10 +54,10 @@
     </Scroll>
     <div class="addCommentBox">
       <input class="comIpt" type="text" v-model="commentVal" placeholder="说说你的看法">
-      <span class="subBtn" @click="submitComment">发表</span>
+      <span class="subBtn" @click="submitComment" v-actions:comment:click>发表</span>
     </div>
 
-  </div>
+  </VueActions>
 </template>
 
 <script>
