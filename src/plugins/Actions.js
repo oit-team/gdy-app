@@ -8,8 +8,19 @@ Vue.use(VueActions, {
       console.error('组件 VueActions 必须提供data参数')
       return
     }
+    // 10分钟
+    const max = 1000 * 60 * 10
     data.page = otherData
-    data.records = data.records.filter(({ actions }) => !!(actions.click + actions.duration))
+    data.duration = Math.min(max, data.duration)
+    // 过滤无效数据
+    data.records = data.records.filter(({ actions }) => {
+      const valid = !!(actions.click + actions.duration)
+
+      if (valid)
+        actions.duration = Math.min(max, actions.duration)
+
+      return valid
+    })
     addUserBehaviorRecord(data)
   }
 })
