@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="text-base">
     <transition :name="transitionName">
       <!-- 貌似不行,页面结构错乱了 -->
       <!-- <div>
