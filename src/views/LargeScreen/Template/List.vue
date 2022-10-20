@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <VueActions class="page" data="mouldList">
     <!--    头部-->
     <van-sticky>
       <div class="headBox">
@@ -64,14 +64,14 @@
               </div>
               <template #right>
                 <van-button square type="primary" text="编辑" class="h-full" @click="toEdit(item.advId)" />
-                <van-button square type="danger" text="删除" class="h-full" @click="deleteMould(item.advId)" />
+                <van-button square type="danger" text="删除" class="h-full" @click="deleteMould(item.advId)" v-actions:deleteMould.click />
               </template>
             </van-swipe-cell>
           </van-list>
         </van-pull-refresh>
       </div>
     </div>
-  </div>
+  </VueActions>
 </template>
 
 <script>
