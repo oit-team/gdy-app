@@ -23,7 +23,7 @@
           class="kindTitItem"
           :class="[kindItem.bandName == bandName ?'active':'']"
           v-for="(kindItem,index) in bigList"
-          v-actions:tag.click
+          v-actions:kindTitleTab.click
           :key="index"
           @click="clickKindItem(kindItem.bandName)">
           <span class="styleName">{{kindItem.bandName}}</span>
@@ -48,7 +48,7 @@
           :class="[item.id == activeId ?'active':'']"
           v-for="(item,index) in cateList"
           :key="index"
-          v-actions:item.click
+          v-actions:seriesNameTab.click
           @click="clickItem(item.id,item.seriesName)">
           <span class="styleName">{{item.seriesName}}</span>
         </li>

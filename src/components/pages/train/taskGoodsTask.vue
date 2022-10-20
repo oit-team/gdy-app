@@ -29,7 +29,7 @@
           :id="item.id"
           :class="{active: item.id == selected}"
           @click="set_tab_index(item.id,index)"
-          v-actions:goodsItem.click>
+          v-actions:taskTab.click>
           {{item.fitOccasionName}}
         </div>
       </div>

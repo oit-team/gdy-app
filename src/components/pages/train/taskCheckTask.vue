@@ -28,7 +28,7 @@
           :id="item.dictitemCode"
           :class="{active: item.dictitemCode == selecteds}"
           @click="set_tab_index(item.dictitemCode,index)"
-          v-actions:check.click>
+          v-actions:checkTab.click>
           {{item.dictitemDisplayName}}
         </div>
       </div>
@@ -55,7 +55,7 @@
       <div v-if="checkTaskList.length > 0" style="padding-top:0.5px;">
         <!-- 考核任务 -->
         <div class="checkTask_box">
-          <div class="listcheck" @click="toCheckTask(item)" v-for="(item,index) in checkTaskList" :key="index" v-actives:toCheckTask.click>
+          <div class="listcheck" @click="toCheckTask(item)" v-for="(item,index) in checkTaskList" :key="index">
             <div class="checkTop">
               <div class="checkTop_box">
                 <div class="sekuai"></div>

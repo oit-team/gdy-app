@@ -1,5 +1,5 @@
 <template>
-  <VueActions id="myCircle" data="myCircleData">
+  <VueActions id="myCircle" data="myCircleDetail">
     <div class="headBox">
       <Header :title="'工作圈'"></Header>
     </div>
@@ -35,7 +35,7 @@
           v-for="(item,Mindex) in circleClassify"
           :key="Mindex"
           @click="clickTest(item.dOrderby,item.type)"
-          v-actions:myCircleItem.click
+          v-actions:myCircleItemTab.click
           >
           {{item.displayName}}
         </div>

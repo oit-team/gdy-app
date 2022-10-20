@@ -1,7 +1,7 @@
 <template>
   <VueActions
     class="newsDetail"
-    data  ="newsDetailData"
+    data  ="myCircleDetailItem"
     @touchmove.prevent
   >
     <Header :title="'详情'"></Header>
@@ -16,7 +16,7 @@
     <div
       class="detail-content"
       ref="contentBox"
-      v-actions:newsDetailCon.duration
+      v-actions:itemContent.duration
     >
       <div
         class="page_scroll_content"

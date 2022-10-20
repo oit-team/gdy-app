@@ -1,5 +1,5 @@
 <template>
-  <VueActions id="myCollocation" data="workColl">
+  <VueActions id="myCollocation" data="myCollocation">
     <div class="headBox">
       <backHeader style="background-color: #f5f5f5;" title="我要搭配">
         <span slot="left" class="head-class f-l" @click="back">
@@ -7,7 +7,7 @@
             <img class="back-icon" src="static/images/dev/back@2x.png" alt="">
           </slot>
         </span>
-        <span slot="right" class="head-class place-label" @click="toAddColl">
+        <span slot="right" class="head-class place-label" @click="toAddColl" v-actions:addCollocation.click>
           <slot>
             <img class="add-icon" src="static/images/icon/addColl.png" alt="">
           </slot>
@@ -20,7 +20,7 @@
         class="tabItem"
         :class="collStatus == item.status?'active':''"
         @click="clickTab(item.status)"
-        v-actions:workCollTab.click>
+        v-actions:myCollTab.click>
         <span>{{item.statusName}}</span>
         <span>({{item.count}})</span>
         </div>
@@ -48,7 +48,7 @@
       >
 
       <div v-if="collList.length > 0" class="collListBox">
-        <div v-for="(item,index) in collList" :key="index" class="itemBox" @click="toCollDetail(item.id,item)" v-actions:workCollList.click>
+        <div v-for="(item,index) in collList" :key="index" class="itemBox" @click="toCollDetail(item.id,item)" v-actions:collList.click>
           <van-swipe-cell>
             <div class="collItem">
               <img class="collImg" :src="item.imgUrl" alt="">
