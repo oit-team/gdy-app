@@ -1,0 +1,18 @@
+$primary: #1989fa;
+
+.van-tabs__nav--card {
+  border: 1px solid $primary;
+  .van-tab {
+    color: $primary;
+    border-right: 1px solid $primary;
+  }
+
+  .van-tab.van-tab--active {
+    color: #fff;
+    background-color: $primary;
+  }
+
+  .van-tab:last-child {
+    border-right: none;
+  }
+}

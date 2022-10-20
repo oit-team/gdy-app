@@ -78,7 +78,7 @@
 import { Dialog } from 'vant'
 import backHeader from '@/components/comps/common/commonBackHeader'
 import { getAdvertsShopAll } from '@/api/mould'
-import {deleteAdvertsShop} from "../../api/mould"
+import {deleteAdvertsShop} from "../../../api/mould"
 
 export default {
   components: {

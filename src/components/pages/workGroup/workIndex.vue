@@ -110,16 +110,16 @@ export default {
             },
           ],
         },
-        // {
-        //   title: '大屏',
-        //   items: [
-        //     {
-        //       icon: '646fa467770dc1a85f4cbfad59844d2e',
-        //       title: '大屏',
-        //       click: () => this.$router.push('/large-screen'),
-        //     },
-        //   ],
-        // },
+        {
+          title: '智能管理',
+          items: [
+            {
+              icon: '646fa467770dc1a85f4cbfad59844d2e',
+              title: '互动屏',
+              click: () => this.$router.push('/large-screen/template'),
+            },
+          ],
+        },
       ]
     }
   },

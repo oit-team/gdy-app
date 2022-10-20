@@ -1,12 +1,17 @@
 import {
   defineConfig,
-  presetMini,
+  presetUno,
 } from 'unocss'
 import presetRemToPx from '@unocss/preset-rem-to-px'
 
 export default defineConfig({
   presets: [
-    presetMini(),
+    presetUno({}),
     presetRemToPx()
   ],
+  theme: {
+    colors: {
+      'primary': '#1989fa',
+    },
+  }
 })

@@ -28,9 +28,9 @@
           :immediate-check="false"
           @load="getData"
         >
-          <div class="content-box flex w-full h-full flex-wrap text-sm grid grid-cols-3 gap-3 p-2 box-border">
+          <div class="content-box text-sm grid grid-cols-3 gap-3 p-2 box-border">
             <div
-              class="list-item rounded-md bgf relative"
+              class="list-item rounded-md relative bg-white"
               v-for="(item, index) in indexData"
               :key="item.id"
             >
@@ -48,7 +48,7 @@
                 height="110"
                 fit="contain"
                 class="item-img"
-                :src="item.collImgUrl"
+                :src="convertImageSize(item.collImgUrl)"
               />
               <div class="list-info flex flex-col items-center">
                 <p class="van-multi-ellipsis--l2 w-full px-2 text-center h-10 box-border goodsFont">
@@ -62,8 +62,8 @@
     </div>
 
     <!--    底部确认-->
-    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border" @click.stop="onShow">
-      <div class="mr-2">
+    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border">
+      <div class="mr-2" @click="onShow">
         已选中：{{ selectImg.length }}/15
       </div>
       <van-button class="py-2" size="mini" type="info" round @click="onsubmit">确认</van-button>
@@ -71,22 +71,22 @@
 
     <!--    弹出层-->
     <van-popup v-model="show" position="bottom" class="overflow-hidden pt-3 box-border max-h-7/10 flex">
-        <div class="overflow-y-auto flex flex-wrap items-center grid grid-cols-3 gap-3 px-3 pb-3">
-          <div
-            v-for="(item, index) in selectImg"
-            :key="item.resId"
-            class="box-border relative aspect-9/16 flex bg-gray-100 rounded"
-          >
-            <van-image
-              class="h-full w-full"
-              :src="item.resUrl"
-              fit="contain"
-            ></van-image>
-            <div class="pop-item__del" @click.stop="delImg(item, index)">
-              <van-icon name="cross" color="#fff" size="14"></van-icon>
-            </div>
+      <div class="overflow-y-auto items-center grid grid-cols-3 gap-3 px-3 pb-3">
+        <div
+          v-for="(item, index) in selectImg"
+          :key="item.resId"
+          class="box-border relative aspect-9/16 flex bg-gray-100 rounded"
+        >
+          <van-image
+            class="h-full w-full"
+            :src="convertImageSize(item.resUrl)"
+            fit="contain"
+          ></van-image>
+          <div class="pop-item__del" @click.stop="delImg(item, index)">
+            <van-icon name="cross" color="#fff" size="14"></van-icon>
           </div>
         </div>
+      </div>
     </van-popup>
   </div>
 </template>
@@ -95,6 +95,8 @@
 import Header from '@/components/comps/header/header'
 import { dictitemInfoAllMethod } from "@/api/mould";
 import {getCollocationList} from "../../api/mould";
+import {SELECT_COLLOCATION} from './constant'
+import { convertImageSize } from '@/utils/helper'
 
 export default {
   name: "Collocation",
@@ -124,6 +126,7 @@ export default {
     this.getClass()
   },
   methods: {
+    convertImageSize,
     // 获取商品列表数据
     getData() {
       this.formData.styleCategory = this.classList[this.selectClass].styleName
@@ -241,7 +244,9 @@ export default {
     },
     // 点击确认按钮
     onsubmit() {
-      // this.$root.$emit()
+      this.$root.$emit(SELECT_COLLOCATION, this.selectImg)
+      this.selectImg = []
+      this.$router.back()
     },
   },
 }
@@ -259,10 +264,6 @@ export default {
 }
 div::marker{
   content: '' !important;
-}
-.list-item:nth-child(3n){
-  flex: 1;
-  margin-right: 0;
 }
 .tipBox {
   position: absolute;
@@ -295,9 +296,6 @@ div::marker{
 }
 .page-btm > .van-button{
   padding: 0 10px !important;
-}
-.bgf{
-  background-color: #fff;
 }
 .pop-scroll{
   overflow-x: hidden;
