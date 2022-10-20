@@ -1,8 +1,8 @@
 <template>
-  <div class="page bacF">
+  <VueActions class="page bacF" data="collocation">
     <van-sticky>
       <Header title="选择搭配"></Header>
-      <van-tabs v-model="selectClass" @click="onClick">
+      <van-tabs v-model="selectClass" @click="onClick" v-actions:changeTabs.click>
         <van-tab v-for="(item, index) in classList" :key="item.dictitemCode" :title="`${item.styleName}(${item.totalNum})`">
         </van-tab>
       </van-tabs>
@@ -26,7 +26,7 @@
           error-text="请求失败，点击重新加载"
           finished-text="没有更多了"
           :immediate-check="false"
-          @load="getData"
+          @load="getData()"
         >
           <div class="content-box text-sm grid grid-cols-3 gap-3 p-2 box-border">
             <div
@@ -34,15 +34,9 @@
               v-for="(item, index) in indexData"
               :key="item.id"
             >
-              <!--                  <div class="tipBox">-->
-              <!--                    <img v-if="item.styleFlag == 1" class="key-tip-img" src="static/images/icon/tip.png" alt="">-->
-              <!--                    <img v-if="item.leaFlag == 1" class="learnIcon"  src="static/images/icon/new.png" alt="">-->
-              <!--                    <img v-if="item.videoFlag == 0" class="videoIcon"  src="static/images/icon/video.png" alt="">-->
-              <!--                  </div>-->
-              <!--                  _chose 是否已经添加   false  未添加  true 已添加-->
               <div class="addIcon">
-                <img v-if="!item._chose" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)">
-                <img v-else src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)">
+                <img v-if="!item._chose" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)" v-actions:addSingle.click>
+                <img v-else src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)" v-actions:delSingle.click>
               </div>
               <van-image
                 height="110"
@@ -62,7 +56,7 @@
     </div>
 
     <!--    底部确认-->
-    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border">
+    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border" @click.stop="onShow" v-actions:onShow.click>
       <div class="mr-2" @click="onShow">
         已选中：{{ selectImg.length }}/15
       </div>
@@ -70,8 +64,8 @@
     </div>
 
     <!--    弹出层-->
-    <van-popup v-model="show" position="bottom" class="overflow-hidden pt-3 box-border max-h-7/10 flex">
-      <div class="overflow-y-auto items-center grid grid-cols-3 gap-3 px-3 pb-3">
+    <van-popup v-model="show" round position="bottom" class="overflow-hidden pt-3 box-border max-h-7/10 flex">
+      <div class="overflow-y-auto flex flex-wrap items-center grid grid-cols-3 gap-3 px-3 pb-3" v-actions:singlePop.duration>
         <div
           v-for="(item, index) in selectImg"
           :key="item.resId"
@@ -79,16 +73,16 @@
         >
           <van-image
             class="h-full w-full"
-            :src="convertImageSize(item.resUrl)"
+            :src="item.resUrl"
             fit="contain"
           ></van-image>
-          <div class="pop-item__del" @click.stop="delImg(item, index)">
+          <div class="pop-item__del" @click.stop="delImg(item, index)" v-actions:delImg.click>
             <van-icon name="cross" color="#fff" size="14"></van-icon>
           </div>
         </div>
       </div>
     </van-popup>
-  </div>
+  </VueActions>
 </template>
 
 <script>
@@ -118,7 +112,6 @@ export default {
       styleCategory: '',
     },
     selectImg: [],
-    selectImgs: [],
     show: false,
   }),
   activated() {
@@ -139,7 +132,7 @@ export default {
         } else {
           if (this.formData.pageNum === 1) {
             this.indexData = res.body.collocationList
-            this.showEmpty = res.body.collocationList.length === 0
+            if (res.body.collocationList.length === 0) this.showEmpty = true
             if (res.body.totalCount <= 20) {
               this.finished = true
             } else {
@@ -190,7 +183,6 @@ export default {
       this.finished = false
       this.error = false
       this.selectClass = name
-      this.getData()
     },
     // 添加照片到数组
     addSingle(item, index) {
@@ -201,11 +193,6 @@ export default {
       } else {
         item._chose = true
         this.$set(this.indexData, index, item)
-        const obj = {}
-        obj[item.id] = [
-          ...item.imgResInfo,
-        ]
-        this.selectImgs.push(obj)
         this.selectImg.push(...item.imgResInfo)
       }
     },
