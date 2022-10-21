@@ -114,9 +114,9 @@ export default {
           title: '智能管理',
           items: [
             {
-              icon: '646fa467770dc1a85f4cbfad59844d2e',
+              icon: '836f94d3d28c5e3b05aceea4f4cf23ac',
               title: '互动屏',
-              click: () => this.$router.push('/large-screen/template'),
+              click: () => this.$router.push('/large-screen/config'),
             },
           ],
         },

@@ -33,8 +33,8 @@ export default {
   },
 
   methods: {
-    swipeTo(index) {
-      this.$refs.swiper.swipeTo(index)
+    swipeTo(index, options) {
+      this.$refs.swiper.swipeTo(index, options)
     }
   },
 

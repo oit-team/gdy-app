@@ -93,8 +93,7 @@
 
 <script>
 import Header from '@/components/comps/header/header'
-import { dictitemInfoAllMethod } from "@/api/mould";
-import {getCollocationList} from "../../api/mould";
+import { dictitemInfoAllMethod, getCollocationList } from "@/api/largeScreen"
 import {SELECT_COLLOCATION} from './constant'
 import { convertImageSize } from '@/utils/helper'
 

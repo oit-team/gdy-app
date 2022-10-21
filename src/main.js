@@ -35,9 +35,6 @@ import store from './store/store.js'
 import Scroll from 'vue-slim-better-scroll'
 Vue.use(Scroll)
 
-// 按需引入
-import Vant from 'vant';
-Vue.use(Vant);
 import 'vant/lib/index.css';
 import "./assets/css/my-vant.css";
 import '@/styles/vant.scss'
@@ -78,6 +75,9 @@ Vue.use(MintUI)
 Vue.use(vueLoading)
 
 Vue.use(VueAwesomeSwiper)
+
+import Vant from 'vant';
+Vue.use(Vant);
 
 Vue.prototype.$video = Video
 

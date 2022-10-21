@@ -9,7 +9,7 @@
               <img class="back-icon" src="static/images/dev/back@2x.png" alt="">
             </slot>
           </span>
-          <span slot="right" class="head-class place-label" @click="toAddMould">
+          <span slot="right" class="head-class place-label" @click="$router.push('/large-screen/template/config')">
             <slot>
               <img class="add-icon" src="static/images/icon/addColl.png" alt="">
             </slot>
@@ -45,7 +45,7 @@
               :key="item.advId"
               class="h-24 mb-2"
             >
-              <div class="card-left w-full h-full flex items-center text-base" @click="toInfo(item.advId)">
+              <div class="card-left w-full h-full flex items-center text-base" @click="select(item)">
                 <van-image
                   width="80"
                   height="80"
@@ -77,8 +77,8 @@
 <script>
 import { Dialog } from 'vant'
 import backHeader from '@/components/comps/common/commonBackHeader'
-import { getAdvertsShopAll } from '@/api/mould'
-import {deleteAdvertsShop} from "../../../api/mould"
+import { getAdvertsShopAll, deleteAdvertsShop } from '@/api/largeScreen'
+import { SELECT_TEMPLATE } from '../constant'
 
 export default {
   components: {
@@ -135,49 +135,34 @@ export default {
         this.isLoading = false
       })
     },
-    // 新增模板
-    toAddMould() {
-      this.$router.push({
-        name: 'Config',
-        params: {
-          type: 'add',
-        },
-      })
-    },
-    toInfo(id) {
-      this.$router.push({
-        name: 'Config',
-        params: {
-          type: 'info',
-          id,
-        },
-      })
-    },
     toEdit(id) {
       this.$router.push({
-        name: 'Config',
-        params: {
-          type: 'edit',
+        path: '/large-screen/template/config',
+        query: {
           id,
         },
       })
     },
-    deleteMould(id) {
-      Dialog.confirm({
+    async deleteMould(id) {
+      await Dialog.confirm({
         title: '提示',
         message: '是否确定删除该模板？',
-      }).then(() => {
-        deleteAdvertsShop({
-          advertsShopId: id,
-        }).then((res) => {
-          console.log(res)
-        })
-      }).catch(() => {});
+      })
+
+      await deleteAdvertsShop({
+        advertsShopId: id,
+      })
+
+      this.getData()
     },
     refresh() {
       this.isLoading = true
       this.formData.pageNum = 1
       this.getData()
+    },
+    select(item) {
+      this.$root.$emit(SELECT_TEMPLATE, item.advId)
+      this.$router.back()
     },
   },
 }
