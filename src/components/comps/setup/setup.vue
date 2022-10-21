@@ -1,5 +1,5 @@
 <template>
-  <VueActions class="main" data="setUp" @touchmove.prevent>
+  <VueActions class="main" data="setUpMain" @touchmove.prevent>
     <div class="page">
       <ul>
         <li @click="toSecret" v-actions:setSecret.click>

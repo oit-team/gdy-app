@@ -20,7 +20,9 @@
       :scrollX='false'
       :scrollY='true'
       :pullDown="false"
-      :pullUp="false">
+      :pullUp="false"
+      v-actions:beforeTest.duration
+      >
       <div class="bodys">
         <div class="bodysTop">
           <div class="lists">

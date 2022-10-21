@@ -51,6 +51,7 @@
       @pullingDown="checkRefresh"
       @pullingUp="checkLoadMore"
       key="2"
+      v-actions:lookCheck.duration
       >
       <div v-if="checkTaskList.length > 0" style="padding-top:0.5px;">
         <!-- 考核任务 -->

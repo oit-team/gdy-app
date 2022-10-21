@@ -8,6 +8,10 @@
 
     <!-- 主题详解有时候为空需要单独做判断 -->
     <!-- <div class="hd_container" v-if="showTheme"> -->
+    <div v-if="selectedTabs  == 0" v-actions:theme.duration></div>
+    <div v-if="selectedTabs  == 1" v-actions:single.duration></div>
+    <div v-if="selectedTabs  == 2" v-actions:brand.duration></div>
+    <div v-if="selectedTabs  == 3" v-actions:shop.duration></div>
     <div class="hd_container">
       <ul class="hd_tab_wrap" >
         <!-- <li

@@ -28,6 +28,7 @@
       :scrollY='true'
       @pullingDown="staffRefresh"
       @pullingUp="staffLoadMore"
+      v-actions:lookCheckItemDetail.duration
       >
       <div class="content" v-if="staffHaveList.length > 0">
         <div class="content_list" v-for="(item,index) in staffHaveList" :key="index" >
@@ -50,7 +51,7 @@
     </Scroll>
     <!-- <div class="delBox" v-if="usedTimes && usedTimes>timesLimit && new Date().getTime() < new Date(endTime).getTime(new Date(endTime)) && new Date().getTime() > new Date(startTime).getTime(new Date(startTime))|| timesLimit&&usedTimes<timesLimit && new Date().getTime() < new Date(endTime).getTime(new Date(endTime)) && new Date().getTime() > new Date(startTime).getTime(new Date(startTime))"> 加一个判断new Date().getTime() -->
     <div class="delBox" v-if="showTestFlag">
-      <van-button type="info" class="checkBtn" @click="toStaffHave()" v-actions:checkBtn.click>测一测</van-button>
+      <van-button type="info" class="checkBtn" @click="toStaffHave()">测一测</van-button>
     </div>
   </VueActions>
 </template>

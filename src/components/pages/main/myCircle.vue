@@ -84,6 +84,8 @@
       </div>
     </div>
 
+    <div v-if="+activeId === 100" v-actions:allDuration.duration></div>
+
     <div class="coll-loading-box" v-if="newsLoading == true" key="load">
       <van-loading color="#00a2ea"  />
     </div>
@@ -100,7 +102,8 @@
       :scrollY='true'
       @pullingDown="circleRefresh"
       @pullingUp="circleLoadMore"
-      key="scroll">
+      key="scroll"
+      >
       <div v-if="newsList.length > 0">
         <div class="item" v-for="item in newsList" :key="item.id" @click="toNewsDetail(item.id,item.collection,item.praise,item.browse,item.browseNum)" v-actions:newListItem.click>
           <div class="icon-box">

@@ -1,5 +1,5 @@
 <template>
-  <VueActions id="myCollocation" data="collocation">
+  <VueActions id="myCollocation" data="collocations">
     <div class="headBox">
       <backHeader title="我要搭配" style="background-color: #fff;">
         <span class="head-class f-l" slot="left" @click="back">
@@ -19,7 +19,6 @@
         v-for="(item,index) in tabList"
         :key="index"
         @click="clickTab(item.id)"
-        v-actions:collTabItem.click
         :class="tabActiveId == item.id?'active':''">{{item.name}}({{item.nums}})</div>
     </div>
     <div style="height:6px;background-color: #f5f5f5;"></div>
@@ -43,7 +42,7 @@
       <!-- @pullingDown="collRefresh"
       @pullingUp="collLoadMore" -->
       <div class="collListBox" v-if="collList.length > 0">
-        <div class="item" v-for="i in 5" :key="i" @click="toCollDetail(i)" v-actions:collList.click>
+        <div class="item" v-for="i in 5" :key="i" @click="toCollDetail(i)">
           <img class="collImg" src="../../../../static/images/goodDetail/coll003.jpg" alt="">
           <div class="collDesc">工作服颜色很正，码数也很标准，上身很合适，显得人特别的端正</div>
         </div>

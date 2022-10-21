@@ -20,7 +20,9 @@
       :scrollX='false'
       :scrollY='true'
       :pullDown="false"
-      :pullUp="false">
+      :pullUp="false"
+      v-actions:lookTopic.duration
+      >
       <div class="bodys">
 
         <div class="listsBom" >
@@ -30,7 +32,7 @@
           </div>
           <div class="listsBomIn" v-html="goodslist.vResult[content_index].subTitle?goodslist.vResult[content_index].subTitle:goodslist.vResult[content_index].content"></div>
           <div class="listBomBom" v-for="(key,i) in (goodslist.vResult[content_index].option?goodslist.vResult[content_index].option:goodslist.vResult[content_index].answers)" :key="i">
-            <div v-if="jiexi!=1" class="listBomBomList" @click="listIconShow(key,i,content_index)" key="listIcon" v-actions:listIcon.click>
+            <div v-if="jiexi!=1" class="listBomBomList" @click="listIconShow(key,i,content_index)">
               <!-- 判断 id 判断 选项 -->
               <div class="listIcon" :class="goodslist.vResult[content_index].ageNUM == key.orderNum&&goodslist.vResult[content_index].egaID == key.instanceId||goodslist.vResult[content_index].ID == key.orderNum?'active':''" >{{key.orderNum}}</div><div class="listContent">{{key.title?key.title:key.orderContent}}</div>
             </div>

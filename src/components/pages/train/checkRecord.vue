@@ -24,6 +24,7 @@
       :autoUpdate="false"
       :scrollX='false'
       :scrollY='true'
+      v-actions:lookCheckRecord.duration
       @pullingDown="recordRefresh"
       @pullingUp="recordLoadMore"
       >

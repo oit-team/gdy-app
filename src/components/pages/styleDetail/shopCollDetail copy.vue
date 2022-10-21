@@ -14,7 +14,7 @@
         <div class="head_img">
           <mslider :loop="isLoop" ref="slider" :auto-play="false">
             <div class="img_wrapper" v-for="(item,index) in collInfo.imgUrls" :key="index">
-              <img :src="item" alt="" @click="getImg(index)" v-actions:style.click>
+              <img :src="item" alt="" @click="getImg(index)" v-actions:getImg.click>
             </div>
           </mslider>
         </div>
@@ -34,15 +34,15 @@
 
             <div class="recDesc" :class="expande ? 'expande' : 'close'"  v-if="reasonDesc !==''" ref="desc">{{reasonDesc}}</div>
             <div v-if="showExchangeButton" key="isShowFold">
-              <div class="show" @click="handleFold" v-show="!expande" v-actions:fold.click>展开</div>
-              <div class="show" @click="handleFold" v-show="expande" v-actions:expande.click>收起</div>
+              <div class="show" @click="handleFold" v-show="!expande">展开</div>
+              <div class="show" @click="handleFold" v-show="expande">收起</div>
             </div>
 
           </div>
         </div>
 
         <div class="recList">
-          <div class="item" @click="toGoods(item.id)" v-actions:toGoods.click v-for="(item,i) in goodsSingle" :key="i">
+          <div class="item" @click="toGoods(item.id)" v-for="(item,i) in goodsSingle" :key="i">
             <div class="imgBox">
               <img :src="item.imgUrl" alt="" @load="imgLoad">
               <div class="tipBox">
@@ -56,7 +56,7 @@
           </div>
         </div>
         <div class="collCommentbox">
-          <div class='commentTit' @click="toShopCollComment" v-actions:toShopColl.click>
+          <div class='commentTit' @click="toShopCollComment">
             <span class="tit">搭配评论</span>
             <img  src="static/images/icon/rightArrowGrey.png" alt="">
           </div>

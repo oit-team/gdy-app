@@ -65,7 +65,7 @@
         </div>
 
         <!-- 我的工作圈 -->
-        <div class="workCircle">
+        <div class="workCircle" v-actions:myWorkCircle.duration>
           <div class="titBox" @click="toMyCircle">
             <span class="secTit">我的工作圈</span>
             <img class="icon" src="static/images/icon/rightArrowGrey.png" alt="">

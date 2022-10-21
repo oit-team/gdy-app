@@ -6,7 +6,7 @@
   >
     <Header :title="'详情'"></Header>
 
-    <div class="newsHead" v-actions:newsDetail>
+    <div class="newsHead">
       <h2>{{newsTitle}}</h2>
       <div class="publish-box">
         <span class="publish-time">{{publishTime}}</span>

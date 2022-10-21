@@ -31,6 +31,8 @@
       <img :src="labelImg" mode="widthFix">
     </div>
 
+    <div v-if="listType == 1" v-actions:lookSeriesList.duration></div>
+    <div v-if="listType == 2" v-actions:lookCateList.duration></div>
     <div class="tabBox">
       <div class="item" :class="{active: listType == 1}" @click="clickSeriesBtn(1)" v-actions:seriesList.click>系列列表</div>
       <div class="item" :class="{active: listType == 2}" @click="clickSeriesBtn(2)" v-actions:cateList.click>品类列表</div>

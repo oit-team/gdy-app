@@ -1,6 +1,6 @@
 <template>
   <!-- app并没用到该页面，可删除 -->
-  <VueActions id="goodsTestTopic" data="testTopic">
+  <div id="goodsTestTopic" data="testTopic">
     <div>
       <Header :title="displayName +' '+ title.name"></Header>
     </div>
@@ -25,7 +25,7 @@
           </div>
           <div class="listsBomIn">这款商品的款式一下描述正确的是：</div>
           <div class="listBomBom">
-            <div class="listBomBomList" @click="optTopicShow" v-actions:listBom.click v-for="(item,index) in goodsTestTopicList.exercises" :key='index'>
+            <div class="listBomBomList" @click="optTopicShow" v-for="(item,index) in goodsTestTopicList.exercises" :key='index'>
               <div class="listIcon">{{item.letter}}</div><div>{{item.text}}</div>
             </div>
           </div>
@@ -33,11 +33,11 @@
       </div>
     </Scroll>
     <div class="footer" >
-      <van-button class="startBtn up" type="info" @click="startTesting" v-actions:preTest.click>上一题</van-button>
-      <van-button class="startBtn in" @click="catalogShow" v-actions:testMenu.click>目 录</van-button>
-      <van-button class="startBtn down" type="info" @click="startTesting" v-actions.nextTest.click>下一题</van-button>
+      <van-button class="startBtn up" type="info" @click="startTesting" >上一题</van-button>
+      <van-button class="startBtn in" @click="catalogShow" >目 录</van-button>
+      <van-button class="startBtn down" type="info" @click="startTesting">下一题</van-button>
     </div>
-  </VueActions>
+  </div>
 </template>
 <script>
 import { Dialog } from 'vant';

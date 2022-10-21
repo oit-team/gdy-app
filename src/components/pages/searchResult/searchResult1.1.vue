@@ -29,7 +29,9 @@
       :scrollY='true'
       :autoUpdate="false"
       @pullingDown="rescollRefresh"
-      @pullingUp="rescollLoadMore">
+      @pullingUp="rescollLoadMore"
+      v-actions:lookResult.duration
+      >
       <ul v-if="searchList.length>0" class="recommended">
         <!-- <li
           v-for="(item, key) in searchList"

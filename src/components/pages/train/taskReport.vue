@@ -19,7 +19,9 @@
       :scrollX='false'
       :scrollY='true'
       :pullDown="false"
-      :pullUp="false">
+      :pullUp="false"
+      v-actions:lookReport.duration
+      >
       <div class="bodys">
         <div class="radial">
           <Radial
@@ -63,7 +65,7 @@
       <van-button class="startBtn" round type="info" @click="analysis" v-actions:analysisOne.click>题目解析</van-button>
     </div>
     <div class="footer1" key="2" v-else >
-      <van-button class="startBtn" round type="info" @click="analysis" v-actions:analysisTwo.click>题目解析</van-button>
+      <van-button class="startBtn" round type="info" @click="analysis" v-actions:analysisOne.click>题目解析</van-button>
     </div>
   </VueActions>
 </template>

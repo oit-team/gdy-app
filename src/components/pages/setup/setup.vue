@@ -16,7 +16,7 @@
           <span class="item-tit">新消息提醒</span>
           <span><img src="static/images/dev/go@2x.png" ></span>
         </li> -->
-        <li @click="toAbout" v-actions:setAbout.click>
+        <li @click="toAbout">
           <span class="item-tit">关于我们</span>
           <span><img src="static/images/dev/go@2x.png" ></span>
         </li>

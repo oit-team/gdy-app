@@ -14,7 +14,7 @@
         <div class="head_img">
           <mslider ref="slider" :loop="isLoop" :auto-play="false">
             <div v-for="(item,index) in collInfo.imgUrls" :key="index" class="img_wrapper">
-              <img :src="item" alt="" @click="getImg(index)" v-actions:styleTwo.click>
+              <img :src="item" alt="" @click="getImg(index)" v-actions:getImg.click>
             </div>
           </mslider>
         </div>
@@ -42,8 +42,8 @@
 
             <div v-if="reasonDesc !==''" ref="desc"  class="recDesc" :class="fold ? 'fold' : 'unfold'">{{reasonDesc}}</div>
             <div v-if="showExchangeButton" key="isShowFold">
-              <div v-show="fold" class="show" @click="handleFold" v-actions:isFold.click>展开</div>
-              <div v-show="!fold" class="show" @click="handleFold" v-actions:isExpand.click>收起</div>
+              <div v-show="fold" class="show" @click="handleFold" >展开</div>
+              <div v-show="!fold" class="show" @click="handleFold" >收起</div>
             </div>
 
           </div>
@@ -65,7 +65,7 @@
         </div>
 
         <div v-if="collStatus == 3" class="collCommentbox" key="commitTit">
-          <div class='commentTit' @click="toShopCollComment" v-actions:toShopColl.click>
+          <div class='commentTit' @click="toShopCollComment">
             <span class="tit">搭配评论</span>
             <img  src="static/images/icon/rightArrowGrey.png" alt="">
           </div>

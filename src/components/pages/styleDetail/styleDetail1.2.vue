@@ -34,15 +34,15 @@
 
             <div v-if="reasonDesc !==''" ref="desc"  class="recDesc" :class="fold ? 'fold' : 'unfold'">{{reasonDesc}}</div>
             <div v-if="showExchangeButton" key="isFold">
-              <div v-show="fold" class="show" @click="handleFold" v-actions:fold.click>展开</div>
-              <div v-show="!fold" class="show" @click="handleFold" v-actions:unFold.click>收起</div>
+              <div v-show="fold" class="show" @click="handleFold">展开</div>
+              <div v-show="!fold" class="show" @click="handleFold">收起</div>
             </div>
 
           </div>
         </div>
 
         <div class="recList">
-          <div v-for="(item,i) in goodsSingle" :key="i" class="item" @click="toGoods(item.id)" v-actions:toGoods.click>
+          <div v-for="(item,i) in goodsSingle" :key="i" class="item" @click="toGoods(item.id)">
             <div class="imgBox">
               <img :src="item.imgUrl" alt="" @load="imgLoad">
               <div class="tipBox">
