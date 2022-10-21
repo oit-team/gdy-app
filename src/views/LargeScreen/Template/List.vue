@@ -113,7 +113,7 @@ export default {
         } else {
           if (this.formData.pageNum === 1) {
             this.indexData = res.body.resultList
-            if (res.body.resultList.length === 0) this.showEmpty = true
+            this.showEmpty = res.body.resultList.length === 0
             if (res.body.count <= 20) {
               this.finished = true
             } else {
