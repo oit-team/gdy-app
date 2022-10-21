@@ -84,3 +84,8 @@ export function dictitemInfoAllMethod(params, config) {
 export function getCollocationList(params) {
   return post('/liveBroadcast/adverts/getCollocationList', params)
 }
+
+// 查询设备数量
+export function getDevCount() {
+  return post('/liveBroadcast/device/getDevCount')
+}
