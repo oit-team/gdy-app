@@ -19,7 +19,7 @@
     </van-sticky>
 
     <!--    模板列表-->
-    <div class="content w-full py-2 box-border">
+    <div class="content w-full">
       <van-empty
         v-if="showEmpty"
         description="暂无数据"
@@ -27,7 +27,7 @@
       <div v-else class="w-full">
         <van-pull-refresh
           v-model="isLoading"
-          class="ub-refresh"
+          class="ub-refresh py-2 box-border"
           success-text="加载成功"
           @refresh="refresh"
         >
@@ -50,7 +50,7 @@
                   width="80"
                   height="80"
                   fit="contain"
-                  :src="item.resImgUrl"
+                  :src="convertImageSize(item.resImgUrl)"
                   class="mx-2"
                 />
                 <div class="leading-loose">
@@ -79,6 +79,7 @@ import { Dialog } from 'vant'
 import backHeader from '@/components/comps/common/commonBackHeader'
 import { getAdvertsShopAll, deleteAdvertsShop } from '@/api/largeScreen'
 import { SELECT_TEMPLATE } from '../constant'
+import { convertImageSize } from '@/utils/helper'
 
 export default {
   components: {
@@ -102,6 +103,7 @@ export default {
     this.getData()
   },
   methods: {
+    convertImageSize,
     getData() {
       getAdvertsShopAll({
         ...this.formData,
@@ -178,6 +180,9 @@ export default {
 }
 .content{
   background-color: #f5f5f5;
+}
+.ub-refresh{
+  min-height: calc(100vh - 1.4rem);
 }
 >>> .van-swipe-cell__wrapper{
   height: 100% !important;
