@@ -56,7 +56,7 @@
     </div>
 
     <!--    底部确认-->
-    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border" @click.stop="onShow" v-actions:onShow.click>
+    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border bg-white" @click.stop="onShow" v-actions:onShow.click>
       <div class="mr-2" @click="onShow">
         已选中：{{ selectImg.length }}/15
       </div>
