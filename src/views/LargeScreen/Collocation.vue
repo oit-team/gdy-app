@@ -35,7 +35,7 @@
               :key="item.id"
             >
               <div class="addIcon">
-                <img v-if="!item._chose" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)" v-actions:addSingle.click>
+                <img v-if="!checkSelected(item)" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)" v-actions:addSingle.click>
                 <img v-else src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)" v-actions:delSingle.click>
               </div>
               <van-image
@@ -56,27 +56,27 @@
     </div>
 
     <!--    底部确认-->
-    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border" @click.stop="onShow" v-actions:onShow.click>
+    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border bg-white" @click.stop="onShow" v-actions:onShow.click>
       <div class="mr-2" @click="onShow">
-        已选中：{{ selectImg.length }}/15
+        已选中：{{ total }}/15
       </div>
       <van-button class="py-2" size="mini" type="info" round @click="onsubmit">确认</van-button>
     </div>
 
     <!--    弹出层-->
     <van-popup v-model="show" round position="bottom" class="overflow-hidden pt-3 box-border max-h-7/10 flex">
-      <div class="overflow-y-auto flex flex-wrap items-center grid grid-cols-3 gap-3 px-3 pb-3" v-actions:singlePop.duration>
+      <div class="overflow-y-auto grid grid-cols-3 gap-3 px-3 pb-3" v-actions:singlePop.duration>
         <div
-          v-for="(item, index) in selectImg"
+          v-for="(item, index) of selectImgs"
           :key="item.resId"
           class="box-border relative aspect-9/16 flex bg-gray-100 rounded"
         >
           <van-image
             class="h-full w-full"
-            :src="item.resUrl"
+            :src="convertImageSize(item.resUrl)"
             fit="contain"
           ></van-image>
-          <div class="pop-item__del" @click.stop="delImg(item, index)" v-actions:delImg.click>
+          <div class="pop-item__del" @click="delImg(item, index)" v-actions:delImg.click>
             <van-icon name="cross" color="#fff" size="14"></van-icon>
           </div>
         </div>
@@ -111,9 +111,14 @@ export default {
       brandId: localStorage.getItem('brandId'),
       styleCategory: '',
     },
-    selectImg: [],
+    selectImgs: {},
     show: false,
   }),
+  computed: {
+    total() {
+      return Object.keys(this.selectImgs).length
+    }
+  },
   activated() {
     this.getClass()
   },
@@ -144,13 +149,6 @@ export default {
               this.finished = true
             } else if (res.body.totalCount > this.indexData.length) this.formData.pageNum++
           }
-          this.indexData.forEach(e => {
-            e._chose = false
-            e.imgResInfo.forEach(n => {
-              const obj = this.selectImg.find(item => item.resId === n.resId)
-              e._chose = obj ? true : false
-            })
-          })
         }
       }).catch(() => {
         this.showEmpty = true
@@ -185,44 +183,30 @@ export default {
       this.selectClass = name
     },
     // 添加照片到数组
-    addSingle(item, index) {
-      const num = this.selectImg.length + item.imgResInfo.length
-      if (num > 15) {
-        this.$toast('最多只能选择15张图片')
-        return false
-      } else {
-        item._chose = true
-        this.$set(this.indexData, index, item)
-        this.selectImg.push(...item.imgResInfo)
-      }
+    addSingle(item) {
+      const length = this.total + item.imgResInfo.length
+      if (length > 15) return this.$toast('最多只能选择15张图片')
+
+      item.imgResInfo.forEach(img => {
+        this.$set(this.selectImgs, img.resId, img)
+      })
     },
     // 删除照片
-    delSingle(item, index) {
-      item._chose = false
-      this.$set(this.indexData, index, item)
-      item.imgResInfo.forEach(e => {
-        this.selectImg.forEach((i, index) => {
-          if (e.resId === i.resId) {
-            this.selectImg.splice(index, 1)
-          }
-        })
-      })
+    delSingle(item) {
+      item.imgResInfo.forEach(({ resId }) => this.$delete(this.selectImgs, resId))
+    },
+    checkSelected(item) {
+      return item.imgResInfo.some(({ resId }) => this.selectImgs[resId])
     },
     // 单独删除图片
-    delImg(item, index) {
-      this.selectImg.splice(index, 1)
-      this.indexData.forEach(e => {
-        e.imgResInfo.forEach(n => {
-          const obj = this.selectImg.find(item => item.resId === n.resId)
-          e._chose = !!obj
-        })
-      })
-      if (this.selectImg.length === 0) {
+    delImg(item) {
+      this.$delete(this.selectImgs, item.resId)
+      if (this.total === 0) {
         this.show = false
       }
     },
     onShow() {
-      if (this.selectImg.length === 0) {
+      if (this.total === 0) {
         this.$toast('您还未选择搭配单品')
       } else {
         this.show = true
@@ -230,8 +214,8 @@ export default {
     },
     // 点击确认按钮
     onsubmit() {
-      this.$root.$emit(SELECT_COLLOCATION, this.selectImg)
-      this.selectImg = []
+      this.$root.$emit(SELECT_COLLOCATION, this.selectImgs)
+      this.selectImgs = {}
       this.$router.back()
     },
   },
@@ -301,6 +285,6 @@ div::marker{
 }
 .van-popup{
   bottom: 0;
-  max-height: 70%;
+  height: 70%;
 }
 </style>

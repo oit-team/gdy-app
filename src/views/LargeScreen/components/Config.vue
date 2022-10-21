@@ -84,14 +84,12 @@ export default {
       this.$router.push('/large-screen/collocation')
       this.$root.$once(SELECT_COLLOCATION, (data) => {
         const max = 15
-        for (const item of data) {
+        for (const item of Object.values(data)) {
           if (this.config.length >= max) {
             this.$toast(`最多添加${max}个搭配图`)
             return
           }
-          this.$set(this.fileMap, item.resId, {
-            resUrl: item.resUrl
-          })
+          this.$set(this.fileMap, item.resId, item)
           this.config.push({
             _tempId: Math.random(),
             items: [
