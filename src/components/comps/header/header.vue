@@ -2,10 +2,9 @@
   <div class='header'>
     <img src="static/images/dev/back@2x.png" @click="back" >
     <span class="tit">{{title}}</span>
-    <span class="placeLabel">
+    <div>
       <slot name="after"></slot>
-    </span>
-    <!-- <img src="" alt=""> -->
+    </div>
   </div>
 </template>
 
@@ -65,9 +64,5 @@ export default {
   transform: translateX(-50%);
   font-size:16px;
   user-select: none; -webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;
-}
-.header .placeLabel{
-  float: right;
-  height: 13px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <VueActions class="page" data="mouldList">
     <!--    头部-->
     <van-sticky>
       <div class="headBox">
@@ -9,7 +9,7 @@
               <img class="back-icon" src="static/images/dev/back@2x.png" alt="">
             </slot>
           </span>
-          <span slot="right" class="head-class place-label" @click="toAddMould">
+          <span slot="right" class="head-class place-label" @click="$router.push('/large-screen/template/config')">
             <slot>
               <img class="add-icon" src="static/images/icon/addColl.png" alt="">
             </slot>
@@ -45,7 +45,7 @@
               :key="item.advId"
               class="h-24 mb-2"
             >
-              <div class="card-left w-full h-full flex items-center text-base" @click="toInfo(item.advId)">
+              <div class="card-left w-full h-full flex items-center text-base" @click="select(item)">
                 <van-image
                   width="80"
                   height="80"
@@ -64,21 +64,21 @@
               </div>
               <template #right>
                 <van-button square type="primary" text="编辑" class="h-full" @click="toEdit(item.advId)" />
-                <van-button square type="danger" text="删除" class="h-full" @click="deleteMould(item.advId)" />
+                <van-button square type="danger" text="删除" class="h-full" @click="deleteMould(item.advId)" v-actions:deleteMould.click />
               </template>
             </van-swipe-cell>
           </van-list>
         </van-pull-refresh>
       </div>
     </div>
-  </div>
+  </VueActions>
 </template>
 
 <script>
 import { Dialog } from 'vant'
 import backHeader from '@/components/comps/common/commonBackHeader'
-import { getAdvertsShopAll } from '@/api/mould'
-import {deleteAdvertsShop} from "../../api/mould"
+import { getAdvertsShopAll, deleteAdvertsShop } from '@/api/largeScreen'
+import { SELECT_TEMPLATE } from '../constant'
 
 export default {
   components: {
@@ -113,7 +113,7 @@ export default {
         } else {
           if (this.formData.pageNum === 1) {
             this.indexData = res.body.resultList
-            if (res.body.resultList.length === 0) this.showEmpty = true
+            this.showEmpty = res.body.resultList.length === 0
             if (res.body.count <= 20) {
               this.finished = true
             } else {
@@ -135,49 +135,34 @@ export default {
         this.isLoading = false
       })
     },
-    // 新增模板
-    toAddMould() {
-      this.$router.push({
-        name: 'Config',
-        params: {
-          type: 'add',
-        },
-      })
-    },
-    toInfo(id) {
-      this.$router.push({
-        name: 'Config',
-        params: {
-          type: 'info',
-          id,
-        },
-      })
-    },
     toEdit(id) {
       this.$router.push({
-        name: 'Config',
-        params: {
-          type: 'edit',
+        path: '/large-screen/template/config',
+        query: {
           id,
         },
       })
     },
-    deleteMould(id) {
-      Dialog.confirm({
+    async deleteMould(id) {
+      await Dialog.confirm({
         title: '提示',
         message: '是否确定删除该模板？',
-      }).then(() => {
-        deleteAdvertsShop({
-          advertsShopId: id,
-        }).then((res) => {
-          console.log(res)
-        })
-      }).catch(() => {});
+      })
+
+      await deleteAdvertsShop({
+        advertsShopId: id,
+      })
+
+      this.getData()
     },
     refresh() {
       this.isLoading = true
       this.formData.pageNum = 1
       this.getData()
+    },
+    select(item) {
+      this.$root.$emit(SELECT_TEMPLATE, item.advId)
+      this.$router.back()
     },
   },
 }

@@ -306,32 +306,31 @@ export default new Router({
             name: "Voice",
             path: '/voice',
             meta: { index: 101 },
-            // component: resolve => require(['../views/Voice/index.vue'], resolve)
             component: () => import('@/views/Voice')
         },
         {
-          name: "LargeScreen",
-          path: '/large-screen',
-          meta: { index: 101 },
-          component: () => import('../views/LargeScreen/List.vue')
+            name: "LargeScreenConfig",
+            path: '/large-screen/config',
+            meta: { index: 101 },
+            component: () => import('@/views/LargeScreen/Config')
         },
-        // {
-        //   name: "AddMould",
-        //   path: '/add-mould',
-        //   meta: { index: 101 },
-        //   component: () => import('../views/LargeScreen/AddMould.vue')
-        // },
         {
-          name: "Config",
-          path: '/config',
+          name: "LargeScreenTemplate",
+          path: '/large-screen/template',
           meta: { index: 101 },
-          component: () => import('../views/LargeScreen/Config.vue')
+          component: () => import('../views/LargeScreen/Template/List.vue')
         },
-      {
-        name: "Collocation",
-        path: '/collocation',
-        meta: { index: 101 },
-        component: () => import('../views/LargeScreen/Collocation.vue')
-      },
+        {
+          name: "LargeScreenTemplateConfig",
+          path: '/large-screen/template/config',
+          meta: { index: 101 },
+          component: () => import('../views/LargeScreen/Template/Config.vue')
+        },
+        {
+          name: "Collocation",
+          path: '/large-screen/collocation',
+          meta: { index: 101 },
+          component: () => import('../views/LargeScreen/Collocation.vue')
+        },
     ]
 })

@@ -42,6 +42,7 @@
 import iframe from '@/iframe'
 import VOICE_CONTENT_TYPE from '@/enums/VOICE_CONTENT_TYPE'
 import { isIos } from '../../../utils/helper'
+import { getDevCount } from '@/api/largeScreen'
 
 export default {
   name: 'workIndex',
@@ -55,6 +56,7 @@ export default {
       authMenu: {
         courseList: false,
       },
+      devCount: 0,
     }
   },
   props: ['noReadNum1'],
@@ -110,16 +112,19 @@ export default {
             },
           ],
         },
-        // {
-        //   title: '大屏',
-        //   items: [
-        //     {
-        //       icon: '646fa467770dc1a85f4cbfad59844d2e',
-        //       title: '大屏',
-        //       click: () => this.$router.push('/large-screen'),
-        //     },
-        //   ],
-        // },
+        {
+          title: '智能管理',
+          items: [
+            {
+              icon: '836f94d3d28c5e3b05aceea4f4cf23ac',
+              title: '互动屏',
+              click: () => {
+                if (!this.devCount) return this.$toast('未检测到互动屏')
+                this.$router.push('/large-screen/config')
+              },
+            },
+          ],
+        },
       ]
     }
   },
@@ -142,8 +147,13 @@ export default {
 
     localStorage.removeItem('assessTask')
     this.getnoReadNums()
+    this.getDevCount()
   },
   methods: {
+    async getDevCount() {
+      const res = await getDevCount()
+      this.devCount = res.body.totalNum
+    },
     toVoicePage() {
       const url = location.href.substring(0, location.href.indexOf(this.$route.fullPath))
       iframe.router.initVoiceTrain({

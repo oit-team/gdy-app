@@ -1,8 +1,8 @@
 <template>
-  <div class="page bacF">
+  <VueActions class="page bacF" data="collocation">
     <van-sticky>
       <Header title="选择搭配"></Header>
-      <van-tabs v-model="selectClass" @click="onClick">
+      <van-tabs v-model="selectClass" @click="onClick" v-actions:changeTabs.click>
         <van-tab v-for="(item, index) in classList" :key="item.dictitemCode" :title="`${item.styleName}(${item.totalNum})`">
         </van-tab>
       </van-tabs>
@@ -26,29 +26,23 @@
           error-text="请求失败，点击重新加载"
           finished-text="没有更多了"
           :immediate-check="false"
-          @load="getData"
+          @load="getData()"
         >
-          <div class="content-box flex w-full h-full flex-wrap text-sm grid grid-cols-3 gap-3 p-2 box-border">
+          <div class="content-box text-sm grid grid-cols-3 gap-3 p-2 box-border">
             <div
-              class="list-item rounded-md bgf relative"
+              class="list-item rounded-md relative bg-white"
               v-for="(item, index) in indexData"
               :key="item.id"
             >
-              <!--                  <div class="tipBox">-->
-              <!--                    <img v-if="item.styleFlag == 1" class="key-tip-img" src="static/images/icon/tip.png" alt="">-->
-              <!--                    <img v-if="item.leaFlag == 1" class="learnIcon"  src="static/images/icon/new.png" alt="">-->
-              <!--                    <img v-if="item.videoFlag == 0" class="videoIcon"  src="static/images/icon/video.png" alt="">-->
-              <!--                  </div>-->
-              <!--                  _chose 是否已经添加   false  未添加  true 已添加-->
               <div class="addIcon">
-                <img v-if="!item._chose" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)">
-                <img v-else src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)">
+                <img v-if="!checkSelected(item)" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)" v-actions:addSingle.click>
+                <img v-else src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)" v-actions:delSingle.click>
               </div>
               <van-image
                 height="110"
                 fit="contain"
                 class="item-img"
-                :src="item.collImgUrl"
+                :src="convertImageSize(item.collImgUrl)"
               />
               <div class="list-info flex flex-col items-center">
                 <p class="van-multi-ellipsis--l2 w-full px-2 text-center h-10 box-border goodsFont">
@@ -62,39 +56,40 @@
     </div>
 
     <!--    底部确认-->
-    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border" @click.stop="onShow">
-      <div class="mr-2">
-        已选中：{{ selectImg.length }}/15
+    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border bg-white" @click.stop="onShow" v-actions:onShow.click>
+      <div class="mr-2" @click="onShow">
+        已选中：{{ total }}/15
       </div>
       <van-button class="py-2" size="mini" type="info" round @click="onsubmit">确认</van-button>
     </div>
 
     <!--    弹出层-->
-    <van-popup v-model="show" position="bottom" class="overflow-hidden pt-3 box-border max-h-7/10 flex">
-        <div class="overflow-y-auto flex flex-wrap items-center grid grid-cols-3 gap-3 px-3 pb-3">
-          <div
-            v-for="(item, index) in selectImg"
-            :key="item.resId"
-            class="box-border relative aspect-9/16 flex bg-gray-100 rounded"
-          >
-            <van-image
-              class="h-full w-full"
-              :src="item.resUrl"
-              fit="contain"
-            ></van-image>
-            <div class="pop-item__del" @click.stop="delImg(item, index)">
-              <van-icon name="cross" color="#fff" size="14"></van-icon>
-            </div>
+    <van-popup v-model="show" round position="bottom" class="overflow-hidden pt-3 box-border max-h-7/10 flex">
+      <div class="overflow-y-auto grid grid-cols-3 gap-3 px-3 pb-3" v-actions:singlePop.duration>
+        <div
+          v-for="(item, index) of selectImgs"
+          :key="item.resId"
+          class="box-border relative aspect-9/16 flex bg-gray-100 rounded"
+        >
+          <van-image
+            class="h-full w-full"
+            :src="convertImageSize(item.resUrl)"
+            fit="contain"
+          ></van-image>
+          <div class="pop-item__del" @click="delImg(item, index)" v-actions:delImg.click>
+            <van-icon name="cross" color="#fff" size="14"></van-icon>
           </div>
         </div>
+      </div>
     </van-popup>
-  </div>
+  </VueActions>
 </template>
 
 <script>
 import Header from '@/components/comps/header/header'
-import { dictitemInfoAllMethod } from "@/api/mould";
-import {getCollocationList} from "../../api/mould";
+import { dictitemInfoAllMethod, getCollocationList } from "@/api/largeScreen"
+import {SELECT_COLLOCATION} from './constant'
+import { convertImageSize } from '@/utils/helper'
 
 export default {
   name: "Collocation",
@@ -116,14 +111,19 @@ export default {
       brandId: localStorage.getItem('brandId'),
       styleCategory: '',
     },
-    selectImg: [],
-    selectImgs: [],
+    selectImgs: {},
     show: false,
   }),
+  computed: {
+    total() {
+      return Object.keys(this.selectImgs).length
+    }
+  },
   activated() {
     this.getClass()
   },
   methods: {
+    convertImageSize,
     // 获取商品列表数据
     getData() {
       this.formData.styleCategory = this.classList[this.selectClass].styleName
@@ -149,13 +149,6 @@ export default {
               this.finished = true
             } else if (res.body.totalCount > this.indexData.length) this.formData.pageNum++
           }
-          this.indexData.forEach(e => {
-            e._chose = false
-            e.imgResInfo.forEach(n => {
-              const obj = this.selectImg.find(item => item.resId === n.resId)
-              e._chose = obj ? true : false
-            })
-          })
         }
       }).catch(() => {
         this.showEmpty = true
@@ -188,52 +181,32 @@ export default {
       this.finished = false
       this.error = false
       this.selectClass = name
-      this.getData()
     },
     // 添加照片到数组
-    addSingle(item, index) {
-      const num = this.selectImg.length + item.imgResInfo.length
-      if (num > 15) {
-        this.$toast('最多只能选择15张图片')
-        return false
-      } else {
-        item._chose = true
-        this.$set(this.indexData, index, item)
-        const obj = {}
-        obj[item.id] = [
-          ...item.imgResInfo,
-        ]
-        this.selectImgs.push(obj)
-        this.selectImg.push(...item.imgResInfo)
-      }
+    addSingle(item) {
+      const length = this.total + item.imgResInfo.length
+      if (length > 15) return this.$toast('最多只能选择15张图片')
+
+      item.imgResInfo.forEach(img => {
+        this.$set(this.selectImgs, img.resId, img)
+      })
     },
     // 删除照片
-    delSingle(item, index) {
-      item._chose = false
-      this.$set(this.indexData, index, item)
-      item.imgResInfo.forEach(e => {
-        this.selectImg.forEach((i, index) => {
-          if (e.resId === i.resId) {
-            this.selectImg.splice(index, 1)
-          }
-        })
-      })
+    delSingle(item) {
+      item.imgResInfo.forEach(({ resId }) => this.$delete(this.selectImgs, resId))
+    },
+    checkSelected(item) {
+      return item.imgResInfo.some(({ resId }) => this.selectImgs[resId])
     },
     // 单独删除图片
-    delImg(item, index) {
-      this.selectImg.splice(index, 1)
-      this.indexData.forEach(e => {
-        e.imgResInfo.forEach(n => {
-          const obj = this.selectImg.find(item => item.resId === n.resId)
-          e._chose = !!obj
-        })
-      })
-      if (this.selectImg.length === 0) {
+    delImg(item) {
+      this.$delete(this.selectImgs, item.resId)
+      if (this.total === 0) {
         this.show = false
       }
     },
     onShow() {
-      if (this.selectImg.length === 0) {
+      if (this.total === 0) {
         this.$toast('您还未选择搭配单品')
       } else {
         this.show = true
@@ -241,7 +214,9 @@ export default {
     },
     // 点击确认按钮
     onsubmit() {
-      // this.$root.$emit()
+      this.$root.$emit(SELECT_COLLOCATION, this.selectImgs)
+      this.selectImgs = {}
+      this.$router.back()
     },
   },
 }
@@ -259,10 +234,6 @@ export default {
 }
 div::marker{
   content: '' !important;
-}
-.list-item:nth-child(3n){
-  flex: 1;
-  margin-right: 0;
 }
 .tipBox {
   position: absolute;
@@ -296,9 +267,6 @@ div::marker{
 .page-btm > .van-button{
   padding: 0 10px !important;
 }
-.bgf{
-  background-color: #fff;
-}
 .pop-scroll{
   overflow-x: hidden;
   overflow-y: auto;
@@ -317,6 +285,6 @@ div::marker{
 }
 .van-popup{
   bottom: 0;
-  max-height: 70%;
+  height: 70%;
 }
 </style>

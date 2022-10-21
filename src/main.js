@@ -23,7 +23,6 @@ import 'video.js/dist/video-js.css'
 // Vue.prototype.requestParams = requestParams;
 import '@/components'
 import '@/assets/icons'
-import './uno.css'
 
 import '@/plugins/Actions'
 
@@ -36,16 +35,14 @@ import store from './store/store.js'
 import Scroll from 'vue-slim-better-scroll'
 Vue.use(Scroll)
 
-// 按需引入
-import { Button, Loading,PullRefresh, List, ShareSheet,Sticky,Toast, Dialog,Icon,Popup ,DatetimePicker,Field,Uploader ,Swipe, SwipeItem, SwipeCell ,Cell, CellGroup ,Step, Steps,Collapse,CollapseItem,Radio,RadioGroup,Empty, Image, Tab, Tabs } from 'vant';
-Vue.use(Button).use(Loading).use(PullRefresh).use(List).use(Sticky).use(ShareSheet).use(Toast).use(Dialog).use(Icon).use(Popup).use(DatetimePicker ).use(Field).use(Uploader ).use(Empty).use(SwipeCell ).use(Cell).use(Tabs).use(Tab).use(CellGroup).use(Steps).use(Step).use(Collapse).use(CollapseItem).use(Radio).use(RadioGroup).use(Swipe).use(SwipeItem).use(Image);
-import { ImagePreview } from 'vant';
-Vue.use(ImagePreview);
 import 'vant/lib/index.css';
 import "./assets/css/my-vant.css";
+import '@/styles/vant.scss'
 
 import "./assets/css/my-mint.css";
 import "./assets/css/my-common.css"
+
+import './uno.css'
 
 import VueQuillEditor from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
@@ -78,6 +75,9 @@ Vue.use(MintUI)
 Vue.use(vueLoading)
 
 Vue.use(VueAwesomeSwiper)
+
+import Vant from 'vant';
+Vue.use(Vant);
 
 Vue.prototype.$video = Video
 
