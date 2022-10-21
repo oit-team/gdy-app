@@ -1,5 +1,8 @@
+import Vue from 'vue'
 import Axios from 'axios'
 import API_STATUS from '@/api/API_STATUS'
+import ApiError from './ApiError'
+import {Toast} from 'vant'
 
 // axios配置
 const axiosConfig = {
@@ -9,27 +12,41 @@ const axiosConfig = {
 }
 
 // 创建axios实例
-const axios = Axios.create(axiosConfig)
+const axiosInstance = Axios.create(axiosConfig)
 
-/**
- * 请求拦截器
- */
-axios.interceptors.request.use(config => {
+// 创建接口错误封装对象
+function createApiError(option) {
+  return new ApiError(option).reject()
+}
+
+// 添加请求拦截器
+axiosInstance.interceptors.request.use((config) => {
   config.headers.userId = localStorage.userId
   config.headers.token = localStorage.accessToken
-
   return config
-}, error => {
-  return Promise.reject(error)
+}, (error) => {
+  return createApiError({ error })
 })
 
-/**
- * 响应拦截器
- */
-axios.interceptors.response.use(response => {
+// 添加响应拦截器
+axiosInstance.interceptors.response.use((response) => {
+  if (response.data && response.data.head.status !== API_STATUS.OK) {
+    return createApiError({
+      url: response.config.url,
+      status: response.config.statusCode,
+      response,
+      message: response.data.head.msg,
+      code: response.data.head.status,
+    })
+  }
   return response
-}, error => {
-  return Promise.reject(error)
+}, async (error) => {
+  return createApiError({
+    error,
+    response: error.response,
+    url: error.config.url,
+    message: error.message,
+  })
 })
 
 /**
@@ -59,19 +76,21 @@ export function post(url, params = {}, config = { tips: true }) {
     con: params,
   }
 
-  return axios({
+  return axiosInstance({
     url,
     method: 'post',
     data: formattedParams,
-  }).then(res => {
-    if (res.data && res.data.head.status === API_STATUS.OK) {
-      return res.data
-    } else {
-      return Promise.reject(res.data)
-    }
-  }).catch(err => {
-    return Promise.reject(err)
-  })
+  }).then(res => res.data)
 }
 
-export default axios
+Vue.config.errorHandler = (err, vm, info) => {
+  if (err instanceof ApiError) {
+    // 处理接口错误
+    Toast.fail(err.message)
+  }
+
+  console.error(err)
+  Vue.util.warn(err, vm)
+}
+
+export default axiosInstance
