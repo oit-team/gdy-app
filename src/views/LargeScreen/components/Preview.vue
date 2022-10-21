@@ -5,13 +5,13 @@
         <van-image
           v-if="item.items[0]"
           :style="{flexBasis: `${item.divider * 100}%`}"
-          :src="fileMap[item.items[0].srcId].resUrl"
+          :src="convertImageSize(fileMap[item.items[0].srcId].resUrl, 'x')"
           fit="cover"
         />
         <van-image
           v-if="item.items[1]"
           class="flex-1"
-          :src="fileMap[item.items[1].srcId].resUrl"
+          :src="convertImageSize(fileMap[item.items[1].srcId].resUrl, 'x')"
           fit="cover"
         />
       </div>
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { convertImageSize } from '@/utils/helper'
+
 export default {
   props: {
     config: {
@@ -33,6 +35,7 @@ export default {
   },
 
   methods: {
+    convertImageSize,
     swipeTo(index, options) {
       this.$refs.swiper.swipeTo(index, options)
     }
