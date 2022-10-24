@@ -24,18 +24,20 @@
             @click.stop="$emit('remove', index)"
           />
           <div class="flex flex-col rounded overflow-hidden aspect-9/16 pointer-events-none w-full">
-            <van-image
+            <ConfigItem
               v-if="item.items[0]"
+              :item="item.items[0]"
+              :file-map="fileMap"
               :style="{flexBasis: `${item.divider * 100}%`}"
-              :src="convertImageSize(fileMap[item.items[0].srcId].resUrl)"
-              fit="cover"
-            />
-            <van-image
+              placeholder
+            ></ConfigItem>
+            <ConfigItem
               v-if="item.items[1]"
+              :item="item.items[1]"
+              :file-map="fileMap"
+              placeholder
               class="flex-1"
-              :src="convertImageSize(fileMap[item.items[1].srcId].resUrl)"
-              fit="cover"
-            />
+            ></ConfigItem>
           </div>
           <div class="text-xs">{{ index + 1 }}</div>
         </div>
@@ -55,10 +57,12 @@
 <script>
 import draggable from 'vuedraggable'
 import { convertImageSize } from '@/utils/helper'
+import ConfigItem from './ConfigItem.vue'
 
 export default {
   components: {
     draggable,
+    ConfigItem,
   },
 
   props: {
