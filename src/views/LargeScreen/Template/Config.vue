@@ -39,12 +39,6 @@ export default {
     this.isEdit = !!this.$route.query.id
     if (this.isEdit) {
       this.loadData()
-    } else {
-      // @deprecated
-      // 重置数据
-      this.templateName = ''
-      this.$refs.config.setFileMap({})
-      this.$refs.config.setConfig([])
     }
   },
 
@@ -84,6 +78,12 @@ export default {
 
       this.$toast('保存成功')
       this.$router.back()
+
+      // @deprecated 本应该直接销毁页面
+      // 重置数据
+      this.templateName = ''
+      this.$refs.config.setFileMap({})
+      this.$refs.config.setConfig([])
     },
   }
 }
