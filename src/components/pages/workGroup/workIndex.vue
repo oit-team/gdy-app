@@ -55,6 +55,7 @@ export default {
 
       authMenu: {
         courseList: false,
+        largeScreen: false,
       },
       devCount: 0,
     }
@@ -66,6 +67,7 @@ export default {
       return [
         {
           title: '门店日常',
+          hide: false,
           items: [
             {
               icon: '007b55f6d8c0af10e678d3251dee462d',
@@ -87,6 +89,7 @@ export default {
         },
         {
           title: '学习提升',
+          hide: false,
           items: [
             {
               icon: 'b3ce32801d9e8320945c0b5ce41e9b32',
@@ -114,6 +117,9 @@ export default {
         },
         {
           title: '智能管理',
+          // 暂时是根据互动屏这一项的隐藏而隐藏，如果后续有添加  需要修改逻辑(或在页面根据group.item.length 控制显示隐藏)
+          // authMenu.largeScreen = true(已交费) 就显示 否则隐藏
+          hide: !this.authMenu.largeScreen,
           items: [
             {
               icon: '836f94d3d28c5e3b05aceea4f4cf23ac',
@@ -122,10 +128,11 @@ export default {
                 if (!this.devCount) return this.$toast('未检测到互动屏')
                 this.$router.push('/large-screen/config')
               },
+              auth: this.authMenu.largeScreen,
             },
           ],
         },
-      ]
+      ].filter(item => !item.hide)
     }
   },
 
