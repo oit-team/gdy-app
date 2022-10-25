@@ -8,8 +8,8 @@ Vue.use(VueActions, {
       console.error('组件 VueActions 必须提供data参数')
       return
     }
-    // 10分钟
-    const max = 1000 * 60 * 10
+    // 1分钟-- 超过一分钟按一分钟处理
+    const max = 1000 * 60 * 1
     data.page = otherData
     data.duration = Math.min(max, data.duration)
     // 过滤无效数据
