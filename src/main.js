@@ -37,7 +37,7 @@ Vue.use(Scroll)
 
 import 'vant/lib/index.css';
 import "./assets/css/my-vant.css";
-import '@/styles/vant.scss'
+import '@/styles/index.scss'
 
 import "./assets/css/my-mint.css";
 import "./assets/css/my-common.css"

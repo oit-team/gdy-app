@@ -17,7 +17,7 @@
       v-else
       class="bg-white grid place-content-center h-full"
     >
-      <van-icon name="play-circle-o" size="28" />
+      <van-icon name="play" size="20" />
     </div>
   </div>
 </template>

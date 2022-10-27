@@ -1,5 +1,5 @@
 <template>
-  <van-swipe class="aspect-9/16 h-full mx-auto shadow-lg rounded overflow-hidden" ref="swiper" @change="$emit('change', $event)">
+  <van-swipe class="shadow-lg rounded" :class="supportsAspectRatio ? 'h-full aspect-9/16' : 'w-202px h-358px'" ref="swiper" @change="$emit('change', $event)">
     <van-swipe-item v-for="(item, index) of config" :key="index">
       <div class="flex flex-col h-full overflow-hidden">
         <ConfigItem
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { convertImageSize } from '@/utils/helper'
+import { convertImageSize, supportsAspectRatio } from '@/utils/helper'
 import ConfigItem from './ConfigItem.vue'
 
 export default {
@@ -40,6 +40,10 @@ export default {
       default: () => ({}),
     },
   },
+
+  data: () => ({
+    supportsAspectRatio,
+  }),
 
   methods: {
     convertImageSize,

@@ -23,7 +23,7 @@
             name="cross"
             @click.stop="$emit('remove', index)"
           />
-          <div class="flex flex-col rounded overflow-hidden aspect-9/16 pointer-events-none w-full">
+          <div class="flex flex-col rounded overflow-hidden pointer-events-none w-full" :class="supportsAspectRatio ? 'aspect-9/16' : 'w-48px h-85px'">
             <ConfigItem
               v-if="item.items[0]"
               :item="item.items[0]"
@@ -56,7 +56,7 @@
 
 <script>
 import draggable from 'vuedraggable'
-import { convertImageSize } from '@/utils/helper'
+import { convertImageSize, supportsAspectRatio } from '@/utils/helper'
 import ConfigItem from './ConfigItem.vue'
 
 export default {
@@ -78,6 +78,7 @@ export default {
 
   data: () => ({
     drag: false,
+    supportsAspectRatio,
   }),
 
   methods: {
