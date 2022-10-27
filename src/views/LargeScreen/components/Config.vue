@@ -9,7 +9,7 @@
         <Preview ref="swiper" :config="config" :file-map="fileMap" @change="configIndex = $event"></Preview>
       </div>
       <div v-else>
-        <van-empty description="暂无预览，请从下方添加展示内容" />
+        <van-empty description="暂无内容" />
       </div>
     </div>
 
@@ -85,6 +85,7 @@ export default {
       this.$root.$once(SELECT_COLLOCATION, (data) => {
         const max = 15
         for (const item of Object.values(data)) {
+          console.log(item)
           if (this.config.length >= max) {
             this.$toast(`最多添加${max}个搭配图`)
             return

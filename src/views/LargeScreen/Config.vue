@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col overflow-hidden h-screen bg-gray-100 config">
-    <Header title="设备列表">
+    <Header :title="devInfo.devSerialNum || '设备列表'">
       <div slot="after" @click="addAppPublishDeviceAds">
         发布
       </div>
