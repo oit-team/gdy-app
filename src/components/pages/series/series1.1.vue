@@ -4,14 +4,15 @@
       <div class="head_back" @click="back"><img src="static/images/dev/back@2x.png" loaded @load="imgLoad"></div>
       <span class="head_span">{{seasonName}}-{{seasonLabel}}</span>
       <div></div>
-    </div>
 
-    <!-- 主题详解有时候为空需要单独做判断 -->
-    <!-- <div class="hd_container" v-if="showTheme"> -->
     <div v-if="selectedTabs  == 0" v-actions:theme.duration></div>
     <div v-if="selectedTabs  == 1" v-actions:single.duration></div>
     <div v-if="selectedTabs  == 2" v-actions:brand.duration></div>
     <div v-if="selectedTabs  == 3" v-actions:shop.duration></div>
+    </div>
+
+    <!-- 主题详解有时候为空需要单独做判断 -->
+    <!-- <div class="hd_container" v-if="showTheme"> -->
     <div class="hd_container">
       <ul class="hd_tab_wrap" >
         <!-- <li

@@ -56,6 +56,7 @@ export default {
       authMenu: {
         courseList: false,
         largeScreen: false,
+        fittingRecords: false,
       },
       devCount: 0,
     }
@@ -122,13 +123,21 @@ export default {
           hide: !this.authMenu.largeScreen,
           items: [
             {
-              icon: '836f94d3d28c5e3b05aceea4f4cf23ac',
+              icon: '229164167229177143230140137233146174',
               title: '互动屏',
               click: () => {
                 if (!this.devCount) return this.$toast('未检测到互动屏')
                 this.$router.push('/large-screen/config')
               },
               auth: this.authMenu.largeScreen,
+            },
+            {
+              icon: '232175149232161163232174176229189149',
+              title: '试穿记录',
+              click: () => {
+                this.$router.push('/fitting-records/fittingList')
+              },
+              auth: this.authMenu.fittingRecords,
             },
           ],
         },
@@ -139,7 +148,8 @@ export default {
   created() {
     this.getShowMenus()
   },
-  mounted() {},
+  mounted() {
+  },
   watch: {
     noReadNum1(val) { // 接收父组件传来的参数名
       this.noReadNums = val
@@ -151,10 +161,10 @@ export default {
     },
   },
   activated() {
-
     localStorage.removeItem('assessTask')
     this.getnoReadNums()
     this.getDevCount()
+    this.getShowMenus()
   },
   methods: {
     async getDevCount() {

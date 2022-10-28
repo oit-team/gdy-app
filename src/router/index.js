@@ -332,5 +332,11 @@ export default new Router({
           meta: { index: 101 },
           component: () => import('../views/LargeScreen/Collocation.vue')
         },
+        {
+          name: "FittingList",
+          path: '/fitting-records/fittingList',
+          meta: { index: 101 },
+          component: () => import('../views/FittingRecords/FittingList.vue')
+        },
     ]
 })
