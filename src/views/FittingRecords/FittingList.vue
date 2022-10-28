@@ -6,7 +6,7 @@
 
     <!-- 记录列表 -->
     <van-empty v-if="showListEmpty" description="暂无数据，请重新加载" />
-    <div v-else class="fittingList w-full pb-10">
+    <div v-else class="fittingList w-full pb-4">
       <van-pull-refresh v-model="refreshing" success-text="加载成功" @refresh="onRefresh">
         <van-list
           v-model="loading"
@@ -77,6 +77,10 @@ export default {
     fittingListItemDetail: [], // popUp列表
   }),
 
+  activated(){
+    this.onRefresh()
+  },
+
   methods: {
     // 下拉刷新
     onRefresh() {
@@ -133,9 +137,14 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-
+.fittingList {
+  height: calc(100% - 45px);
+  overflow-y: auto;
+}
 .fitListItem{
-  box-shadow: 2px 2px 2px #ccc;
+  &::after{
+    border-bottom: 1px solid #aaa;
+  }
   .listCount{
     .countColor{
       color: red;
