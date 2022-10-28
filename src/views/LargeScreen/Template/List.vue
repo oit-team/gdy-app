@@ -63,7 +63,7 @@
                 </div>
               </div>
               <template #right>
-                <van-button square type="primary" text="编辑" class="h-full" @click="toEdit(item.advId)" />
+                <van-button square type="primary" text="编辑" class="ml-1 h-full" @click="toEdit(item.advId)" />
                 <van-button square type="danger" text="删除" class="h-full" @click="deleteMould(item.advId)" v-actions:deleteMould.click />
               </template>
             </van-swipe-cell>
