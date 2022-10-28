@@ -1,6 +1,6 @@
 <template>
   <VueActions data="largeScreen" class="flex flex-col overflow-hidden h-screen bg-gray-100 config">
-    <Header :title="devInfo.devSerialNum || '设备列表'">
+    <Header :title="devInfo.devSerialNum || '设备列表'" :color="devInfo.devState==0 ? 'gray' : 'green'">
       <div slot="after" @click="addAppPublishDeviceAds" v-actions:appPublish.click>
         发布
       </div>
@@ -12,7 +12,7 @@
         <span>离线设备：{{devState.offNum || 0}}台</span>
       </div>
       <div class="flex-1 flex justify-end items-center">
-        <div class="devStateCircle mr-2" :class="devInfo.devState==0? 'devOffLine':'devOnLine'" ></div>
+        <!-- <div class="devStateCircle mr-2" :class="devInfo.devState==0? 'devOffLine':'devOnLine'" ></div> -->
         <div class="flex items-center text-sm bg-primary text-white px-2 rounded-full" @click="getDevState(true)" v-actions:detect.click>
           <van-icon name="aim" />
           <span class="ml-1">探测</span>
@@ -227,8 +227,8 @@ export default {
     text-align: center;
   }
   .devStateCircle{
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     border-radius: 50px;
   }
   .devOffLine{
