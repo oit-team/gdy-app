@@ -15,22 +15,30 @@
 
     <div class="h-200px flex flex-col py-2">
       <van-tabs class="flex-1 flex flex-col overflow-hidden" v-model="tabIndex" type="card">
-        <van-tab title="内容" name="list" class="flex items-center">
+        <van-tab name="list" class="flex items-center">
+          <template #title>
+            <div v-actions:contentTab.click key="content">内容</div>
+          </template>
           <ConfigList
             v-model="config"
             :file-map="fileMap"
             @push="selectCollocation"
             @select="(e) => $refs.swiper.swipeTo(e)"
             @remove="config.splice($event, 1)"
+            v-actions:contentTab.duration
           />
         </van-tab>
-        <van-tab title="配置" name="config">
+        <van-tab name="config">
+          <template #title>
+            <div v-actions:configTab.click key="config">配置</div>
+          </template>
           <van-cell-group inset v-if="config[configIndex]">
             <van-field
               :value="config[configIndex].duration / 1000"
               type="digit"
               label="停留时间"
               @input="config[configIndex].duration = $event * 1000"
+              v-actions:configTab.duration
             >
               <span slot="right-icon">秒</span>
             </van-field>
@@ -74,8 +82,8 @@ export default {
     configIndex: 0,
     config: [],
     fileMap: {},
+    devStateActive: 0
   }),
-
   mounted() {
   },
 
@@ -91,6 +99,8 @@ export default {
             return
           }
           this.$set(this.fileMap, item.resId, item)
+          console.log(this.config)
+          console.log(item)
           this.config.push({
             _tempId: Math.random(),
             items: [
@@ -101,7 +111,7 @@ export default {
               }
             ],
             divider: 1,
-            duration: 5000,
+            duration: 8000,
           })
         }
       })
@@ -111,6 +121,7 @@ export default {
 
       const config = this.config.map(item => {
         item = { ...item }
+        console.log(item)
         delete item._tempId
         item.items.forEach(({ srcId }) => resId.add(srcId))
         return item
@@ -165,6 +176,11 @@ export default {
   .van-tab__pane {
     height: 100%;
     padding: 8px 0;
+  }
+
+  .van-tab__text {
+    flex: 1;
+    text-align: center;
   }
 }
 </style>

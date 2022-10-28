@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col overflow-hidden h-screen bg-gray-100 config">
+  <VueActions data="largeScreen" class="flex flex-col overflow-hidden h-screen bg-gray-100 config">
     <Header :title="devInfo.devSerialNum || '设备列表'">
-      <div slot="after" @click="addAppPublishDeviceAds">
+      <div slot="after" @click="addAppPublishDeviceAds" v-actions:appPublish.click>
         发布
       </div>
     </Header>
@@ -11,9 +11,12 @@
         <span>在线设备：{{devState.onNum || 0}}台</span>
         <span>离线设备：{{devState.offNum || 0}}台</span>
       </div>
-      <div class="flex items-center text-sm bg-primary text-white px-2 rounded-full" @click="getDevState(true)">
-        <van-icon name="aim" />
-        <span class="ml-1">探测</span>
+      <div class="flex-1 flex justify-end items-center">
+        <div class="devStateCircle mr-2" :class="devInfo.devState==0? 'devOffLine':'devOnLine'" ></div>
+        <div class="flex items-center text-sm bg-primary text-white px-2 rounded-full" @click="getDevState(true)" v-actions:detect.click>
+          <van-icon name="aim" />
+          <span class="ml-1">探测</span>
+        </div>
       </div>
     </div>
 
@@ -22,12 +25,16 @@
       arrow
       @prev="changeDev(devIndex <= 0 ? devList.length - 1 : devIndex - 1)"
       @next="changeDev(devIndex >= devList.length - 1 ? 0 : devIndex + 1)"
+      :devState="devInfo.devState"
     >
       <template slot="tab-after">
-        <van-tab title="信息">
+        <van-tab>
+          <template #title>
+            <div v-actions:messageTab.click key="message">信息</div>
+          </template>
           <div class="h-full overflow-auto">
             <van-cell-group inset>
-              <van-cell title="在线状态">
+              <van-cell title="在线状态" v-actions:messageTab.duration>
                 <span :class="{'text-green-500': +devInfo.devState === 1}">{{ ['离线', '在线'][devInfo.devState] }}</span>
               </van-cell>
               <van-cell title="设备名称" :value="devInfo.devSerialNum" />
@@ -38,12 +45,12 @@
         </van-tab>
       </template>
       <template slot="actions">
-        <van-button class="!h-10" type="info" block round plain @click="selectTemplate()">选择模板</van-button>
+        <van-button class="!h-10" type="info" block round plain @click="selectTemplate()" v-actions:selectTemplate.click>选择模板</van-button>
         <van-button v-if="hasDraft" class="!h-10" type="info" block round plain @click="getRollbackAdverts()">回退</van-button>
-        <van-button class="!h-10" type="info" block round @click="addAdvertsTemp()">保存草稿{{ hasDraft ? '(1)' : '' }}</van-button>
+        <van-button class="!h-10" type="info" block round @click="addAdvertsTemp()" v-actions:addAdvertsTemp.click>保存草稿{{ hasDraft ? '(1)' : '' }}</van-button>
       </template>
     </Config>
-  </div>
+  </VueActions>
 </template>
 
 <script>
@@ -82,6 +89,7 @@ export default {
     },
     devIndex() {
       this.devId = this.devList[this.devIndex].devId
+      console.log(this.devIndex)
     },
     devId: 'getAppDevInfo',
   },
@@ -116,6 +124,7 @@ export default {
       })
 
       const {resId, config} = this.getConfig()
+      console.log(config)
       await addAppPublishDeviceAds({
         devId: this.devId,
         describe: "APP",
@@ -161,6 +170,7 @@ export default {
     async getAppDevInfo() {
       const res = await getAppDevInfo(this.devId)
       const { advertsRes, devInfo, isDraft } = res.body
+      console.log(devInfo)
       this.hasDraft = isDraft === HAS_DRAFT
       this.$refs.config.swipeTo(0, { immediate: true })
       this.setConfig(advertsRes.rotationRules)
@@ -212,4 +222,19 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.van-tab__text {
+    flex: 1;
+    text-align: center;
+  }
+  .devStateCircle{
+    width: 12px;
+    height: 12px;
+    border-radius: 50px;
+  }
+  .devOffLine{
+    background-color: gray;;
+  }
+  .devOnLine{
+    background-color: #a0f377;
+  }
 </style>

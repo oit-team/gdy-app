@@ -56,7 +56,7 @@
     </div>
 
     <!--    底部确认-->
-    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border bg-white" v-actions:onShow.click>
+    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border bg-white" @click.stop="onShow" v-actions:onShow.click>
       <div class="mr-2" @click="onShow">
         已选中：{{ total }}/15
       </div>
@@ -64,7 +64,7 @@
     </div>
 
     <!--    弹出层-->
-    <van-popup v-model="show" round position="bottom" class="overflow-hidden pt-3 box-border max-h-7/10">
+    <van-popup v-model="show" round position="bottom" class="overflow-hidden pt-3 box-border max-h-7/10 flex">
       <div class="overflow-y-auto grid grid-cols-3 gap-3 px-3 pb-3" v-actions:singlePop.duration>
         <div
           v-for="(item, index) of selectImgs"
@@ -215,9 +215,7 @@ export default {
     // 点击确认按钮
     onsubmit() {
       this.$root.$emit(SELECT_COLLOCATION, this.selectImgs)
-      this.$nextTick(() => {
-        this.selectImgs = {}
-      })
+      this.selectImgs = {}
       this.$router.back()
     },
   },

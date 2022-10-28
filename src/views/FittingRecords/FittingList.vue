@@ -22,7 +22,9 @@
                 <div>设备名称：{{item.devSerialNum}}</div>
                 <div>试衣时间：{{item.createTime}}</div>
               </div>
-              <div class="listCount flex justify-between items-center">x{{item.styleCount}}</div>
+              <div class="listCount flex justify-between items-center">
+                件数：<div class="countColor">{{item.styleCount}}</div>
+              </div>
             </div>
           </van-cell>
         </van-list>
@@ -135,7 +137,10 @@ export default {
 .fitListItem{
   box-shadow: 2px 2px 2px #ccc;
   .listCount{
-    font-size: 16px;
+    .countColor{
+      color: red;
+      font-size: 16px;
+    }
   }
 }
 .fittingDetai{

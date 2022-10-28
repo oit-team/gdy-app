@@ -11,17 +11,19 @@
       @start="drag = true"
       @end="drag = false"
     >
-      <transition-group class="flex gap-x-3 py-2" type="transition" :name="drag ? 'transition-transform' : null">
+      <transition-group v-if="value.length" class="flex gap-x-3 py-2" type="transition" :name="drag ? 'transition-transform' : null">
         <div
           v-for="(item, index) in value"
           :key="item._tempId"
           class="flex flex-col items-center item relative w-12 flex-shrink-0"
           @click="$emit('select', index)"
+          v-actions:clickSelectedImg.click
         >
           <van-icon
             class="!absolute -right-1.5 -top-1.5 !text-xs bg-red-500 w-3 h-3 !leading-3 rounded-1/2 text-white border border-white p-0.5 z-10"
             name="cross"
             @click.stop="$emit('remove', index)"
+            v-actions:removeSelectedImg.click
           />
           <div class="flex flex-col rounded overflow-hidden pointer-events-none w-full" :class="supportsAspectRatio ? 'aspect-9/16' : 'w-48px h-85px'">
             <ConfigItem
@@ -42,12 +44,12 @@
           <div class="text-xs">{{ index + 1 }}</div>
         </div>
       </transition-group>
+      <div v-else class="h-full grid place-content-center text-gray-500">
+        暂无内容
+      </div>
     </draggable>
-    <div v-if="!value.length" class="h-full grid place-content-center text-gray-500 absolute left-0 w-full">
-      暂无内容
-    </div>
-    <span key="add" class="flex flex-col text-sm pl-2 w-12 h-105px relative z-10">
-      <div class="flex-1 flex flex-col justify-center rounded bg-white items-center" @click="$emit('push')">
+    <span key="add" class="flex flex-col text-sm pl-2 w-12 h-105px">
+      <div class="flex-1 flex flex-col justify-center rounded bg-white items-center" @click="$emit('push')" v-actions:addMatch.click>
         <span class="text-3xl">+</span>
       </div>
     </span>
