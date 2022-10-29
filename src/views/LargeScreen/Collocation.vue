@@ -2,62 +2,63 @@
   <VueActions class="page bacF" data="collocation">
     <van-sticky>
       <Header title="选择搭配"></Header>
+    </van-sticky>
       <van-tabs v-model="selectClass" @click="onClick" v-actions:changeTabs.click>
         <van-tab v-for="(item, index) in classList" :key="item.dictitemCode" :title="`${item.styleName}(${item.totalNum})`">
+          <!--    列表-->
+          <van-empty
+            v-if="showEmpty"
+            description="暂无数据"
+          ></van-empty>
+          <div v-else class="w-full pb-10">
+            <van-pull-refresh
+              v-model="isLoading"
+              class="ub-refresh"
+              success-text="加载成功"
+              @refresh="refresh()"
+            >
+              <van-list
+                v-model="loading"
+                :finished="finished"
+                :error.sync="error"
+                class="bacF"
+                error-text="请求失败，点击重新加载"
+                finished-text="没有更多了"
+                :immediate-check="false"
+                @load="getData()"
+              >
+                <div class="content-box text-sm grid grid-cols-3 gap-3 p-2 box-border">
+                  <div
+                    class="list-item rounded-md relative bg-white"
+                    v-for="(item, index) in indexData"
+                    :key="index"
+                  >
+                    <div class="addIcon">
+                      <img v-if="!checkSelected(item)" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)" v-actions:addSingle.click>
+                      <img v-else src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)" v-actions:delSingle.click>
+                    </div>
+                    <van-image
+                      height="110"
+                      fit="contain"
+                      class="item-img"
+                      :src="convertImageSize(item.collImgUrl)"
+                    />
+                    <div class="list-info flex flex-col items-center">
+                      <p class="van-multi-ellipsis--l2 w-full px-2 text-center h-10 box-border goodsFont">
+                        {{item.collName}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </van-list>
+            </van-pull-refresh>
+          </div>
+
         </van-tab>
       </van-tabs>
-    </van-sticky>
-<!--    列表-->
-    <van-empty
-      v-if="showEmpty"
-      description="暂无数据"
-    ></van-empty>
-    <div v-else class="w-full pb-10 bacF">
-      <van-pull-refresh
-        v-model="isLoading"
-        class="ub-refresh"
-        success-text="加载成功"
-        @refresh="isLoading = true, formData.pageNum = 1, getData()"
-      >
-        <van-list
-          v-model="loading"
-          :finished="finished"
-          :error.sync="error"
-          error-text="请求失败，点击重新加载"
-          finished-text="没有更多了"
-          :immediate-check="false"
-          @load="getData()"
-        >
-          <div class="content-box text-sm grid grid-cols-3 gap-3 p-2 box-border">
-            <div
-              class="list-item rounded-md relative bg-white"
-              v-for="(item, index) in indexData"
-              :key="item.id"
-            >
-              <div class="addIcon">
-                <img v-if="!checkSelected(item)" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)" v-actions:addSingle.click>
-                <img v-else src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)" v-actions:delSingle.click>
-              </div>
-              <van-image
-                height="110"
-                fit="contain"
-                class="item-img"
-                :src="convertImageSize(item.collImgUrl)"
-              />
-              <div class="list-info flex flex-col items-center">
-                <p class="van-multi-ellipsis--l2 w-full px-2 text-center h-10 box-border goodsFont">
-                  {{item.collName}}
-                </p>
-              </div>
-            </div>
-          </div>
-        </van-list>
-      </van-pull-refresh>
-    </div>
-
     <!--    底部确认-->
-    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border bg-white" @click.stop="onShow" v-actions:onShow.click>
-      <div class="mr-2" @click="onShow">
+    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border bg-white">
+      <div class="mr-2" @click="onShow" v-actions:onShow.click>
         已选中：{{ total }}/15
       </div>
       <van-button class="py-2" size="mini" type="info" round @click="onsubmit">确认</van-button>
@@ -101,9 +102,9 @@ export default {
     selectClass: 0,
     indexData: [],
     showEmpty: false,
-    finished: false,
-    isLoading: false,
-    loading: false,
+    finished: false, // 如果加载完毕， 则为 true
+    isLoading: false, // 异步加载完成， 为 false
+    loading: false, // 滚动到底部 loading = true 加载完毕 为false
     error: false,
     formData: {
       pageNum: 1,
@@ -125,8 +126,12 @@ export default {
   methods: {
     convertImageSize,
     // 获取商品列表数据
-    getData() {
+    async getData() {
+      this.isLoading = false
+      this.showEmpty = false
+      this.finished = false
       this.formData.styleCategory = this.classList[this.selectClass].styleName
+      setTimeout(() => {
       getCollocationList({
         ...this.formData,
       }).then((res) => {
@@ -137,8 +142,8 @@ export default {
         } else {
           if (this.formData.pageNum === 1) {
             this.indexData = res.body.collocationList
-            if (res.body.collocationList.length === 0) this.showEmpty = true
-            if (res.body.totalCount <= 20) {
+            this.showEmpty = res.body.collocationList.length === 0
+            if (res.body.totalCount <= 18) {
               this.finished = true
             } else {
               this.formData.pageNum++
@@ -158,6 +163,20 @@ export default {
         this.loading = false
         this.isLoading = false
       })
+      }, 1000)
+    },
+    //  下拉加载
+    refresh() {
+      this.finished = false
+      this.isLoading = false
+      this.loading = true
+      this.formData.pageNum = 1
+      this.getData()
+    },
+    // 重置数据
+    reset() {
+      this.showEmpty = false
+      this.error = false // 如果列表加载失败 则设置true
     },
     //获取分类列表tab
     getClass() {
@@ -177,10 +196,13 @@ export default {
     // 切换tab
     onClick(name, title) {
       this.indexData = []
+      this.formData.pageNum = 1
       this.showEmpty = false
+      this.loading = true
       this.finished = false
       this.error = false
       this.selectClass = name
+      this.getData()
     },
     // 添加照片到数组
     addSingle(item) {
@@ -214,6 +236,7 @@ export default {
     },
     // 点击确认按钮
     onsubmit() {
+      console.log(this.selectImgs)
       this.$root.$emit(SELECT_COLLOCATION, this.selectImgs)
       this.selectImgs = {}
       this.$router.back()
@@ -228,6 +251,10 @@ export default {
 }
 .item-img{
   width: 100%;
+}
+.page{
+  width: 100%;
+  height: 100%;
 }
 .item-img >>> .van-image__img{
   border-radius: 5px 5px 0 0;
@@ -267,7 +294,8 @@ div::marker{
 .page-btm > .van-button{
   padding: 0 10px !important;
 }
-.pop-scroll{
+::v-deep .van-tabs__content{
+  height: 80vh;
   overflow-x: hidden;
   overflow-y: auto;
 }
