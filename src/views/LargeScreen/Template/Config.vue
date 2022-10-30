@@ -35,7 +35,7 @@ export default {
     templateName: '',
   }),
 
-  mounted() {
+  activated() {
     this.isEdit = !!this.$route.query.id
     if (this.isEdit) {
       this.loadData()
