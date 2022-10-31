@@ -127,7 +127,8 @@ export default {
               title: '互动屏',
               click: () => {
                 if (!this.devCount) return this.$toast('未检测到互动屏')
-                this.$router.push('/large-screen/config')
+                // @deprecated 此处时间戳是为了解决组件缓存问题
+                this.$router.push('/large-screen/config?timestamp=' + Date.now())
               },
               auth: this.authMenu.largeScreen,
             },
