@@ -2,9 +2,9 @@
   <div class='header'>
     <img src="static/images/dev/back@2x.png" @click="back" >
     <div class="tit flex items-center">
-      {{title}}
-    <div v-if="color === 'green'" class="devOnLine devStateCircle ml-1"></div>
-    <div v-else-if="color === 'gray'" class="devOffLine devStateCircle ml-1"></div>
+      <slot name="title">
+        {{title}}
+      </slot>
     </div>
     <div>
       <slot name="after"></slot>
@@ -34,7 +34,6 @@ export default {
   },
   props:{
     title:String,
-    color:String,
   }
 };
 </script>
@@ -70,15 +69,4 @@ export default {
   font-size:16px;
   user-select: none; -webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;
 }
-.devOffLine{
-    background-color: gray;;
-  }
-  .devOnLine{
-    background-color: #a0f377;
-  }
-  .devStateCircle{
-    width: 8px;
-    height: 8px;
-    border-radius: 50px;
-  }
 </style>

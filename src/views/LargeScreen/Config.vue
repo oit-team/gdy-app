@@ -1,6 +1,9 @@
 <template>
   <VueActions data="largeScreen" class="flex flex-col overflow-hidden h-screen bg-gray-100 config">
-    <Header :title="devInfo.devSerialNum || '设备列表'" :color="devInfo.devState==0 ? 'gray' : 'green'">
+    <Header>
+      <div slot="title">
+        <span>{{ devInfo.devSerialNum || '设备列表' }}</span>
+      </div>
       <div slot="after" @click="addAppPublishDeviceAds" v-actions:appPublish.click>
         发布
       </div>
