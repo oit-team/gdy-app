@@ -11,7 +11,7 @@
       @start="drag = true"
       @end="drag = false"
     >
-      <transition-group v-if="value.length" class="flex gap-x-3 py-2" type="transition" :name="drag ? 'transition-transform' : null">
+      <transition-group class="flex gap-x-3 py-2" type="transition" :name="drag ? 'transition-transform' : null">
         <div
           v-for="(item, index) in value"
           :key="item._tempId"
@@ -44,11 +44,11 @@
           <div class="text-xs">{{ index + 1 }}</div>
         </div>
       </transition-group>
-      <div v-else class="h-full grid place-content-center text-gray-500">
-        暂无内容
-      </div>
     </draggable>
-    <span key="add" class="flex flex-col text-sm pl-2 w-12 h-105px">
+    <div v-if="!value.length" class="h-full grid place-content-center text-gray-500 absolute left-0 w-full">
+      暂无内容
+    </div>
+    <span key="add" class="flex flex-col text-sm pl-2 w-12 h-105px relative z-10">
       <div class="flex-1 flex flex-col justify-center rounded bg-white items-center" @click="$emit('push')" v-actions:addMatch.click>
         <span class="text-3xl">+</span>
       </div>
