@@ -97,7 +97,6 @@ export default {
       getFitGoodsInfo({
         ...this.formData,
       }).then((res) => {
-        console.log(res)
         if (res.head.status !== 0) {
           this.$toast(res.head.msg)
           this.error = true

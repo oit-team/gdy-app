@@ -1,8 +1,9 @@
 <template>
   <VueActions data="largeScreen" class="flex flex-col overflow-hidden h-screen bg-gray-100 config">
     <Header>
-      <div slot="title">
+      <div slot="title" class="flex justify-center items-center">
         <span>{{ devInfo.devSerialNum || '设备列表' }}</span>
+        <div class="devStateCircle ml-1" :class="devInfo.devState == 0 ? 'devOffLine':'devOnLine'"></div>
       </div>
       <div slot="after" @click="addAppPublishDeviceAds" v-actions:appPublish.click>
         发布
