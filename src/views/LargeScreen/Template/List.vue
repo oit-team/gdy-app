@@ -139,7 +139,8 @@ export default {
     },
     toEdit(id) {
       this.$router.push({
-        path: '/large-screen/template/config',
+        // @deprecated
+        path: '/large-screen/template/config?timestamp=' + Date.now(),
         query: {
           id,
         },
