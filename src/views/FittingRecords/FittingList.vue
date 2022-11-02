@@ -78,7 +78,7 @@ export default {
   }),
 
   activated(){
-    this.onRefresh()
+    this.onLoad()
   },
 
   methods: {
