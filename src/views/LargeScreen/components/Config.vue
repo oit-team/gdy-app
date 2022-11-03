@@ -121,10 +121,6 @@ export default {
       const config = this.config.map(item => {
         item = { ...item }
         delete item._tempId
-        // item.items.forEach(({ srcId, goods }) => {
-        //   resId.push(srcId)
-        //   goods && goodsIds.push(...goods)
-        // })
         item.items.forEach(({ srcId }) => {
           resId.push(srcId)
         })
