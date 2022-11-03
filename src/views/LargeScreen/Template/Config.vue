@@ -57,7 +57,7 @@ export default {
         return this.$toast('模板名称不能为空')
       }
 
-      const {resId, config} = this.$refs.config.getConfig()
+      const {resId, config, goods} = this.$refs.config.getConfig()
 
       if (!config.length) {
         return this.$toast('请先添加内容')
@@ -67,11 +67,13 @@ export default {
         ? await updateAdvertsShop({
           advertsShopId: this.$route.query.id,
           describe: this.templateName,
+          advertsShopStyles: goods,
           rotationRules: JSON.stringify(config),
           resId,
         })
         : await addAdvertsShop({
           describe: this.templateName,
+          advertsShopStyles: goods,
           rotationRules: JSON.stringify(config),
           resId,
         })

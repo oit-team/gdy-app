@@ -90,19 +90,17 @@ export default {
   methods: {
     selectCollocation() {
       this.$router.push('/large-screen/collocation')
-      this.$root.$once(SELECT_COLLOCATION, (data) => {
+      this.$root.$once(SELECT_COLLOCATION, (res) => {
         const max = 15
-        for (const item of Object.values(data)) {
-          console.log(item)
+        for (const item of Object.values(res)) {
           if (this.config.length >= max) {
             this.$toast(`最多添加${max}个搭配图`)
             return
           }
           this.$set(this.fileMap, item.resId, item)
-          console.log(this.config)
-          console.log(item)
           this.config.push({
             _tempId: Math.random(),
+            goods: item.goods.map(({ id }) => id),
             items: [
               {
                 srcId: item.resId,
@@ -117,19 +115,29 @@ export default {
       })
     },
     getConfig() {
-      const resId = new Set()
+      const resId = []
+      const goodsIds = []
 
       const config = this.config.map(item => {
         item = { ...item }
-        console.log(item)
         delete item._tempId
-        item.items.forEach(({ srcId }) => resId.add(srcId))
+        // item.items.forEach(({ srcId, goods }) => {
+        //   resId.push(srcId)
+        //   goods && goodsIds.push(...goods)
+        // })
+        item.items.forEach(({ srcId }) => {
+          resId.push(srcId)
+        })
+        item.goods.forEach(item =>{
+          item && goodsIds.push(item)
+        })
         return item
       })
 
       return {
         config,
-        resId: [...resId],
+        resId: [...new Set(resId)],
+        goods: [...new Set(goodsIds)],
       }
     },
     setConfig(config, cache = true) {

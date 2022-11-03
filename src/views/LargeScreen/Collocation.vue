@@ -210,7 +210,10 @@ export default {
       if (length > 15) return this.$toast('最多只能选择15张图片')
 
       item.imgResInfo.forEach(img => {
-        this.$set(this.selectImgs, img.resId, img)
+        this.$set(this.selectImgs, img.resId, {
+          goods: item.commoditys,
+          ...img,
+        })
       })
     },
     // 删除照片
@@ -236,7 +239,6 @@ export default {
     },
     // 点击确认按钮
     onsubmit() {
-      console.log(this.selectImgs)
       this.$root.$emit(SELECT_COLLOCATION, this.selectImgs)
       this.selectImgs = {}
       this.$router.back()

@@ -93,7 +93,6 @@ export default {
     },
     devIndex() {
       this.devId = this.devList[this.devIndex].devId
-      console.log(this.devIndex)
     },
     devId: 'getAppDevInfo',
   },
@@ -126,15 +125,14 @@ export default {
         title: '提示',
         message: '确定要发布吗？',
       })
-
-      const {resId, config} = this.getConfig()
-      console.log(config)
+      const {resId, config, goods} = this.getConfig()
       await addAppPublishDeviceAds({
         devId: this.devId,
         describe: "APP",
         advertsType: 0,
         defaults: "0",
         state: 0,
+        advertsStyle: goods,
         rotationRules: JSON.stringify(config),
         resId,
       })
@@ -146,10 +144,11 @@ export default {
     },
     async addAdvertsTemp() {
       await this.checkConfig()
-      const {resId, config} = this.getConfig()
+      const {resId, config, goods} = this.getConfig()
       await addAdvertsTemp({
         devId: this.devId,
         rotationRules: JSON.stringify(config),
+        advertsTempStyles: goods,
         describe: '',
         resId,
       })
@@ -174,7 +173,6 @@ export default {
     async getAppDevInfo() {
       const res = await getAppDevInfo(this.devId)
       const { advertsRes, devInfo, isDraft } = res.body
-      console.log(devInfo)
       this.hasDraft = isDraft === HAS_DRAFT
       this.$refs.config.swipeTo(0, { immediate: true })
       this.setConfig(advertsRes.rotationRules)
