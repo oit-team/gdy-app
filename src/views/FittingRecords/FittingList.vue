@@ -32,7 +32,7 @@
     </div>
 
     <!-- 弹出层 -->
-    <van-popup v-model="show" round position="bottom" class="overflow-hidden pt-3 box-border max-h-7/10 flex">
+    <van-popup v-model="show" round position="bottom" class="overflow-y-auto pt-3 box-border max-h-7/10 flex">
       <div class="h-full flex-1" v-if="fittingListItemDetail.length === 0">
         <van-empty description="暂无试衣数据" />
       </div>

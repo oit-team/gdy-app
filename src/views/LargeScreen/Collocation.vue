@@ -1,61 +1,72 @@
 <template>
   <VueActions class="page bacF" data="collocation">
     <van-sticky>
-      <Header title="选择搭配"></Header>
+      <Header>
+        <div slot="title">
+          <span>选择搭配</span>
+        </div>
+        <div slot="after">
+          <div @click="showDate = true">
+            <van-icon name="notes-o" size="24"/>
+          </div>
+          <van-calendar :min-date="minDate" :max-date="maxDate" v-model="showDate" type="range" @confirm="onConfirmDate" />
+        </div>
+      </Header>
     </van-sticky>
-      <van-tabs v-model="selectClass" @click="onClick" v-actions:changeTabs.click>
-        <van-tab v-for="(item, index) in classList" :key="item.dictitemCode" :title="`${item.styleName}(${item.totalNum})`">
-          <!--    列表-->
-          <van-empty
-            v-if="showEmpty"
-            description="暂无数据"
-          ></van-empty>
-          <div v-else class="w-full pb-10">
-            <van-pull-refresh
-              v-model="isLoading"
-              class="ub-refresh"
-              success-text="加载成功"
-              @refresh="refresh()"
+    <van-empty v-if="styleEmpty" description="暂无数据"></van-empty>
+    <van-tabs v-model="selectClass" @click="onClick" v-actions:changeTabs.click v-else>
+      <van-tab v-for="(item, index) in classList" :key="item.dictitemCode" :title="`${item.styleName}(${item.totalNum})`">
+        <!--    列表-->
+        <van-empty
+          v-if="showEmpty"
+          description="暂无数据"
+        ></van-empty>
+        <div v-else class="w-full pb-10">
+          <van-pull-refresh
+            v-model="isLoading"
+            class="ub-refresh"
+            success-text="加载成功"
+            @refresh="refresh()"
+          >
+            <van-list
+              v-model="loading"
+              :finished="finished"
+              :error.sync="error"
+              class="bacF"
+              error-text="请求失败，点击重新加载"
+              finished-text="没有更多了"
+              :immediate-check="false"
+              @load="getData()"
             >
-              <van-list
-                v-model="loading"
-                :finished="finished"
-                :error.sync="error"
-                class="bacF"
-                error-text="请求失败，点击重新加载"
-                finished-text="没有更多了"
-                :immediate-check="false"
-                @load="getData()"
-              >
-                <div class="content-box text-sm grid grid-cols-3 gap-3 p-2 box-border">
-                  <div
-                    class="list-item rounded-md relative bg-white"
-                    v-for="(item, index) in indexData"
-                    :key="index"
-                  >
-                    <div class="addIcon">
-                      <img v-if="!checkSelected(item)" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)" v-actions:addSingle.click>
-                      <img v-else src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)" v-actions:delSingle.click>
-                    </div>
-                    <van-image
-                      height="110"
-                      fit="contain"
-                      class="item-img"
-                      :src="convertImageSize(item.collImgUrl)"
-                    />
-                    <div class="list-info flex flex-col items-center">
-                      <p class="van-multi-ellipsis--l2 w-full px-2 text-center h-10 box-border goodsFont">
-                        {{item.collName}}
-                      </p>
-                    </div>
+              <div class="content-box text-sm grid grid-cols-3 gap-3 p-2 box-border">
+                <div
+                  class="list-item rounded-md relative bg-white"
+                  v-for="(item, index) in indexData"
+                  :key="index"
+                >
+                  <div class="addIcon">
+                    <img v-if="!checkSelected(item)" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)" v-actions:addSingle.click>
+                    <img v-else src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)" v-actions:delSingle.click>
+                  </div>
+                  <van-image
+                    height="110"
+                    fit="contain"
+                    class="item-img"
+                    :src="convertImageSize(item.collImgUrl)"
+                  />
+                  <div class="list-info flex flex-col items-center">
+                    <p class="van-multi-ellipsis--l2 w-full px-2 text-center h-10 box-border goodsFont">
+                      {{item.collName}}
+                    </p>
                   </div>
                 </div>
-              </van-list>
-            </van-pull-refresh>
-          </div>
+              </div>
+            </van-list>
+          </van-pull-refresh>
+        </div>
 
-        </van-tab>
-      </van-tabs>
+      </van-tab>
+    </van-tabs>
     <!--    底部确认-->
     <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border bg-white">
       <div class="mr-2" @click="onShow" v-actions:onShow.click>
@@ -92,6 +103,13 @@ import { dictitemInfoAllMethod, getCollocationList } from "@/api/largeScreen"
 import {SELECT_COLLOCATION} from './constant'
 import { convertImageSize } from '@/utils/helper'
 
+const d = new Date()
+const year = d.getFullYear()
+let month = d.getMonth() + 1
+month = month < 10 ? `0${month}` : month
+let date = d.getDate()
+date = date < 10 ? `0${date}` : date
+
 export default {
   name: "Collocation",
   components: {
@@ -102,10 +120,14 @@ export default {
     selectClass: 0,
     indexData: [],
     showEmpty: false,
+    styleEmpty: false,
+    clickConfirm: false,
     finished: false, // 如果加载完毕， 则为 true
     isLoading: false, // 异步加载完成， 为 false
     loading: false, // 滚动到底部 loading = true 加载完毕 为false
     error: false,
+    minDate: new Date(year - 1, month - 1, date),
+    maxDate: new Date(year + 1 , month - 1, date),
     formData: {
       pageNum: 1,
       pageSize: 18,
@@ -114,6 +136,10 @@ export default {
     },
     selectImgs: {},
     show: false,
+    showDate: false,
+    pastTime:'',
+    startcreateTime:'',
+    endcreateTime:''
   }),
   computed: {
     total() {
@@ -121,9 +147,46 @@ export default {
     }
   },
   activated() {
+    this.startcreateTime =  ''
+    this.styleEmpty = false
     this.getClass()
   },
+
   methods: {
+    formatDate(date) {
+      let month = date.getMonth() + 1
+      month = month >= 10 ? month : '0' + month
+      let day = date.getDate()
+      day = day >= 10 ? day : '0' +  day
+      return `${date.getFullYear()}/${month}/${day}`
+    },
+    initCalTime(){
+
+    },
+    onConfirmDate(date) {
+      const [start, end] = date
+      this.startcreateTime =  this.formatDate(start)
+      this.endcreateTime =  this.formatDate(end)
+      this.showDate = false
+      this.clickConfirm = true
+      this.getClass()
+
+    },
+    // 判断初始是否选择时间
+    handelTime(){
+      if(!this.startcreateTime || this.clickConfirm){
+        let currentDate = (new Date()).getTime()
+        let pastDate = new Date(currentDate - 365 / 2 * 24 * 60 * 60 * 1000)
+        let pastYear = pastDate.getFullYear()
+
+        let pastMonth = pastDate.getMonth() + 1
+        pastMonth = pastMonth >= 10 ? pastMonth : `0${pastMonth}`
+
+        let pastDay = pastDate.getDate()
+        pastDay = pastDay >= 10 ? pastDay : `0${pastDay}`
+        this.pastTime = pastYear + '/' + pastMonth + '/'+pastDay
+      }
+    },
     convertImageSize,
     // 获取商品列表数据
     async getData() {
@@ -131,38 +194,42 @@ export default {
       this.showEmpty = false
       this.finished = false
       this.formData.styleCategory = this.classList[this.selectClass].styleName
+
       setTimeout(() => {
-      getCollocationList({
-        ...this.formData,
-      }).then((res) => {
-        if (res.head.status !== 0) {
-          this.$toast(res.head.msg)
-          this.error = true
-          return false
-        } else {
-          if (this.formData.pageNum === 1) {
-            this.indexData = res.body.collocationList
-            this.showEmpty = res.body.collocationList.length === 0
-            if (res.body.totalCount <= 18) {
-              this.finished = true
-            } else {
-              this.formData.pageNum++
-            }
+        this.handelTime()
+        getCollocationList({
+          ...this.formData,
+          startcreateTime: this.startcreateTime || this.pastTime,
+          endcreateTime: this.endcreateTime || this.formatDate(new Date())
+        }).then((res) => {
+          if (res.head.status !== 0) {
+            this.$toast(res.head.msg)
+            this.error = true
+            return false
           } else {
-            this.indexData = [...this.indexData, ...res.body.collocationList]
-            if (res.body.totalCount === this.indexData.length) {
-              this.finished = true
-            } else if (res.body.totalCount > this.indexData.length) this.formData.pageNum++
+            if (this.formData.pageNum === 1) {
+              this.indexData = res.body.collocationList
+              this.showEmpty = res.body.collocationList.length === 0
+              if (res.body.totalCount <= 18) {
+                this.finished = true
+              } else {
+                this.formData.pageNum++
+              }
+            } else {
+              this.indexData = [...this.indexData, ...res.body.collocationList]
+              if (res.body.totalCount === this.indexData.length) {
+                this.finished = true
+              } else if (res.body.totalCount > this.indexData.length) this.formData.pageNum++
+            }
           }
-        }
-      }).catch(() => {
-        this.showEmpty = true
-        this.error = true
-        this.finished = true
-      }).finally(() => {
-        this.loading = false
-        this.isLoading = false
-      })
+        }).catch(() => {
+          this.showEmpty = true
+          this.error = true
+          this.finished = true
+        }).finally(() => {
+          this.loading = false
+          this.isLoading = false
+        })
       }, 1000)
     },
     //  下拉加载
@@ -180,16 +247,22 @@ export default {
     },
     //获取分类列表tab
     getClass() {
+      this.handelTime()
       dictitemInfoAllMethod({
         brandId: localStorage.getItem('brandId'),
         type: 'styleCategory',
         userId: localStorage.getItem('userId'),
+        startcreateTime: this.startcreateTime || this.pastTime,
+        endcreateTime: this.endcreateTime || this.formatDate(new Date())
       }, {
         cmd: 100009
       }).then((res) => {
+        debugger
         if (res.head.status === 0) {
           this.classList = res.body.resultList
-          this.getData()
+          const isEmpty = !this.classList.length
+          this.styleEmpty = isEmpty
+          !isEmpty && this.getData()
         }
       })
     },
@@ -241,6 +314,11 @@ export default {
     onsubmit() {
       this.$root.$emit(SELECT_COLLOCATION, this.selectImgs)
       this.selectImgs = {}
+      // if(this.clickConfirm){
+      //   this.startcreateTime = this.pastTime
+      //   this.endcreateTime = this.formatDate(new Date())
+      //   this.styleEmpty = false
+      // }
       this.$router.back()
     },
   },
