@@ -16,3 +16,5 @@ uno.css
 *.sln
 .svn
 .env.local
+
+.env
