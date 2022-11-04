@@ -9,7 +9,7 @@
           <div @click="showDate = true">
             <van-icon name="notes-o" size="24"/>
           </div>
-          <van-calendar :min-date="minDate" :max-date="maxDate" v-model="showDate" type="range" @confirm="onConfirmDate" />
+          <van-calendar ref="confirmDate" :min-date="minDate" :max-date="maxDate" v-model="showDate" type="range" @confirm="onConfirmDate" />
         </div>
       </Header>
     </van-sticky>
@@ -102,14 +102,6 @@ import Header from '@/components/comps/header/header'
 import { dictitemInfoAllMethod, getCollocationList } from "@/api/largeScreen"
 import {SELECT_COLLOCATION} from './constant'
 import { convertImageSize } from '@/utils/helper'
-
-const d = new Date()
-const year = d.getFullYear()
-let month = d.getMonth() + 1
-month = month < 10 ? `0${month}` : month
-let date = d.getDate()
-date = date < 10 ? `0${date}` : date
-
 export default {
   name: "Collocation",
   components: {
@@ -126,8 +118,8 @@ export default {
     isLoading: false, // 异步加载完成， 为 false
     loading: false, // 滚动到底部 loading = true 加载完毕 为false
     error: false,
-    minDate: new Date(year - 1, month - 1, date),
-    maxDate: new Date(year + 1 , month - 1, date),
+    minDate: new Date(new Date().getTime() - 365 * 24 * 60 * 60 * 1000),
+    maxDate: new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000),
     formData: {
       pageNum: 1,
       pageSize: 18,
@@ -137,21 +129,22 @@ export default {
     selectImgs: {},
     show: false,
     showDate: false,
-    pastTime:'',
     startcreateTime:'',
     endcreateTime:''
   }),
   computed: {
     total() {
       return Object.keys(this.selectImgs).length
+    },
+    pastTime(){
+      let currentDate = (new Date()).getTime()
+      return this.formatDate(new Date(currentDate - 365 / 2 * 24 * 60 * 60 * 1000))
     }
   },
   activated() {
-    this.startcreateTime =  ''
-    this.styleEmpty = false
-    this.getClass()
+    this.onConfirmDate([new Date(this.pastTime),new Date()])
+    this.$refs.confirmDate.reset()
   },
-
   methods: {
     formatDate(date) {
       let month = date.getMonth() + 1
@@ -169,21 +162,6 @@ export default {
       this.getClass()
 
     },
-    // 判断初始是否选择时间
-    handelTime(){
-      if(!this.startcreateTime || this.clickConfirm){
-        let currentDate = (new Date()).getTime()
-        let pastDate = new Date(currentDate - 365 / 2 * 24 * 60 * 60 * 1000)
-        let pastYear = pastDate.getFullYear()
-
-        let pastMonth = pastDate.getMonth() + 1
-        pastMonth = pastMonth >= 10 ? pastMonth : `0${pastMonth}`
-
-        let pastDay = pastDate.getDate()
-        pastDay = pastDay >= 10 ? pastDay : `0${pastDay}`
-        this.pastTime = pastYear + '/' + pastMonth + '/'+pastDay
-      }
-    },
     convertImageSize,
     // 获取商品列表数据
     async getData() {
@@ -193,7 +171,6 @@ export default {
       this.formData.styleCategory = this.classList[this.selectClass].styleName
 
       setTimeout(() => {
-        this.handelTime()
         getCollocationList({
           ...this.formData,
           startcreateTime: this.startcreateTime || this.pastTime,
@@ -244,7 +221,6 @@ export default {
     },
     //获取分类列表tab
     getClass() {
-      this.handelTime()
       dictitemInfoAllMethod({
         brandId: localStorage.getItem('brandId'),
         type: 'styleCategory',
@@ -254,7 +230,6 @@ export default {
       }, {
         cmd: 100009
       }).then((res) => {
-        debugger
         if (res.head.status === 0) {
           this.classList = res.body.resultList
           const isEmpty = !this.classList.length
