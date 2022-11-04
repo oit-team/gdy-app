@@ -155,13 +155,10 @@ export default {
   methods: {
     formatDate(date) {
       let month = date.getMonth() + 1
-      month = month >= 10 ? month : '0' + month
+      month = month >= 10 ? month : `0${month}`
       let day = date.getDate()
-      day = day >= 10 ? day : '0' +  day
+      day = day >= 10 ? day : `0${day}`
       return `${date.getFullYear()}/${month}/${day}`
-    },
-    initCalTime(){
-
     },
     onConfirmDate(date) {
       const [start, end] = date
@@ -314,11 +311,6 @@ export default {
     onsubmit() {
       this.$root.$emit(SELECT_COLLOCATION, this.selectImgs)
       this.selectImgs = {}
-      // if(this.clickConfirm){
-      //   this.startcreateTime = this.pastTime
-      //   this.endcreateTime = this.formatDate(new Date())
-      //   this.styleEmpty = false
-      // }
       this.$router.back()
     },
   },
