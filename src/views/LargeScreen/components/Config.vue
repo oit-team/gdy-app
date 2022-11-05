@@ -124,7 +124,7 @@ export default {
         item.items.forEach(({ srcId }) => {
           resId.push(srcId)
         })
-        item.goods.forEach(item =>{
+        item.goods && item.goods.forEach(item =>{
           item && goodsIds.push(item)
         })
         return item

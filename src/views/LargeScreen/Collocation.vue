@@ -77,7 +77,7 @@
 
     <!--    弹出层-->
     <van-popup v-model="show" round position="bottom" class="overflow-hidden pt-3 box-border max-h-7/10">
-      <div class="overflow-y-auto grid grid-cols-3 gap-3 px-3 pb-3" v-actions:singlePop.duration>
+      <div class="overflow-y-auto grid grid-cols-3 gap-3 px-3 pb-3 h-full" v-actions:singlePop.duration>
         <div
           v-for="(item, index) of selectImgs"
           :key="item.resId"
