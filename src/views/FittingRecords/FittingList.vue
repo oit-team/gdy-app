@@ -36,7 +36,7 @@
       <div class="h-full flex-1" v-if="fittingListItemDetail.length === 0">
         <van-empty description="暂无试衣数据" />
       </div>
-      <div v-else class="h-full overflow-y-auto grid grid-cols-3 gap-3 px-3 pb-3">
+      <div v-else class="h-full grid grid-cols-3 gap-3 px-3 pb-3">
         <div  class="fittingDetai box-border relative aspect-9/16 flex flex-col justify-center items-center rounded" v-for="(item,index) in fittingListItemDetail" :key="index">
           <van-image
             height="120"
@@ -62,7 +62,7 @@ export default {
   },
 
   data: () => ({
-    loading: false,
+    loading: true,
     finished: false,
     refreshing: false,
     show: false,
@@ -77,19 +77,23 @@ export default {
     fittingListItemDetail: [], // popUp列表
   }),
 
-  activated(){
-    this.onLoad()
+  activated() {
+    this.formatData()
   },
 
   methods: {
     // 下拉刷新
     onRefresh() {
+      this.refreshing = true
+      this.formatData()
+    },
+    formatData(){
       // 清空列表数据
       this.finished = false
-      this.refreshing = true
       // 重新加载数据
       this.loading = true
       this.formData.pageNum = 1
+      this.fittingList = []
       this.onLoad()
     },
     // 获取列表数据
@@ -139,6 +143,7 @@ export default {
 .fittingList {
   height: calc(100% - 45px);
   overflow-y: auto;
+  box-sizing: border-box;
 }
 .fitListItem{
   &::after{
