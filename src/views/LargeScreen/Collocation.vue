@@ -15,7 +15,7 @@
     </van-sticky>
     <van-empty v-if="styleEmpty" description="暂无数据"></van-empty>
     <van-tabs v-model="selectClass" @click="onClick" v-actions:changeTabs.click v-else>
-      <van-tab v-for="(item, index) in classList" :key="item.dictitemCode" :title="`${item.styleName}(${item.totalNum})`">
+      <van-tab v-for="item in classList" :key="item.dictitemCode" :title="`${item.styleName}(${item.totalNum})`">
         <!--    列表-->
         <van-empty
           v-if="showEmpty"
