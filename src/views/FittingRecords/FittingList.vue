@@ -92,6 +92,7 @@ export default {
       this.finished = false
       // 重新加载数据
       this.loading = true
+      this.showListEmpty = false
       this.formData.pageNum = 1
       this.fittingList = []
       this.onLoad()
