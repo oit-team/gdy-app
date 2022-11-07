@@ -77,19 +77,21 @@
 
     <!--    弹出层-->
     <van-popup v-model="show" round position="bottom" class="overflow-hidden pt-3 box-border max-h-7/10">
-      <div class="overflow-y-auto grid grid-cols-3 gap-3 px-3 pb-3 h-full" v-actions:singlePop.duration>
-        <div
-          v-for="(item, index) of selectImgs"
-          :key="item.resId"
-          class="box-border relative aspect-9/16 flex bg-gray-100 rounded"
-        >
-          <van-image
-            class="h-full w-full"
-            :src="convertImageSize(item.resUrl)"
-            fit="contain"
-          ></van-image>
-          <div class="pop-item__del" @click="delImg(item, index)" v-actions:delImg.click>
-            <van-icon name="cross" color="#fff" size="14"></van-icon>
+      <div class="overflow-y-auto h-full">
+        <div class="grid grid-cols-3 gap-3 px-3 pb-3" v-actions:singlePop.duration>
+          <div
+            v-for="(item, index) of selectImgs"
+            :key="item.resId"
+            class="box-border relative aspect-9/16 flex bg-gray-100 rounded"
+          >
+            <van-image
+              class="h-full w-full"
+              :src="convertImageSize(item.resUrl)"
+              fit="contain"
+            ></van-image>
+            <div class="pop-item__del" @click="delImg(item, index)" v-actions:delImg.click>
+              <van-icon name="cross" color="#fff" size="14"></van-icon>
+            </div>
           </div>
         </div>
       </div>
