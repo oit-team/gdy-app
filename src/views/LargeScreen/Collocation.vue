@@ -122,8 +122,8 @@ export default {
     isLoading: false, // 异步加载完成， 为 false
     loading: false, // 滚动到底部 loading = true 加载完毕 为false
     error: false,
-    minDate: dayjs().subtract(6, 'month').toDate(),
-    maxDate: dayjs().add(6, 'month').toDate(),
+    minDate: dayjs().subtract(1, 'year').toDate(), // 日历可选当前时间前后一年 默认开始时间为半年前
+    maxDate: dayjs().add(1, 'year').toDate(),
     formData: {
       pageNum: 1,
       pageSize: 18,
