@@ -102,6 +102,8 @@ import Header from '@/components/comps/header/header'
 import { dictitemInfoAllMethod, getCollocationList } from "@/api/largeScreen"
 import {SELECT_COLLOCATION} from './constant'
 import { convertImageSize } from '@/utils/helper'
+import dayjs from 'dayjs'
+
 export default {
   name: "Collocation",
   components: {
@@ -118,8 +120,8 @@ export default {
     isLoading: false, // 异步加载完成， 为 false
     loading: false, // 滚动到底部 loading = true 加载完毕 为false
     error: false,
-    minDate: new Date(new Date().getTime() - 365 * 24 * 60 * 60 * 1000),
-    maxDate: new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000),
+    minDate: dayjs().subtract(6, 'month').toDate(),
+    maxDate: dayjs().add(6, 'month').toDate(),
     formData: {
       pageNum: 1,
       pageSize: 18,
@@ -137,21 +139,16 @@ export default {
       return Object.keys(this.selectImgs).length
     },
     pastTime(){
-      let currentDate = (new Date()).getTime()
-      return this.formatDate(new Date(currentDate - 365 / 2 * 24 * 60 * 60 * 1000))
+      return dayjs().subtract(6, 'month').toDate()
     }
   },
   activated() {
-    this.onConfirmDate([new Date(this.pastTime),new Date()])
+    this.onConfirmDate([this.pastTime, new Date()])
     this.$refs.confirmDate.reset()
   },
   methods: {
     formatDate(date) {
-      let month = date.getMonth() + 1
-      month = month >= 10 ? month : `0${month}`
-      let day = date.getDate()
-      day = day >= 10 ? day : `0${day}`
-      return `${date.getFullYear()}/${month}/${day}`
+      return dayjs(date).format('YYYY/MM/DD')
     },
     onConfirmDate(date) {
       const [start, end] = date
