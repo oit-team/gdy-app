@@ -169,41 +169,40 @@ export default {
       this.finished = false
       this.formData.styleCategory = this.classList[this.selectClass].styleName
 
-      setTimeout(() => {
-        getCollocationList({
-          ...this.formData,
-          startcreateTime: this.startcreateTime || this.pastTime,
-          endcreateTime: this.endcreateTime || this.formatDate(new Date())
-        }).then((res) => {
-          if (res.head.status !== 0) {
-            this.$toast(res.head.msg)
-            this.error = true
-            return false
-          } else {
-            if (this.formData.pageNum === 1) {
-              this.indexData = res.body.collocationList
-              this.showEmpty = res.body.collocationList.length === 0
-              if (res.body.totalCount <= 18) {
-                this.finished = true
-              } else {
-                this.formData.pageNum++
-              }
-            } else {
-              this.indexData = [...this.indexData, ...res.body.collocationList]
-              if (res.body.totalCount === this.indexData.length) {
-                this.finished = true
-              } else if (res.body.totalCount > this.indexData.length) this.formData.pageNum++
-            }
-          }
-        }).catch(() => {
-          this.showEmpty = true
+      getCollocationList({
+        ...this.formData,
+        startcreateTime: this.startcreateTime || this.pastTime,
+        endcreateTime: this.endcreateTime || this.formatDate(new Date())
+      }).then((res) => {
+        if (res.head.status !== 0) {
+          this.$toast(res.head.msg)
           this.error = true
-          this.finished = true
-        }).finally(() => {
-          this.loading = false
-          this.isLoading = false
-        })
-      }, 1000)
+          return false
+        } else {
+          if (this.formData.pageNum === 1) {
+            this.indexData = res.body.collocationList
+            this.showEmpty = res.body.collocationList.length === 0
+            if (res.body.totalCount <= 18) {
+              this.finished = true
+            } else {
+              this.formData.pageNum++
+            }
+          } else {
+            this.indexData = [...this.indexData, ...res.body.collocationList]
+            if (res.body.totalCount === this.indexData.length) {
+              this.finished = true
+            } else if (res.body.totalCount > this.indexData.length) this.formData.pageNum++
+          }
+        }
+      }).catch(() => {
+        this.showEmpty = true
+        this.error = true
+        this.finished = true
+      }).finally(() => {
+        this.loading = false
+        this.isLoading = false
+      })
+
     },
     //  下拉加载
     refresh() {
