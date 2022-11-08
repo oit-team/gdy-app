@@ -68,7 +68,7 @@
       </van-tab>
     </van-tabs>
     <!--    底部确认-->
-    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border bg-white">
+    <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border bg-white z-10">
       <div class="mr-2" @click="onShow" v-actions:onShow.click>
         已选中：{{ total }}/15
       </div>
