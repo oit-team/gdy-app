@@ -16,7 +16,7 @@
           error-text="请求失败，点击重新加载"
           @load="onLoad()"
         >
-          <van-cell class="fitListItem" v-for="(item,index) in fittingList" :key="index"  @click="showPopup(item.styleList)">
+          <van-cell class="fitListItem" v-for="(item,index) in fittingList" :key="index"  @click="showPopup(item)">
              <div class="list flex justify-between">
               <div class="flex flex-1 flex-col">
                 <div>设备名称：{{item.devSerialNum}}</div>
@@ -36,14 +36,20 @@
       <div class="h-full flex-1" v-if="fittingListItemDetail.length === 0">
         <van-empty description="暂无试衣数据" />
       </div>
-      <div v-else class="h-full grid grid-cols-3 gap-3 px-3 pb-3">
-        <div  class="fittingDetai box-border relative aspect-9/16 flex flex-col justify-center items-center rounded" v-for="(item,index) in fittingListItemDetail" :key="index">
-          <van-image
-            height="120"
-            fit="contain"
-            :src="item.resUrl"
-          />
-          <div class="fittingNo">{{item.styleNo}}</div>
+      <div v-else>
+        <div class="deviceInfo">
+          <div>设备名称：{{fittingListItemInfo.devSerialNum}}</div>
+          <div>试衣时间：{{fittingListItemInfo.createTime}}</div>
+        </div>
+        <div  class="h-full grid grid-cols-3 gap-3 px-3 pb-3">
+          <div  class="fittingDetai box-border relative aspect-9/16 flex flex-col justify-center items-center rounded" v-for="(item,index) in fittingListItemDetail" :key="index">
+            <van-image
+              height="120"
+              fit="contain"
+              :src="item.resUrl"
+            />
+            <div class="fittingNo">{{item.styleNo}}</div>
+          </div>
         </div>
       </div>
     </van-popup>
@@ -68,6 +74,10 @@ export default {
     show: false,
     error: false,
     showListEmpty: false,
+    fittingListItemInfo:{
+      devSerialNum:'',
+      createTime:''
+    },
 
     formData: {
       pageNum:1,
@@ -94,7 +104,6 @@ export default {
       this.loading = true
       this.showListEmpty = false
       this.formData.pageNum = 1
-      this.fittingList = []
       this.onLoad()
     },
     // 获取列表数据
@@ -134,7 +143,9 @@ export default {
     // 弹出框
     showPopup(item){
       this.show = true
-      this.fittingListItemDetail = item
+      this.fittingListItemInfo.devSerialNum = item.devSerialNum
+      this.fittingListItemInfo.createTime = item.createTime
+      this.fittingListItemDetail = item.styleList
     },
   },
 }
@@ -156,6 +167,11 @@ export default {
       font-size: 16px;
     }
   }
+}
+.deviceInfo{
+  padding: 10px 16px;
+  color: #333;
+  font-size: 14px;
 }
 .fittingDetai{
   border: 1px solid #ccc;
