@@ -119,7 +119,7 @@ export default {
           if (this.formData.pageNum === 1) {
             this.fittingList = res.body.result
             if (res.body.result.length === 0) this.showListEmpty = true
-            if (res.body.count <= 20) {
+            if (res.body.count <= 18) {
               this.finished = true
             } else {
               this.formData.pageNum++

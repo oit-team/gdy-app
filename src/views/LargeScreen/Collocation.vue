@@ -9,7 +9,7 @@
           <div @click="showDate = true">
             <van-icon name="notes-o" size="24"/>
           </div>
-          <van-calendar ref="confirmDate" :min-date="minDate" :max-date="maxDate" v-model="showDate" type="range" @confirm="onConfirmDate" />
+          <van-calendar ref="confirmDate" :default-date="defaultDate" :min-date="minDate" :max-date="maxDate" v-model="showDate" type="range" color="#1989fa" @confirm="onConfirmDate" />
         </div>
       </Header>
     </van-sticky>
@@ -122,7 +122,8 @@ export default {
     isLoading: false, // 异步加载完成， 为 false
     loading: false, // 滚动到底部 loading = true 加载完毕 为false
     error: false,
-    minDate: dayjs().subtract(1, 'year').toDate(), // 日历可选当前时间前后一年 默认开始时间为半年前
+    defaultDate: [dayjs().subtract(6, 'month').toDate(), new Date()], // 默认开始时间为半年前
+    minDate: dayjs().subtract(1, 'year').toDate(), // 日历可选当前时间前后一年
     maxDate: dayjs().add(1, 'year').toDate(),
     formData: {
       pageNum: 1,
