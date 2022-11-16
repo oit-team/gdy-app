@@ -114,7 +114,7 @@ export function getDaysAgo(day, format = 'yyyy/MM/dd') {
 }
 
 export function convertImageSize(img, size = 's') {
-  return img.replace(/(.*)\./, `$1_${size}.`)
+  return img && img.replace(/(.*)\./, `$1_${size}.`)
 }
 
 export const supportsAspectRatio = CSS && CSS.supports

@@ -36,7 +36,7 @@
       <div class="h-full flex-1" v-if="fittingListItemDetail.length === 0">
         <van-empty description="暂无试衣数据" />
       </div>
-      <div v-else>
+      <div style="width: 100%" v-else>
         <div class="deviceInfo">
           <div>设备名称：{{fittingListItemInfo.devSerialNum}}</div>
           <div>试衣时间：{{fittingListItemInfo.createTime}}</div>
