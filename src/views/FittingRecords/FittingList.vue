@@ -46,7 +46,7 @@
             <van-image
               height="120"
               fit="contain"
-              :src="item.resUrl"
+              :src="convertImageSize(item.resUrl)"
             />
             <div class="fittingNo">{{item.styleNo}}</div>
           </div>
@@ -58,6 +58,7 @@
 </template>
 
 <script>
+import { convertImageSize } from '@/utils/helper'
 import Header from '@/components/comps/header/header'
 import { getFitGoodsInfo } from "@/api/fittingRecords"
 
@@ -97,6 +98,7 @@ export default {
       this.refreshing = true
       this.formatData()
     },
+    convertImageSize,
     formatData(){
       // 清空列表数据
       this.finished = false
