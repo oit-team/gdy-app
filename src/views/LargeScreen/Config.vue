@@ -2,35 +2,48 @@
   <VueActions data="largeScreen" class="flex flex-col overflow-hidden h-screen bg-gray-100 config">
     <Header>
       <div slot="title" class="flex justify-center items-center">
-        <span>{{ devInfo.devSerialNum || '设备列表' }}</span>
-        <div class="devStateCircle ml-1" :class="devInfo.devState == 0 ? 'devOffLine':'devOnLine'"></div>
+        设备列表
       </div>
-      <div slot="after" @click="addAppPublishDeviceAds" v-actions:appPublish.click>
-        发布
+
+      <div slot="after" class="flex items-center text-sm bg-primary text-white px-2 rounded-full" @click="getDevState(true)" v-actions:detect.click>
+        <van-icon name="aim" />
+        <span class="ml-1">探测</span>
       </div>
     </Header>
 
-    <div class="flex items-center justify-between px-3 pt-2">
-      <div class="text-sm text-gray-500">
-        <span>在线设备：{{devState.onNum || 0}}台</span>
-        <span>离线设备：{{devState.offNum || 0}}台</span>
-      </div>
-      <div class="flex-1 flex justify-end items-center">
-        <!-- <div class="devStateCircle mr-2" :class="devInfo.devState==0? 'devOffLine':'devOnLine'" ></div> -->
-        <div class="flex items-center text-sm bg-primary text-white px-2 rounded-full" @click="getDevState(true)" v-actions:detect.click>
-          <van-icon name="aim" />
-          <span class="ml-1">探测</span>
-        </div>
-      </div>
+    <div>
+      <van-tabs
+        v-model="active"
+        swipe-threshold="2"
+        @click="changeDev"
+        color="rgb(25, 137, 250)"
+        line-width="110"
+      >
+        <van-tab
+          v-for="item in devList"
+          :key="item.devId"
+        >
+          <template #title>
+            <div class="flex items-center justify-around">
+              <div class="devStateCircle mx-1 inline-block" :class="item.devState == 0 ? 'devOffLine':'devOnLine'"></div>
+              {{ item.devSerialNum }}
+            </div>
+          </template>
+        </van-tab>
+      </van-tabs>
     </div>
 
     <Config
       ref="config"
       arrow
-      @prev="changeDev(devIndex <= 0 ? devList.length - 1 : devIndex - 1)"
-      @next="changeDev(devIndex >= devList.length - 1 ? 0 : devIndex + 1)"
       :devState="devInfo.devState"
+      @addAdvertsTemp="addAdvertsTemp()"
+      @getRollbackAdverts="getRollbackAdverts()"
     >
+      <template slot="top-actions">
+        <van-button class="!h-8 w-120px" type="info" block round @click="addAdvertsTemp" v-actions:addAdvertsTemp.click>保存草稿{{ hasDraft ? '(1)' : '' }}</van-button>
+        <van-button v-if="hasDraft" class="!h-8 w-80px ml-1" type="info" block round plain @click="getRollbackAdverts">回退</van-button>
+      </template>
       <template slot="tab-after">
         <van-tab>
           <template #title>
@@ -38,10 +51,6 @@
           </template>
           <div class="h-full overflow-auto">
             <van-cell-group inset>
-              <van-cell title="在线状态" v-actions:messageTab.duration>
-                <span :class="{'text-green-500': +devInfo.devState === 1}">{{ ['离线', '在线'][devInfo.devState] }}</span>
-              </van-cell>
-              <van-cell title="设备名称" :value="devInfo.devSerialNum" />
               <van-cell title="发布时间" :value="devInfo.releaseTime" />
               <van-cell title="探测时间" :value="devInfo.detecTime" />
             </van-cell-group>
@@ -49,16 +58,27 @@
         </van-tab>
       </template>
       <template slot="actions">
-        <van-button class="!h-10" type="info" block round plain @click="selectTemplate()" v-actions:selectTemplate.click>选择模板</van-button>
-        <van-button v-if="hasDraft" class="!h-10" type="info" block round plain @click="getRollbackAdverts()">回退</van-button>
-        <van-button class="!h-10" type="info" block round @click="addAdvertsTemp()" v-actions:addAdvertsTemp.click>保存草稿{{ hasDraft ? '(1)' : '' }}</van-button>
+        <van-button class="!h-10" type="info" block round plain @click="selectTemplate()" v-actions:selectTemplate.click>
+          {{ modulesTitle ? `模板(${modulesTitle})` : '选择模板' }}
+        </van-button>
+        <van-button
+          round
+          block
+          size="small"
+          type="info"
+          class="!h-10"
+          @click="addAppPublishDeviceAds"
+          v-actions:appPublish.click
+        >
+          发布
+        </van-button>
       </template>
     </Config>
   </VueActions>
 </template>
 
 <script>
-import Header from '@/components/comps/header/header'
+import Header from '../../components/comps/header/header'
 import ConfigList from './components/ConfigList.vue'
 import Preview from './components/Preview.vue'
 import Config from './components/Config.vue'
@@ -84,6 +104,8 @@ export default {
     fileMap: {},
     devId: null,
     hasDraft: false,
+    active: 0,
+    modulesTitle: '',
   }),
 
   watch: {
@@ -136,7 +158,7 @@ export default {
         rotationRules: JSON.stringify(config),
         resId,
       })
-
+      this.modulesTitle = ''
       this.hasDraft = false
       this.saveConfigCache()
 
@@ -173,6 +195,7 @@ export default {
     async getAppDevInfo() {
       const res = await getAppDevInfo(this.devId)
       const { advertsRes, devInfo, isDraft } = res.body
+      this.modulesTitle = ''
       this.hasDraft = isDraft === HAS_DRAFT
       this.$refs.config.swipeTo(0, { immediate: true })
       this.setConfig(advertsRes.rotationRules)
@@ -199,7 +222,7 @@ export default {
         const res = await getAdvertsShopById({
           advertsShopId: id,
         })
-
+        this.modulesTitle = res.body.describe
         this.setFileMap(keyBy(res.body.resEntityList, 'id'))
         this.setConfig(res.body.rotationRules, false)
       })

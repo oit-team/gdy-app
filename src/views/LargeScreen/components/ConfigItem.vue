@@ -7,7 +7,7 @@
       fit="cover"
     />
     <video
-      v-if="item.type === 'video' && !placeholder"
+      v-else-if="item.type === 'video' && !placeholder"
       class="h-full w-full"
       :src="src"
       controls

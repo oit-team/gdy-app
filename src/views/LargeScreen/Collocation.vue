@@ -45,8 +45,8 @@
                   :key="index"
                 >
                   <div class="addIcon">
-                    <img v-if="!checkSelected(item)" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)" v-actions:addSingle.click>
-                    <img v-else src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)" v-actions:delSingle.click>
+                    <img v-if="!checkSelected(item)" src="@/assets/img/plus.png" alt="" @click.stop="addSingle(item, index)" v-actions:addSingle.click>
+                    <img v-else src="@/assets/img/minus.png" alt="" @click.stop="delSingle(item, index)" v-actions:delSingle.click>
                   </div>
                   <van-image
                     height="110"
@@ -305,7 +305,7 @@ export default {
 .item-img >>> .van-image__img{
   border-radius: 5px 5px 0 0;
 }
-div::marker{
+*::marker{
   content: '' !important;
 }
 .tipBox {
@@ -333,8 +333,8 @@ div::marker{
   z-index: 1;
 }
 .addIcon > img{
-  width:25px;
-  height: 25px;
+  width:20px;
+  height: 20px;
   margin-top:2.5px;
 }
 .page-btm > .van-button{

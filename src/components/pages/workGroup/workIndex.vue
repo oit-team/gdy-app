@@ -26,7 +26,7 @@
             <div class="imgBox">
               <div style="position:relative;">
                 <vc-icon size="28">{{ item.icon }}</vc-icon>
-                <div class="numBox flex items-center" v-if="item.badge > 0">
+                <div class="numBox flex items-center" v-if="parseInt(item.badge) > 0">
                   <span class="nums">{{ item.badge }}</span>
                 </div>
               </div>
@@ -255,7 +255,8 @@ export default {
         'userId': userid,
       }
       _this.$axios.post('/api/noticeInfo/notReadNum', data).then(function(res) {
-        // console.log("未读消息为:",res.data)
+        console.log("未读消息为:",res.data)
+        console.log(typeof res.data)
         if (res.data.code == 200) {
           _this.noReadNums = res.data.data
           if (_this.noReadNums == 0) {

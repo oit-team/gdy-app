@@ -1,6 +1,6 @@
 <template>
   <van-swipe class="shadow-lg rounded" :class="supportsAspectRatio ? 'h-full aspect-9/16' : 'w-202px h-358px'" ref="swiper" @change="$emit('change', $event)">
-    <van-swipe-item v-for="(item, index) of config" :key="index">
+    <van-swipe-item v-for="(item, index) of config" :key="index" class="h-full aspect-9/16">
       <div class="flex flex-col h-full overflow-hidden">
         <ConfigItem
           v-if="item.items[0]"

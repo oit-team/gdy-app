@@ -1,8 +1,7 @@
 <template>
-  <div class="flex px-4 w-full box-border relative">
+  <div class="flex flex-col items-center w-full box-border relative">
     <draggable
       :value="value"
-      class="flex-1 overflow-auto"
       :animation="200"
       ghostClass="ghost"
       :options="{delay: 200}"
@@ -11,11 +10,11 @@
       @start="drag = true"
       @end="drag = false"
     >
-      <transition-group class="flex gap-x-3 py-2" type="transition" :name="drag ? 'transition-transform' : null">
+      <transition-group class="grid-cols-2 gap-x-3 grid px-2" type="transition" :name="drag ? 'transition-transform' : null">
         <div
           v-for="(item, index) in value"
           :key="item._tempId"
-          class="flex flex-col items-center item relative w-12 flex-shrink-0"
+          class="flex flex-col items-center item mt-2 relative w-12 flex-shrink-0"
           @click="$emit('select', index)"
           v-actions:clickSelectedImg.click
         >
@@ -45,14 +44,6 @@
         </div>
       </transition-group>
     </draggable>
-    <div v-if="!value.length" class="h-full grid place-content-center text-gray-500 absolute left-0 w-full">
-      暂无内容
-    </div>
-    <span key="add" class="flex flex-col text-sm pl-2 w-12 h-105px relative z-10">
-      <div class="flex-1 flex flex-col justify-center rounded bg-white items-center" @click="$emit('push')" v-actions:addMatch.click>
-        <span class="text-3xl">+</span>
-      </div>
-    </span>
   </div>
 </template>
 
@@ -89,7 +80,7 @@ export default {
 }
 </script>
 
-<style scoped="scss">
+<style scoped>
 .ghost {
   opacity: 0.5;
   background: #c8ebfb;
