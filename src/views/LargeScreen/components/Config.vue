@@ -1,25 +1,24 @@
 <template>
   <div class="flex-1 flex flex-col overflow-hidden">
     <!--    轮播 + 选择图片-->
-    <div class="overflow-hidden px-2 pt-2 pb-3 flex  bg-white relative box-border" :class="config.length <= 0 ? 'justify-center' : 'justify-between'">
-      <div v-if="config.length > 0" class="mx-3 h-full relative overflow-hidden max-w-202px">
-        <Preview ref="swiper" :config="config" :file-map="fileMap" @change="configIndex = $event"></Preview>
+    <div class="flex flex-col relative">
+      <div class="flex relative">
+        <div class="aspect-9/16 flex-1 p-2 gap-2 overflow-hidden">
+          <Preview ref="swiper" :config="config" :file-map="fileMap" @change="configIndex = $event"></Preview>
+        </div>
+        <div class="p-2 minWidth">
+          <div class="flex flex-col justify-between pt-2 pb-3 box-border absolute top-0 right-3 h-full w-125px">
+            <ConfigList
+              v-model="config"
+              :file-map="fileMap"
+              class="overflow-hidden overflow-y-auto"
+              @select="(e) => $refs.swiper.swipeTo(e)"
+              @remove="config.splice($event, 1)"
+              v-actions:contentTab.duration
+            />
+          </div>
+        </div>
       </div>
-      <!--  Config    -->
-      <div v-if="config.length > 0" class="flex flex-col justify-between pt-2 pb-3 box-border absolute top-0 right-0 h-full w-125px">
-        <ConfigList
-          v-model="config"
-          :file-map="fileMap"
-          class="overflow-hidden overflow-y-auto"
-          @select="(e) => $refs.swiper.swipeTo(e)"
-          @remove="config.splice($event, 1)"
-          v-actions:contentTab.duration
-        />
-      </div>
-      <div v-else class="mx-3 aspect-9/16 h-358px">
-        <van-empty description="暂无内容" />
-      </div>
-      <!--      按钮-->
       <div class="flex justify-between items-center w-full absolute bg-white bg-opacity-50 bottom-3 left-0 z-10 py-1 px-3 box-border">
         <div class="w-3/5 flex justify-center">
           <slot name="top-actions"></slot>
@@ -34,10 +33,11 @@
           v-actions:appPublish.click
         />
       </div>
+      <van-empty v-if="config.length === 0" description="暂无内容" class="absolute inset-0 bg-gray-100" />
     </div>
 
-    <div class="bottom-info flex-1 min-h-175px flex flex-col pt-4 pb-2 bg-white">
-      <van-tabs class="flex-1 flex flex-col overflow-hidden px-2" v-model="tabIndex">
+    <div class="bottom-info flex-1 min-h-175px flex flex-col pb-2 bg-white">
+      <van-tabs class="flex-1 flex flex-col px-2 overflow-hidden overflow-y-auto" v-model="tabIndex">
         <van-tab name="config">
           <template #title>
             <div v-actions:configTab.click key="config">配置</div>
@@ -204,6 +204,9 @@ export default {
   }
   .bottom-info .van-tab--active{
     color: rgb(25, 137, 250);
+  }
+  .minWidth{
+    width: 35%;
   }
 }
 </style>

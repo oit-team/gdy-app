@@ -45,11 +45,11 @@
         <van-button v-if="hasDraft" class="!h-8 w-80px ml-1" type="info" block round plain @click="getRollbackAdverts">回退</van-button>
       </template>
       <template slot="tab-after">
-        <van-tab>
+        <van-tab class="overflow-y-auto">
           <template #title>
             <div v-actions:messageTab.click key="message">信息</div>
           </template>
-          <div class="h-full overflow-auto">
+          <div>
             <van-cell-group inset>
               <van-cell title="发布时间" :value="devInfo.releaseTime" />
               <van-cell title="探测时间" :value="devInfo.detecTime" />
@@ -64,7 +64,6 @@
         <van-button
           round
           block
-          size="small"
           type="info"
           class="!h-10"
           @click="addAppPublishDeviceAds"

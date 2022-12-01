@@ -113,7 +113,7 @@ export function getDaysAgo(day, format = 'yyyy/MM/dd') {
   return formatDate(Date.now() - total, format)
 }
 
-export function convertImageSize(img, size = 'x') {
+export function convertImageSize(img, size = 's') {
   return img && img.replace(/(.*)\./, `$1_${size}.`)
 }
 

@@ -5,6 +5,7 @@
       class="h-full w-full"
       :src="convertImageSize(src, imageSize)"
       fit="cover"
+      show-loading
     />
     <video
       v-else-if="item.type === 'video' && !placeholder"

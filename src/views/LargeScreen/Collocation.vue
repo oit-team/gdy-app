@@ -36,11 +36,11 @@
               error-text="请求失败，点击重新加载"
               finished-text="没有更多了"
               :immediate-check="false"
-              @load="getData()"
+              @load="reGetData()"
             >
               <div class="content-box text-sm grid grid-cols-3 gap-3 p-2 box-border">
                 <div
-                  class="list-item rounded-md relative bg-white"
+                  class="rounded-md relative bg-white"
                   v-for="(item, index) in indexData"
                   :key="index"
                 >
@@ -52,7 +52,7 @@
                     height="110"
                     fit="contain"
                     class="item-img"
-                    :src="convertImageSize(item.collImgUrl)"
+                    :src="convertImageSize(item.collImgUrl, 's')"
                   />
                   <div class="list-info flex flex-col items-center">
                     <p class="van-multi-ellipsis--l2 w-full px-2 text-center h-10 box-border goodsFont">
@@ -69,10 +69,12 @@
     </van-tabs>
     <!--    底部确认-->
     <div class="page-btm bgf !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border bg-white z-10">
-      <div class="mr-2" @click="onShow" v-actions:onShow.click>
-        已选中：{{ total }}/15
+      <div class="flex items-center w-50%">
+        <div class="mr-2" @click="onShow" v-actions:onShow.click>
+          已选中：{{ total }}/15
+        </div>
+        <van-button class="py-2 flex-1" size="small" type="info" round @click="onsubmit">确认</van-button>
       </div>
-      <van-button class="py-2" size="mini" type="info" round @click="onsubmit">确认</van-button>
     </div>
 
     <!--    弹出层-->
@@ -86,7 +88,7 @@
           >
             <van-image
               class="h-full w-full"
-              :src="convertImageSize(item.resUrl)"
+              :src="convertImageSize(item.resUrl, 's')"
               fit="contain"
             ></van-image>
             <div class="pop-item__del" @click="delImg(item, index)" v-actions:delImg.click>
@@ -180,20 +182,9 @@ export default {
           this.error = true
           return false
         } else {
-          if (this.formData.pageNum === 1) {
-            this.indexData = res.body.collocationList
-            this.showEmpty = res.body.collocationList.length === 0
-            if (res.body.totalCount <= 18) {
-              this.finished = true
-            } else {
-              this.formData.pageNum++
-            }
-          } else {
-            this.indexData = [...this.indexData, ...res.body.collocationList]
-            if (res.body.totalCount === this.indexData.length) {
-              this.finished = true
-            } else if (res.body.totalCount > this.indexData.length) this.formData.pageNum++
-          }
+          this.indexData = res.body.collocationList
+          this.showEmpty = res.body.collocationList.length === 0
+          this.finished = this.indexData.length < 18
         }
       }).catch(() => {
         this.showEmpty = true
@@ -204,6 +195,21 @@ export default {
         this.isLoading = false
       })
 
+    },
+    // 触底加载
+    async reGetData() {
+      this.formData.pageNum++
+      const res = await getCollocationList({
+        ...this.formData,
+        startcreateTime: this.startcreateTime || this.pastTime,
+        endcreateTime: this.endcreateTime || this.formatDate(new Date())
+      })
+      this.indexData = [...this.indexData, ...res.body.collocationList]
+      if (res.body.collocationList.length === 0) {
+        this.finished = true
+      }
+      this.loading = false
+      this.isLoading = false
     },
     //  下拉加载
     refresh() {
@@ -306,7 +312,7 @@ export default {
   border-radius: 5px 5px 0 0;
 }
 *::marker{
-  content: '' !important;
+  display: none !important;
 }
 .tipBox {
   position: absolute;
