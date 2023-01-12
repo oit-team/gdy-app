@@ -8,6 +8,7 @@ import {Toast} from 'vant'
 const axiosConfig = {
   // 请求超时时间
   timeout: 60000,
+  // baseURL: '/api',
   baseURL: process.env.NODE_ENV === 'production' ? './mta-api' : '/api',
 }
 

@@ -10,7 +10,8 @@
     "start": "npm run dev",
     "build": "node build/build.js",
     "dev:css": "yarn css --watch",
-    "css": "unocss \"src/**/*.vue\" --out-file src/uno.css"
+    "css": "unocss \"src/**/*.vue\" --out-file src/uno.css",
+    "lint": "yarn lint"
   },
   "dependencies": {
     "@oit/vant-extend": "^0.1.0-beta.10",

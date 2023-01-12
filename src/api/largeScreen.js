@@ -33,7 +33,7 @@ export function getAppDevInfo(devId) {
  * 店铺广告模板列表
  * @param params
  */
- export function getAdvertsShopAll(params) {
+export function getAdvertsShopAll(params) {
   return post('/liveBroadcast/advertsShop/getAdvertsShopAll', params)
 }
 
@@ -88,4 +88,11 @@ export function getCollocationList(params) {
 // 查询设备数量
 export function getDevCount() {
   return post('/liveBroadcast/device/getDevCount')
+}
+
+/**
+ * 控制大屏显示模块
+ */
+export function sendCommandToDevice(params) {
+  return post('/liveBroadcast/device/sendCommandToDevice', params)
 }

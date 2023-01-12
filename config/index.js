@@ -13,6 +13,7 @@ module.exports = {
     proxyTable: {
       '/api/api': {
         target: 'http://192.168.9.12:8132/mta-api/api',
+        // target: 'https://app.gaodanyi.com:9443/mta-api/api',
         changeOrigin: true,
         pathRewrite: {
           '^/api/api': ''
@@ -20,6 +21,7 @@ module.exports = {
       },
       '/api/mta': {
         target: 'http://192.168.9.12:8132/mta',
+        // target: 'https://app.gaodanyi.com:9443/mta',
         changeOrigin: true,
         pathRewrite: {
           '^/api/mta': ''
@@ -27,6 +29,7 @@ module.exports = {
       },
       '/api': {
         target: 'http://192.168.9.65:8089',
+        // target: 'https://app.gaodanyi.com:9443/mta-api',
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
