@@ -85,10 +85,6 @@
   position: absolute;
   top: -12px;
   right: -12px;
-  padding: 2px;
-  line-height: 1;
-  background-color: red;
-  border-radius: 50%;
 }
 #workIndex .workGroup .workBox .workCon .circleBox .imgBox .numBox .nums {
   color: #fff;

@@ -27,7 +27,7 @@
               <div style="position:relative;">
                 <vc-icon size="28">{{ item.icon }}</vc-icon>
                 <div class="numBox flex items-center" v-if="item.badge > 0">
-                  <span class="nums">{{ item.badge }}</span>
+                  <van-badge :content="item.badge" max="99" />
                 </div>
               </div>
             </div>
