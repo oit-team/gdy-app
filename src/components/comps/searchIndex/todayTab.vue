@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <div class="h-20 flex justify-center items-center text-gray-700 text-ms" v-else>暂无数据</div>
+    <div class="h-20 flex justify-center items-center text-[#666]" style="font-size: 16px;" v-else>暂无数据</div>
   </div>
 </template>
 

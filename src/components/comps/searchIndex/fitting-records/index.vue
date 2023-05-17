@@ -7,7 +7,7 @@
     </div>
     <div class="min-h-30 w-full">
       <div ref="fittingRef" v-if="Object.keys(fittingRecordsInfo)" style="height: 180px" class="p-1"></div>
-      <div class="h-20 flex justify-center items-center text-gray-700 text-ms" v-else>暂无数据</div>
+      <div class="h-20 flex justify-center items-center text-[#666]" style="font-size: 16px;" v-else>暂无数据</div>
     </div>
   </div>
 </template>
