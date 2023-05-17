@@ -338,5 +338,23 @@ export default new Router({
           meta: { index: 101 },
           component: () => import('../views/FittingRecords/FittingList.vue')
         },
+        {
+          name: "SaleList",
+          path: '/shop-sale/saleList',
+          meta: { index: 102 },
+          component: () => import('../views/ShopSale/index.vue')
+        },
+        {
+          name: "AddSale",
+          path: '/shop-sale/addSale',
+          meta: { index: 103 },
+          component: () => import('../views/ShopSale/components/AddSale.vue')
+        },
+        {
+          name: "SelectProduct",
+          path: '/shop-sale/selectProduct',
+          meta: { index: 104 },
+          component: () => import('../views/ShopSale/components/SelectProduct.vue')
+        },
     ]
 })

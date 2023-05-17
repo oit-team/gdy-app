@@ -1,0 +1,83 @@
+<template>
+  <div class="h-full bg-white rounded mt-2 px-2 py-4 text-sm">
+    <div class="flex justify-between items-center">
+      <div class="flex items-center">
+        <div style="width: 4px; height: 18px" class="bg-[#2F5AD5] mr-1"></div>
+        <div>销售看板</div>
+        <div class="ml-4 text-xs" v-if="ranking">昨日我的排名第<span class="px-1 text-sm font-bold text-[#28B3EB]">{{ ranking }}</span>名</div>
+      </div>
+      <div class="flex items-center">
+        <span class="text-xs text-[#aab]" @click="$router.push('/shop-sale/saleList')">去报销售</span>
+        <img class="w-5 h-4" src="static/images/icon/rightArrowGrey.png" alt="">
+      </div>
+    </div>
+    <div v-if="Object.keys(saleBoardInfo)" class="grid grid-cols-2 grid-rows-2 gap-2 mt-2">
+      <div class="flex flex-col justify-center items-center py-2 bg-[#F2F2F2]">
+        <div>今日店铺销售额</div>
+        <div class="flex mt-2">
+          <img v-show="saleBoardInfo.todayTrend > 0" class="w-5 h-5" src="@/assets/img/shop-sale/top.png" alt="">
+          <img v-show="saleBoardInfo.todayTrend < 0" class="w-4 h-5" src="@/assets/img/shop-sale/down.png" alt="">
+          <div class="ml-1 text-base font-bold text-[#28B3EB]">{{ saleBoardInfo.todaySaleAmount }}</div>
+        </div>
+      </div>
+      <div class="flex flex-col justify-center items-center py-2 bg-[#F2F2F2]">
+        <div>今日冠军店铺销售额</div>
+        <div class="flex mt-2">
+          <div class="ml-1 text-base font-bold text-[#28B3EB]">{{ saleBoardInfo.maxTodaySaleAmount }}</div>
+        </div>
+      </div>
+      <div class="flex flex-col justify-center items-center py-2 bg-[#F2F2F2]">
+        <div>昨日店铺销售额</div>
+        <div class="flex mt-2 items-center">
+          <img v-show="saleBoardInfo.yesterdayTrend > 0" class="w-5 h-5" src="@/assets/img/shop-sale/top.png" alt="">
+          <img v-show="saleBoardInfo.yesterdayTrend < 0" class="w-4 h-5" src="@/assets/img/shop-sale/down.png" alt="">
+          <div class="ml-1 text-base font-bold text-[#28B3EB]">{{ saleBoardInfo.yesterdaySaleAmount }}</div>
+        </div>
+      </div>
+      <div class="flex flex-col justify-center items-center py-2 bg-[#F2F2F2]">
+        <div>本月店铺销售额</div>
+        <div class="flex mt-2">
+          <img v-show="saleBoardInfo.nowMonthTrend > 0" class="w-5 h-5" src="@/assets/img/shop-sale/top.png" alt="">
+          <img v-show="saleBoardInfo.nowMonthTrend < 0" class="w-4 h-5" src="@/assets/img/shop-sale/down.png" alt="">
+          <div class="ml-1 text-base font-bold text-[#28B3EB]">{{ saleBoardInfo.nowTotalSaleAmount}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="h-20 flex justify-center items-center text-gray-700 text-ms" v-else>暂无数据</div>
+  </div>
+</template>
+
+<script>
+import {getReportFromsSalesForHome, getShopRank, getFittingNum } from "@/api/shopSale"
+export default {
+  name: 'SaleBoard',
+  data(){
+    return {
+      saleBoardInfo: {}, // 看板列表
+      ranking: '', // 排名
+    }
+  },
+  mounted(){
+    this.getShopRank()
+    this.getReportFromsSalesForHome()
+  },
+  methods: {
+    async getShopRank(){
+      const res = await getShopRank({
+        shopId: localStorage.shopId,
+      })
+      this.ranking = res.body.top
+    },
+    async getReportFromsSalesForHome(){
+      const res = await getReportFromsSalesForHome({
+        shopId: localStorage.shopId,
+      })
+      this.saleBoardInfo = res.body
+    },
+  },
+
+}
+</script>
+
+<style lang='scss' scoped>
+</style>
