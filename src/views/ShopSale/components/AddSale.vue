@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#F9F9F9] h-full overflow-y-auto">
+  <div class="bg-[#F9F9F9] main overflow-y-auto">
     <div class="text-sm grid grid-cols-1 gap-2 p-2 box-border">
       <div v-for="(item,index) in detailList" :key="index">
         <van-swipe-cell>
@@ -75,13 +75,11 @@ export default {
     convertImageSize,
 
     async rightSlideDelete(item){
-      console.log(item,'右滑删除单项')
       await this.$dialog.confirm({
         title: '提示',
         message: '确定要删除吗？',
       })
       this.$emit('del',item)
-      // 删除逻辑TODO
 
     },
     // 新增接口
@@ -100,12 +98,13 @@ export default {
       this.addReportFromsSales()
       this.$emit('addSuccess',true)
       this.$router.back()
-      // this.$router.push('/shop-sale/saleList')
     },
   }
 }
 </script>
 
 <style lang='scss'>
-
+.main{
+  height: calc(100% - 40px);
+}
 </style>

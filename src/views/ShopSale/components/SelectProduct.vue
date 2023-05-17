@@ -1,10 +1,11 @@
 <template>
   <div class="bg-[#F9F9F9]">
     <van-search
-      v-model="searchValue"
+      v-model="formData.searchCondition"
       show-action
+      :clearable = "false"
       shape="round"
-      placeholder="商品款号、名称"
+      placeholder="输入商品款号或名称"
       @search="onSearch"
     >
       <template #left>
@@ -81,24 +82,6 @@
 
     <!--    弹出层-->
     <van-popup v-model="selectedShow" round position="bottom" :style="{ height: '65%' }" class="overflow-hidden pt-3 box-border">
-      <!-- <div class="overflow-y-auto h-full">
-        <div class="grid grid-cols-3 gap-3 px-3 pb-3">
-          <div
-            v-for="(item, index) of selectImgs"
-            :key="index"
-            class="box-border relative aspect-9/16 flex bg-gray-100 rounded"
-          >
-            <van-image
-              class="h-full w-full"
-              :src="convertImageSize(item.resUrl)"
-              fit="contain"
-            ></van-image>
-            <div class="pop-item__del" @click="delImg(item, index)">
-              <van-icon name="cross" color="#fff" size="14"></van-icon>
-            </div>
-          </div>
-        </div>
-      </div> -->
       <AddSale :selectedList = selectedList @addSuccess = addSuccess @del="delSingle" />
     </van-popup>
   </div>
@@ -122,7 +105,7 @@ export default {
   },
   data: () => ({
     title:'选择商品',
-    searchValue:'',
+    searchCondition:'',
     classList: [],
     selectClass: 0,
     listData: [], // 列表数据
@@ -137,8 +120,7 @@ export default {
       pageNum: 1,
       pageSize: 18,
       brandId: localStorage.getItem('brandId'),
-      styleNo:'',
-      styleName:'',
+      searchCondition: '',
     },
     selectImgs: {},
     selectedShow: false,
@@ -165,6 +147,7 @@ export default {
     onSearch(val) {
       this.formData.pageNum = 1
       this.formData.pageSize = 18
+      this.formData.searchCondition = ''
       this.listData = []
       this.finished = false
       this.getData()
@@ -242,8 +225,6 @@ export default {
         this.selectedList.push(item)
         this.$set(this.selectImgs, item.styleId, item)
       }
-      console.log(this.selectImgs)
-      console.log(this.selectedList,'选中的')
       if (this.total > 15) return this.$toast('最多只能选择15张图片')
 
     },
@@ -272,19 +253,11 @@ export default {
       }
     },
     addSuccess(val){
-      console.log(val,'加载完成')
       if(val){
         this.selectImgs = {}
         this.selectedList = []
       }
     },
-    // 点击确认按钮
-    // onsubmit() {
-    //   console.log(this.selectedList,'选中的列表')
-    //   this.selectImgs = {}
-    //   this.$router.push('/shop-sale/saleList')
-    // },
-
   },
 }
 </script>
