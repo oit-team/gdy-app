@@ -4,7 +4,7 @@
       <div class="flex items-center">
         <div style="width: 4px; height: 18px" class="bg-[#2F5AD5] mr-1"></div>
         <div>销售看板</div>
-        <div class="ml-4 text-xs" v-if="ranking">昨日我的排名第<span class="px-1 text-sm font-bold text-[#28B3EB]">{{ ranking }}</span>名</div>
+        <div class="ml-4 text-xs">昨日我的排名第<span class="px-1 text-sm font-bold text-[#28B3EB]">{{ ranking }}</span>名</div>
       </div>
       <div class="flex items-center">
         <span class="text-xs text-[#aab]" @click="$router.push('/shop-sale/saleList')">去报销售</span>
@@ -43,7 +43,7 @@
         </div>
       </div>
     </div>
-    <div class="h-20 flex justify-center items-center text-gray-700 text-ms" v-else>暂无数据</div>
+    <div class="h-20 flex justify-center items-center text-[#666]" style="font-size: 16px;" v-else>暂无数据</div>
   </div>
 </template>
 

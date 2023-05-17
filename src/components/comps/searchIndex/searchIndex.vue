@@ -78,7 +78,7 @@
                 <van-tab title="昨日" />
                 <van-tab title="今日" />
               </van-tabs>
-             <div v-if="ranking" class="ranking">昨日店铺排名第<span style="font-size: 16px; font-weight: bold; color: #28B3EB; padding: 0 2px;">{{ ranking }}</span>名</div>
+             <div class="ranking">昨日店铺排名第<span style="font-size: 16px; font-weight: bold; color: #28B3EB; padding: 0 2px;">{{ ranking }}</span>名</div>
             </div>
             <div class="tabRight">
               <span @click="$router.push('/shop-sale/saleList')">去报销售</span>
