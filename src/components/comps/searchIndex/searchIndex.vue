@@ -64,6 +64,33 @@
           </div>
         </div>
 
+        <!-- 销售看板 -->
+        <SaleBoard />
+
+        <!-- 试衣记录 -->
+        <FittingRecords />
+
+        <!-- 报销售 -->
+        <div class="mySell">
+          <div class="titBox">
+            <div class="tabLeft">
+              <van-tabs v-model="activeTab">
+                <van-tab title="昨日" />
+                <van-tab title="今日" />
+              </van-tabs>
+             <div v-if="ranking" class="ranking">昨日店铺排名第<span style="font-size: 16px; font-weight: bold; color: #28B3EB; padding: 0 2px;">{{ ranking }}</span>名</div>
+            </div>
+            <div class="tabRight">
+              <span @click="$router.push('/shop-sale/saleList')">去报销售</span>
+              <img  class="icon" src="static/images/icon/rightArrowGrey.png" alt="">
+            </div>
+          </div>
+          <div>
+            <YesterdayTab v-if="activeTab === 0" :yesterdayResultList = "yesterdayResultList" />
+            <TodayTab v-if="activeTab === 1" :todayResultList = "todayResultList" />
+          </div>
+        </div>
+
         <!-- 我的工作圈 -->
         <div class="workCircle" v-actions:myWorkCircle.duration>
           <div class="titBox" @click="toMyCircle">
@@ -102,6 +129,11 @@
 
 <script>
 import { Toast } from 'mint-ui';
+import TodayTab from './todayTab.vue'
+import YesterdayTab from './yesterdayTab.vue'
+import SaleBoard from './sale-board/index.vue'
+import FittingRecords from './fitting-records/index.vue'
+import { getTopNSaleProducts, getShopRank } from "@/api/shopSale"
 export default {
   name: "searchIndex",
   data() {
@@ -110,9 +142,18 @@ export default {
       circleList:[],
       curSeriesList:[],
       noReadMsgNum:null,
+      activeTab: 0,
+      todayResultList: [],
+      yesterdayResultList: [],
+      ranking: '', // 昨日销售排名
     };
   },
-  components:{},
+  components:{
+    TodayTab,
+    YesterdayTab,
+    SaleBoard,
+    FittingRecords,
+  },
   created(){
     // console.log("-------created--------");
     this.getCurSeries();
@@ -122,12 +163,15 @@ export default {
   mounted(){
     // console.log("-------mounted--------");
     window.callJsFunction = this.scanToSearch;
+    this.getTopNSaleProducts()
+    this.getShopRank()
   },
   activated(){
     // console.log("-------activated--------");
     this.getCurSeries();
     this.getCircleList();
     this.getNoReadNum();
+    this.getTopNSaleProducts()
   },
   methods:{
     toSearch(){
@@ -307,6 +351,20 @@ export default {
       }
       // console.log(localStorage.browseNum)
     },
+    async getTopNSaleProducts(){
+      const res = await getTopNSaleProducts({
+        shopId: localStorage.shopId,
+        topN: 4,
+      })
+      this.todayResultList = res.body.todayResultList
+      this.yesterdayResultList = res.body.yesterdayResultList
+    },
+    async getShopRank(){
+      const res = await getShopRank({
+        shopId: localStorage.shopId,
+      })
+      this.ranking = res.body.top
+    },
   },
 
 };
@@ -315,5 +373,4 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 @import "../../.../../../assets/pageCss/searchIndex";
-
 </style>

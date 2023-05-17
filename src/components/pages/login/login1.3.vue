@@ -177,6 +177,7 @@ export default {
             localStorage.autoGraph = result.autoGraph;    // 个性签名
             localStorage.brandIdGDY = "GDY-"+result.brandId;//  考核模块用
             localStorage.accessToken = res.data.body.accessToken;
+            localStorage.shopId = result.shopId;  // 报销售 店铺用
             localStorage.orgId = 10000;    //  暂时写死
 
             Toast("登录成功");
