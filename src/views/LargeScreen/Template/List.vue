@@ -128,6 +128,7 @@ export default {
             } else if (res.body.count > this.indexData.length) this.formData.pageNum++
           }
         }
+        console.log(this.indexData)
       }).catch(() => {
         this.showEmpty = true
         this.error = true

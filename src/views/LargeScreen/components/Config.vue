@@ -1,33 +1,43 @@
 <template>
   <div class="flex-1 flex flex-col overflow-hidden">
-    <div class="flex-1 overflow-hidden pt-2 pb-3 flex justify-around items-center">
-      <template v-if="arrow">
-        <van-icon name="arrow-left" class="text-5xl text-[#cccccc]" @click="$emit('prev')" />
-        <van-icon name="arrow" class="order-3 text-5xl text-[#cccccc]" @click="$emit('next')" />
-      </template>
-      <div v-if="config.length > 0" class="flex items-center h-full">
-        <Preview ref="swiper" :config="config" :file-map="fileMap" @change="configIndex = $event"></Preview>
+    <!--    轮播 + 选择图片-->
+    <div class="flex flex-col relative">
+      <div class="flex relative">
+        <div class="aspect-9/16 flex-1 p-2 gap-2 overflow-hidden">
+          <Preview ref="swiper" :config="config" :file-map="fileMap" @change="configIndex = $event"></Preview>
+        </div>
+        <div class="p-2 minWidth">
+          <div class="flex flex-col justify-between pt-2 pb-3 box-border absolute top-0 right-3 h-full w-125px">
+            <ConfigList
+              v-model="config"
+              :file-map="fileMap"
+              class="overflow-hidden overflow-y-auto"
+              @select="(e) => $refs.swiper.swipeTo(e)"
+              @remove="config.splice($event, 1)"
+              v-actions:contentTab.duration
+            />
+          </div>
+        </div>
       </div>
-      <div v-else>
-        <van-empty description="暂无内容" />
+      <div class="flex justify-between items-center w-full absolute bg-white bg-opacity-50 bottom-3 left-0 z-10 py-1 px-3 box-border">
+        <div class="w-3/5 flex justify-center">
+          <slot name="top-actions"></slot>
+        </div>
+        <van-button
+          class="!h-8 w-100px"
+          icon="plus"
+          block
+          round
+          type="default"
+          @click="selectCollocation"
+          v-actions:appPublish.click
+        />
       </div>
+      <van-empty v-if="config.length === 0" description="暂无内容" class="absolute inset-0 bg-gray-100" />
     </div>
 
-    <div class="h-200px flex flex-col py-2">
-      <van-tabs class="flex-1 flex flex-col overflow-hidden" v-model="tabIndex" type="card">
-        <van-tab name="list" class="flex items-center">
-          <template #title>
-            <div v-actions:contentTab.click key="content">内容</div>
-          </template>
-          <ConfigList
-            v-model="config"
-            :file-map="fileMap"
-            @push="selectCollocation"
-            @select="(e) => $refs.swiper.swipeTo(e)"
-            @remove="config.splice($event, 1)"
-            v-actions:contentTab.duration
-          />
-        </van-tab>
+    <div class="bottom-info flex-1 min-h-175px flex flex-col pb-2 bg-white">
+      <van-tabs class="flex-1 flex flex-col px-2 overflow-hidden overflow-y-auto" v-model="tabIndex">
         <van-tab name="config">
           <template #title>
             <div v-actions:configTab.click key="config">配置</div>
@@ -55,7 +65,7 @@
       </div>
     </div>
   </div>
-</template>
+</template>0
 
 <script>
 import Header from '@/components/comps/header/header'
@@ -185,6 +195,18 @@ export default {
   .van-tab__text {
     flex: 1;
     text-align: center;
+  }
+  .bottom-info .van-tabs__wrap{
+    border-bottom: 3px solid rgb(25, 137, 250);
+  }
+  .bottom-info .van-tabs__line{
+    display: none !important;
+  }
+  .bottom-info .van-tab--active{
+    color: rgb(25, 137, 250);
+  }
+  .minWidth{
+    width: 35%;
   }
 }
 </style>

@@ -8,6 +8,7 @@ import {Toast} from 'vant'
 const axiosConfig = {
   // 请求超时时间
   timeout: 60000,
+  // baseURL: '/api',
   baseURL: process.env.NODE_ENV === 'production' ? './mta-api' : '/api',
 }
 
@@ -83,14 +84,20 @@ export function post(url, params = {}, config = { tips: true }) {
   }).then(res => res.data)
 }
 
-Vue.config.errorHandler = (err, vm, info) => {
-  if (err instanceof ApiError) {
+window.addEventListener('unhandledrejection', ({ reason }) => {
+  if (reason instanceof ApiError) {
     // 处理接口错误
-    Toast.fail(err.message)
+    Toast.fail(reason.message)
   }
+})
 
+Vue.config.errorHandler = (err, vm, info) => {
   console.error(err)
   Vue.util.warn(err, vm)
+
+  if (err instanceof ApiError) {
+    return Promise.reject(err)
+  }
 }
 
 export default axiosInstance

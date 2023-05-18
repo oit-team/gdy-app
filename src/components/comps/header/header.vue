@@ -6,7 +6,7 @@
         {{title}}
       </slot>
     </div>
-    <div>
+    <div class="flex items-center">
       <slot name="after"></slot>
     </div>
   </div>
@@ -58,7 +58,8 @@ export default {
   width:8px;
   height: 13px;
   margin-right: 5px;
-  padding:5px 25px 5px 0px;
+  /*padding:5px 25px 5px 0px;*/
+  padding:5px 5px 5px 0px;
   /* background-color: pink; */
   user-select: none; -webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;
 }

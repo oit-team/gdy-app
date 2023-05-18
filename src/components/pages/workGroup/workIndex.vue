@@ -255,7 +255,8 @@ export default {
         'userId': userid,
       }
       _this.$axios.post('/api/noticeInfo/notReadNum', data).then(function(res) {
-        // console.log("未读消息为:",res.data)
+        console.log("未读消息为:",res.data)
+        console.log(typeof res.data)
         if (res.data.code == 200) {
           _this.noReadNums = res.data.data
           if (_this.noReadNums == 0) {

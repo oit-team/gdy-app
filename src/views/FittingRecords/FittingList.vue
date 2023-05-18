@@ -41,14 +41,16 @@
           <div>设备名称：{{fittingListItemInfo.devSerialNum}}</div>
           <div>试衣时间：{{fittingListItemInfo.createTime}}</div>
         </div>
-        <div  class="h-full grid grid-cols-3 gap-3 px-3 pb-3">
-          <div  class="fittingDetai box-border relative aspect-9/16 flex flex-col justify-center items-center rounded" v-for="(item,index) in fittingListItemDetail" :key="index">
-            <van-image
-              height="120"
-              fit="contain"
-              :src="convertImageSize(item.resUrl)"
-            />
-            <div class="fittingNo">{{item.styleNo}}</div>
+        <div  class="grid grid-cols-3 gap-3 px-3 pb-3">
+          <div v-for="(item,index) in fittingListItemDetail" :key="index">
+            <div  class="fittingDetai box-border relative aspect-9/16 flex flex-col justify-center items-center rounded">
+              <van-image
+                height="120"
+                fit="contain"
+                :src="convertImageSize(item.resUrl, 's')"
+              />
+              <div class="fittingNo">{{item.styleNo}}</div>
+            </div>
           </div>
         </div>
       </div>
