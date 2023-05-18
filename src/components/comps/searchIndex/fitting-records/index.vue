@@ -6,7 +6,7 @@
       <span class="text-xs">(近七日)</span>
     </div>
     <div class="min-h-30 w-full">
-      <div ref="fittingRef" v-if="Object.keys(fittingRecordsInfo)" style="height: 180px" class="p-1"></div>
+      <div ref="fittingRef" v-if="Object.keys(fittingRecordsInfo)" style="height: 160px" class="p-1"></div>
       <div class="h-20 flex justify-center items-center text-[#666]" style="font-size: 16px;" v-else>暂无数据</div>
     </div>
   </div>
@@ -35,37 +35,14 @@ export default {
     }
   },
   mounted(){
-
   },
-  // computed:{
-  //   option(){
-  //     return {
-  //       xAxis: {
-  //         type: 'category',
-  //         data:  ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-  //       },
-  //       yAxis: {
-  //         type: 'value'
-  //       },
-  //       series: [
-  //         {
-  //           data: [150, 230, 500, 218, 135, 147, 260],
-  //           type: 'line'
-  //         }
-  //       ]
-  //     }
-  //   }
-  // },
-  mounted(){
-    this.getFittingNum()
-  },
-  methods: {
-    initChartData(){
-      const option = {
+  computed:{
+    option(){
+      return  {
         xAxis: {
           type: 'category',
           axisLabel: { interval: 0, rotate: 30 },
-          data: this.fittingRecordsInfo.xList.map(item => item.slice(5)),
+          data: this.fittingRecordsInfo.xList.reverse().map(item => item.slice(5)),
         },
         yAxis: {
           type: 'value'
@@ -87,9 +64,16 @@ export default {
           bottom: '30px'
         }
       }
+    }
+  },
+  mounted(){
+    this.getFittingNum()
+  },
+  methods: {
+    initChartData(){
       const chartDom = this.$refs.fittingRef
       const myChart = echarts.init(chartDom)
-      option && myChart.setOption(option)
+      this.option && myChart.setOption(this.option)
     },
 
     async getFittingNum(){
