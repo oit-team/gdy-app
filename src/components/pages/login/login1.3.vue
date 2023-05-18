@@ -36,7 +36,8 @@
 </template>
 
 <script>
-import { Toast } from 'mint-ui';
+// import { Toast } from 'mint-ui';
+import { Toast } from 'vant';
 import CryptoJS from '../../../assets/js/CryptoJS';
 export default {
   name: "login",
@@ -180,7 +181,8 @@ export default {
             localStorage.shopId = result.shopId;  // 报销售 店铺用
             localStorage.orgId = 10000;    //  暂时写死
 
-            Toast("登录成功");
+            // Toast("登录成功");
+            Toast.success('登录成功');
 
             try {
               // 添加用户
@@ -197,7 +199,7 @@ export default {
 
             _this.$router.replace("/index?stamp="+new Date().getTime());
           }else{
-            Toast("用户名或密码错误！");
+            Toast.fail("用户名或密码错误！");
           }
       })
       .catch(function (error) {
@@ -235,13 +237,13 @@ export default {
             // console.log("static为0,用户存在");
             _this.$router.replace("/index?stamp="+new Date().getTime());
           }else if(res.data.data.static == 1){
-            Toast("用户不存在");
+            Toast.fail("用户不存在");
           }
         }else{
-          Toast("请求失败,请稍后重试!");
+          Toast.fail("请求失败,请稍后重试!");
         }
       }).catch(err=>{
-        Toast("服务超时,请稍后再试!");
+        Toast.fail("服务超时,请稍后再试!");
       })
     },
   },
