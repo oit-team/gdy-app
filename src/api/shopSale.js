@@ -45,3 +45,10 @@ export function getShopRank(params) {
 export function getFittingNum(params) {
   return post('/data/reportSales/getFittingNum', params)
 }
+
+/*
+  流量监测数据
+*/
+export function getPeopleTraffic(params) {
+  return post('/data/reportSales/getPeopleTraffic', params)
+}

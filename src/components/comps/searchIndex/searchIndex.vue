@@ -70,6 +70,9 @@
         <!-- 试衣记录 -->
         <FittingRecords />
 
+        <!-- 流量监测 -->
+        <FlowDetection />
+
         <!-- 报销售 -->
         <div class="mySell">
           <div class="titBox">
@@ -133,6 +136,7 @@ import TodayTab from './todayTab.vue'
 import YesterdayTab from './yesterdayTab.vue'
 import SaleBoard from './sale-board/index.vue'
 import FittingRecords from './fitting-records/index.vue'
+import FlowDetection from './flow-detection/index.vue'
 import { getTopNSaleProducts, getShopRank } from "@/api/shopSale"
 export default {
   name: "searchIndex",
@@ -153,6 +157,7 @@ export default {
     YesterdayTab,
     SaleBoard,
     FittingRecords,
+    FlowDetection,
   },
   created(){
     // console.log("-------created--------");
