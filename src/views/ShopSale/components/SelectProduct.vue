@@ -164,7 +164,10 @@ export default {
         recordDate: this.$route.query.currentTime.split('-').join(''),
       })
       this.selectedInfo = res.body
-      res.body.detailList.forEach(item=> this.addSingle(item))
+      res.body.detailList.forEach(item=> {
+        this.selectedList.push(item)
+        this.$set(this.selectImgs, item.styleId, item)
+      })
       this.onSearch()
     },
     //  下拉加载
@@ -217,7 +220,7 @@ export default {
     },
     // 添加照片到数组
     addSingle(item) {
-      const index = this.selectedList.findIndex(el => el.styleId === item.styleId)
+      const index = this.selectedList.findIndex(el =>  el.styleId == item.styleId)
       if(index > -1){
         this.selectedList[index].salesNum++
       }else{
@@ -240,7 +243,7 @@ export default {
       this.selectedList = this.selectedList.filter(el=> el.styleId !== item.styleId)
       const index = this.listData.findIndex(el=> el.styleId === item.styleId)
       if(index > -1){
-         this.listData[index].salesNum = 0
+        this.listData[index].salesNum = 0
         this.listData[index].salesAmount = 0
       }
     },

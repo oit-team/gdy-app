@@ -23,7 +23,7 @@
       <div class="flex flex-col justify-center items-center py-2 bg-[#F2F2F2]">
         <div>今日冠军店铺销售额</div>
         <div class="flex mt-2">
-          <div class="ml-1 text-base font-bold text-[#28B3EB]">{{ saleBoardInfo.maxTodaySaleAmount }}</div>
+          <div class="ml-1 text-base font-bold text-[#28B3EB]">{{ saleBoardInfo.maxTodaySaleAmount || 0 }}</div>
         </div>
       </div>
       <div class="flex flex-col justify-center items-center py-2 bg-[#F2F2F2]">

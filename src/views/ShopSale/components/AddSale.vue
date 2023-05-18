@@ -95,7 +95,7 @@ export default {
     },
 
     async handleConfirm(){
-      this.addReportFromsSales()
+      await this.addReportFromsSales()
       this.$emit('addSuccess',true)
       this.$router.back()
     },

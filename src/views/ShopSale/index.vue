@@ -13,7 +13,7 @@
         class="selectTime pl-3 bg-white border-b-solid border-gray-200 border-b border-box flex items-center"
       >
           <!-- 时间选择 -->
-          <div class="flex flex-1 overflow-x-auto">
+          <div class="h-full flex flex-1 overflow-x-auto">
             <div
               @click="changeSelectTime(item, index)"
               :class="nowIndex === index ? 'activeState' : ''"
@@ -21,7 +21,6 @@
               v-for="(item,index) in nearlySevenDaysList"
               :key="index"
             >
-              <!-- <div v-if="isToday(item)">今天</div> -->
               <div class="font-bold px-1 text-sm">{{ item.split('-').join('').slice(4) }}</div>
             </div>
 
@@ -37,19 +36,19 @@
       </div>
       <div class="statistics grid grid-cols-4 px-3 gap-3 flex justify-around items-center">
         <div class="flex flex-col justify-center items-center p-4 bg-[#F2F2F2] text-xs">
-          <div class="text-sm">销售额</div>
-          <div class="font-bold text-[#2897DC]"><span>￥</span>{{ shopSaleInfo.salesAmount }}</div>
+          <div class="text-sm mb-1">销售额</div>
+          <div class="font-bold text-[#2897DC]"><span class="pr-1">￥</span>{{ shopSaleInfo.salesAmount }}</div>
         </div>
         <div class="flex flex-col justify-center items-center p-4 bg-[#F2F2F2] text-xs">
-          <div class="text-sm">销件数</div>
-          <div class="font-bold text-[#2897DC]">{{ shopSaleInfo.salesNum }}<span>件</span></div>
+          <div class="text-sm mb-1">销件数</div>
+          <div class="font-bold text-[#2897DC]">{{ shopSaleInfo.salesNum }}<span class="pl-1">件</span></div>
         </div>
         <div @click="changeStatistics" class="flex flex-col justify-center items-center p-4 bg-[#F2F2F2] text-xs">
-          <div class="text-sm">客单数</div>
-          <div class="font-bold text-[#2897DC]">{{ shopSaleInfo.guestNumber }}<span>件</span></div>
+          <div class="text-sm mb-1">客单数</div>
+          <div class="font-bold text-[#2897DC]">{{ shopSaleInfo.guestNumber }}<span class="pl-1">件</span></div>
         </div>
         <div class="flex flex-col justify-center items-center p-4 bg-[#F2F2F2] text-xs">
-          <div class="text-sm">总折扣</div>
+          <div class="text-sm mb-1">总折扣</div>
           <div class="font-bold text-[#2897DC]">{{ shopSaleInfo.grossDiscount }}</div>
         </div>
         <van-popup position="bottom" round v-model="updateStatisticsShow" :style="{ height: '30%',backgroundColor:'#F7F8FA' }" >
@@ -71,7 +70,7 @@
         </van-popup>
       </div>
       <!-- 列表数据 -->
-      <div class="h-full flex-1" v-if="!shopSaleList.length">
+      <div class="flex-1" v-if="!shopSaleList.length">
         <van-empty description="暂无数据" />
       </div>
       <div style="width: 100%" v-else>
@@ -122,12 +121,12 @@ export default {
     currentTime: dayjs(new Date()).format('YYYY-MM-DD'),
     nowIndex: 6,
     num: '', // 客单量修改的值
-    nearlySevenDaysList: [],
+    nearlySevenDaysList: [], // 近七天数据
     shopSaleInfo: {},
     shopSaleList: [],
-    guestNumber: '',
+    guestNumber: '', // 客单量
     minDate: dayjs().subtract(1, 'year').toDate(),
-    maxDate: dayjs().add(1, 'year').toDate(),
+    maxDate: dayjs().add(0, 'day').toDate(),
     templateList: [],
 
   }),
@@ -200,11 +199,10 @@ export default {
       this.updateStatisticsShow = true
     },
 
-    // 新增接口
-    async addReportFromsSalesList(){
+    // 新增、编辑、删除接口
+    async editReportFromsSalesList(){
       this.editLoading = true
-      const idObj = !this.shopSaleList.length ? {} : { id:this.shopSaleInfo.id}
-
+      const idObj = !this.shopSaleList.length ? {} : { id: this.shopSaleInfo.id }
       await addReportFromsSales({
         shopId: localStorage.shopId,
         ...idObj,
@@ -219,7 +217,7 @@ export default {
     // 保存客单数
     async handleSubmit(){
       await Dialog.confirm({ message: '确认保存吗？'})
-      await this.addReportFromsSalesList()
+      await this.editReportFromsSalesList()
       await this.getReportFromsSales()
       this.updateStatisticsShow = false
     },
@@ -227,9 +225,14 @@ export default {
     // 删除列表单项
     async deleteProduct(item,index){
       await Dialog.confirm({message: '确认删除该项吗？'})
-      this.templateList = Object.assign(this.shopSaleList)
+
+      if(this.shopSaleList.length === 1){
+        await Toast('至少保留一项！')
+        return
+      }
+      this.templateList = JSON.parse(JSON.stringify(this.shopSaleList))
       this.templateList.splice(index,1)
-      await this.addReportFromsSalesList()
+      await this.editReportFromsSalesList()
       await this.getReportFromsSales()
       this.templateList = []
     },
@@ -244,6 +247,7 @@ export default {
     box-sizing: border-box;
   }
   .selectTime{
+    min-height: 74px;
     .activeState{
       color: white;
       background-color: #3B84EB;
@@ -259,6 +263,8 @@ export default {
       font-weight: bold;
     }
     .selectCalendar{
+      min-width: 74px;
+      min-height: 74px;
       display: flex;
       flex-direction: column;
       justify-content: center;
