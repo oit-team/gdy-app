@@ -81,7 +81,7 @@
     </div>
 
     <!--    弹出层-->
-    <van-popup v-model="selectedShow" round position="bottom" :style="{ height: '65%' }" class="overflow-hidden pt-3 box-border">
+    <van-popup v-model="selectedShow" round position="bottom" :style="{ height: '65%' }" class="overflow-hidden py-3 box-border">
       <AddSale :selectedList = selectedList @addSuccess = addSuccess @del="delSingle" />
     </van-popup>
   </div>
@@ -137,7 +137,6 @@ export default {
   },
   activated() {
     this.selectedList = []
-    // this.selectedInfo = {}
     this.selectImgs = {}
     this.getReportFromsSales()
   },
@@ -147,17 +146,15 @@ export default {
     onSearch(val) {
       this.formData.pageNum = 1
       this.formData.pageSize = 18
-      this.formData.searchCondition = ''
       this.listData = []
       this.finished = false
       this.getData()
     },
     goBack(){
       this.$router.back()
-      // this.$router.push('/shop-sale/saleList')
     },
 
-    // 进入挑选页面（编辑状态下需要调用查询）
+    // 进入挑选页面
     async getReportFromsSales(){
       const res = await getReportFromsSales({
         shopId: localStorage.shopId,
@@ -172,9 +169,11 @@ export default {
     },
     //  下拉加载
     refresh() {
+      this.formData.searchCondition = ''
       this.finished = false
-      this.isPullRefreshLoading = false
+      this.isPullRefreshLoading = true
       this.listloading = true
+      this.showEmpty = false
       this.formData.pageNum = 1
       this.getData()
     },
@@ -214,7 +213,7 @@ export default {
         this.error = true
         this.finished = true
       }).finally(() => {
-        this.loading = false
+        this.listloading = false
         this.isPullRefreshLoading = false
       })
     },
