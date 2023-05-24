@@ -21,7 +21,7 @@
               v-for="(item,index) in nearlySevenDaysList"
               :key="index"
             >
-              <div class="font-bold px-1 text-sm">{{ item.split('-').join('').slice(4) }}</div>
+              <div class="font-bold px-1 text-sm">{{ item.slice(5) }}</div>
             </div>
 
           </div>
@@ -78,7 +78,7 @@
           <van-loading size="24px" vertical>加载中...</van-loading>
         </div>
         <div v-else class="h-full grid grid-cols-3 px-3 gap-3 pb-3">
-          <div class="relative box-border relative rounded-md bg-white" v-for="(item,index) in shopSaleList" :key="index">
+          <div class="relative box-border relative rounded-md bg-white" v-for="(item,index) in shopSaleList" :key="index"  @click="$router.push(`/goodsDetail2?styleId=${item.styleId}`)">
             <div class="addIcon">
               <img src="static/images/icon/a-reduce.png" alt="" @click.stop="deleteProduct(item, index)">
             </div>
@@ -118,7 +118,7 @@ export default {
     updateStatisticsShow: false, // 客单量修改弹窗
     showDate: false, // 日历弹窗
     selectTime: '', // 选中的日期
-    currentTime: dayjs(new Date()).format('YYYY-MM-DD'),
+    currentTime: dayjs(new Date()).format('YYYY/MM/DD'),
     nowIndex: 6,
     num: '', // 客单量修改的值
     nearlySevenDaysList: [], // 近七天数据
@@ -131,7 +131,7 @@ export default {
 
   }),
   created(){
-    this.nearlySevenDaysList = Array.from({length: 7}).map((item, index) => dayjs(new Date()).subtract(index, 'day').format('YYYY-MM-DD')).reverse()
+    this.nearlySevenDaysList = Array.from({length: 7}).map((item, index) => dayjs(new Date()).subtract(index, 'day').format('YYYY/MM/DD')).reverse()
   },
   mounted(){
     this.getReportFromsSales()
@@ -163,14 +163,14 @@ export default {
     // 获取近七天的时间
     getNearlySevenDaysList(time){
       return Array.from({length: 7})
-      .map((item, index) => dayjs(time).subtract(index, 'day').format('YYYY-MM-DD')).reverse()
+      .map((item, index) => dayjs(time).subtract(index, 'day').format('YYYY/MM/DD')).reverse()
     },
 
     // 查询列表
     async getReportFromsSales(){
       const res = await getReportFromsSales({
         shopId: localStorage.shopId,
-        recordDate: this.currentTime.split('-').join(''),
+        recordDate: this.currentTime.split('/').join(''),
       })
       this.shopSaleInfo = res.body
       this.shopSaleList= res.body.detailList
@@ -184,7 +184,7 @@ export default {
     },
 
     formatDate(date) {
-      return dayjs(date).format('YYYY-MM-DD')
+      return dayjs(date).format('YYYY/MM/DD')
     },
     // 选择日历点击确认
     onConfirmDate(date) {
@@ -207,7 +207,7 @@ export default {
         shopId: localStorage.shopId,
         ...idObj,
         guestNumber: this.shopSaleInfo.guestNumber,
-        recordDate: this.currentTime.split('-').join(''),
+        recordDate: this.currentTime.split('/').join(''),
         detailList: !this.templateList.length ? this.shopSaleList : this.templateList,
       }).finally(()=> this.editLoading = false)
 
