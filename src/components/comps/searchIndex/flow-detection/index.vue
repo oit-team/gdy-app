@@ -1,9 +1,9 @@
 <template>
-  <div class="h-full bg-white rounded mt-2 px-2 py-4 text-sm">
-    <div class="flex items-center">
-      <div style="width: 4px; height: 18px" class="bg-[#2F5AD5] mr-1"></div>
-      <div>流量监测</div>
+  <div class="h-full bg-white rounded-md mt-2 px-2 py-4 text-sm">
+    <div class="flex items-center relative">
+      <div class="text-base font-bold mr-1">流量监测</div>
       <span class="text-xs">(近七日)</span>
+      <van-icon class="absolute right-8" name="replay" @click="getPeopleTraffic()" />
     </div>
     <div class="min-h-30 w-full">
       <div ref="flowRef" v-if="Object.keys(FlowDetectionInfo)" style="height: 160px" class="p-1"></div>
@@ -34,8 +34,6 @@ export default {
       FlowDetectionInfo: {},
     }
   },
-  mounted(){
-  },
   computed:{
     option(){
       return  {
@@ -49,7 +47,7 @@ export default {
         },
         series: [
           {
-            data: this.FlowDetectionInfo.yList,
+            data: this.FlowDetectionInfo.yList.reverse(),
             type: 'line',
             label: {
               show: true,
@@ -67,6 +65,9 @@ export default {
     }
   },
   mounted(){
+    this.getPeopleTraffic()
+  },
+  activated() {
     this.getPeopleTraffic()
   },
   methods: {

@@ -1,11 +1,11 @@
 <template>
-  <div class="h-full bg-white rounded mt-2 px-2 py-4 text-sm">
-    <div class="flex items-center">
-      <div style="width: 4px; height: 18px" class="bg-[#2F5AD5] mr-1"></div>
-      <div>试衣人数</div>
+  <div class="h-full bg-white rounded-md mt-2 px-2 py-4 text-sm">
+    <div class="flex items-center relative">
+      <div class="text-base font-bold mr-1">试衣人数</div>
       <span class="text-xs">(近七日)</span>
+      <van-icon class="absolute right-8" name="replay" @click="getFittingNum()" />
     </div>
-    <div class="min-h-30 w-full">
+    <div class="min-h-30">
       <div ref="fittingRef" v-if="Object.keys(fittingRecordsInfo)" style="height: 160px" class="p-1"></div>
       <div class="h-20 flex justify-center items-center text-[#666]" style="font-size: 16px;" v-else>暂无数据</div>
     </div>
@@ -34,8 +34,6 @@ export default {
       fittingRecordsInfo: {},
     }
   },
-  mounted(){
-  },
   computed:{
     option(){
       return  {
@@ -49,7 +47,7 @@ export default {
         },
         series: [
           {
-            data: this.fittingRecordsInfo.yList,
+            data: this.fittingRecordsInfo.yList.reverse(),
             type: 'line',
             label: {
               show: true,
@@ -67,6 +65,9 @@ export default {
     }
   },
   mounted(){
+    this.getFittingNum()
+  },
+  activated() {
     this.getFittingNum()
   },
   methods: {
