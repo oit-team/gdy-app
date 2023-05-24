@@ -1,10 +1,9 @@
 <template>
-  <div class="h-full bg-white rounded mt-2 px-2 py-4 text-sm">
+  <div class="h-full bg-white rounded-md mt-2 p-2 text-sm">
     <div class="flex justify-between items-center">
       <div class="flex items-center">
-        <div style="width: 4px; height: 18px" class="bg-[#2F5AD5] mr-1"></div>
-        <div>销售看板</div>
-        <div class="ml-4 text-xs">昨日我的排名第<span class="px-1 text-sm font-bold text-[#28B3EB]">{{ ranking }}</span>名</div>
+        <div class="text-base font-bold">销售看板</div>
+        <div class="ml-4 text-xs">昨日店铺排名NO.<span class="px-1 text-sm font-bold text-[#28B3EB]">{{ ranking }}</span></div>
       </div>
       <div class="flex items-center">
         <span class="text-xs text-[#aab]" @click="$router.push('/shop-sale/saleList')">去报销售</span>
@@ -58,6 +57,10 @@ export default {
     }
   },
   mounted(){
+    this.getShopRank()
+    this.getReportFromsSalesForHome()
+  },
+  activated() {
     this.getShopRank()
     this.getReportFromsSalesForHome()
   },

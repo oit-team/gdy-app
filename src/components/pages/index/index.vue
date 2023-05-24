@@ -1,5 +1,5 @@
 <template>
-    <div class="mainApp" @touchmove.prevent>
+    <div class="mainApp">
       <div class="body">
         <div v-if="selected=='商品'" class="header">
           <search  type="0"></search>

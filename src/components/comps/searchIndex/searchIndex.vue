@@ -1,5 +1,5 @@
 <template>
-  <VueActions class="homeMain" data="homeIndex" @touchmove.prevent>
+  <VueActions class="homeMain" data="homeIndex">
     <div class="homeHead">
       <div class="top">
         <span class="logoImg">
@@ -30,14 +30,8 @@
       </div>
     </div>
     <div style="width:100%;height:4px;background-color: #f5f5f5;"></div>
-    <Scroll
-      class="homeConBox"
-      ref="addCollScroll"
-      :probeType = '3'
-      :bounce='false'
-      :listenScroll='true'
-      :pullDown="false"
-      :pullUp="false">
+    <div
+      class="homeConBox overflow-y-auto">
       <div>
         <!-- 考核任务模块 -->
         <!-- <div class="examTaskBox">
@@ -67,25 +61,24 @@
         <!-- 销售看板 -->
         <SaleBoard />
 
-        <!-- 试衣记录 -->
-        <FittingRecords />
-
-        <!-- 流量监测 -->
-        <FlowDetection />
-
         <!-- 报销售 -->
         <div class="mySell">
+          <div class="flex justify-between items-center">
+            <div class="flex items-center">
+              <div class="text-base font-bold">销售爆款</div>
+              <div class="ml-4 text-xs">昨日店铺排名NO.<span class="px-1 text-sm font-bold text-[#28B3EB]">{{ ranking }}</span></div>
+            </div>
+            <div class="flex items-center">
+              <span class="text-xs text-[#aab]" @click="$router.push('/shop-sale/saleList')">去报销售</span>
+              <img class="w-5 h-4" src="static/images/icon/rightArrowGrey.png" alt="">
+            </div>
+          </div>
           <div class="titBox">
             <div class="tabLeft">
               <van-tabs v-model="activeTab">
                 <van-tab title="昨日" />
                 <van-tab title="今日" />
               </van-tabs>
-             <div class="ranking">昨日店铺排名第<span style="font-size: 16px; font-weight: bold; color: #28B3EB; padding: 0 2px;">{{ ranking }}</span>名</div>
-            </div>
-            <div class="tabRight">
-              <span @click="$router.push('/shop-sale/saleList')">去报销售</span>
-              <img  class="icon" src="static/images/icon/rightArrowGrey.png" alt="">
             </div>
           </div>
           <div>
@@ -93,6 +86,13 @@
             <TodayTab v-if="activeTab === 1" :todayResultList = "todayResultList" />
           </div>
         </div>
+
+        <!-- 试衣记录 -->
+        <FittingRecords />
+
+        <!-- 流量监测 -->
+        <FlowDetection />
+
 
         <!-- 我的工作圈 -->
         <div class="workCircle" v-actions:myWorkCircle.duration>
@@ -124,7 +124,7 @@
           </div>
         </div>
       </div>
-    </Scroll>
+    </div>
     <div style="width:100%;height:4px;background-color: #f5f5f5;"></div>
 
   </VueActions>
@@ -359,7 +359,7 @@ export default {
     async getTopNSaleProducts(){
       const res = await getTopNSaleProducts({
         shopId: localStorage.shopId,
-        topN: 4,
+        topN: 10,
       })
       this.todayResultList = res.body.todayResultList
       this.yesterdayResultList = res.body.yesterdayResultList
