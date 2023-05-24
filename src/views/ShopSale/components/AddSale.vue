@@ -38,7 +38,7 @@
         </van-swipe-cell>
       </div>
     </div>
-    <van-button class="!fixed bottom-0 w-full z-10" size="small" type="info" round @click="handleConfirm">确认</van-button>
+    <van-button class="!fixed bottom-1 w-full py-2 z-10" size="small" type="info" round @click="handleConfirm">确认</van-button>
   </div>
 </template>
 
