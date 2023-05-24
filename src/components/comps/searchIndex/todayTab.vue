@@ -1,17 +1,17 @@
 <template>
   <div class="h-full">
-    <div v-if="todayResultList.length > 0" class="max-h-40 flex pt-2 overflow-x-auto sellBox">
-      <div  class="sellItem relative p-1" v-for="(item,index) in todayResultList" :key="index">
+    <div v-if="todayResultList.length > 0" class="max-h-110 flex pt-2 overflow-x-auto sellBox">
+      <div  class="sellItem bg-[#F9F9F9] relative p-1" v-for="(item,index) in todayResultList" :key="index">
         <div>
           <img class="w-13 h-13 absolute -right-3.5 -top-5 z-10" v-show="index === 0" src="@/assets/img/shop-sale/top1.png" alt="">
           <img class="w-13 h-13 absolute -right-3.5 -top-5 z-10" v-show="index === 1" src="@/assets/img/shop-sale/top2.png" alt="">
           <img class="w-13 h-13 absolute -right-3.5 -top-5 z-10" v-show="index === 2" src="@/assets/img/shop-sale/top3.png" alt="">
         </div>
-        <div class="bg-[#D8D8D8] flex flex-col justify-around items-center rounded p-1 pb-0 border-box">
+        <div class="bg-white flex flex-col justify-around items-center rounded p-1 pb-0 border-box"  @click="$router.push(`/goodsDetail2?styleId=${item.styleId}`)">
           <van-image
             v-if="item.resUrl"
             width="100%"
-            height="70"
+            height="110px"
             fit="contain"
             class="bg-white rounded overflow-hidden mb-2"
             :src="convertImageSize(item.resUrl)"
@@ -21,7 +21,7 @@
             <van-image
               v-else
               width="100%"
-              height="70"
+              height="110px"
               fit="contain"
               class="bg-white rounded overflow-hidden mb-2"
             >
@@ -60,7 +60,7 @@ export default {
 <style lang='scss' scoped>
 .sellItem{
   flex-shrink: 0;
-  width: 25%;
+  width: 32%;
   box-sizing: border-box;
   .numColor{
     padding-left: 2px;
