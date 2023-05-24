@@ -75,7 +75,7 @@
     <!--底部确认-->
     <div class="page-btm !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border bg-white z-10">
       <div class="mr-2" @click="onShow">
-        查看已选：{{ total }}/15
+        查看已选：{{ total }}/25
       </div>
       <!-- <van-button class="py-2" size="mini" type="info" round @click="onsubmit">确认</van-button> -->
     </div>
@@ -161,7 +161,7 @@ export default {
     async getReportFromsSales(){
       const res = await getReportFromsSales({
         shopId: localStorage.shopId,
-        recordDate: this.$route.query.currentTime.split('-').join(''),
+        recordDate: this.$route.query.currentTime.split('/').join(''),
       })
       this.selectedInfo = res.body
       res.body.detailList.forEach(item=> {
@@ -228,7 +228,7 @@ export default {
         this.selectedList.push(item)
         this.$set(this.selectImgs, item.styleId, item)
       }
-      if (this.total > 15) return this.$toast('最多只能选择15张图片')
+      if (this.total > 25) return this.$toast('最多只能选择25张图片')
 
     },
 
