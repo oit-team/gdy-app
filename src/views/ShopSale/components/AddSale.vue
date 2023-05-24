@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#F9F9F9] mb-2 overflow-y-auto">
+  <div class="bg-[#F9F9F9] h-full overflow-y-auto">
     <div class="text-sm grid grid-cols-1 gap-2 box-border">
       <div v-for="(item,index) in detailList" :key="index" class="px-1">
         <van-swipe-cell>
