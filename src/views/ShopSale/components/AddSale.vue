@@ -1,9 +1,9 @@
 <template>
-  <div class="bg-[#F9F9F9] main overflow-y-auto">
-    <div class="text-sm grid grid-cols-1 gap-2 p-2 box-border">
-      <div v-for="(item,index) in detailList" :key="index">
+  <div class="bg-[#F9F9F9] mb-2 overflow-y-auto">
+    <div class="text-sm grid grid-cols-1 gap-2 box-border">
+      <div v-for="(item,index) in detailList" :key="index" class="px-1">
         <van-swipe-cell>
-          <div class="flex h-full bg-white p-3 rounded">
+          <div class="flex bg-white p-3 rounded">
             <div class="flex-1 flex">
               <van-image
                 width="30%"
@@ -18,18 +18,17 @@
                 <div class="text-xs">{{ item.styleNo }}</div>
               </div>
             </div>
-            <div class="flex flex-col justify-center" style="width: 22%">
+            <div class="flex flex-col justify-center">
               <van-stepper
                 v-model="item.salesNum"
                 min="1"
-                max="8"
                 integer
                 input-width="28px"
                 button-size="20px"
                 />
                 <div class="flex items-center mt-4">
                   <span>￥</span>
-                  <van-field class="flex p-2" v-model="item.salesAmount" placeholder="价格" />
+                  <van-field class="flex p-2" style="width: 60px" v-model="item.salesAmount" placeholder="价格" />
                 </div>
             </div>
          </div>
@@ -39,7 +38,7 @@
         </van-swipe-cell>
       </div>
     </div>
-    <van-button class="!fixed bottom-0 w-full py-2" size="small" type="info" round @click="handleConfirm">确认</van-button>
+    <van-button class="!fixed bottom-0 w-full z-10" size="small" type="info" round @click="handleConfirm">确认</van-button>
   </div>
 </template>
 
@@ -88,7 +87,7 @@ export default {
       await addReportFromsSales({
         ...idObj,
         shopId: localStorage.shopId,
-        recordDate: this.$route.query.currentTime.split('-').join(''),
+        recordDate: this.$route.query.currentTime.split('/').join(''),
         detailList: this.detailList,
       })
       await Toast.success('添加成功！')
@@ -104,7 +103,4 @@ export default {
 </script>
 
 <style lang='scss'>
-.main{
-  height: calc(100% - 40px);
-}
 </style>
