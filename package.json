@@ -28,6 +28,7 @@
     "lib-flexible": "^0.3.2",
     "lodash-es": "^4.17.21",
     "mint-ui": "^2.2.13",
+    "numeral": "^2.0.6",
     "px2rem-loader": "^0.1.9",
     "save": "^2.4.0",
     "stylus": "^0.54.7",

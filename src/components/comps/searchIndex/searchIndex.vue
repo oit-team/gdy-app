@@ -62,7 +62,7 @@
         <SaleBoard />
 
         <!-- 报销售 -->
-        <div class="mySell">
+        <!-- <div class="mySell">
           <div class="flex justify-between items-center">
             <div class="flex items-center">
               <div class="text-base font-bold">销售爆款</div>
@@ -70,7 +70,7 @@
             </div>
             <div class="flex items-center">
               <span class="text-xs text-[#aab]" @click="$router.push('/shop-sale/saleList')">去报销售</span>
-              <img class="w-5 h-4" src="static/images/icon/rightArrowGrey.png" alt="">
+              <van-icon color="#AAAABB" name="arrow" size="12" />
             </div>
           </div>
           <div class="titBox">
@@ -85,7 +85,27 @@
             <YesterdayTab v-if="activeTab === 0" :yesterdayResultList = "yesterdayResultList" />
             <TodayTab v-if="activeTab === 1" :todayResultList = "todayResultList" />
           </div>
+        </div> -->
+        <div class="mySell">
+          <div class="titBox">
+            <div class="tabLeft">
+              <van-tabs v-model="activeTab" color="#2897DC">
+                <van-tab title-class="font-bold text-base" title="昨日" />
+                <van-tab title-class="font-bold text-base" title="今日" />
+              </van-tabs>
+              <div class="ml-4 text-xs">昨日店铺排名NO.<span class="px-1 text-sm font-bold text-[#28B3EB]">{{ ranking }}</span></div>
+            </div>
+            <div class="tabRight">
+              <span @click="$router.push('/shop-sale/saleList')">去报销售</span>
+              <van-icon color="#AAAABB" name="arrow" size="12" />
+            </div>
+          </div>
+          <div>
+            <YesterdayTab v-if="activeTab === 0" :yesterdayResultList = "yesterdayResultList" />
+            <TodayTab v-if="activeTab === 1" :todayResultList = "todayResultList" />
+          </div>
         </div>
+
 
         <!-- 试衣记录 -->
         <FittingRecords />

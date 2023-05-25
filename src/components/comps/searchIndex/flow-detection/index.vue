@@ -3,7 +3,6 @@
     <div class="flex items-center relative">
       <div class="text-base font-bold mr-1">流量监测</div>
       <span class="text-xs">(近七日)</span>
-      <van-icon class="absolute right-8" name="replay" @click="getPeopleTraffic()" />
     </div>
     <div class="min-h-30 w-full">
       <div ref="flowRef" v-if="Object.keys(FlowDetectionInfo)" style="height: 160px" class="p-1"></div>

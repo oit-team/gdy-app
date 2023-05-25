@@ -3,7 +3,6 @@
     <div class="flex items-center relative">
       <div class="text-base font-bold mr-1">试衣人数</div>
       <span class="text-xs">(近七日)</span>
-      <van-icon class="absolute right-8" name="replay" @click="getFittingNum()" />
     </div>
     <div class="min-h-30">
       <div ref="fittingRef" v-if="Object.keys(fittingRecordsInfo)" style="height: 160px" class="p-1"></div>
