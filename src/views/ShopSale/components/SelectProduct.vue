@@ -156,9 +156,11 @@ export default {
 
     // 进入挑选页面
     async getReportFromsSales(){
+      const dList = Array.from({length: 7}).map((item, index) => dayjs(this.$route.query.currentTime).subtract(index, 'day').format('YYYYMMDD')).reverse()
       const res = await getReportFromsSales({
         shopId: localStorage.shopId,
-        recordDate: this.$route.query.currentTime.split('/').join(''),
+        recordDate: this.$route.query.currentTime,
+        recordDateList: dList,
       })
       this.selectedInfo = res.body
       res.body.detailList.forEach(item=> {

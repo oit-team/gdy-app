@@ -27,7 +27,7 @@
                 button-size="20px"
                 />
                 <div class="flex items-center mt-4">
-                  <span>￥</span>
+                  <span class="text-xs">￥</span>
                   <van-field class="flex p-2" style="width: 60px" v-model="item.salesAmount" placeholder="价格" />
                 </div>
             </div>
@@ -87,7 +87,7 @@ export default {
       await addReportFromsSales({
         ...idObj,
         shopId: localStorage.shopId,
-        recordDate: this.$route.query.currentTime.split('/').join(''),
+        recordDate: this.$route.query.currentTime,
         detailList: this.detailList,
       })
       await Toast.success('添加成功！')

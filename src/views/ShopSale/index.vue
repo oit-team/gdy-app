@@ -15,13 +15,15 @@
           <!-- 时间选择 -->
           <div class="h-full flex flex-1 overflow-x-auto">
             <div
+              ref="selectedTimeRef"
               @click="changeSelectTime(item, index)"
               :class="nowIndex === index ? 'activeState' : ''"
               class="border-box px-3 flex flex-col justify-center items-center text-xs h-17"
-              v-for="(item,index) in nearlySevenDaysList"
+              v-for="(item,index) in newSevenDaysList"
               :key="index"
             >
-              <div class="font-bold px-1 text-sm">{{ item.slice(5) }}</div>
+              <div class="font-bold px-1 text-base">{{ dayjs(item.date).format('MM/DD') }}</div>
+              <p class="truncate font-bold"><span class="pr-1 text-xs">￥</span>{{ numeral(item.salesAmount).format('0,0') }}</p>
             </div>
 
           </div>
@@ -35,21 +37,21 @@
 
       </div>
       <div class="statistics grid grid-cols-4 px-3 gap-3 flex justify-around items-center">
-        <div class="flex flex-col justify-center items-center p-4 bg-[#F2F2F2] text-xs">
+        <div class="flex flex-col justify-center items-center max-w-1/5 shrink-0 p-4 bg-[#F2F2F2] text-xs">
           <div class="text-sm mb-1">销售额</div>
-          <div class="font-bold text-[#2897DC]"><span class="pr-1">￥</span>{{ shopSaleInfo.salesAmount }}</div>
+          <p class="w-full text-center font-bold truncate text-[#2897DC] text-sm"><span class="pr-1 text-xs">￥</span>{{ numeral(shopSaleInfo.salesAmount).format('0,0') }}</p>
         </div>
-        <div class="flex flex-col justify-center items-center p-4 bg-[#F2F2F2] text-xs">
+        <div class="flex flex-col justify-center items-center shrink-0 p-4 bg-[#F2F2F2] text-xs">
           <div class="text-sm mb-1">销件数</div>
-          <div class="font-bold text-[#2897DC]">{{ shopSaleInfo.salesNum }}<span class="pl-1">件</span></div>
+          <div class="font-bold text-[#2897DC] text-sm">{{ shopSaleInfo.salesNum }}<span class="pl-1 text-xs">件</span></div>
         </div>
-        <div @click="changeStatistics" class="flex flex-col justify-center items-center p-4 bg-[#F2F2F2] text-xs">
+        <div @click="changeStatistics" class="flex flex-col justify-center items-center shrink-0 p-4 bg-[#F2F2F2] text-xs">
           <div class="text-sm mb-1">客单数</div>
-          <div class="font-bold text-[#2897DC]">{{ shopSaleInfo.guestNumber }}<span class="pl-1">件</span></div>
+          <div class="font-bold text-[#2897DC] text-sm">{{ shopSaleInfo.guestNumber }}<span class="pl-1 text-xs">件</span></div>
         </div>
-        <div class="flex flex-col justify-center items-center p-4 bg-[#F2F2F2] text-xs">
+        <div class="flex flex-col justify-center items-center shrink-0 p-4 bg-[#F2F2F2] text-xs">
           <div class="text-sm mb-1">总折扣</div>
-          <div class="font-bold text-[#2897DC]">{{ shopSaleInfo.grossDiscount }}</div>
+          <div class="font-bold text-[#2897DC] text-sm">{{ shopSaleInfo.grossDiscount }}</div>
         </div>
         <van-popup position="bottom" round v-model="updateStatisticsShow" :style="{ height: '30%',backgroundColor:'#F7F8FA' }" >
           <div class="h-full">
@@ -90,8 +92,8 @@
             />
             <div class="w-full flex flex-col items-center text-xs mb-2">
               <p class="w-full min-h-4 text-center truncate">{{ item.styleName }}</p>
-              <p>销售<span class="px-1 text-red-500">{{ item.salesNum }} </span>件</p>
-              <p class="text-red-500 font-bold">￥{{ item.salesAmount }} </p>
+              <p class="w-full text-center truncate">销售<span class="px-1 text-red-500">{{ item.salesNum }} </span>件</p>
+              <p class="w-full text-center text-red-500 font-bold text-sm truncate"><span class="text-xs">￥</span>{{ item.salesAmount }} </p>
             </div>
           </div>
         </div>
@@ -102,6 +104,7 @@
 </template>
 
 <script>
+import numeral from 'numeral'
 import { Dialog } from 'vant'
 import Header from '@/components/comps/header/header'
 import dayjs from 'dayjs'
@@ -118,10 +121,11 @@ export default {
     updateStatisticsShow: false, // 客单量修改弹窗
     showDate: false, // 日历弹窗
     selectTime: '', // 选中的日期
-    currentTime: dayjs(new Date()).format('YYYY/MM/DD'),
+    currentTime: dayjs(new Date()).format('YYYYMMDD'),
     nowIndex: 6,
     num: '', // 客单量修改的值
     nearlySevenDaysList: [], // 近七天数据
+    newSevenDaysList: [],
     shopSaleInfo: {},
     shopSaleList: [],
     guestNumber: '', // 客单量
@@ -131,7 +135,7 @@ export default {
 
   }),
   created(){
-    this.nearlySevenDaysList = Array.from({length: 7}).map((item, index) => dayjs(new Date()).subtract(index, 'day').format('YYYY/MM/DD')).reverse()
+    this.nearlySevenDaysList = Array.from({length: 7}).map((item, index) => dayjs(new Date()).subtract(index, 'day').format('YYYYMMDD')).reverse()
   },
   mounted(){
     this.getReportFromsSales()
@@ -140,6 +144,8 @@ export default {
     this.getReportFromsSales()
   },
   methods: {
+    numeral,
+    dayjs,
     convertImageSize,
     goToSelectGoods(){
       if(this.shopSaleInfo.id){
@@ -163,28 +169,37 @@ export default {
     // 获取近七天的时间
     getNearlySevenDaysList(time){
       return Array.from({length: 7})
-      .map((item, index) => dayjs(time).subtract(index, 'day').format('YYYY/MM/DD')).reverse()
+      .map((item, index) => dayjs(time).subtract(index, 'day').format('YYYYMMDD')).reverse()
     },
 
+    // 时间滚动事件
+    getTimeScroll(){
+      this.$refs.selectedTimeRef[this.nowIndex].scrollIntoView({behavior:'smooth', inline: 'center'})
+    },
     // 查询列表
     async getReportFromsSales(){
+      const dList = this.nearlySevenDaysList
       const res = await getReportFromsSales({
         shopId: localStorage.shopId,
-        recordDate: this.currentTime.split('/').join(''),
+        recordDate: this.currentTime,
+        recordDateList: dList,
       })
       this.shopSaleInfo = res.body
+      this.newSevenDaysList = res.body.recordDateResultList
       this.shopSaleList= res.body.detailList
+      await this.$nextTick()
+      await this.getTimeScroll()
     },
 
     // 切换日期
     changeSelectTime(item, index){
       this.nowIndex = index
-      this.currentTime = item
+      this.currentTime = item.date
       this.getReportFromsSales()
     },
 
     formatDate(date) {
-      return dayjs(date).format('YYYY/MM/DD')
+      return dayjs(date).format('YYYYMMDD')
     },
     // 选择日历点击确认
     onConfirmDate(date) {
@@ -207,7 +222,7 @@ export default {
         shopId: localStorage.shopId,
         ...idObj,
         guestNumber: this.shopSaleInfo.guestNumber,
-        recordDate: this.currentTime.split('/').join(''),
+        recordDate: this.currentTime,
         detailList: !this.templateList.length ? this.shopSaleList : this.templateList,
       }).finally(()=> this.editLoading = false)
 
