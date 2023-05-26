@@ -93,7 +93,6 @@
                 <van-tab title-class="font-bold text-base" title="昨日" />
                 <van-tab title-class="font-bold text-base" title="今日" />
               </van-tabs>
-              <div class="ml-4 text-xs">昨日店铺排名NO.<span class="px-1 text-sm font-bold text-[#28B3EB]">{{ ranking }}</span></div>
             </div>
             <div class="tabRight">
               <span @click="$router.push('/shop-sale/saleList')">去报销售</span>
@@ -157,7 +156,7 @@ import YesterdayTab from './yesterdayTab.vue'
 import SaleBoard from './sale-board/index.vue'
 import FittingRecords from './fitting-records/index.vue'
 import FlowDetection from './flow-detection/index.vue'
-import { getTopNSaleProducts, getShopRank } from "@/api/shopSale"
+import { getTopNSaleProducts } from "@/api/shopSale"
 export default {
   name: "searchIndex",
   data() {
@@ -169,7 +168,6 @@ export default {
       activeTab: 0,
       todayResultList: [],
       yesterdayResultList: [],
-      ranking: '', // 昨日销售排名
     };
   },
   components:{
@@ -189,7 +187,6 @@ export default {
     // console.log("-------mounted--------");
     window.callJsFunction = this.scanToSearch;
     this.getTopNSaleProducts()
-    this.getShopRank()
   },
   activated(){
     // console.log("-------activated--------");
@@ -383,12 +380,6 @@ export default {
       })
       this.todayResultList = res.body.todayResultList
       this.yesterdayResultList = res.body.yesterdayResultList
-    },
-    async getShopRank(){
-      const res = await getShopRank({
-        shopId: localStorage.shopId,
-      })
-      this.ranking = res.body.top
     },
   },
 
