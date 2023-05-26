@@ -29,7 +29,7 @@
                 />
                 <div class="flex items-center mt-4">
                   <span class="text-xs">￥</span>
-                  <van-field class="flex p-2" style="width: 60px" v-model="item.salesAmount" placeholder="价格" />
+                  <van-field class="flex p-2" style="width: 60px" @input="item.salesAmount = $event"  v-model="item.salesAmount" placeholder="价格" />
                 </div>
             </div>
          </div>

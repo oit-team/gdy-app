@@ -222,13 +222,14 @@ export default {
     },
     // 添加照片到数组
     addSingle(item) {
+      item = JSON.parse(JSON.stringify(item))
       const index = this.selectedList.findIndex(el =>  el.styleId == item.styleId)
       if(index > -1){
         this.selectedList[index].salesNum++
       }else{
         item.salesNum++
         item.salesAmount = item.stylePrice
-        this.selectedList.push(item)
+        this.$set(this.selectedList, this.selectedList.length, item)
         this.$set(this.selectImgs, item.styleId, item)
       }
       if (this.total > 25) return this.$toast('最多只能选择25张图片')
