@@ -23,7 +23,7 @@
               :key="index"
             >
               <div class="font-bold px-1 text-base">{{ dayjs(item.date).format('MM/DD') }}</div>
-              <p class="truncate font-bold"><span class="pr-1 text-xs">￥</span>{{ numeral(item.salesAmount).format('0,0') }}</p>
+              <p class="truncate font-bold"><span class="pr-1 text-xs">￥</span>{{ numeral(item.salesAmount).format('0,0[.][0000]') }}</p>
             </div>
 
           </div>
@@ -39,15 +39,16 @@
       <div class="statistics grid grid-cols-4 px-3 gap-3 flex justify-around items-center">
         <div class="flex flex-col justify-center items-center max-w-1/5 shrink-0 p-4 bg-[#F2F2F2] text-xs">
           <div class="text-sm mb-1">销售额</div>
-          <p class="w-full text-center font-bold truncate text-[#2897DC] text-sm"><span class="pr-1 text-xs">￥</span>{{ numeral(shopSaleInfo.salesAmount).format('0,0') }}</p>
+          <p class="w-full text-center font-bold truncate text-[#2897DC] text-sm"><span class="pr-1 text-xs">￥</span>{{ numeral(shopSaleInfo.salesAmount).format('0,0[.][0000]') }}</p>
         </div>
-        <div class="flex flex-col justify-center items-center shrink-0 p-4 bg-[#F2F2F2] text-xs">
+        <div class="flex flex-col justify-center items-center max-w-1/5 shrink-0 p-4 bg-[#F2F2F2] text-xs">
           <div class="text-sm mb-1">销件数</div>
-          <div class="font-bold text-[#2897DC] text-sm">{{ shopSaleInfo.salesNum }}<span class="pl-1 text-xs">件</span></div>
+          <p class="w-full text-center font-bold truncate text-[#2897DC] text-sm">{{ shopSaleInfo.salesNum }}<span class="pl-1 text-xs">件</span></p>
         </div>
-        <div @click="changeStatistics" class="flex flex-col justify-center items-center shrink-0 p-4 bg-[#F2F2F2] text-xs">
+        <div @click="changeStatistics" class="relative flex flex-col max-w-1/5 justify-center items-center shrink-0 p-4 bg-[#F2F2F2] text-xs">
+          <van-icon name="edit" class="absolute right-0 top-0" />
           <div class="text-sm mb-1">客单数</div>
-          <div class="font-bold text-[#2897DC] text-sm">{{ shopSaleInfo.guestNumber }}<span class="pl-1 text-xs">件</span></div>
+          <p class="w-full text-center font-bold truncate text-[#2897DC] text-sm">{{ shopSaleInfo.guestNumber }}<span class="pl-1 text-xs">件</span></p>
         </div>
         <div class="flex flex-col justify-center items-center shrink-0 p-4 bg-[#F2F2F2] text-xs">
           <div class="text-sm mb-1">总折扣</div>
