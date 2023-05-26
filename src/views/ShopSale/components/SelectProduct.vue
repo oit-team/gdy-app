@@ -37,7 +37,7 @@
         >
           <div class="content-box text-sm grid grid-cols-3 gap-3 p-2 box-border">
             <div
-              class="list-item rounded-md relative bg-white"
+              class="list-item rounded-md relative bg-white list-none"
               v-for="(item, index) in listData"
               :key="item.styleId"
             >
@@ -62,10 +62,11 @@
               >
                 <template v-slot:error>暂无图片</template>
               </van-image>
-              <div class="flex flex-col items-center">
-                <p class="van-multi-ellipsis--l2 w-full px-2 text-center box-border text-xs">
+              <div class="flex flex-col items-center text-xs px-2">
+                <p class="truncate w-full text-center box-border">
                   {{item.styleName}}
                 </p>
+                <div class="w-full truncate text-center font-bold text-red-500">￥<span class="text-sm">{{ item.stylePrice }}</span></div>
               </div>
             </div>
           </div>
@@ -206,7 +207,7 @@ export default {
           this.listData = resultList.map(item=> {
             const index = this.selectedList.findIndex(el => el.styleId === item.styleId)
             item.salesNum = index > -1 ? this.selectedList[index].salesNum : 0
-            item.salesAmount = index > -1 ?  this.selectedList[index].salesAmount : 0
+            // item.salesAmount = index > -1 ?  this.selectedList[index].salesAmount : 0
             return item
           })
         }
@@ -226,6 +227,7 @@ export default {
         this.selectedList[index].salesNum++
       }else{
         item.salesNum++
+        item.salesAmount = item.stylePrice
         this.selectedList.push(item)
         this.$set(this.selectImgs, item.styleId, item)
       }
@@ -245,7 +247,7 @@ export default {
       const index = this.listData.findIndex(el=> el.styleId === item.styleId)
       if(index > -1){
         this.listData[index].salesNum = 0
-        this.listData[index].salesAmount = 0
+        // this.listData[index].salesAmount = 0
       }
     },
 

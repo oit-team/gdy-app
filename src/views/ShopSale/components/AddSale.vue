@@ -25,6 +25,7 @@
                 integer
                 input-width="28px"
                 button-size="20px"
+                @change="changeSalesNum(item)"
                 />
                 <div class="flex items-center mt-4">
                   <span class="text-xs">￥</span>
@@ -64,7 +65,7 @@ export default {
   }),
   watch: {
     selectedList(val){
-    this.detailList = [...val]
+      this.detailList = [...val]
     }
   },
   mounted() {
@@ -72,6 +73,10 @@ export default {
   },
   methods:{
     convertImageSize,
+
+    changeSalesNum(item){
+      return item.salesAmount = item.salesNum * item.stylePrice
+    },
 
     async rightSlideDelete(item){
       await this.$dialog.confirm({
