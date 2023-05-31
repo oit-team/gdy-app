@@ -1,6 +1,6 @@
 <template>
   <div class="bg-[#F9F9F9] w-full h-full flex flex-col">
-    <div class="text-sm flex-1 grid grid-cols-1 gap-2 box-border overflow-y-auto">
+    <div class="text-sm flex-1 flex flex-col justify-start grid grid-cols-1 gap-2 box-border overflow-y-auto">
       <div v-for="(item,index) in detailList" :key="index" class="px-1">
         <van-swipe-cell>
           <div class="flex bg-white p-3 rounded">
