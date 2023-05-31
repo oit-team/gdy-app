@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-[#F9F9F9] h-full overflow-y-auto">
-    <div class="text-sm grid grid-cols-1 gap-2 box-border">
+  <div class="bg-[#F9F9F9] w-full h-full flex flex-col">
+    <div class="text-sm flex-1 grid grid-cols-1 gap-2 box-border overflow-y-auto">
       <div v-for="(item,index) in detailList" :key="index" class="px-1">
         <van-swipe-cell>
           <div class="flex bg-white p-3 rounded">
@@ -13,9 +13,9 @@
                 :src="convertImageSize(item.resUrl)"
                 class="flex-shrink-0"
               />
-              <div class="leading-relaxed text-sm mx-4 my-2 flex flex-col justify-center">
-                <div class="mb-4">{{ item.styleName }}</div>
-                <div class="text-xs">{{ item.styleNo }}</div>
+              <div class="leading-relaxed grow-0 text-sm mx-4 my-2 flex flex-col justify-center">
+                <p class="mb-4 van-multi-ellipsis--l2 w-full">{{ item.styleName }}</p>
+                <p class="text-xs truncate w-full mr-2">{{ item.styleNo }}</p>
               </div>
             </div>
             <div class="flex flex-col justify-center">
@@ -39,7 +39,7 @@
         </van-swipe-cell>
       </div>
     </div>
-    <van-button class="!fixed bottom-1 w-full py-2 z-10" size="small" type="info" round @click="handleConfirm">确认</van-button>
+    <van-button class="w-full py-2" size="small" type="info" round @click="handleConfirm">确认</van-button>
   </div>
 </template>
 

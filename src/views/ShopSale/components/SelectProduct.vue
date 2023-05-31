@@ -82,7 +82,7 @@
     </div>
 
     <!--    弹出层-->
-    <van-popup v-model="selectedShow" round position="bottom" :style="{ height: '65%' }" class="overflow-hidden py-3 box-border">
+    <van-popup v-model="selectedShow" round position="bottom" class="overflow-hidden py-2 box-border h-65%">
       <AddSale :selectedList = selectedList @addSuccess = addSuccess @del="delSingle" />
     </van-popup>
   </div>
