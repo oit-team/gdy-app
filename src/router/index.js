@@ -356,5 +356,23 @@ export default new Router({
           meta: { index: 104 },
           component: () => import('../views/ShopSale/components/SelectProduct.vue')
         },
+        {
+          name: "VideoList",
+          path: '/video/list',
+          meta: { index: 101 },
+          component: () => import('../views/Video/List.vue')
+        },
+        {
+          name: "VideoDetail",
+          path: '/video/detail/:id',
+          meta: { index: 101 },
+          component: () => import('../views/Video/Detail.vue')
+        },
+        {
+          name: "VideoSwipe",
+          path: '/video/swipe',
+          meta: { index: 101 },
+          component: () => import('../views/Video/Swipe.vue')
+        },
     ]
 })

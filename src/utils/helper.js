@@ -120,3 +120,7 @@ export function convertImageSize(img, size = 's') {
 export const supportsAspectRatio = CSS && CSS.supports
   ? CSS.supports('aspect-ratio', '0')
   : false
+
+export function getVideoFrame(src) {
+  return src && src.replace(/(.*)\..*/, '$1_s.jpg')
+}

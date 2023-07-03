@@ -18,6 +18,7 @@ import VueAwesomeSwiper from 'vue-awesome-swiper';
 import routerStack from  './assets/js/routeStack.js'
 import routerController from './assets/js/routerController.js'
 import Video from 'video.js'
+import { post } from '@/api'
 import 'video.js/dist/video-js.css'
 // import requestParams from './assets/js/requestParams'
 // Vue.prototype.requestParams = requestParams;
@@ -84,6 +85,7 @@ Vue.prototype.$video = Video
 Vue.prototype.$BScroll = BScroll
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
+Vue.prototype.$post = post
 Vue.prototype.$loading = Indicator
 // Vue.prototype.routerStack = routerStack;
 

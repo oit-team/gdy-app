@@ -140,6 +140,13 @@ export default {
               },
               auth: this.authMenu.fittingRecords,
             },
+            {
+              icon: '506e40da68eeaedde694f39495ee166b',
+              title: '商品视频',
+              click: () => {
+                this.$router.push('/video/list')
+              },
+            },
           ],
         },
       ].filter(item => !item.hide)

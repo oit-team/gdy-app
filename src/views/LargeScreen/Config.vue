@@ -151,6 +151,7 @@ export default {
   },
 
   data: () => ({
+    showPopover: false,
     devIndex: 0,
     devState: {},
     devList: {},
@@ -161,9 +162,7 @@ export default {
     active: 0,
     modulesTitle: '',
     showKeep: false, // 是否显示保存草稿
-    showPop: false,
     showPop2: false,
-    columns: ['探测', '模式切换'],
     columns2: ['交互模式', '轮播模式'],
   }),
 
@@ -191,8 +190,7 @@ export default {
 
   methods: {
     onConfirm(event) {
-      this.showPop = false
-      if (event === '探测') {
+      if (event.text === '探测') {
         this.getDevState(true)
       } else {
         this.showPop2 = true
@@ -339,7 +337,7 @@ export default {
 }
 
 .devOffLine {
-  background-color: gray;;
+  background-color: gray;
 }
 
 .devOnLine {
