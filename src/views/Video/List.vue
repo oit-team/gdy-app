@@ -27,14 +27,6 @@ export default {
       this.list = pageNum === 1 ? res.body.resultList : [...this.list, ...res.body.resultList]
       return this.list.length >= res.body.count
     },
-    async like(item) {
-      await this.$post('/liveBroadcast/videoAssociation/addVideoLikeCount', {
-        videoZoneId: item.videoZoneId,
-        likeType: [1, 2][item.isLike]
-      })
-      item.isLike = +!item.isLike
-      item.likeCount += item.isLike ? 1 : -1
-    },
   },
 }
 </script>
@@ -59,8 +51,8 @@ export default {
                   <img :src="item.headPortrait" class="w-7 h-7 rounded-full overflow-hidden">
                   {{ item.createIdName }}
                 </div>
-                <div class="flex items-center" @click.stop="like(item)">
-                  <van-icon :name="item.isLike ? 'good-job' : 'good-job-o'" class="text-xl" />
+                <div class="flex items-center">
+                  <van-icon name="good-job-o" class="text-xl" />
                   <span class="text-sm">{{ item.likeCount }}</span>
                 </div>
               </div>
