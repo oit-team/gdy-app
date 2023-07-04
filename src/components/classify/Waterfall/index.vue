@@ -38,7 +38,7 @@ export default {
       :style="{ gap }"
     >
       <div v-for="item of group" :key="getKey(item)" class="vc-waterfall-item">
-        <slot :item="item" />
+        <slot :item="item" :index="data.indexOf(item)" />
       </div>
     </div>
   </div>

@@ -13,8 +13,17 @@ export default {
       this.$refs.list.reload()
     },
   },
-  created() {
-    this.loadData()
+  mounted() {
+    this.scrollRecord = 0
+    this.$root.$on('video:load', () => {
+      this.$refs.list.load()
+    })
+  },
+  activated() {
+    this.$refs.page.scrollTop = this.scrollRecord
+  },
+  deactivated() {
+    this.scrollRecord = this.$refs.page.scrollTop
   },
   methods: {
     getVideoFrame,
@@ -27,22 +36,31 @@ export default {
       this.list = pageNum === 1 ? res.body.resultList : [...this.list, ...res.body.resultList]
       return this.list.length >= res.body.count
     },
+    toSwipe(index) {
+      this.$router.push({
+        name: 'VideoSwipe',
+        params: {
+          list: this.list,
+          index,
+        },
+      })
+    },
   },
 }
 </script>
 
 <template>
-  <div class="h-screen flex flex-col overflow-auto bg-gray-100">
+  <div class="h-screen flex flex-col overflow-auto bg-gray-100" ref="page">
     <van-tabs v-model="type" class="px-12 sticky top-0 bg-white z-100">
       <van-tab title="商品" :name="1"></van-tab>
       <van-tab title="搭配" :name="2"></van-tab>
       <van-tab title="面料" :name="3"></van-tab>
       <van-tab title="推荐" :name="4"></van-tab>
     </van-tabs>
-    <vc-list ref="list" pull-refresh load-more :promise="loadData" class="p-3 overflow-initial">
-      <vc-waterfall :data="list" gap="12px" immediate>
-        <template #default="{ item }">
-          <div class="flex flex-col bg-white rounded-lg shadow overflow-hidden" @click="$router.push(`/video/detail/${item.videoZoneId}`)">
+    <vc-list ref="list" pull-refresh load-more :promise="loadData" class="p-3 overflow-initial" immediate>
+      <vc-waterfall :data="list" gap="12px">
+        <template #default="{ item, index }">
+          <div class="flex flex-col bg-white rounded-lg shadow overflow-hidden" @click="toSwipe(index)">
             <img :src="getVideoFrame(item.videoUrl)" class="w-full">
             <div class="p-1 text-sm">
               <div>{{ item.displayName }}</div>
