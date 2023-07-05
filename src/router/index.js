@@ -473,14 +473,6 @@ const routes = [
     component: () => import('../views/Video/List.vue')
   },
   {
-    name: "VideoDetail",
-    path: "/video/detail/:id",
-    meta: {
-      index: 101
-    },
-    component: () => import('../views/Video/Detail.vue')
-  },
-  {
     name: "VideoSwipe",
     path: "/video/swipe",
     meta: {

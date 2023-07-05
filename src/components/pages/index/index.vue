@@ -17,6 +17,11 @@
                 <goods ref="goods" v-if="selected === '商品'"></goods>
               </keep-alive>
             </mt-tab-container-item>
+            <mt-tab-container-item id="视频">
+              <keep-alive>
+                <VideoList ref="videoList" v-if="selected === '视频'"></VideoList>
+              </keep-alive>
+            </mt-tab-container-item>
             <mt-tab-container-item id="工作">
               <keep-alive>
                 <workIndex @changeTip="changeTipFlag" v-if="selected === '工作'"></workIndex>
@@ -42,6 +47,10 @@
             <img slot="icon" :src="selected=='商品'?'static/images/tabbarIcon/goods-active.png':'static/images/tabbarIcon/goods-grey.png'">
             <span>商品</span>
           </mt-tab-item>
+          <mt-tab-item id="视频">
+            <img slot="icon" :src="selected=='视频'?'static/images/tabbarIcon/mine-active1.png':'static/images/tabbarIcon/mine-grey.png'">
+            <span>视频</span>
+          </mt-tab-item>
           <mt-tab-item id="工作">
             <img slot="icon" :src="selected=='工作'?'static/images/tabbarIcon/operation-active.png':'static/images/tabbarIcon/operation-grey.png'">
             <span>工作</span>
@@ -66,6 +75,8 @@ import { Dialog } from 'vant';
 import search from "../../comps/search/search"
 import searchIndex from "../../comps/searchIndex/searchIndex"
 import Main from "../main/main.vue"
+import VideoList from '../../../views/Video/List.vue';
+
 export default {
   name: "",
   data() {
@@ -87,7 +98,8 @@ export default {
     search,
     Main,
     searchIndex,
-    workIndex
+    workIndex,
+    VideoList,
   },
   created(){
     this.clickMine()

@@ -11,6 +11,7 @@ export default {
   watch: {
     type() {
       this.$refs.list.reload()
+      this.$refs.page.scrollTop = 0
     },
   },
   mounted() {
@@ -33,7 +34,9 @@ export default {
         pageNum,
         videoSource: this.type,
       })
-      this.list = pageNum === 1 ? res.body.resultList : [...this.list, ...res.body.resultList]
+      pageNum === 1
+        ? this.list.splice(0, this.list.length, ...res.body.resultList)
+        : this.list.push(...res.body.resultList)
       return this.list.length >= res.body.count
     },
     toSwipe(index) {
@@ -50,12 +53,13 @@ export default {
 </script>
 
 <template>
-  <div class="h-screen flex flex-col overflow-auto bg-gray-100" ref="page">
+  <div class="h-100% flex flex-col overflow-auto bg-gray-100" ref="page">
     <van-tabs v-model="type" class="px-12 sticky top-0 bg-white z-100">
+      <van-tab title="推荐" :name="''"></van-tab>
       <van-tab title="商品" :name="1"></van-tab>
       <van-tab title="搭配" :name="2"></van-tab>
-      <van-tab title="面料" :name="3"></van-tab>
-      <van-tab title="推荐" :name="4"></van-tab>
+      <van-tab title="面料" :name="4"></van-tab>
+      <van-tab title="收藏" :name="101"></van-tab>
     </van-tabs>
     <vc-list ref="list" pull-refresh load-more :promise="loadData" class="p-3 overflow-initial" immediate>
       <vc-waterfall :data="list" gap="12px">
@@ -66,7 +70,7 @@ export default {
               <div>{{ item.displayName }}</div>
               <div class="flex justify-between items-center mt-1">
                 <div class="flex items-center gap-2">
-                  <img :src="item.headPortrait" class="w-7 h-7 rounded-full overflow-hidden">
+                  <img :src="item.headPortrait" class="w-6 h-6 rounded-full overflow-hidden">
                   {{ item.createIdName }}
                 </div>
                 <div class="flex items-center">
