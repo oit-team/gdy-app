@@ -19,11 +19,11 @@
             </div>
             <div class="flex items-center justify-around py-3">
               <div class="flex items-center gap-2" @click="like(data)">
-                <van-icon :name="data.isLike ? 'good-job' : 'good-job-o'" class="text-3xl"/>
+                <van-icon :name="data.isLike ? 'like color-red-500' : 'like-o'" class="text-3xl"/>
                 <span>{{ data.likeCount }}</span>
               </div>
               <div class="flex items-center gap-2" @click="toggleCollect(data)">
-                <van-icon :name="data.isCollect ? 'star' : 'star-o'" class="text-3xl"/>
+                <van-icon :name="data.isCollect ? 'star color-orange' : 'star-o'" class="text-3xl"/>
                 <span>{{ data.collectCount }}</span>
               </div>
               <div class="flex items-center gap-2" @click="showComment = true">
@@ -132,12 +132,15 @@ export default {
     },
   },
   created() {
-    console.log(this.$route.params)
     this.list = this.$route.params.list
-    console.log(this.list === this.$route.params.list)
     this.index = this.$route.params.index
     if (this.list === undefined) {
       this.$router.back()
+    }
+  },
+  mounted() {
+    if (this.index === 0) {
+      this.getPlayer(this.index).play()
     }
   },
   methods: {

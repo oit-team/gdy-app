@@ -69,12 +69,12 @@ export default {
             <div class="p-1 text-sm">
               <div>{{ item.displayName }}</div>
               <div class="flex justify-between items-center mt-1">
-                <div>
+                <div class="text-xs">
                   {{ item.createTime }}
                 </div>
                 <div class="flex items-center">
-                  <van-icon name="good-job-o" class="text-xl" />
-                  <span class="text-sm">{{ item.likeCount }}</span>
+                  <van-icon :name="item.isLike ? 'like color-red-500' : 'like-o'"/>
+                  <span class="text-sm ml-1">{{ item.likeCount }}</span>
                 </div>
               </div>
             </div>
