@@ -69,9 +69,8 @@ export default {
             <div class="p-1 text-sm">
               <div>{{ item.displayName }}</div>
               <div class="flex justify-between items-center mt-1">
-                <div class="flex items-center gap-2">
-                  <img :src="item.headPortrait" class="w-6 h-6 rounded-full overflow-hidden">
-                  {{ item.createIdName }}
+                <div>
+                  {{ item.createTime }}
                 </div>
                 <div class="flex items-center">
                   <van-icon name="good-job-o" class="text-xl" />

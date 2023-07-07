@@ -2,7 +2,6 @@
   <div>
     <div class="absolute py-3 left-0 right-0 px-3 z-10 flex justify-between color-white [background-image:linear-gradient(180deg,#00000090,transparent)]">
       <van-icon name="arrow-left" class="text-2xl" @click="$router.back()" />
-      <van-icon name="share-o" class="text-2xl" @click="showShare = true" />
     </div>
 
     <VirtualSwiper ref="swiperRef" :slides="list" class="h-screen" :initial-swipe="index" @change="swiperChange" v-if="list && list.length">
@@ -30,6 +29,10 @@
               <div class="flex items-center gap-2" @click="showComment = true">
                 <van-icon name="comment-o" class="text-3xl"/>
                 <span>{{ data.commentCount }}</span>
+              </div>
+              <div class="flex items-center gap-2" @click="showShare = true">
+                <van-icon name="share-o" class="text-3xl"/>
+                <span>{{ data.shareCount }}</span>
               </div>
             </div>
           </div>
