@@ -11,13 +11,14 @@
 
           <div class="absolute bottom-0 w-full color-white [background-image:linear-gradient(0deg,black,transparent)]">
             <div class="flex items-center gap-2 px-3">
-              <img :src="data.headPortrait" class="w-6 h-6 rounded-full">
-              <span class="font-bold">{{ data.createIdName }}</span>
+              <div class="text-xs">
+                {{ data.createTime }}
+              </div>
             </div>
             <div class="py-2 px-3">
               {{ data.displayName }}
             </div>
-            <div class="flex items-center justify-around py-3">
+            <div class="flex items-center justify-between p-3">
               <div class="flex items-center gap-2" @click="like(data)">
                 <van-icon :name="data.isLike ? 'like color-red-500' : 'like-o'" class="text-3xl"/>
                 <span>{{ data.likeCount }}</span>
@@ -81,9 +82,11 @@
             {
               icon: '/static/images/share/24171b5afc9d3abcbf65ac21626c3b9.png',
               title: '小红书',
-              type: 'xiaohongshu'
+              type: 'xiaohongshu',
+              disabled: true,
             },
           ]"
+          :class="{'opacity-50': item.disabled}"
           @click="share(item.type)"
         >
           <img :src="item.icon" class="h-8 w-8 rounded-full overflow-hidden">

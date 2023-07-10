@@ -68,13 +68,13 @@ export default {
             <img :src="getVideoFrame(item.videoUrl)" class="w-full">
             <div class="p-1 text-sm">
               <div>{{ item.displayName }}</div>
-              <div class="flex justify-between items-center mt-1">
-                <div class="text-xs">
+              <div class="flex justify-between items-center mt-1 text-xs">
+                <div class="color-gray-500">
                   {{ item.createTime }}
                 </div>
                 <div class="flex items-center">
                   <van-icon :name="item.isLike ? 'like color-red-500' : 'like-o'"/>
-                  <span class="text-sm ml-1">{{ item.likeCount }}</span>
+                  <span class="ml-1">{{ item.likeCount }}</span>
                 </div>
               </div>
             </div>
