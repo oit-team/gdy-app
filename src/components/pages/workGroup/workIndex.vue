@@ -86,6 +86,13 @@ export default {
               title: '我要搭配',
               click: this.toMyCollocation,
             },
+            {
+              icon: '646fa467770dc1a85f4cbfad59844d2e',
+              title: '月度目标',
+              click: () => {
+                this.$router.push('/monthly-target/list')
+              },
+            },
           ],
         },
         {
@@ -139,13 +146,6 @@ export default {
                 this.$router.push('/fitting-records/fittingList')
               },
               auth: this.authMenu.fittingRecords,
-            },
-            {
-              icon: '506e40da68eeaedde694f39495ee166b',
-              title: '商品视频',
-              click: () => {
-                this.$router.push('/video/list')
-              },
             },
           ],
         },

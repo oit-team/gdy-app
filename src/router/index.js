@@ -479,6 +479,10 @@ const routes = [
       index: 101
     },
     component: () => import('../views/Video/Swipe.vue')
+  },
+  {
+    path: "/monthly-target/list",
+    component: () => import('../views/MonthlyTarget/List.vue')
   }
 ]
 
