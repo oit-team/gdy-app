@@ -446,7 +446,7 @@ const routes = [
     meta: {
       index: 102
     },
-    component: () => import('../views/ShopSale/index.vue')
+    component: () => import('../views/ShopSale/index-new.vue')
   },
   {
     name: "AddSale",
@@ -483,7 +483,13 @@ const routes = [
   {
     path: "/monthly-target/list",
     component: () => import('../views/MonthlyTarget/List.vue')
-  }
+  },
+  {
+    name: "SelectNotInProduct",
+    path: '/shop-sale/selectNotInProduct',
+    meta: { index: 105 },
+    component: () => import('../views/ShopSale/components/SelectNotInProduct.vue')
+  },
 ]
 
 function transformName(name) {
