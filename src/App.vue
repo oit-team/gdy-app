@@ -1,25 +1,17 @@
 <template>
   <div id="app" class="text-base">
-    <transition :name="transitionName">
-      <!-- 貌似不行,页面结构错乱了 -->
-      <!-- <div>
-        <keep-alive>
-          <router-view  :key="$route.fullPath" v-if="$route.meta.keepAlive"></router-view>
-        </keep-alive>
-        <router-view :key="$route.fullPath" v-if="!$route.meta.keepAlive"></router-view>
-      </div> -->
-
-      <keep-alive exclude="login">
-        <router-view :key="$route.fullPath" class="router-view"/>
-      </keep-alive>
-
-    </transition>
+    <BetterView></BetterView>
   </div>
 </template>
 
 <script>
+import { BetterView } from '@oit/vue-components'
+
 export default {
   name: 'App',
+  components: {
+    BetterView,
+  },
   data(){
     return{
       transitionName:'',
@@ -68,6 +60,9 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-overflow-scrolling: touch;
+}
+.vc-better-view {
+  height: 100vh;
 }
 .slide-right-enter-active,
 .slide-right-leave-active,
