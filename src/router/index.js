@@ -342,7 +342,7 @@ export default new Router({
           name: "SaleList",
           path: '/shop-sale/saleList',
           meta: { index: 102 },
-          component: () => import('../views/ShopSale/index.vue')
+          component: () => import('../views/ShopSale/index-new.vue')
         },
         {
           name: "AddSale",
@@ -355,6 +355,12 @@ export default new Router({
           path: '/shop-sale/selectProduct',
           meta: { index: 104 },
           component: () => import('../views/ShopSale/components/SelectProduct.vue')
+        },
+        {
+          name: "SelectNotInProduct",
+          path: '/shop-sale/selectNotInProduct',
+          meta: { index: 105 },
+          component: () => import('../views/ShopSale/components/SelectNotInProduct.vue')
         },
     ]
 })

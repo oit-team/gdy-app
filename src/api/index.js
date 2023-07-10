@@ -31,6 +31,9 @@ axiosInstance.interceptors.request.use((config) => {
 
 // 添加响应拦截器
 axiosInstance.interceptors.response.use((response) => {
+  if(response.data && response.data.code === '200'){
+    return response
+  }
   if (response.data && response.data.head.status !== API_STATUS.OK) {
     return createApiError({
       url: response.config.url,
@@ -56,31 +59,40 @@ axiosInstance.interceptors.response.use((response) => {
  * @param {object} params 请求参数
  * @param {object} config 配置
  */
-export function post(url, params = {}, config = { tips: true }) {
+export function post(url, params = {}, config) {
   const userData = {
     userId: localStorage.userId,
     orgId: localStorage.brandId,
   }
 
-  const formattedParams = {
-    head: {
-      aid: userData.userId,
-      ver: '1.0',
-      ln: 'cn',
-      mod: 'app',
-      de: '2019-10-16',
-      sync: 1,
-      cmd: config.cmd,
-      uuid: userData.orgId,
-      chcode: 'ef19843298ae8f2134f',
-    },
-    con: params,
-  }
+  const {
+    cmd,
+    wrap = true,
+    ..._config
+  } = config || {}
+
+  const formattedParams = wrap
+    ? {
+      head: {
+        aid: userData.userId,
+        ver: '1.0',
+        ln: 'cn',
+        mod: 'app',
+        de: '2019-10-16',
+        sync: 1,
+        cmd,
+        uuid: userData.orgId,
+        chcode: 'ef19843298ae8f2134f',
+      },
+      con: params,
+    }
+    : params
 
   return axiosInstance({
     url,
     method: 'post',
     data: formattedParams,
+    ..._config,
   }).then(res => res.data)
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-[#F9F9F9]">
+  <div class="bg-[#F9F9F9] overflow-hidden">
     <van-search
       v-model="formData.searchCondition"
       show-action
@@ -15,6 +15,67 @@
         <div class="px-1" @click="onSearch">搜索</div>
       </template>
     </van-search>
+
+<!--
+    <van-tabs title-active-color="#1978FE" color="#1978FE" v-model="normalActiveTab" @change="changeSelect(item)" class="my-2">
+      <van-tab v-for="(item, index) in normalDataList" :key="item.id" :title="item.fitOccasionName" />
+    </van-tabs>
+
+    <van-tabs v-if="seriesList.length > 0" title-active-color="#1978FE" color="#fff" v-model="seriesActiveTab" class="my-2">
+      <van-tab v-for="(item, index) in seriesList" :key="item.id">
+        <template #title>
+          <div :class="index === seriesActiveTab ? 'bg-[#E8F1FE] border-[#1978FE]' : 'border-[#F5F5F5] bg-[#F5F5F5]'"
+            class="px-2 py-1 border border-solid border-[#F5F5F5] bg-[#F5F5F5] rounded-lg"
+          >
+            {{ item.seriesName }}</div>
+        </template>
+      </van-tab>
+    </van-tabs> -->
+
+    <Scroll
+      ref="kindTitScroll"
+      class="kindTitBox"
+      :probeType='3'
+      :scrollX='true'
+      :scrollY='false'
+      :autoUpdate="true"
+      :pullDown="false"
+      :pullUp="false">
+      <ul class="kindTitUl">
+        <li
+          v-for="(item,index) in normalDataList"
+          :key="index"
+          class="kindTitItem"
+          :class="[item.id == normalActiveTab ?'active':'']"
+          @click="clickKindItem(kindItem)">
+          <span class="styleName">{{item.fitOccasionName}}</span>
+        </li>
+      </ul>
+    </Scroll>
+
+    <Scroll
+      ref="kindTopScroll"
+      class="kindTopBox"
+      :listenScroll='true'
+      :probeType='3'
+      :scrollX='true'
+      :scrollY='false'
+      :autoUpdate="true"
+      :pullDown="false"
+      :pullUp="false">
+      <!-- 滚动的内容 -->
+      <ul class="scrollUl" >
+        <li
+          v-for="(item,index) in seriesList"
+          :key="index"
+          class="kindItem"
+          :class="[item.id == seriesActiveTab ?'active':'']"
+          @click="clickItem(item)">
+          <span class="styleName">{{item.seriesName}}</span>
+        </li>
+      </ul>
+    </Scroll>
+
     <van-empty
       v-if="showEmpty"
       description="暂无数据"
@@ -39,11 +100,11 @@
             <div
               class="list-item rounded-md relative bg-white list-none"
               v-for="(item, index) in listData"
-              :key="item.styleId"
+              :key="index"
             >
               <div class="addIcon">
-                <img v-if="!checkSelected(item)" src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)">
-                <img v-else src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)">
+                <img src="static/images/icon/add1.png" alt="" @click.stop="addSingle(item, index)">
+                <!-- <img v-if="checkSelected(item)" src="static/images/icon/a-reduce.png" alt="" @click.stop="delSingle(item, index)"> -->
               </div>
               <van-image
                 v-if="item.resUrl"
@@ -76,7 +137,7 @@
     <!--底部确认-->
     <div class="page-btm !fixed bottom-0 text-sm flex justify-end w-full items-center p-2 box-border bg-white z-10">
       <div class="mr-2" @click="onShow">
-        查看已选：{{ total }}/25
+        查看已选：{{ total }}/15
       </div>
       <!-- <van-button class="py-2" size="mini" type="info" round @click="onsubmit">确认</van-button> -->
     </div>
@@ -92,7 +153,7 @@
 import Header from '@/components/comps/header/header'
 import AddSale from './AddSale.vue'
 import dayjs from 'dayjs'
-import { getStyleList,getReportFromsSales } from "@/api/shopSale"
+import { getStyleList, getReportFromsSales, normalList, getSeriesListById, seriesAllMethod } from "@/api/shopSale"
 import { convertImageSize } from '@/utils/helper'
 
 export default {
@@ -106,7 +167,11 @@ export default {
   },
   data: () => ({
     title:'选择商品',
+    normalActiveTab: 0,
+    seriesActiveTab: 0,
     searchCondition:'',
+    normalDataList: [],
+    seriesList: [],
     classList: [],
     selectClass: 0,
     listData: [], // 列表数据
@@ -139,9 +204,22 @@ export default {
   activated() {
     this.selectedList = []
     this.selectImgs = {}
-    this.getReportFromsSales()
+    // this.getReportFromsSales()
+    this.getNormalList()
   },
   methods: {
+    changeSelect(item){
+      console.log(item,'hhhhhhhhhhhhhhhhhh')
+    },
+    clickKindItem(item){
+      if(this.normalActiveTab != item.id){
+        this.normalActiveTab = item.id;
+        this.getSeriesListById();
+      }
+    },
+    clickItem(item){
+      this.seriesActiveTab = item.id
+    },
     convertImageSize,
     // 模糊查询列表
     onSearch(val) {
@@ -170,6 +248,28 @@ export default {
       })
       this.onSearch()
     },
+
+    async getNormalList(){
+      const res = await normalList({
+        "brandId": localStorage.getItem('brandId'),
+        "typeId": 1,
+      })
+      this.normalDataList = res.data
+      this.normalActiveTab = res.data.length === 0 ? 0 : res.data[0].id
+      await this.getSeriesListById()
+      await this.getData()
+    },
+
+    async getSeriesListById(){
+      const id = this.normalActiveTab
+      const res = await getSeriesListById({
+        "brandId": localStorage.getItem('brandId'),
+        "sId": id,
+      })
+      this.seriesList = res.data
+      this.seriesActiveTab = res.data.length=== 0 ? 0 : res.data[0].id
+    },
+
     //  下拉加载
     refresh() {
       this.formData.searchCondition = ''
@@ -183,6 +283,8 @@ export default {
     getData(){
       getStyleList({
         ...this.formData,
+        sId: this.normalActiveTab || this.normalDataList[0].id,
+        seriesId: this.seriesActiveTab || this.seriesList[0].id,
       }).then((res) => {
         if (res.head.status !== 0) {
           this.$toast(res.head.msg)
@@ -204,12 +306,12 @@ export default {
               this.finished = true
             } else if (res.body.count > resultList.length) this.formData.pageNum++
           }
-          this.listData = resultList.map(item=> {
-            const index = this.selectedList.findIndex(el => el.styleId === item.styleId)
-            item.salesNum = index > -1 ? this.selectedList[index].salesNum : 0
-            // item.salesAmount = index > -1 ?  this.selectedList[index].salesAmount : 0
-            return item
-          })
+          this.listData = resultList
+          // this.listData = resultList.map(item=> {
+          //   const index = this.selectedList.findIndex(el => el.styleId === item.styleId)
+          //   item.salesNum = index > -1 ? this.selectedList[index].salesNum : 0
+          //   return item
+          // })
         }
       }).catch(() => {
         this.showEmpty = true
@@ -232,7 +334,7 @@ export default {
         this.$set(this.selectedList, this.selectedList.length, item)
         this.$set(this.selectImgs, item.styleId, item)
       }
-      if (this.total > 25) return this.$toast('最多只能选择25张图片')
+      if (this.total > 15) return this.$toast('最多只能选择15张图片')
 
     },
 
@@ -248,7 +350,6 @@ export default {
       const index = this.listData.findIndex(el=> el.styleId === item.styleId)
       if(index > -1){
         this.listData[index].salesNum = 0
-        // this.listData[index].salesAmount = 0
       }
     },
 
@@ -298,4 +399,84 @@ div::marker{
 .page-btm > .van-button{
   padding: 0 10px !important;
 }
+
+.kindTitBox {
+    width:100%;
+    height: 1.1rem;
+    line-height: 1.1rem;
+    display: flex;
+    background-color: #fff;
+    .kindTitUl{
+      flex:1;
+      overflow: hidden;
+      display: flex;
+      height: 1.1rem;
+      .kindTitItem{
+
+        padding:0px 15px;
+        white-space: nowrap;
+        height: 1.1rem;
+        color:#999;
+        box-sizing: border-box;
+        .styleName{
+          display: inline-block;
+          height:  0.94rem;
+          font-size: 14px;
+          border-bottom:2px solid transparent;
+          box-sizing: border-box;
+        }
+
+      }
+      .kindTitItem:last-child{
+        margin-right:0px;
+      }
+      .active{
+        .styleName{
+          color:#1978FE;
+          font-size: 16px;
+          border-bottom:2px solid #1978FE;
+        }
+      }
+    }
+  }
+
+  .kindTopBox {
+    width:100%;
+    height: 1.4rem;
+    line-height: 1.4rem;
+    display: flex;
+    margin:6px 0px;
+    background-color: #fff;
+    .scrollUl{
+      flex:1;
+      overflow: hidden;
+      display: flex;
+      height: 1.4rem;
+      .kindItem{
+        padding:0px 15px;
+        white-space: nowrap;
+        height: 1.4rem;
+        color:#999;
+        box-sizing: border-box;
+        .styleName{
+          padding:4px 10px;
+          background-color: #f5f5f5;
+          font-size: 14px;
+          box-sizing: border-box;
+          border-radius: 12px;
+          border:0.5px solid #fff;
+        }
+      }
+      .kindItem:last-child{
+        margin-right:0px;
+      }
+      .active{
+        .styleName{
+          background-color: #E8F1FE;
+          color:#1978FE;
+          border:0.5px solid #1978FE;
+        }
+      }
+    }
+  }
 </style>
