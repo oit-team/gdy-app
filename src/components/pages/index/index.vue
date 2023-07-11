@@ -48,7 +48,7 @@
             <span>商品</span>
           </mt-tab-item>
           <mt-tab-item id="视频">
-            <img slot="icon" :src="selected=='视频'?'static/images/tabbarIcon/mine-active1.png':'static/images/tabbarIcon/mine-grey.png'">
+            <img slot="icon" :src="selected=='视频'?'static/images/tabbarIcon/video-active.png':'static/images/tabbarIcon/video.png'">
             <span>视频</span>
           </mt-tab-item>
           <mt-tab-item id="工作">
