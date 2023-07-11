@@ -26,6 +26,7 @@
     "element-ui": "^2.4.11",
     "exif": "^0.6.0",
     "exif-js": "^2.3.0",
+    "html2canvas": "^1.4.1",
     "lib-flexible": "^0.3.2",
     "lodash-es": "^4.17.21",
     "mint-ui": "^2.2.13",

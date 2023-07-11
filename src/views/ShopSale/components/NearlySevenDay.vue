@@ -1,5 +1,5 @@
 <template>
-  <div class="flex mb-2 items-center rounded grid grid-col-5 gap-.5 bg-white font-bold mt-2 overflow-hidden">
+  <div class="flex items-center rounded grid grid-col-5 gap-.5 font-bold overflow-hidden">
     <div class="saleNumItem">
       <div>吊牌额</div>
       <div class="text-[#c00000]"><span>￥</span>15,000</div>

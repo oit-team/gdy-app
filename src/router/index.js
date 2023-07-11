@@ -490,6 +490,10 @@ const routes = [
     meta: { index: 105 },
     component: () => import('../views/ShopSale/components/SelectNotInProduct.vue')
   },
+  {
+    path: '/shop-sale/share',
+    component: () => import('../views/ShopSale/share.vue')
+  },
 ]
 
 function transformName(name) {
