@@ -22,15 +22,15 @@
         <input placeholder="密码" type="password" v-model="password" @input="getPwd">
         <img v-if="closePwd" class="cancelIcon" src="static/images/icon/cancelIcon.png" alt="" @click="cancelPwd">
       </div>
-      <div class="login_btn active" v-if="loginFlag" @click="login">登　录</div>
+      <div class="login_btn active" v-if="loginFlag && checked" @click="login">登　录</div>
       <div class="login_btn" v-else >登　录</div>
       <!-- <div class="login_message">
         <span>注册</span>
         <span>忘记密码?</span>
       </div> -->
-      <!-- <div class="login_dirc">
-        登录代表您已经同意<span>《高单易隐私政策》</span>
-      </div> -->
+      <div class="login_dirc flex">
+        <van-checkbox v-model="checked" class="mr-2" icon-size="16px"></van-checkbox>已同意高单易<span @click="$router.push('/privacyPolicy')">《隐私协议》</span><span @click="$router.push('/serviceAggrement')">《用户协议》</span>
+      </div>
     </div>
   </div>
 </template>
@@ -48,6 +48,7 @@ export default {
       closeName:false,
       closePwd:false,
       loginFlag:false,
+      checked: false,
     };
   },
   created(){
