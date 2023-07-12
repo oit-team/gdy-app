@@ -93,6 +93,47 @@
           发布
         </van-button>
       </template>
+
+      <template #operate>
+        <div class="w-full flex justify-around flex-wrap gap-x-2 text-sm">
+          <div
+            class="flex flex-col items-center rounded p-2"
+            @click="showPop2 = true"
+          >
+            <van-icon name="exchange" size="20" color="#6FA7FF" />
+            <div class="mt-1">
+              切换
+            </div>
+          </div>
+          <div
+            class="flex flex-col items-center rounded p-2"
+            @click="toAudio"
+          >
+            <van-icon name="music-o" size="20" color="#6FA7FF" />
+            <div class="mt-1">
+              音频
+            </div>
+          </div>
+          <div
+            class="flex flex-col items-center rounded p-2"
+            @click="getDevState(true)"
+          >
+            <van-icon name="aim" size="20" color="#6FA7FF" />
+            <div class="mt-1">
+              探测
+            </div>
+          </div>
+          <div
+            class="flex flex-col items-center rounded p-2 box-border"
+            @click="closeDev"
+          >
+            <van-icon name="stop-circle-o" size="20" color="#6FA7FF" />
+            <div class="mt-1">
+              关机
+            </div>
+          </div>
+        </div>
+      </template>
     </Config>
 
     <van-popup
@@ -139,6 +180,7 @@ import {
 } from '@/api/largeScreen'
 import { SELECT_TEMPLATE } from './constant'
 import { keyBy } from 'lodash-es'
+import {Toast} from 'vant'
 
 const HAS_DRAFT = 2
 
@@ -203,7 +245,7 @@ export default {
         cmd: event === '交互模式' ? 9 : 10,
         mod: 1, // 来源：1（小程序）
       })
-      this.$toast('切换成功')
+      Toast('切换成功')
     },
     isShow() {
       this.showPop = true
@@ -213,7 +255,7 @@ export default {
       const res = await getDevState()
       this.devState = res.body
       this.devList = res.body.resultList
-      this.$toast('探测完成')
+      Toast('探测完成')
     },
     async getAppDevList() {
       const res = await getAppDevList()
@@ -239,7 +281,7 @@ export default {
       this.hasDraft = false
       this.saveConfigCache()
 
-      this.$toast('发布成功')
+      Toast('发布成功')
     },
     async addAdvertsTemp() {
       await this.checkConfig()
@@ -255,7 +297,7 @@ export default {
 
       this.saveConfigCache()
 
-      this.$toast('保存成功')
+      Toast('保存成功')
     },
     async getRollbackAdverts() {
       await this.$dialog.confirm({
@@ -319,6 +361,27 @@ export default {
     },
     setFileMap(map) {
       this.$refs.config.setFileMap(map)
+    },
+    closeDev() {
+      this.$dialog.confirm({
+        title: '提示',
+        message: '是否确认关闭该设备？',
+      }).then(async () => {
+        await sendCommandToDevice({
+          devId: this.devId,
+          cmd: 1,
+          mod: 1,
+        })
+        Toast.success('关闭成功')
+      })
+    },
+    toAudio(devId) {
+      this.$router.push({
+        name: 'AudioList',
+        query: {
+          devId: this.devId,
+        }
+      })
     },
   },
 }

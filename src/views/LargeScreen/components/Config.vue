@@ -58,6 +58,10 @@
           </div>
         </van-tab>
         <slot name="tab-after"></slot>
+
+        <van-tab title="操作">
+          <slot name="operate" />
+        </van-tab>
       </van-tabs>
 
       <div class="flex gap-3 px-3">
