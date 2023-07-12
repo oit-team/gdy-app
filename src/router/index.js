@@ -491,6 +491,12 @@ const routes = [
     component: () => import('../views/ShopSale/components/SelectNotInProduct.vue')
   },
   {
+    name: "ShopAudioList",
+    path: '/shop-Audio/list',
+    meta: { index: 106 },
+    component: () => import('../views/ShopAudio/list.vue')
+  },
+  {
     path: '/shop-sale/share',
     component: () => import('../views/ShopSale/share.vue')
   },

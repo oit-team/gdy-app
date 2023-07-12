@@ -5,9 +5,9 @@
         设备列表
       </div>
 
-      <div slot="after" class="flex items-center" @click="isShow">
+      <!-- <div slot="after" class="flex items-center" @click="isShow">
         <van-icon name="ellipsis" size="18"></van-icon>
-      </div>
+      </div> -->
     </Header>
 
     <div>
@@ -136,7 +136,7 @@
       </template>
     </Config>
 
-    <van-popup
+    <!-- <van-popup
       ref="popup"
       v-model="showPop"
       round
@@ -147,7 +147,7 @@
         :columns="columns"
         @confirm="onConfirm"
       />
-    </van-popup>
+    </van-popup> -->
     <van-popup
       ref="popup"
       v-model="showPop2"
@@ -206,6 +206,7 @@ export default {
     showKeep: false, // 是否显示保存草稿
     showPop2: false,
     columns2: ['交互模式', '轮播模式'],
+    showPop: false,
   }),
 
   watch: {
@@ -377,7 +378,7 @@ export default {
     },
     toAudio(devId) {
       this.$router.push({
-        name: 'AudioList',
+        name: 'ShopAudioList',
         query: {
           devId: this.devId,
         }

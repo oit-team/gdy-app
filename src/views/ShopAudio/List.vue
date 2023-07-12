@@ -9,13 +9,13 @@
     </van-sticky>
     <div class="w-full flex-1 overflow-hidden overflow-y-auto">
       <div v-if="!showEmpty" class="w-full h-full px-2 mt-2 box-border">
-        <div v-for="(item, index) in shopAudioList" :key="index" class="p-2 bg-white rounded-md flex items-center mb-2" @click.stop="updateAudioContent(item)">
+        <div v-for="(item, index) in shopAudioList" :key="index" class="p-2 bg-white rounded-md flex items-center mb-2" @click="updateAudioContent(item)">
           <div class="flex flex-col text-sm w-full">
             <div class="w-full flex justify-between items-center">
               <div class="text-base font-bold">
                 {{ item.remark }}
               </div>
-              <div class="p-2" @click.self="audioPlay(item.audioUrl)">
+              <div class="p-2" @click.stop="audioPlay(item.audioUrl)">
                 <van-icon name="volume" class="" />
               </div>
             </div>
@@ -36,7 +36,7 @@
       position="bottom"
       round
       class="p-2 box-border"
-      custom-style="height: 50%;"
+      :style="{ height: '50%' }"
       v-model="show"
       @close="onClose"
     >
@@ -70,32 +70,13 @@
 
     <van-popup
       v-model="showAudio"
-      position="bottom"
-      round
-      custom-style="height: 10%;"
+      position="center"
+      class="rounded"
       @close="closeAudio()"
     >
-      <audio controls :src="audioUrl"></audio>
-      <!-- <div class="w-full h-full flex justify-around items-center p-2 pb-0 box-border p-2">
-        <div class="text-center" @click="playChange()">
-          <van-icon v-if="!isPlay" name="play-circle-o" size="20px" />
-          <van-icon v-else name="pause-circle-o" size="20px" />
-          <div class="text-sm">
-            {{ isPlay ? '暂停' : '播放' }}
-          </div>
-        </div>
-        <div class="text-center" @click="replay()">
-          <div :class="isAnimation ? 'replay-icon' : ''">
-            <van-icon
-              name="replay"
-              size="20px"
-            />
-          </div>
-          <div class="text-sm">
-            重播
-          </div>
-        </div>
-      </div> -->
+      <div class="w-full h-full flex justify-around items-center py-4 px-2 box-border">
+        <audio controls :src="audioUrl"></audio>
+      </div>
     </van-popup>
   </div>
 </template>
@@ -130,7 +111,7 @@ export default {
   },
   methods: {
     async getData() {
-      this.$loading({
+      Toast.loading({
         message: '加载中...',
         forbidClick: true,
       })
@@ -154,7 +135,7 @@ export default {
         duration: 0,
       })
       await addOrModifyShopAudioInfo({
-        shopAudioId: this.currentItem.shopAudioId || '',
+        shopAudioId: this.currentItem.shopAudioId,
         textContent: this.textContent,
         textType: this.currentItem.textType,
         devId: this.devId,
