@@ -482,7 +482,7 @@ const routes = [
   },
   {
     path: "/monthly-target/list",
-    component: () => import('../views/MonthlyTarget/List.vue')
+    component: () => import('../views/MonthlyTarget/ListV2.vue')
   },
   {
     name: "SelectNotInProduct",
