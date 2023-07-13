@@ -1,15 +1,24 @@
 <script>
 import { getVideoFrame } from '@/utils/helper'
+import dayjs from 'dayjs'
 
 export default {
   data: () => ({
     list: [],
     type: 1,
+    searchForm: {
+      displayName: '',
+      endCreateTime: '',
+      startCreateTime: '',
+    },
 
     isLoading: false,
+    searchPopup: false,
+    showCalendar: false,
   }),
   watch: {
     type() {
+      this.resetSearch()
       this.$refs.list.reload()
       this.$refs.page.scrollTop = 0
     },
@@ -32,6 +41,7 @@ export default {
       const res = await this.$post('/liveBroadcast/videoAssociation/getVideoAssociation', {
         pageSize: 20,
         pageNum,
+        ...this.searchForm,
         videoSource: this.type,
       })
       pageNum === 1
@@ -48,19 +58,47 @@ export default {
         },
       })
     },
+    resetSearch() {
+      this.searchForm = {
+        displayName: '',
+        endCreateTime: '',
+        startCreateTime: '',
+      }
+    },
+    submitSearch() {
+      this.searchPopup = false
+      this.$refs.list.reload()
+    },
+    onConfirm(e) {
+      this.searchForm.startCreateTime = dayjs(e[0]).format('YYYY-MM-DD')
+      this.searchForm.endCreateTime = dayjs(e[1]).format('YYYY-MM-DD')
+      this.showCalendar = false
+    },
   },
 }
 </script>
 
 <template>
   <div class="h-100% flex flex-col overflow-auto bg-gray-100" ref="page">
-    <van-tabs v-model="type" class="px-12 sticky top-0 bg-white z-100">
-      <van-tab title="推荐" :name="''"></van-tab>
-      <van-tab title="商品" :name="1"></van-tab>
-      <van-tab title="搭配" :name="2"></van-tab>
-      <van-tab title="面料" :name="4"></van-tab>
-      <van-tab title="收藏" :name="101"></van-tab>
-    </van-tabs>
+    <div class="sticky top-0 flex items-center px-10 z-100000 bg-white">
+      <van-tabs v-model="type" class="flex-1">
+        <van-tab title="推荐" :name="''"></van-tab>
+        <van-tab title="商品" :name="1"></van-tab>
+        <van-tab title="搭配" :name="2"></van-tab>
+        <van-tab title="面料" :name="4"></van-tab>
+        <van-tab title="收藏" :name="101"></van-tab>
+      </van-tabs>
+      <div class="w-0 flex">
+        <van-icon name="search" size="20" @click="searchPopup = true"/>
+      </div>
+    </div>
+    <van-popup v-model="searchPopup" position="top">
+      <div class="pt-10">
+        <van-field v-model="searchForm.displayName" label="名称" placeholder="请输入名称" input-align="right" />
+        <van-cell title="日期" :value="`${searchForm.startCreateTime}-${searchForm.endCreateTime}`" @click="showCalendar = true"/>
+        <van-button @click="submitSearch" block class="mt-2">搜索</van-button>
+      </div>
+    </van-popup>
     <vc-list ref="list" pull-refresh load-more :promise="loadData" class="p-3 overflow-initial" immediate>
       <vc-waterfall :data="list" gap="12px">
         <template #default="{ item, index }">
@@ -82,6 +120,8 @@ export default {
         </template>
       </vc-waterfall>
     </vc-list>
+
+    <van-calendar v-model="showCalendar" type="range" @confirm="onConfirm" :min-date="new Date('2020')"/>
   </div>
 </template>
 
