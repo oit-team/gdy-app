@@ -4,6 +4,25 @@ import StatisticsData from './components/statisticsData.vue'
 import ShareContent from './components/ShareContent.vue'
 import ShareItem from './components/ShareItem.vue'
 import NearlySevenDay from './components/nearlySevenDay.vue'
+import { upload } from '@uxuip/axios-upload'
+import axios from 'axios'
+import iframe from '@/iframe'
+import { Toast } from 'vant'
+
+function transformRequest(data) {
+  const { file } = data
+
+  return {
+    ...data,
+    totalSize: file.raw.size,
+    startPos: file.start,
+    endPos: file.end,
+    noThumb: file.end === file.raw.size ? 0 : 101,
+    fileType: 0,
+    userId: localStorage.userId,
+    fname: `${Date.now()}.png`,
+  }
+}
 
 export default {
   components: {
@@ -15,13 +34,62 @@ export default {
   },
   data: () => ({
     editable: false,
+    showShare: false,
+
+    options: [
+      { name: '微信', icon: 'http://res.oitor.com:8099/upload/15000985612/2021/2/3db93b5eee414d62a400d18bb622a049.png' },
+      { name: '朋友圈', icon: 'http://res.oitor.com:8099/upload/15000985612/2021/2/0695fe7d5b9a452fb3c2818a0fab8099.png' },
+      { name: '保存图片', icon: '/static/images/icon/download.png' },
+    ],
   }),
   created() {
   },
   methods: {
-    share() {
-      this.$refs.share.screenshot()
-    }
+    async share({ name }) {
+      try {
+        Toast.loading({
+          message: '图片生成中...',
+          duration: 0,
+          forbidClick: true,
+        })
+        const blob = await this.$refs.share.screenshot()
+        const res = await this.upload(blob)
+        console.log(res)
+        switch(name) {
+          case '微信':
+            iframe.actions.shareImage(res.data.fileUrl, {
+              shareType: 2,
+            })
+            break
+          case '朋友圈':
+            iframe.actions.shareImage(res.data.fileUrl, {
+              shareType: 3,
+            })
+            break
+          case '保存图片':
+            iframe.actions.saveImageLocal(res.data.fileUrl)
+            break
+        }
+      } finally {
+        Toast.clear()
+      }
+    },
+    upload(blob) {
+      return new Promise((resolve, reject) => {
+        upload({
+          action: `/system/file/upVideoOrAudio`,
+          headers: {
+            token: localStorage.accessToken,
+            userId: localStorage.userId,
+          },
+          chunkSize: 5 * 1024 * 1024,
+          transformRequest: [transformRequest, axios.defaults.transformRequest[0]],
+          file: blob,
+          onSuccess: resolve,
+          onError: reject,
+        })
+      })
+    },
   },
 }
 </script>
@@ -32,7 +100,7 @@ export default {
       <Header title="分享">
         <div slot="after" class="flex gap-3">
           <span @click="editable = !editable">{{editable ? '完成' : '编辑' }}</span>
-          <span @click="share" v-if="!editable">生成</span>
+          <span @click="showShare = true" v-if="!editable">生成</span>
         </div>
       </Header>
     </van-sticky>
@@ -61,7 +129,7 @@ export default {
       <ShareItem>
         <div class="flex">
           <div class="flex-1">
-            <div class="title">店铺当日销售排名TOP15</div>
+            <div class="title">店铺当日销售排名Top15</div>
             <table>
               <tr>
                 <th>仓库名称</th>
@@ -74,7 +142,7 @@ export default {
             </table>
           </div>
           <div class="flex-1">
-            <div class="title">本月累计销售排名TOP15</div>
+            <div class="title">本月累计销售排名Top15</div>
             <table>
               <tr>
                 <th>仓库名称</th>
@@ -91,7 +159,7 @@ export default {
 
       <ShareItem>
         <div>
-          <div class="title">店铺当日销售排名TOP15</div>
+          <div class="title">店铺当日销售排名Top15</div>
           <table>
             <tr>
               <th>系列</th>
@@ -133,6 +201,13 @@ export default {
         </div>
       </ShareItem>
     </ShareContent>
+
+    <van-share-sheet
+      v-model="showShare"
+      title="立即分享给好友"
+      :options="options"
+      @select="share"
+    />
   </div>
 </template>
 

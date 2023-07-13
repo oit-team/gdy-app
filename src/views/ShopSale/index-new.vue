@@ -1,7 +1,11 @@
 <template>
   <div class=" bg-[#F9F9F9] flex flex-col overflow-hidden">
     <van-sticky>
-      <Header title="店铺销售" />
+      <Header title="店铺销售">
+        <div slot="after" class="flex gap-3">
+          <span @click="$router.push('/shop-sale/share')">分享</span>
+        </div>
+      </Header>
     </van-sticky>
     <!-- 月度业绩 -->
     <div class="px-2 flex-1 flex flex-col overflow-hidden">

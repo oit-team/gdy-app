@@ -1,6 +1,6 @@
 <script>
-import { screenshot } from '@/utils/screenshot'
 import { Toast } from 'vant'
+import html2canvas from "html2canvas"
 
 export default {
   provide() {
@@ -15,13 +15,11 @@ export default {
     orders: [],
   }),
   methods: {
-    screenshot() {
-      Toast.loading({
-        message: '图片生成中...',
-        duration: 0,
-        forbidClick: true,
+    async screenshot() {
+      const canvas = await html2canvas(this.$refs.contentRef)
+      return new Promise((r) => {
+        canvas.toBlob(blob => r(new Blob([blob])))
       })
-      screenshot(this.$refs.contentRef).finally(Toast.clear)
     },
     registry(item) {
       this.orders.push(item)
